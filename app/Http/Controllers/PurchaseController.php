@@ -1,0 +1,47 @@
+<?php namespace App\Http\Controllers;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+use Martin\Products\ProductRepository;
+
+class PurchaseController extends Controller {
+
+    protected $productsRepository;
+
+    function __construct(ProductRepository $productsRepository)
+    {
+        $this->productsRepository = $productsRepository;
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $products = $this->productsRepository->getPurchasePaginated(12);
+        return view('purchase.index')->with(['products' => $products]);
+    }
+
+    public function retailers()
+    {
+        return view('purchase.retailers');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        $product = $this->productsRepository->getPurchaseById($id);
+        return view('purchase.show')->with(['product'=> $product]);
+    }
+
+}

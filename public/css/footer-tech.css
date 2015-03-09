@@ -1,0 +1,19 @@
+.bp-footer
+{
+    background-image: url("/images/background/bottom-dark-small.jpg");
+    background-repeat: repeat-x;
+    color: #000000;
+}
+.contact-info, .contact-title, .contact-details {
+    color: black;
+    font: bold;
+}
+
+.footer-col {
+    background: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 65px;
+    margin: 2%;
+    width: 21%;
+}

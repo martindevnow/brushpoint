@@ -1,0 +1,115 @@
+@extends('layouts.zeina')
+
+@section('header_bottom')
+
+    <?php
+    $page['link'] = "/products";
+
+    $page['title'] = "Products";
+    $page['short_title'] = "Products";
+    $page['short_description'] = "Our Lineup!";
+
+    if (isset($product))
+    {
+        $shortTitle = [
+            'Portfolio' => '/products',
+            $product->name => '#'
+        ];
+        $page['short_title'] = $shortTitle;
+    }
+
+
+
+    $sep = false;
+
+    ?>
+    @include('zeina.top-title-wrapper', ['page' => $page])
+
+@stop
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 animated" data-animtype="fadeInLeft"
+                                                       data-animrepeat="0"
+                                                       data-speed="1s"
+                                                       data-delay="0.4s">
+                @if(isset($product))
+                <div class="left-image-container center-text">
+                    <img class="img-responsive inline-block" src="http://placehold.it/350x450" style="padding: 1% 0px 3% 1%" />
+                </div>
+                @endif
+
+                <div class="list-group">
+                @foreach($products as $productNav)
+                    <a href="/products/id-{{ $productNav->id }}" class="list-group-item {{ isset($product) && $product->id == $productNav->id ? "active" : ""  }}">{{ $productNav->name }}</a>
+                @endforeach
+                </div>
+            </div>
+
+            <div class="col-md-8 col-sm-8">
+                <div class="left-title">
+                    <div class="heading-title">
+                        <h2 class="left-text"><b>@if (isset($product))
+                         {{ $product->name }} @else Please select a product @endif </b></h2>
+                    </div>
+
+                    @if(isset($product->claim))
+                    <p>{{ $product->claim }}</p>
+                    @endif
+
+
+                    @if (isset($product->benefits) && !empty($product->benefits))
+                    <div class="left-title">
+                        <div class="heading-title">
+                            <h2 class="h3-section-title left-text">Benefits</h2>
+                        </div>
+                        <ul class="icons-list check-2 colored-list ">
+                            @foreach($product->benefits as $benefit)
+                            <li>{{ $benefit }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <?php $sep = true; ?>
+                    @endif
+
+
+                    @if (isset($product->features) && !empty($product->features))
+                    @if($sep) <div class="space-sep20"></div> @endif
+                    <div class="left-title">
+                        <div class="heading-title">
+                            <h2 class="h3-section-title left-text">Features</h2>
+                        </div>
+                        <ul class="icons-list check-2 colored-list ">
+                            @foreach($product->features as $feature)
+                            <li>{{ $feature }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
+
+                    @if(isset($product->other) && !empty($product->other_list))
+                    @if($sep) <div class="space-sep20"></div> @endif
+
+                        <div class="left-title">
+                            <div class="heading-title">
+                                <h2 class="h3-section-title left-text">{{ $product->other }}</h2>
+                            </div>
+                            <ul class="icons-list check-2 colored-list ">
+                                @foreach($product->other_list as $point)
+                                <li>{{ $point }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @elseif (isset($product->other) && empty($product->other_list))
+                        <p>{{ $product->other }}</p>
+
+                    @endif
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@stop

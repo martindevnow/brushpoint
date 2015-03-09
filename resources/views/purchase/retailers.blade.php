@@ -1,0 +1,86 @@
+@extends('layouts.zeina')
+
+@section('header_inside')
+
+@stop
+
+@section('header_bottom')
+
+    <?php
+    $page['link'] = "/purchase";
+
+    $page['title'] = "Purchase";
+    $page['short_title'] = ["Purchase" => '/purchase', 'Retailers' => "#"];
+    $page['short_description'] = "Find a Retailer";
+
+     $showCart = true;
+     $hideBreadcrumb = true;
+    ?>
+    @include('zeina.top-title-wrapper', ['page' => $page])
+
+@stop
+
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="center-title">
+                <div class="heading-title">
+                    <h2 class="h2-section-title">Online Retailers</h2>
+                </div>
+                <p>
+                    Brushpoint products are available at any of these fine retailers.
+                    <br />
+                    Click on the icon of the retailer to purchase them online
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <a target="_blank" href="http://www.walmart.com/search/search-ng.do?search_query=BrushPoint&ic=16_0&Find=Find&search_constraint=976760">
+                <img class="img-responsive" src="/images/retailers/walmart.jpg"/>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a target="_blank" href="http://www.drugstore.com/search/search_results.asp?N=0&Ntx=mode%2Bmatchallpartial&Ntk=All&srchtree=5&Ntt=BrushPoint&Go.x=15&Go.y=19">
+                <img class="img-responsive" src="/images/retailers/drugstore.jpeg"/>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a target="_blank" href="http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dhpc&field-keywords=brushpoint">
+                <img class="img-responsive" src="/images/retailers/amazon.jpg"/>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <a target="_blank" href="http://www.target.com/s?searchTerm=brushpoint&category=0%7CAll%7Cmatchallpartial%7Call+categories">
+                <img class="img-responsive" src="/images/retailers/target.gif"/>
+            </a>
+        </div>
+    </div>
+    <div class="space-sep40"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="center-title">
+                <div class="heading-title">
+                    <h2 class="h2-section-title">Replacement Heads</h2>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="center-title">
+                <a href="/purchase" class="btn btn-primary" style="height: 80px;
+                    display: inline-block;
+                    vertical-align: middle;
+                    float: none;
+                    border-radius: 15px">
+                    <br /> <h2 style="color: white;">Purchase Replacement Heads Online Here</h2>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+@stop
