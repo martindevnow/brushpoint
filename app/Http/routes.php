@@ -199,8 +199,8 @@ Route::get('imageDZThumb', function()
 /**
  * Pages
  */
-Route::get('/', 'HomeController@index');
-Route::get('index/{id}', 'PagesController@index');
+Route::get('/', 'PagesController@index');
+Route::get('home', 'PagesController@index');
 Route::get('about', 'PagesController@about');
 Route::get('capabilities', 'PagesController@capabilities');
 Route::get('contact', 'PagesController@contact');
@@ -241,6 +241,11 @@ Route::post('cart/confirmAdd/{id}', 'CartController@addToCartConfirmed');
  * Admin Routes
  *
  */
-Route::get('administration', 'AdminController@index');
-Route::get('products/create', 'ProductsController@create');
-Route::post('products/create', 'ProductsController@store');
+Route::group(['namespace' => 'Admin'], function()
+{
+    Route::get('admins', 'AdminController@index');
+    Route::resource('admins/products', 'ProductsController');
+
+    // Route::get('admins/products/create', 'ProductsController@create');
+    // Route::post('admins/products/create', 'ProductsController@store');
+});

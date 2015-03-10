@@ -10,6 +10,9 @@ abstract class Controller extends BaseController {
 
 	use DispatchesCommands, ValidatesRequests;
 
+    protected $layout = 'layouts.admin';
+
+
     /**
      * Execute an action on the controller.
      *
@@ -35,17 +38,49 @@ abstract class Controller extends BaseController {
     }
 
 
+    /**
+     * Show the user profile.
+     */
+    public function setContent($view, $data = [])
+    {
+
+        if ( ! is_null($this->layout))
+        {
+            return $this->layout->nest('child', $view, $data);
+        }
+
+        return view($view, $data);
+
+    }
+
+
+    /**
+     * Set the layout used by the controller.
+     *
+     * @param $name
+     * @return void
+     */
+    protected function setLayout($name)
+    {
+        $this->layout = $name;
+    }
+
+
+    /**
+     * Setup the layout used by the controller.
+     *
+     * @return void
+     */
     protected function setupLayout()
     {
-        /*if ( ! is_null($this->layout))
+        if ( ! is_null($this->layout))
         {
             $this->layout = view($this->layout);
-        }*/
+        }
 
         view()->share('currentUser', Auth::user());
 
         $cartRepo = new CartRepository();
-        //dd($cartRepo);
 
         view()->share('cartRepo', $cartRepo);
 

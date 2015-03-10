@@ -12,15 +12,16 @@ class PagesController extends Controller {
      *
      * @return Response
      */
-    public function index($id)
+    public function index()
     {
         //
-        return view('pages.index'.$id);
+        return view('pages.index2');
     }
 
     public function about()
     {
-        return view('pages.about');
+        $this->layout->content = view('pages.about');
+        // return view('pages.about');
     }
 
     public function capabilities()
