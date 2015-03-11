@@ -11,6 +11,12 @@ class ProductsTableSeeder extends Seeder {
 
     public function run()
     {
+        /**
+         * Clear the Databases
+         */
+        DB::table('products')->truncate();
+        DB::table('items')->truncate();
+
         $faker = Faker::create();
 
         /**

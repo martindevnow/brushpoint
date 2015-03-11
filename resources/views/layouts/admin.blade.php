@@ -69,9 +69,9 @@
     <script src="/admin/sb-admin/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="/admin/sb-admin/bower_components/raphael/raphael-min.js"></script>
-    <script src="/admin/sb-admin/bower_components/morrisjs/morris.min.js"></script>
-    <script src="/admin/sb-admin/js/morris-data.js"></script>
+    <!-- <script src="/admin/sb-admin/bower_components/raphael/raphael-min.js"></script>
+        <script src="/admin/sb-admin/bower_components/morrisjs/morris.min.js"></script>
+        <script src="/admin/sb-admin/js/morris-data.js"></script>   -->
 
     <!-- Custom Theme JavaScript -->
     <script src="/admin/sb-admin/dist/js/sb-admin-2.js"></script>

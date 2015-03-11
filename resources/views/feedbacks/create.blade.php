@@ -33,7 +33,89 @@
                 can assist you!
             </p>
 
-            <form class="form-wrapper" id="contact-form" method="post" role="form" novalidate>
+
+
+            {!! Form::open(['method' => 'POST', 'action' => 'FeedbackController@store', 'id' => 'contact-form', 'class'=>'form-wrapper']) !!}
+                <!-- Name Form Input -->
+                <div class="col-md-6">
+                    <div class="form-group clearfix">
+                        {!! Form::label('name', 'Name *', ['class' => 'control-label']) !!}
+                        <div class="col-xs-8">
+                            {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Form Input -->
+                <div class="col-md-6">
+                    <div class="form-group clearfix">
+                        {!! Form::label('email', 'Email *', ['class' => 'control-label']) !!}
+                        <div class="col-xs-8">
+                            {!! Form::text('email', null, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone Form Input -->
+                <div class="col-md-6">
+                    <div class="form-group clearfix">
+                        {!! Form::label('phone', 'Phone *', ['class' => 'control-label']) !!}
+                        <div class="col-xs-8">
+                            {!! Form::text('phone', null, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address Form Input -->
+                <div class="col-md-6">
+                    <div class="form-group clearfix">
+                        {!! Form::label('address', 'Address', ['class' => 'control-label']) !!}
+                        <div class="col-xs-8">
+                            {!! Form::text('address', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Retailer Form Input -->
+                <div class="col-md-6">
+                    <div class="form-group clearfix">
+                        {!! Form::label('retailer', 'Retailer *', ['class' => 'control-label']) !!}
+                        <div class="col-xs-8">
+                            {!! Form::text('retailer', null, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lot Code Form Input -->
+                <div class="col-md-6">
+                    <div class="form-group clearfix">
+                        {!! Form::label('lot_code', 'Lot Code', ['class' => 'control-label']) !!}
+                        <div class="col-xs-8">
+                            {!! Form::text('lot_code', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Lot Code Form Input -->
+                <div class="col-md-12">
+                    <div class="form-group clearfix">
+                        {!! Form::label('issue', 'Issue *', ['class' => 'control-label']) !!}
+                        <div class="col-xs-10">
+                            {!! Form::textarea('isssue', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+
+
+
+            {!! Form::close() !!}
+
+
+<!--
+
+            <form class="form-wrapper" id="contact-form2" method="post" role="form" novalidate>
                 <div class="col-md-12">
                     <div class="form-group clearfix">
                         <label class="control-label" for="name">Name *</label>
@@ -46,7 +128,9 @@
                     <div class="form-group clearfix">
                         <label class="control-label" for="user-email"> E-mail *</label>
                         <div class="col-xs-6">
+-->
                             <!-- type email used by jquery validate -->
+<!--
                             <input type="text" name="email" id="user-email" class="form-control" required/>
                         </div>
                     </div>
@@ -79,7 +163,9 @@
                 <div class="form-group clearfix">
                     <label class="control-label" for="issue">  Issue *</label>
                     <div class="col-xs-6">
+-->
                         <!-- type email used by jquery validate -->
+<!--
                         <textarea name="issue" id="issue" class="form-control" required></textarea>
                     </div>
                 </div>
@@ -92,6 +178,9 @@
                     </div>
                 </div>
             </form>
+-->
+
+
         </div>
         <div class="col-md-3 col-sm-3">
 

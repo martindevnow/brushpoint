@@ -24,7 +24,7 @@ class CreateFeedbacksTable extends Migration {
             $table->string('retailer');
             $table->string('lot_code');
             $table->text('issue');
-            $table->boolean('resolved');
+            $table->boolean('resolved')->default(false);
 
             $table->timestamps();
         });

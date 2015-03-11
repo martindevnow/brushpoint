@@ -8,7 +8,7 @@ use Martin\Core\CoreModel;
 
 class Feedback extends CoreModel {
 
-   protected $table = 'feedback';
+   protected $table = 'feedbacks';
 
 
 } 

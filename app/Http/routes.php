@@ -210,6 +210,7 @@ Route::get('video', 'PagesController@video');
  * Feedback
  */
 Route::get('feedback', 'FeedbackController@create');
+Route::get('feedback/store', 'FeedbackController@store');
 
 
 /**
@@ -245,6 +246,8 @@ Route::group(['namespace' => 'Admin'], function()
 {
     Route::get('admins', 'AdminController@index');
     Route::resource('admins/products', 'ProductsController');
+
+    Route::resource('admins/feedback', 'FeedbackController');
 
     // Route::get('admins/products/create', 'ProductsController@create');
     // Route::post('admins/products/create', 'ProductsController@store');
