@@ -234,6 +234,13 @@ Route::get('purchase/id-{id}/{name}', 'PurchaseController@show');
  * Cart
  */
 Route::get('cart', 'CartController@index');
+Route::get('cart/address', 'CartController@getPayerInfo');
+Route::get('cart/checkout/express', 'CartController@expressCheckout');
+Route::get('cart/checkout/confirm', 'CartController@confirmPayerInfo');
+Route::get('cart/checkout/process', 'CartController@checkout');
+Route::get('cart/checkout/success', 'CartController@success');
+Route::get('cart/checkout/cancelled', 'CartController@cancelled');
+
 Route::get('cart/confirmAdd/{id}', 'CartController@confirmAddToCart');
 Route::post('cart/confirmAdd/{id}', 'CartController@addToCartConfirmed');
 
@@ -246,8 +253,8 @@ Route::group(['namespace' => 'Admin'], function()
 {
     Route::get('admins', 'AdminController@index');
     Route::resource('admins/products', 'ProductsController');
-
     Route::resource('admins/feedback', 'FeedbackController');
+    Route::resource('admins/purchases', 'PurchasesController');
 
     // Route::get('admins/products/create', 'ProductsController@create');
     // Route::post('admins/products/create', 'ProductsController@store');

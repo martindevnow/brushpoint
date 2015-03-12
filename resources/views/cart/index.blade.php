@@ -19,7 +19,6 @@
 
 @section('content')
 <div class="container">
-
     <table class="table">
         <thead>
             <tr>
@@ -40,5 +39,15 @@
             @endforeach
           </tbody>
     </table>
+
+    <!-- {!! Form::open(['method' => 'POST', 'action' => 'CartController@getPayerInfo']) !!}
+         <div class="form-group">
+             {!! Form::submit('Checkout', ['class' => 'btn btn-primary']) !!}
+         </div>
+    {!! Form::close() !!} -->
+
+    <a href="/cart/checkout/express" class="btn btn-primary">Checkout</a>
+
+
 </div>
 @stop

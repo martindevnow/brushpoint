@@ -186,6 +186,21 @@ class CartRepository {
 
     }
 
+
+    public function calculateShipping()
+    {
+
+        if ($this->getCartTotal() >= 20)
+            return 6.95;
+        return 9.95;
+
+
+        /*
+         * Here is where I could include other factors to ACTUALLY calculate the shipping cost.
+         */
+    }
+
+
     public function getCartByProductId($id)
     {
         return Cart::where('cartable_id', '=', $id)->where('unique_id', '=', Session::get('unique_id'));
