@@ -189,7 +189,6 @@ class CartRepository {
 
     public function calculateShipping()
     {
-
         if ($this->getCartTotal() >= 20)
             return 6.95;
         return 9.95;

@@ -10,6 +10,7 @@ use Martin\Notifications\Flash;
 use Martin\Products\CartRepository;
 use Martin\Products\Product;
 use Martin\Products\Item;
+use Martin\Sales\Sale as MSale;;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item as PPItem;
@@ -23,9 +24,15 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Exception\PPConnectionException;
 use PayPal\Rest\ApiContext;
 
+use PayPal\Api\ExecutePayment;
+
+
 class CartController extends Controller {
 
     protected $cartRepository;
+    protected $_oauthCredential;
+    protected $_accessToken;
+    protected $_api_context;
 
     function __construct(CartRepository $cartRepository)
     {
@@ -33,8 +40,9 @@ class CartController extends Controller {
 
         // setup PayPal Api Context
         $paypal_conf = Config::get('paypal');
-        $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
-        $this->_api_context->setConfig($paypal_conf['settings']);
+        $this->_oauthCredential = new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']);
+        $this->_api_context     = new ApiContext();
+        $this->_accessToken     = $this->_oauthCredential->getAccessToken(array('mode' => 'sandbox'));
 
     }
 
@@ -155,26 +163,32 @@ class CartController extends Controller {
         // Let PAYPAL handle everything.
 
 
+        $sale = new MSale();
+
+        $sale->setSessionId();
+
+
         /**
          * Set up the Payer
          */
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
+
         $cart = $this->cartRepository->getCartData();
         /**
          * Set up the products ordered
          */
 
-        $products = Product::all();
+        // $products = Product::all();
 
         // dd($cart);
 
-        $quantity_ordered = $cart['products'];
+        // $quantity_ordered = $cart;
 
-        $product_number = 0;
+        // $product_number = 0;
         $order_number = 0;
-        $total_cost = 0;
+        // $total_cost = 0;
 
         //dd($quantity_ordered);
         // fetch the item selected from the DB and populate the fields
@@ -204,8 +218,10 @@ class CartController extends Controller {
             }*/
         }
 
-        $total_cost = $cart->getCartTotal();
-        // dd($order);
+        $total_cost = $this->cartRepository->getCartTotal();
+        $sale->setSubtotalCost($total_cost);
+
+
 
         /**
          * Build the List
@@ -216,7 +232,8 @@ class CartController extends Controller {
 
 
 
-        $shipping_cost = $cart->calculateShipping();
+        $shipping_cost = $this->cartRepository->calculateShipping();
+        $sale->setShippingCost($shipping_cost);
 
 
         /**
@@ -227,6 +244,9 @@ class CartController extends Controller {
             ->setTax('0.00')
             ->setSubtotal($total_cost);
 
+        $sale->setTaxCost(0);
+
+
 
         /**
          * Set the total amount (subtotal + shipping and tax)
@@ -236,6 +256,8 @@ class CartController extends Controller {
         $amount->setCurrency('USD')
             ->setTotal($total_cost)
             ->setDetails($details);
+        $sale->setTotalCost($total_cost);
+
 
         /**
          * Build the transaction
@@ -257,6 +279,8 @@ class CartController extends Controller {
             ->setTransactions(array($transaction));
 
         // echo '<pre>';print_r($payment);echo '</pre>';exit;
+
+        // dd ($this->_api_context);
 
         try {
             $payment->create($this->_api_context);
@@ -384,4 +408,113 @@ class CartController extends Controller {
          */
     }
 
+    public function paymentTest()
+    {
+        $addr = new Address();
+        $addr->setLine1('52 N Main ST');
+        $addr->setCity('Johnstown');
+        $addr->setCountry_code('US');
+        $addr->setPostal_code('43210');
+        $addr->setState('OH');
+
+        $payer = new Payer();
+        $payer->setPayment_method('credit_card');
+        $payer->setFunding_instruments(array($fi));
+
+        $amountDetails = new AmountDetails();
+        $amountDetails->setSubtotal('7.41');
+        $amountDetails->setTax('0.03');
+        $amountDetails->setShipping('0.03');
+
+        $amount = new Amount();
+        $amount->setCurrency('USD');
+        $amount->setTotal('7.47');
+        $amount->setDetails($amountDetails);
+
+        $transaction = new Transaction();
+        $transaction->setAmount($amount);
+        $transaction->setDescription('This is the payment transaction description.');
+
+        $payment = new Payment();
+        $payment->setIntent('sale');
+        $payment->setPayer($payer);
+        $payment->setTransactions(array($transaction));
+
+        $payment->create($this->_api_context);
+    }
+
+
+    public function paymentTextExecute()
+    {
+
+        session_start();
+        if(isset($_GET['success']) && $_GET['success'] == 'true') {
+
+
+            // payment id was previously stored in session in
+            // create.php
+            $paymentId_session = $_SESSION['paymentId'];
+            // if you used database to store product id and payment id
+            // use below mysqli code to fetch payment_id from database
+
+            /*
+
+               #### GET PAYMENT ID ###
+
+               //Open a new connection to the MySQL server
+               $mysqli = new mysqli('host','username','password','database_name');
+
+               //Output any connection error
+               if ($mysqli->connect_error) {
+                   die('Error : ('. $mysqli->connect_errno .') '. $mysqli->connect_error);
+               }
+
+               $payment_info = $mysqli->query("SELECT * FROM payment_records
+                                             WHERE payment_id = '".$mysqli->mysqli_real_escape_string($paymentId_session)."'");
+
+               if(mysqli_num_rows($payment_info) > 0){
+                   $row = mysqli_fetch_assoc($payment_info);
+
+                   // Assign values fetched from database
+                   $productid = $row['product_id'];
+                   $paymentId = $row['payment_id'];
+
+
+               }else{
+                   die('Error : ('. $mysqli->errno .') '. $mysqli->error);
+               }
+
+               if( $paymentId != $paymentId_session){
+                   die("Payment id not verified");
+
+                   // only use below lines for testing, comment them in live website
+                   // echo "Payment id from session:" . $paymentId_session;
+                   // echo "Payment id from database:" . $paymentId ;
+               }
+
+           */
+
+
+            // Get the payment Object by passing paymentId
+            $payment = Payment::get($paymentId, $apiContext);
+
+            // PaymentExecution object includes information necessary
+            // to execute a PayPal account payment.
+            // The payer_id is added to the request query parameters
+            // when the user is redirected from paypal back to your site
+            $execution = new PaymentExecution();
+            $execution->setPayerId($_GET['PayerID']);
+
+            //Execute the payment
+            // (See bootstrap.php for more on `ApiContext`)
+            $result = $payment->execute($execution, $apiContext);
+
+            echo "<html><body><pre>";
+            print_r($result);
+
+
+        } else {
+            echo "User cancelled payment.";
+        }
+    }
 }

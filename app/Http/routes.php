@@ -244,6 +244,19 @@ Route::get('cart/checkout/cancelled', 'CartController@cancelled');
 Route::get('cart/confirmAdd/{id}', 'CartController@confirmAddToCart');
 Route::post('cart/confirmAdd/{id}', 'CartController@addToCartConfirmed');
 
+Route::get('cart/checkout/status', [
+    'as' => 'payment_status',
+    'uses' => 'CartController@getPaymentStatus'
+]);
+
+
+/**
+ * Payment Processing
+ */
+
+Route::get('paymentTest', 'CartController@paymentTest');
+Route::get('payment/execute', 'CartController@paymentTestExecute');
+
 
 /**
  * Admin Routes

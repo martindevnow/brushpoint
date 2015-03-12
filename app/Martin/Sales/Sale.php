@@ -19,6 +19,33 @@ class Sale extends CoreModel {
         'cost_total'
     ];
 
+    public function setSessionId()
+    {
+        $this->session_id = session('unique_id');
+        return $this->session_id;
+    }
+
+    public function setTotalCost($cost)
+    {
+        $this->cost_total = $cost;
+    }
+
+
+    public function setTaxCost($cost)
+    {
+        $this->cost_tax = $cost;
+    }
+
+    public function setSubtotalCost($cost)
+    {
+        $this->cost_subtotal = $cost;
+    }
+
+    public function setShippingCost($cost)
+    {
+        $this->cost_shipping = $cost;
+    }
+
     public function address()
     {
         return $this->belongsTo('Martin\Core\Address');
