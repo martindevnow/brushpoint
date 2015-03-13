@@ -2,7 +2,6 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\SetPayerInfoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -10,21 +9,8 @@ use Martin\Notifications\Flash;
 use Martin\Products\CartRepository;
 use Martin\Products\Product;
 use Martin\Products\Item;
-use Martin\Sales\Sale as MSale;;
-use PayPal\Api\Amount;
-use PayPal\Api\Details;
-use PayPal\Api\Item as PPItem;
-use PayPal\Api\ItemList;
-use PayPal\Api\Payer;
-use PayPal\Api\Payment;
-use PayPal\Api\PaymentExecution;
-use PayPal\Api\RedirectUrls;
-use PayPal\Api\Transaction;
-use PayPal\Auth\OAuthTokenCredential;
-use PayPal\Exception\PPConnectionException;
-use PayPal\Rest\ApiContext;
+use Martin\Sales\Sale;
 
-use PayPal\Api\ExecutePayment;
 
 
 class CartController extends Controller {
@@ -37,14 +23,6 @@ class CartController extends Controller {
     function __construct(CartRepository $cartRepository)
     {
         $this->cartRepository = $cartRepository;
-
-        // setup PayPal Api Context
-        $paypal_conf = Config::get('paypal');
-        $this->_oauthCredential = new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']);
-        $this->_api_context     = new ApiContext($this->_oauthCredential);
-        $this->_api_context->setConfig($paypal_conf['settings']);
-        //$this->_accessToken     = $this->_oauthCredential->getAccessToken(array('mode' => 'sandbox'));
-
     }
 
 
@@ -159,160 +137,13 @@ class CartController extends Controller {
     public function expressCheckout()
     {
 
+        $checkout = new \Martin\Ecom\Checkout();
 
-        // NO ADDRESS ENTERING
-        // Let PAYPAL handle everything.
+        $checkout->newPayment($this->cartRepository);
 
-
-        $sale = new MSale();
-
-        $sale->setSessionId();
+        return $checkout->redirect();
 
 
-        /**
-         * Set up the Payer
-         */
-        $payer = new Payer();
-        $payer->setPaymentMethod('paypal');
-
-
-        $cart = $this->cartRepository->getCartData();
-        /**
-         * Set up the products ordered
-         */
-
-        // $products = Product::all();
-
-        // dd($cart);
-
-        // $quantity_ordered = $cart;
-
-        // $product_number = 0;
-        $order_number = 0;
-        // $total_cost = 0;
-
-        //dd($quantity_ordered);
-        // fetch the item selected from the DB and populate the fields
-        foreach($cart as $item)
-        {
-            if ($item['quantity'] > 0)
-            {
-                $i = new PPItem();
-                $i->setName($item['name'])
-                    ->setPrice($item['price'])
-                    ->setQuantity($item['quantity'])
-                    ->setCurrency('USD');
-                $order[$order_number] = $i;
-                $order_number ++;
-            }
-
-
-            /*
-            if (isset($quantity_ordered[$product['id']])) {
-                $order[$order_number] = new Item();
-                $order[$order_number]->setName($product['name'])
-                    ->setCurrency('USD')
-                    ->setPrice($product['price'])
-                    ->setQuantity($quantity_ordered[$product['id']]);
-                $total_cost = $total_cost + $quantity_ordered[$product['id']] * $product['price'];
-                $order_number++;
-            }*/
-        }
-
-        $total_cost = $this->cartRepository->getCartTotal();
-        $sale->setSubtotalCost($total_cost);
-
-
-
-        /**
-         * Build the List
-         */
-        $item_list = new ItemList();
-        $item_list->setItems($order);
-
-
-
-
-        $shipping_cost = $this->cartRepository->calculateShipping();
-        $sale->setShippingCost($shipping_cost);
-
-
-        /**
-         * Set the details of the transaction
-         */
-        $details = new Details();
-        $details->setShipping($shipping_cost)
-            ->setTax('0.00')
-            ->setSubtotal($total_cost);
-
-        $sale->setTaxCost(0);
-
-
-
-        /**
-         * Set the total amount (subtotal + shipping and tax)
-         */
-        $total_cost += $shipping_cost;
-        $amount = new Amount();
-        $amount->setCurrency('USD')
-            ->setTotal($total_cost)
-            ->setDetails($details);
-        $sale->setTotalCost($total_cost);
-
-
-        /**
-         * Build the transaction
-         */
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-            ->setItemList($item_list)
-            ->setDescription('Your BrushPoint Innovations Order')
-            ->setInvoiceNumber(md5(time()));
-
-        $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(route('payment_status'))
-            ->setCancelUrl(route('payment_status'));
-
-        $payment = new Payment();
-        $payment->setIntent('sale')
-            ->setPayer($payer)
-            ->setRedirectUrls($redirect_urls)
-            ->setTransactions(array($transaction));
-
-        // echo '<pre>';print_r($payment);echo '</pre>';exit;
-
-        // dd ($this->_api_context);
-
-        try {
-            $payment->create($this->_api_context);
-        } catch(PPConnectionException $ex) {
-            //if (\Config::get('app.debug')) {
-            $err_data = json_decode($ex->getData(), true);
-            echo "Exception: " . $ex->getMessage() . PHP_EOL . print_r($err_data, true);
-
-            exit;
-            //} else {
-            die('Some error occurred, sorry!');
-            // }
-        }
-
-        foreach ($payment->getLinks() as $link)
-        {
-            if ($link->getRel() == 'approval_url') {
-                $redirect_url = $link->getHref();
-                break;
-            }
-        }
-
-        session()->put('paypal_payment_id', $payment->getId());
-
-        if (isset($redirect_url)){
-            return redirect()->away($redirect_url);
-
-        }
-
-        return redirect()->route('original.route')
-            ->with('error', 'unknown error occurred');
     }
 
     public function getPaymentStatus(Request $request)
@@ -335,7 +166,6 @@ class CartController extends Controller {
         $execution->setPayerId($request->get('PayerID'));
 
         $result = $payment->execute($execution, $this->_api_context);
-        // echo '<pre>';print_r($result);echo '</pre>';exit;
 
 
         DB::table('dump')->insert([
@@ -354,10 +184,13 @@ class CartController extends Controller {
             // i might have to really read the documentation
             // hopefully it is broken up by "object" in some sence. liek the variables are dependant on each criteria.
             Flash::message("Thank you for your purchase!");
-            return redirect()->route('original.route')
+            return redirect()->route('payment_status')
                 ->with('success', 'Payment success');
         }
-        return redirect()->route('original.route')
+
+        Flash::error('Unknown Error Occurred');
+
+        return redirect()->route('payment_status')
             ->with('error', 'Payment Failed');
 
 

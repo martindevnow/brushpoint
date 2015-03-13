@@ -274,90 +274,31 @@ Route::group(['namespace' => 'Admin'], function()
 });
 
 
-Route::get('test-payment', function(){
-    $api = new \PayPal\Rest\ApiContext(
-        new \PayPal\Auth\OAuthTokenCredential(
-            "ATlJHRAw5uQ-RzFkuIR0YKWHV663168jtf9H-xRdj1-ykO--zbeJbouzKsk9",
-            "EMSIVBCsDoyhrgveqbcuu37f1eZfv7J0sqrtutt5gOEn7ALEbiMwiD7R3aIa"
-        )
-    );
+Route::get('test-checkout', function(){
+    $checkout = new \Martin\Ecom\Checkout();
+    $cartRepo = new \Martin\Products\CartRepository();
 
-    $api->setConfig([
-        'mode' => 'sandbox',
-        'http.ConnectionTimeOut'    => 30,
-        'log.LogEnabled'            => true,
-        'log.FileName'              => storage_path() . '/logs/paypal.log',
-        'log.LogLevel'              => 'FINE',
-    ]);
-
-
-    $payer = new \PayPal\Api\Payer();
-    $details = new \PayPal\Api\Details();
-    $amount = new \PayPal\Api\Amount();
-    $transaction = new \PayPal\Api\Transaction();
-    $payment = new \PayPal\Api\Payment();
-    $redirectUrls = new \PayPal\Api\RedirectUrls();
-
-    $payer->setPaymentMethod('paypal');
-
-    $details->setShipping('2.00')
-        ->setTax('0.00')
-        ->setSubtotal('20.00');
-
-    $amount->setCurrency('USD')
-        ->setTotal('22.00')
-        ->setDetails($details);
-
-    $transaction->setAmount($amount)
-        ->setDescription('This Item');
-
-    $payment->setIntent('sale')
-        ->setPayer($payer)
-        ->setTransactions([$transaction]);
-
-    $redirectUrls->setReturnUrl('http://bpl5.dev/cart/checkout/status?complete=true')
-        ->setCancelUrl('http://bpl5.dev/cart/checkout/status?complete=false');
-
-    $payment->setRedirectUrls($redirectUrls);
-
-
-    try
-    {
-        $payment->create($api);
-
-
-    } catch (\PayPal\Exception\PayPalConnectionException $e) {
-        header('Location: http://bpl5.dev/cart/checkout/error');
-        exit;
-    }
-
-    $approvalUrl = $payment->getApprovalLink();
-
-    if ($approvalUrl)
-    {
-        header('Location: '. $approvalUrl);
-        exit;
-    }
-
+    $checkout->newPayment($cartRepo);
 });
+
 
 
 Route::get('cart/checkout/error', function(){
     return "There was an error";
 });
 
+Route::get('cart/checkout/status', function(){
+    return "You completed the payment";
+});
+
+Route::get('cart/checkout/cancel', function() {
+    return "You cancelled the payment";
+});
 
 
-
-
-
-
-
-
-
-
-
-
+Route::get('displaySession', function(){
+    dd(session()->all());
+});
 
 
 
