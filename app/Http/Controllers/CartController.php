@@ -41,8 +41,9 @@ class CartController extends Controller {
         // setup PayPal Api Context
         $paypal_conf = Config::get('paypal');
         $this->_oauthCredential = new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']);
-        $this->_api_context     = new ApiContext();
-        $this->_accessToken     = $this->_oauthCredential->getAccessToken(array('mode' => 'sandbox'));
+        $this->_api_context     = new ApiContext($this->_oauthCredential);
+        $this->_api_context->setConfig($paypal_conf['settings']);
+        //$this->_accessToken     = $this->_oauthCredential->getAccessToken(array('mode' => 'sandbox'));
 
     }
 
