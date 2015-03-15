@@ -290,11 +290,18 @@ class CartRepository {
     {
         foreach ($data as $cartItem => $quantity)
         {
-            $cartItem = explode('-', $cartItem);
-            // $items[$cartItem[0]] = $quantity;
-            $cart = $this->getCartByItemId($cartItem[0]);
-            $cart->quantity = $quantity;
-            $cart->save();
+            if ($quantity == 0)
+            {
+                $this->removeByItemId($cartItem[0]);
+            }
+            else{
+                $cartItem = explode('-', $cartItem);
+                // $items[$cartItem[0]] = $quantity;
+                $cart = $this->getCartByItemId($cartItem[0]);
+                $cart->quantity = $quantity;
+                $cart->save();
+            }
+
         }
         $this->refreshCartFromDB();
 

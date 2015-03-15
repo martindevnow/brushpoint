@@ -97,6 +97,12 @@ class CartController extends Controller {
         return redirect()->back();
     }
 
+    /**
+     * Update the quantites of the cart.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(Request $request)
     {
         $this->cartRepository->updateQuantities($request->except('_token'));
