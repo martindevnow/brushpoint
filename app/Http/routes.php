@@ -1,8 +1,6 @@
 <?php
 use Martin\Products\Item;
-use Martin\Users\Permission;
-use Martin\Users\Role;
-use Martin\Users\User;
+
 
 
 /*
@@ -248,12 +246,19 @@ Route::get('checkout/address', 'CartController@getPayerInfo');
 Route::get('checkout/express', 'CheckoutController@expressCheckout');
 Route::get('checkout/confirm', 'CheckoutController@confirmPayerInfo');
 Route::get('checkout/process', 'CheckoutController@checkout');
+Route::get('checkout/error', 'CheckoutController@error');
+Route::get('checkout/status', 'CheckoutController@status');
+Route::get('cart/checkout/status', 'CheckoutController@status');
+Route::get('checkout/cancel', 'CheckoutController@cancel');
+
+
+/*
 Route::get('checkout/success', 'CheckoutController@success');
-Route::get('checkout/cancelled', 'CheckoutController@cancelled');
-Route::get('cart/checkout/status', [
+Route::get('checkout/cancelled', 'CheckoutController@cancelled'); */
+/*Route::get('checkout/status', [
     'as' => 'payment_status',
     'uses' => 'CheckoutController@getPaymentStatus'
-]);
+]);*/
 
 
 
@@ -295,18 +300,9 @@ Route::get('test-checkout', function(){
 });
 
 
-
-Route::get('cart/checkout/error', function(){
-    return "There was an error";
-});
-
-Route::get('cart/checkout/status', function(){
-    return "You completed the payment";
-});
-
-Route::get('cart/checkout/cancel', function() {
-    return "You cancelled the payment";
-});
+/**
+ * Testing the Checkout Return Redirect URLs
+ */
 
 
 Route::get('displaySession', function(){

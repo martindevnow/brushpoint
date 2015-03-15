@@ -9,7 +9,7 @@ use Martin\Notifications\Flash;
 use Martin\Products\CartRepository;
 use Martin\Products\Product;
 use Martin\Products\Item;
-use Martin\Sales\Sale;
+// use Martin\Sales\Sale;
 
 
 

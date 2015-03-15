@@ -23,7 +23,7 @@ class Checkout {
     protected $redirectUrls;
     protected $itemList;
 
-    protected $sale;
+    protected $ecomPayment;
 
     public function __construct()
     {
@@ -50,8 +50,8 @@ class Checkout {
      */
     public function newPayment(CartRepository $cartRepository)
     {
-        $this->sale = new \Martin\Ecom\Payment;
-        $this->sale->setUniqueId();
+        $this->ecomPayment = new \Martin\Ecom\Payment;
+        $this->ecomPayment->setUniqueId();
 
         $this->payer = new \PayPal\Api\Payer();
         $this->details = new \PayPal\Api\Details();
@@ -92,8 +92,8 @@ class Checkout {
             ->setDescription("Your BrushPoint.com Purchase")
             ->setItemList($this->itemList);
 
-        $this->redirectUrls->setReturnUrl('http://bpl5.dev/cart/checkout/status')
-            ->setCancelUrl('http://bpl5.dev/cart/checkout/cancel');
+        $this->redirectUrls->setReturnUrl('http://bpl5.dev/checkout/status')
+            ->setCancelUrl('http://bpl5.dev/checkout/cancel');
 
         $this->payment->setIntent('sale')
             ->setPayer($this->payer)
@@ -104,14 +104,32 @@ class Checkout {
         try
         {
             $this->payment->create($this->api);
+
+            session()->put('paypal_payment_id', $this->payment->getId());
+
+            $hash = md5($this->payment->getId());
+            session()->put('paypal.hash', $hash);
+
+            $this->ecomPayment->payment_id = $this->payment->getId();
+            $this->ecomPayment->hash = $hash;
+
+            $this->ecomPayment->save();
+
+
+
+
+
+
+
+
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
             $err_data = json_decode($ex->getData(), true);
             echo "Exception: " . $ex->getMessage() . PHP_EOL . print_r($err_data, true);
-            header('Location: http://bpl5.dev/cart/checkout/error');
+            header('Location: http://bpl5.dev/checkout/error');
             exit;
         }
 
-        session()->put('paypal_payment_id', $this->payment->getId());
+
 
         // return $this->savePaymentToDB();
 
@@ -134,6 +152,7 @@ class Checkout {
         return "9.95";
     }
 
+
     /**
      * Redirect the user to Paypal
      *
@@ -149,6 +168,13 @@ class Checkout {
         Flash::error('Unknown Error Occurred');
         return redirect()->route('payment_status')
             ->with('error', 'unknown error occurred');
+    }
+
+
+    public function getPayment($paymentId)
+    {
+        $payment = \PayPal\Api\Payment::get($paymentId, $this->api);
+        return $payment;
     }
 
 

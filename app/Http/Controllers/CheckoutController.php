@@ -4,7 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Martin\Ecom\Checkout;
 use Martin\Products\CartRepository;
+use PayPal\Api\Payment;
 
 class CheckoutController extends Controller {
 
@@ -129,6 +131,16 @@ class CheckoutController extends Controller {
     }
 
 
+    public function status(Request $request)
+    {
+        $paymentId = $request->get('paymentId');
+
+        $checkout = new Checkout();
+        $payment = $checkout->getPayment($paymentId);
+
+        dd($payment);
+    }
+
     public function completed()
     {
         // DISPLAY a message to thank the user for their purchase
@@ -173,6 +185,91 @@ class CheckoutController extends Controller {
          *
          */
     }
-
-
 }
+
+
+/*
+
+
+Payment {#316 ▼
+  -_propMap: array:8 [▼
+    "id" => "PAY-0ED230570R273814BKUDA5OI"
+    "create_time" => "2015-03-15T22:59:05Z"
+    "update_time" => "2015-03-15T22:59:05Z"
+    "state" => "created"
+    "intent" => "sale"
+    "payer" => Payer {#323 ▼
+      -_propMap: array:3 [▼
+        "payment_method" => "paypal"
+        "status" => "VERIFIED"
+        "payer_info" => PayerInfo {#318 ▼
+          -_propMap: array:5 [▼
+            "email" => "benjaminm+test@brushpoint.com"
+            "first_name" => "Ben"
+            "last_name" => "Martin"
+            "payer_id" => "P69HMJQPKX258"
+            "shipping_address" => ShippingAddress {#320 ▼
+              -_propMap: array:6 [▼
+                "line1" => "1 Main St"
+                "city" => "San Jose"
+                "state" => "CA"
+                "postal_code" => "95131"
+                "country_code" => "US"
+                "recipient_name" => "Ben Martin"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    "transactions" => array:1 [▼
+      0 => Transaction {#322 ▼
+        -_propMap: array:4 [▼
+          "amount" => Amount {#326 ▶}
+          "description" => "Your BrushPoint.com Purchase"
+          "item_list" => ItemList {#330 ▼
+            -_propMap: array:1 [▼
+              "items" => array:1 [▼
+                0 => Item {#332 ▼
+                  -_propMap: array:4 [▼
+                    "name" => "Dual Motion Replacement Heads - (4 Pack) [Soft]"
+                    "price" => "5.50"
+                    "currency" => "USD"
+                    "quantity" => "1"
+                  ]
+                }
+              ]
+            ]
+          }
+          "related_resources" => []
+        ]
+      }
+    ]
+    "links" => array:3 [▼
+      0 => Links {#335 ▼
+        -_propMap: array:3 [▼
+          "href" => "https://api.sandbox.paypal.com/v1/payments/payment/PAY-0ED230570R273814BKUDA5OI"
+          "rel" => "self"
+          "method" => "GET"
+        ]
+      }
+      1 => Links {#336 ▼
+        -_propMap: array:3 [▼
+          "href" => "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-9NX58250UB561911P"
+          "rel" => "approval_url"
+          "method" => "REDIRECT"
+        ]
+      }
+      2 => Links {#337 ▼
+        -_propMap: array:3 [▼
+          "href" => "https://api.sandbox.paypal.com/v1/payments/payment/PAY-0ED230570R273814BKUDA5OI/execute"
+          "rel" => "execute"
+          "method" => "POST"
+        ]
+      }
+    ]
+  ]
+}
+
+
+ */
