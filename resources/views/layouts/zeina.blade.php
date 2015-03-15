@@ -49,6 +49,20 @@
         <link href="/css/skins/flat-blue.css" rel='stylesheet' type='text/css' id="skin-file">
 
 
+        <!--
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+        -->
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+<!--[if lt IE 9]>
+        <script type="text/javascript" src="/js/respond.js"></script>
+<![endif]-->
+        <link rel="stylesheet" href="/css/color-chooser.css">
+
+
+
         <style>
         .bp-breadcrumb {
             color: #ffffff;
@@ -176,22 +190,39 @@
         }
 
 
+        .purchase-name {
+            margin-bottom: 2px;
+        }
+        .purchase-price {
+            margin-bottom: 2px;
+            color: #C24F00;
+        }
+
+
+        .addToCart-form {
+            height: 34px;
+            font-size: 16px;
+        }
+        .cart-item-quantity {
+            width: 45px;
+            height: 40px;
+            padding: 2px 2px 2px 8px;
+            margin-top: -10px;
+            font-size: 18px;
+            margin-bottom: 0px;
+        }
+        .cart-contents th {
+            font-size: 18px;
+            /*padding-top: 8px;;*/
+        }
+        .cart-contents > tbody > tr > td {
+            font-size: 16px;
+            padding-top: 16px;
+        }
+
+
         </style>
 
-
-
-
-        <!--
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
-        -->
-        <!-- Fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-
-<!--[if lt IE 9]>
-        <script type="text/javascript" src="/js/respond.js"></script>
-<![endif]-->
-        <link rel="stylesheet" href="/css/color-chooser.css">
 
 
 

@@ -30,9 +30,9 @@ class Cart extends CoreModel {
      *
      * @return mixed
      */
-    public function cartable()
+    public function item()
     {
-        return $this->morphTo();
+        return $this->belongsTo('Martin\Products\Item');
     }
 
 } 

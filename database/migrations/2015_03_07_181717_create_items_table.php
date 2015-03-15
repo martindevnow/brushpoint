@@ -21,6 +21,7 @@ class CreateItemsTable extends Migration {
             $table->string('sku');
             $table->double('price', 6, 2);
             $table->integer('on_hand');
+            $table->string('variance')->nullable();
             $table->timestamps();
         });
     }

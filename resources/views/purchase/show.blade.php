@@ -30,6 +30,7 @@
             <div class="left-title">
                 <div class="heading-title">
                     <h2 class="h2-section-title left-text">{{ $product->name }}</h2>
+                    <h2 class="purchase-price">USD ${{ number_format($product->price, 2) }}</h2>
                 </div>
                 <p>
                     Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudine odio.
@@ -43,7 +44,16 @@
                 </ul>
             </div>
             <div class="space-sep20"></div>
-            <p><a href="/cart/confirmAdd/{{ $product->id }}" class="btn btn-sale" style="background-color: yellow; border: 1px solid black;" role="button">Add to Cart</a></p>
+
+            {!! Form::open(['method'=>'post', 'action' => 'CartController@addToCartConfirmed']) !!}
+                    <div class="col-sm-6 col-md-8">
+                        <div class="row">
+                            @include('purchase.partials.addToCart', ['product' => $product])
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+
+            <!-- <p><a href="/cart/add/{{ $product->id }}" class="btn btn-sale" style="background-color: yellow; border: 1px solid black;" role="button">Add to Cart</a></p> -->
         </div>
 
 

@@ -26,30 +26,16 @@
     </div>
    <div class="row">
         <div class="col-sm-6 col-md-4">
-           <p>{{ $product->description }}</p>
-           <a href="/purchase/id-{{ $product->id }}"><img src="/images/brushpoint/purchase/{{ $product->sku }}-240.png" alt="{{ $product->name }}"></a>
 
+           <a href="/purchase/id-{{ $product->id }}"><img src="/images/brushpoint/purchase/{{ $product->sku }}-240.png" alt="{{ $product->name }}"></a>
         </div>
-        {!! Form::open() !!}
+        {!! Form::open(['method'=>'post', 'action' => 'CartController@addToCartConfirmed']) !!}
         <div class="col-sm-6 col-md-8">
             <div class="row">
-                @if($product->items()->count() > 1)
-                {!! Form::label('item_id', 'Select the Item:') !!}
-                {!! Form::select('item_id', $selections) !!}
-                @else
-                {!! Form::hidden('item_id', $product->items()->get()->id) !!}
-                @endif
+                <p>{{ $product->description }}</p>
+                @include('purchase.partials.addToCart', ['product' => $product])
             </div>
-            <div class="space-sep20"></div>
-            <div class="row">
-                {!! Form::label('quantity', 'How Many:') !!}
-                {!! Form::text('quantity', '1') !!}
-            </div>
-            <div class="space-sep20"></div>
-            <div class="row">
-                {!! Form::submit('Add to Cart', ['class'=> 'btn btn-sale', 'style' => 'float: left;']) !!}
-            </div>
-        </div>
+          </div>
         {!! Form::close() !!}
     </div>
 </div>

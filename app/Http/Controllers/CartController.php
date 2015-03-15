@@ -16,9 +16,6 @@ use Martin\Sales\Sale;
 class CartController extends Controller {
 
     protected $cartRepository;
-    protected $_oauthCredential;
-    protected $_accessToken;
-    protected $_api_context;
 
     function __construct(CartRepository $cartRepository)
     {
@@ -38,19 +35,20 @@ class CartController extends Controller {
 
     }
 
+    /**
+     * Show a form to force the user to seelct the variance they desire and confirm
+     *
+     * @param $id
+     * @return $this
+     */
     public function confirmAddToCart($id)
     {
         $product = Product::find($id);
-        $cart = $this->cartRepository->getCartByProductId($id);
+        $cart = $this->cartRepository->getCartByItemId($id);
 
         $selections = array();
         if ($product->items()->count())
-        {
-            foreach($product->items()->get() as $item)
-            {
-                $selections[$item->id] = $item->name;
-            }
-        }
+            $selections = $product->items()->lists('variance', 'id');
 
         return view('cart.confirmAdd')->with(['product' => $product,
                                                     'cart' => $cart,
@@ -58,13 +56,16 @@ class CartController extends Controller {
 
     }
 
-    public function addToCartConfirmed($product_id, Request $request)
+    /**
+     * Add the item to the cart based on the user's selection and confirmation
+     *
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function addToCartConfirmed(Request $request)
     {
-        // $input = Input::all();
         $fields = $request->only(['item_id', 'quantity']);
-        //  dd($fields);
 
-        //fetch the item
         $item = Item::find($fields['item_id']);
 
         $success = $this->cartRepository->addToCart($item, $fields['quantity']);
@@ -72,283 +73,38 @@ class CartController extends Controller {
         if ($success)
         {
             Flash::message('It has been added to your cart.');
-            return redirect('/purchase/id-'. $product_id);
+            return redirect('/purchase/id-'. $item->product->id);
         }
         else
         {
             Flash::error('There was an error');
             return redirect()->back()->withInput();
         }
-
-
     }
 
-
-    public function getPayerInfo()
+    /**
+     * Remove an item from the user's cart by Item->id
+     *
+     * @param $itemId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove($itemId)
     {
-        // SAVE the cart to the DB (DONE AUTOMATICALLY BY unique_id)
+        $this->cartRepository->removeByItemId($itemId);
 
-        // DISPLAY a form to get name and address from user, save it, add that key to session
+        Flash::message('Successfully removed from cart.');
 
-        // DISPLAY total and a confirm button
-
-        return view('cart/address');
-
-
+        return redirect()->back();
     }
 
-    public function confirmPayerInfo(SetPayerInfoRequest $request)
+    public function update(Request $request)
     {
-        // RECEIVE the form filled out by the user with name and address.
+        $this->cartRepository->updateQuantities($request->except('_token'));
 
-        // SAVE this info into the DB
-        //      Associate the unique_id to it too.
-        //      rare, but this id is save to cookies.
-        //      IF we want, we can use that to fill in their address for them
+        Flash::message('Quantities have been updated');
 
-        // PUT the id of the address into the session
-
-        // DISPLAY the info received from the user
-
-        // DISPLAY the items to be purchased
-
-        // USE a hidden field with the total amount and some other reference to make sure
-        //    no changes have been made to the cart between confirmation and check out etc..
-
-        // DISPLAY a Checkout Now button -> CartCOntroller@checkout
-    }
-
-    public function checkout()
-    {
-        // RECEIVE confirmation
-
-        // CONFIRM that the order is the same as what was pushed from the last page.
-
-        // SAVE a payment object to the Database with all relevant information for tracking purposes
-            // link to address, cart items, etc...
-
-        // BUILD the paypal payment and payer objects etc according to paypal's API
-
-        // SEND the user to paypal to complete their purchase
-
+        return redirect()->back();
     }
 
 
-    public function expressCheckout()
-    {
-
-        $checkout = new \Martin\Ecom\Checkout();
-
-        $checkout->newPayment($this->cartRepository);
-
-        return $checkout->redirect();
-
-
-    }
-
-    public function getPaymentStatus(Request $request)
-    {
-        // get the payment ID before session clear
-        $payment_id = session()->get('paypal_payment_id');
-
-        //clear session ID
-        session()->forget('paypal_payment_id');
-
-        if (! $request->get('PayerID') || !$request->get('token'))
-        {
-            return redirect()->route('original.route')
-                ->with('error', 'Payment Failed');
-        }
-
-        $payment = Payment::get($payment_id, $this->_api_context);
-
-        $execution = new PaymentExecution();
-        $execution->setPayerId($request->get('PayerID'));
-
-        $result = $payment->execute($execution, $this->_api_context);
-
-
-        DB::table('dump')->insert([
-                'dumped_text' => serialize($result)
-            ]
-        );
-
-
-        if ($result->getState() == 'approved') {
-
-            // do the logging of the payment
-            // create invoice
-            // add to the database // or log it as paid
-            // look up code for integrating php paypal rest api with mysql, mvc, or objects
-            // there must be someone who wanted to track it by buyer, or transaction, or somehting
-            // i might have to really read the documentation
-            // hopefully it is broken up by "object" in some sence. liek the variables are dependant on each criteria.
-            Flash::message("Thank you for your purchase!");
-            return redirect()->route('payment_status')
-                ->with('success', 'Payment success');
-        }
-
-        Flash::error('Unknown Error Occurred');
-
-        return redirect()->route('payment_status')
-            ->with('error', 'Payment Failed');
-
-
-    }
-
-
-    public function completed()
-    {
-        // DISPLAY a message to thank the user for their purchase
-        // DISPLAY a receipt number for the user
-
-    }
-
-    public function cancelled()
-    {
-        // DISPLAY a message to the user that the payment could not be completed
-        // DISPLAY any error messages from PayPal
-    }
-
-    public function IPN()
-    {
-        // THIS METHOD WILL NOT EXIST
-
-        // TODO: build the IPN notification file so that paypal can notify us when a payment haas been processed correctly.
-        // this will update the purchase/payment object generated in the checkout method
-        // from there, generate an invoice and send it to the user in HTML format to their email address
-
-        // also, generate an invoice/receipt in PDF form to send to BrushPoint for printing.
-
-        // TODO: add to one of the methods above a way to calculate the shipping cost based on several criteria
-            // such as weight, number of items, thickness of some items etc.
-
-        /*
-         * if ($cart->has(FLOSSERS)
-         *      $smallPacket = true;
-         *
-         * if ($cart->numberOfItems() > 4
-         *      $smallPacket = true;
-         *
-         * if ($smallPacket){
-         *      switch($orcerWeight):
-         *          case (,...)
-         *
-         *      break;
-         *
-         * }
-         *
-         *
-         */
-    }
-
-    public function paymentTest()
-    {
-        $addr = new Address();
-        $addr->setLine1('52 N Main ST');
-        $addr->setCity('Johnstown');
-        $addr->setCountry_code('US');
-        $addr->setPostal_code('43210');
-        $addr->setState('OH');
-
-        $payer = new Payer();
-        $payer->setPayment_method('credit_card');
-        $payer->setFunding_instruments(array($fi));
-
-        $amountDetails = new AmountDetails();
-        $amountDetails->setSubtotal('7.41');
-        $amountDetails->setTax('0.03');
-        $amountDetails->setShipping('0.03');
-
-        $amount = new Amount();
-        $amount->setCurrency('USD');
-        $amount->setTotal('7.47');
-        $amount->setDetails($amountDetails);
-
-        $transaction = new Transaction();
-        $transaction->setAmount($amount);
-        $transaction->setDescription('This is the payment transaction description.');
-
-        $payment = new Payment();
-        $payment->setIntent('sale');
-        $payment->setPayer($payer);
-        $payment->setTransactions(array($transaction));
-
-        $payment->create($this->_api_context);
-    }
-
-
-    public function paymentTextExecute()
-    {
-
-        session_start();
-        if(isset($_GET['success']) && $_GET['success'] == 'true') {
-
-
-            // payment id was previously stored in session in
-            // create.php
-            $paymentId_session = $_SESSION['paymentId'];
-            // if you used database to store product id and payment id
-            // use below mysqli code to fetch payment_id from database
-
-            /*
-
-               #### GET PAYMENT ID ###
-
-               //Open a new connection to the MySQL server
-               $mysqli = new mysqli('host','username','password','database_name');
-
-               //Output any connection error
-               if ($mysqli->connect_error) {
-                   die('Error : ('. $mysqli->connect_errno .') '. $mysqli->connect_error);
-               }
-
-               $payment_info = $mysqli->query("SELECT * FROM payment_records
-                                             WHERE payment_id = '".$mysqli->mysqli_real_escape_string($paymentId_session)."'");
-
-               if(mysqli_num_rows($payment_info) > 0){
-                   $row = mysqli_fetch_assoc($payment_info);
-
-                   // Assign values fetched from database
-                   $productid = $row['product_id'];
-                   $paymentId = $row['payment_id'];
-
-
-               }else{
-                   die('Error : ('. $mysqli->errno .') '. $mysqli->error);
-               }
-
-               if( $paymentId != $paymentId_session){
-                   die("Payment id not verified");
-
-                   // only use below lines for testing, comment them in live website
-                   // echo "Payment id from session:" . $paymentId_session;
-                   // echo "Payment id from database:" . $paymentId ;
-               }
-
-           */
-
-
-            // Get the payment Object by passing paymentId
-            $payment = Payment::get($paymentId, $apiContext);
-
-            // PaymentExecution object includes information necessary
-            // to execute a PayPal account payment.
-            // The payer_id is added to the request query parameters
-            // when the user is redirected from paypal back to your site
-            $execution = new PaymentExecution();
-            $execution->setPayerId($_GET['PayerID']);
-
-            //Execute the payment
-            // (See bootstrap.php for more on `ApiContext`)
-            $result = $payment->execute($execution, $apiContext);
-
-            echo "<html><body><pre>";
-            print_r($result);
-
-
-        } else {
-            echo "User cancelled payment.";
-        }
-    }
 }

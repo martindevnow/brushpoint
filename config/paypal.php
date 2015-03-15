@@ -14,7 +14,7 @@ return array(
 /*
  *
  *
- * Respose Example
+ * Response Example
  *
  * {
   "id": "PAY-17S8410768582940NKEE66EQ",

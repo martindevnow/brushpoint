@@ -474,32 +474,54 @@ class ProductsTableSeeder extends Seeder {
             $product->images()->save($image2);
 
 
+
+
+
+
         }
 
 
         /**
          * Seed the items for the replacement heads
          */
-        $products = Product::all()        ;
+        $products = Product::where('active', '=', 1)->get();
         foreach($products as $prod)
         {
-            $sku = str_replace('**', '', $prod->sku);
-            Item::create([
-                'product_id' => $prod->id,
-                'name' => $prod->name . " [Soft]",
-                'description' => $prod->description,
-                'sku' => $sku . "SOFT",
-                'price' => $prod->price,
-                'on_hand' => $prod->on_hand
-            ]);
-            Item::create([
-                'product_id' => $prod->id,
-                'name' => $prod->name . " [Medium]",
-                'description' => $prod->description,
-                'sku' => $sku . "MED",
-                'price' => $prod->price,
-                'on_hand' => $prod->on_hand
-            ]);
+            if ($prod->purchase)
+            {
+                $sku = str_replace('**', '', $prod->sku);
+                Item::create([
+                    'product_id' => $prod->id,
+                    'name' => $prod->name . " [Soft]",
+                    'description' => $prod->description,
+                    'sku' => $sku . "SOFT",
+                    'price' => $prod->price,
+                    'on_hand' => $prod->on_hand,
+                    'variance' => 'Soft',
+                ]);
+                Item::create([
+                    'product_id' => $prod->id,
+                    'name' => $prod->name . " [Medium]",
+                    'description' => $prod->description,
+                    'sku' => $sku . "MED",
+                    'price' => $prod->price,
+                    'on_hand' => $prod->on_hand,
+                    'variance' => 'Medium',
+
+                ]);
+            }
+            else{
+                $sku = str_replace('**', '', $prod->sku);
+                Item::create([
+                    'product_id' => $prod->id,
+                    'name' => $prod->name,
+                    'description' => $prod->description,
+                    'sku' => $sku,
+                    'price' => $prod->price,
+                    'on_hand' => $prod->on_hand,
+                ]);
+            }
+
         }
     }
 

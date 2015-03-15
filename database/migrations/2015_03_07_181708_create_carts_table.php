@@ -18,8 +18,7 @@ class CreateCartsTable extends Migration {
             $table->integer('user_id')->nullable();
             $table->string('unique_id')->index();
 
-            $table->integer('cartable_id');
-            $table->string('cartable_type');
+            $table->integer('item_id');
 
             $table->double('price', 6, 2);
             $table->integer('quantity');

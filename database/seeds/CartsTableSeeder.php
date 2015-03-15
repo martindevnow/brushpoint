@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use Faker\Factory as Faker;
+use Martin\Products\Item;
 use Martin\Products\Product;
 use Martin\Users\User;
 use Martin\Products\Cart;
@@ -21,22 +22,19 @@ class CartsTableSeeder extends Seeder {
 
         foreach(range(1,100) as $index)
         {
-            $products = Product::lists('id');
-            $prices = Product::lists('price');
-            $names = Product::lists('name');
+            $items = Item::lists('id');
+            $prices = Item::lists('price');
+            $names = Item::lists('name');
 
 
-            $product = $faker->randomElement($products);
+            $item = $faker->randomElement($items);
 
 
             Cart::create([
                 'user_id' => $faker->randomElement($users),
                 'unique_id' => md5($faker->sentence()),
-                'cartable_id' => $product,
-                'cartable_type' => 'Martin\Products\Product',
-                'price' => $prices[$product - 1],
-                // 'name' => $names[$product - 1],
-
+                'item_id' => $item,
+                'price' => $prices[$item - 1],
                 'quantity' => $faker->numberBetween(1,4),
             ]);
         }

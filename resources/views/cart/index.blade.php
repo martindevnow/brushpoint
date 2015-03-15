@@ -1,7 +1,6 @@
 @extends('layouts.zeina')
 
 @section('header_bottom')
-
     <?php
     $page['link'] = "/cart";
 
@@ -19,7 +18,10 @@
 
 @section('content')
 <div class="container">
-    <table class="table">
+
+    {!! Form::open(['method' => 'post', 'url' => 'cart/update']) !!}
+
+    <table class="table cart-contents">
         <thead>
             <tr>
               <th>Item</th>
@@ -29,14 +31,23 @@
             </tr>
           </thead>
           <tbody>
+
             @foreach($cartData as $item)
             <tr>
-              <td>{{ $item['name'] }}</td>
+              <td>
+                <a href="cart/remove/{{ $item['id'] }}"><button type="button" class="btn btn-danger btn-xs">X</button></a>
+                <a href="/purchase/id-{{ $item['id'] }}">{{ $item['name'] }}</a></td>
               <td>{{ asMoney($item['price']) }}</td>
-              <td>{{ $item['quantity'] }}</td>
+              <td>
+                <!--  Form Input -->
+                <div class="form-group" style="margin-bottom: 0px">
+                    {!! Form::text($item['id'] . '-quantity', $item['quantity'], ['class' => 'form-control cart-item-quantity']) !!}
+                </div>
+            </td>
               <td>{{ asMoney($item['price'] * $item['quantity']) }}</td>
             </tr>
             @endforeach
+
           </tbody>
     </table>
 
@@ -45,8 +56,12 @@
              {!! Form::submit('Checkout', ['class' => 'btn btn-primary']) !!}
          </div>
     {!! Form::close() !!} -->
+    <a href="/purchase" class="btn btn-primary">Continue Browsing</a>
+    {!! Form::submit('Update Quantities', ['class' => "btn btn-sale" ]) !!}
+    {{-- <a href="/cart/update" class="btn btn-sale">Update Quantities</a> --}}
+    <a href="/checkout/express" class="btn btn-sale">Checkout</a>
 
-    <a href="/cart/checkout/express" class="btn btn-primary">Checkout</a>
+    {!! Form::close() !!}
 
 
 </div>

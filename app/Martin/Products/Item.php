@@ -27,10 +27,9 @@ class Item extends CoreModel {
         return $this->hasMany('Martin\Sales\Purchase');
     }
 
-
     public function carts()
     {
-        return $this->morphMany('Martin\Products\Cart', 'cartable');
+        return $this->hasMany('Martin\Products\Cart');
     }
 
 } 

@@ -234,20 +234,33 @@ Route::get('purchase/id-{id}/{name}', 'PurchaseController@show');
  * Cart
  */
 Route::get('cart', 'CartController@index');
-Route::get('cart/address', 'CartController@getPayerInfo');
-Route::get('cart/checkout/express', 'CartController@expressCheckout');
-Route::get('cart/checkout/confirm', 'CartController@confirmPayerInfo');
-Route::get('cart/checkout/process', 'CartController@checkout');
-Route::get('cart/checkout/success', 'CartController@success');
-Route::get('cart/checkout/cancelled', 'CartController@cancelled');
+Route::get('cart/add/{id}', 'CartController@confirmAddToCart');
+Route::post('cart/add/confirm', 'CartController@addToCartConfirmed');
+Route::get('cart/remove/{id}', 'CartController@remove');
+Route::post('cart/update', 'CartController@update');
 
-Route::get('cart/confirmAdd/{id}', 'CartController@confirmAddToCart');
-Route::post('cart/confirmAdd/{id}', 'CartController@addToCartConfirmed');
 
+
+/**
+ * Checkout Controller
+ */
+Route::get('checkout/address', 'CartController@getPayerInfo');
+Route::get('checkout/express', 'CheckoutController@expressCheckout');
+Route::get('checkout/confirm', 'CheckoutController@confirmPayerInfo');
+Route::get('checkout/process', 'CheckoutController@checkout');
+Route::get('checkout/success', 'CheckoutController@success');
+Route::get('checkout/cancelled', 'CheckoutController@cancelled');
 Route::get('cart/checkout/status', [
     'as' => 'payment_status',
-    'uses' => 'CartController@getPaymentStatus'
+    'uses' => 'CheckoutController@getPaymentStatus'
 ]);
+
+
+
+
+
+
+
 
 
 /**

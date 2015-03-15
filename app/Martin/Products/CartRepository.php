@@ -40,9 +40,9 @@ class CartRepository {
                 ];
             }
         }
-        else {
+        else
             return array();
-        }
+
         return $data;
 
     }
@@ -64,12 +64,14 @@ class CartRepository {
         else
             $carts = Cart::where('unique_id', '=', $this->unique_id)
                 ->orWhere('user_id', '=', $this->user_id);
+        // dd($carts->count());
 
         foreach ($carts->get() as $cart)
         {
-            $data[] = [
-                'id'        => $cart->cartable_id,
-                'name'      => $cart->cartable->name,
+            // dd($cart);
+            $data['item-'. $cart->item_id] = [
+                'id'        => $cart->item_id,
+                'name'      => $cart->item->name,
                 'price'     => $cart->price,
                 'quantity'  => $cart->quantity
             ];
@@ -101,12 +103,16 @@ class CartRepository {
     }
 
 
+    /**
+     * Get the total cost of the cart from the DB
+     * @param null $identifier
+     * @return int
+     */
     public function getCartTotalDB($identifier = null)
     {
 
         $total = 0;
         if ($identifier)
-
             $cartItems = Cart::where('unique_id', '=', $identifier)
                 ->orWhere('user_id', '=', $identifier)->get();
         else
@@ -115,7 +121,6 @@ class CartRepository {
 
         if ( ! $cartItems->count())
             return $total;
-
 
         foreach ($cartItems as $cart)
             $total += $cart->getCartExtendedPrice();
@@ -133,23 +138,21 @@ class CartRepository {
      */
     public function addToCart(Item $item, $quantity)
     {
-        // dd($item);
-        $cartId = 'cart.item-'.$item->id;
+        $cartId = $this->getCartIdentifier($item->id);
 
-        // update session first
         if (Session::has($cartId)){
             $cart = Session::get($cartId);
             Session::put($cartId, [
-                'name' => $item->name,
-                'price' => $item->price,
-                'quantity' => $cart['quantity'] + $quantity
+                'name'      => $item->name,
+                'price'     => $item->price,
+                'quantity'  => $cart['quantity'] + $quantity
             ]);
         }
         else{
             Session::put($cartId, [
-                'name' => $item->name,
-                'price' => $item->price,
-                'quantity' => $quantity
+                'name'      => $item->name,
+                'price'     => $item->price,
+                'quantity'  => $quantity
             ]);
         }
 
@@ -158,19 +161,26 @@ class CartRepository {
         return $cart;
     }
 
+
+    /**
+     * Add the item to the user's cart
+     *
+     * @param Item $item
+     * @param $quantity
+     * @return Cart
+     */
     public function addToCartDB(Item $item, $quantity)
     {
         $cart = Cart::where('unique_id', '=', $this->unique_id)
-            ->where('cartable_id', '=', $item->id)->get();
+            ->where('item_id', '=', $item->id)->get();
 
         if (!$cart->count())
         {
             $cart = new Cart();
-
-            $cart->unique_id = $this->unique_id;
-            $cart->user_id = $this->user_id;
-            $cart->quantity = $quantity;
-            $cart->price = $item->price;
+            $cart->unique_id    = $this->unique_id;
+            $cart->user_id      = $this->user_id;
+            $cart->quantity     = $quantity;
+            $cart->price        = $item->price;
             $cart->save();
 
             $item->carts()->save($cart);
@@ -183,10 +193,14 @@ class CartRepository {
         }
 
         return $cart;
-
     }
 
 
+    /**
+     * Calculate the cost of shipping
+     *
+     * @return float
+     */
     public function calculateShipping()
     {
         if ($this->getCartTotal() >= 20)
@@ -200,12 +214,24 @@ class CartRepository {
     }
 
 
-    public function getCartByProductId($id)
+    /**
+     * Get an item from the cart DB based on the item id
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getCartByItemId($id)
     {
-        return Cart::where('cartable_id', '=', $id)->where('unique_id', '=', Session::get('unique_id'));
+        return Cart::where('item_id', '=', $id)
+            ->where('unique_id', '=', Session::get('unique_id'))->first();
     }
 
 
+    /**
+     * Completely Empty the cart
+     *
+     * @param null $identifier
+     */
     public function clearCart($identifier = null)
     {
         if (!$identifier)
@@ -214,6 +240,11 @@ class CartRepository {
         $this->clearCartDB($identifier);
     }
 
+    /**
+     * Empty the cart from the DB
+     *
+     * @param null $identifier
+     */
     public function clearCartDB($identifier = null)
     {
         if ($identifier)
@@ -221,6 +252,61 @@ class CartRepository {
         else
             Cart::where('unique_id', '=', $this->unique_id)->orWhere('user_id', '=', $this->user_id)->delete();
     }
+
+
+    /**
+     * Remove an item from the cart DB
+     *
+     * @param $itemId
+     */
+    public function removeByItemId($itemId)
+    {
+        $cart = $this->getCartByItemId($itemId);
+        $cart->delete();
+        $this->refreshCartFromDB();
+    }
+
+    /**
+     * Rebuild the session cart from the DB
+     */
+    public function refreshCartFromDB()
+    {
+        session()->put('cart', $this->getCartDataDB());
+    }
+
+
+    /**
+     * Returns a string used to identify the item in the cart
+     *
+     * @param $id
+     * @return string
+     */
+    public function getCartIdentifier($id)
+    {
+        return 'cart.item-'.$id;
+    }
+
+    public function updateQuantities(array $data)
+    {
+        foreach ($data as $cartItem => $quantity)
+        {
+            $cartItem = explode('-', $cartItem);
+            // $items[$cartItem[0]] = $quantity;
+            $cart = $this->getCartByItemId($cartItem[0]);
+            $cart->quantity = $quantity;
+            $cart->save();
+        }
+        $this->refreshCartFromDB();
+
+        // dd($items);
+    }
+
+    /*
+    public function getCartByItemId($itemId)
+    {
+        $item = Item::find($itemId);
+        return $item->carts()->where('unique_id', '=', $this->unique_id);
+    }*/
 }
 
 
