@@ -10,9 +10,8 @@ class PayerTableSeeder extends Seeder {
 
     public function run()
     {
-        DB::table('payers')->delete();
-        DB::table('addresses')->delete();
-
+        Payer::truncate();
+        Address::truncate();
 
         $faker = Faker::create();
 

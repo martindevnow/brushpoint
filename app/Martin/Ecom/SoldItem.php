@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace Martin\Ecom;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -311,7 +311,19 @@ Route::get('displaySession', function(){
 
 
 
+Route::get('payer1', function(){
+    $payer = \Martin\Ecom\Payer::create([
+        'payer_id' => "P69HMJQPKX258",
+        'payment_method' => "paypal",
+        'status' => "VERIFIED",
+        'email' => "me@gmail.com",
+        'first_name' => "Ben",
+        'last_name' => "Martin",
+    ]);
 
+    dd(\Martin\Ecom\Payer::find(1));
+
+});
 
 
 

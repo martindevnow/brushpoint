@@ -17,12 +17,14 @@ class CreateSoldItemsTable extends Migration {
 			$table->increments('id');
 
             $table->integer('item_id')->nullable();;
+            $table->integer('transaction_id');
 
 
             $table->string('name');
             $table->decimal('price');
             $table->string('currency');
             $table->integer('quantity');
+
 
 			$table->timestamps();
 		});

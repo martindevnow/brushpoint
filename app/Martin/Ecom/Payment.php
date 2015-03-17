@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model {
+use Martin\Core\CoreModel;
+
+class Payment extends CoreModel {
 
 	protected $table = "payments";
 
@@ -25,7 +27,7 @@ class Payment extends Model {
 
     public function transactions()
     {
-        return $this->belongsToMany('Martin\Econ\Transaction');
+        return $this->belongsToMany('Martin\Ecom\Transaction');
     }
 }
 

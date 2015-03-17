@@ -28,9 +28,6 @@ class Payer extends CoreModel {
         'birth_date', 		// string
         'tax_id', 		    // string
         'tax_id_type',
-
-        // NO 'shipping_address_id' or 'billing_address'
-        // Payer can have many addresses
     ];
 
     protected $hidden = [];
@@ -39,6 +36,5 @@ class Payer extends CoreModel {
     {
         return $this->hasMany('Martin\Ecom\Payment');
     }
-	//
 
 }
