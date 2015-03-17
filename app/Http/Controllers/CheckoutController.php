@@ -139,6 +139,7 @@ class CheckoutController extends Controller {
 
     public function status(Request $request)
     {
+
         // dd($request->all());
         $this->dispatch(new ProcessPaymentStatusCommand($request->get('paymentId')));
 

@@ -12,4 +12,21 @@ class Payment extends Model {
         $this->unique_id = session('unique_id');
     }
 
+
+
+    /**
+     * Relationships
+     */
+
+    public function payer()
+    {
+        return $this->belongsTo('Martin\Ecom\Payer');
+    }
+
+    public function transactions()
+    {
+        return $this->belongsToMany('Martin\Econ\Transaction');
+    }
 }
+
+

@@ -7,7 +7,7 @@ class ProcessPaymentStatusCommand extends Command {
     /**
      * @var
      */
-    private $paymentId;
+    public $paymentId;
 
     /**
      * Create a new command instance.

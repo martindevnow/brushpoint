@@ -19,7 +19,11 @@ class CreatePaymentsTable extends Migration {
             $table->string('payment_id');
             $table->string('hash');
 
-            $table->integer('sale_id')->nullable();
+            $table->string('state');
+            $table->string('intent');
+
+            // Has Many Transactions (Many to Many??)
+            // $table->integer('transaction_id')->nullable();
             $table->integer('payer_id')->nullable();
             $table->timestamps();
         });

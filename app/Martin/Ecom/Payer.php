@@ -1,8 +1,6 @@
-<?php
+<?php namespace Martin\Ecom;
 
-
-namespace Martin\Paypal;
-
+use Illuminate\Database\Eloquent\Model;
 
 use Martin\Core\CoreModel;
 
@@ -37,10 +35,10 @@ class Payer extends CoreModel {
 
     protected $hidden = [];
 
-
-    // PARENT
     public function payments()
     {
-        return $this->hasMany('Martin\Paypal\Payment');
+        return $this->hasMany('Martin\Ecom\Payment');
     }
-} 
+	//
+
+}

@@ -15,12 +15,17 @@ class CreatePayersTable extends Migration {
         Schema::create('payers', function(Blueprint $table)
         {
             $table->increments('id');
+
+            $table->string('payer_id')->index(); // STRING set by PayPal
+
+
             // populate with paypal information
             $table->string('payment_method');
+            $table->string('status');
+
             $table->string('email');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('ppid')->index(); // STRING set by PayPal
 
 
             $table->timestamps();

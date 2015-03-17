@@ -43,6 +43,11 @@ class Checkout {
         ]);
     }
 
+
+    public function getApi()
+    {
+        return $this->api;
+    }
     /**
      * Build the Payment for PayPal and store all relevant information to the DB
      *
