@@ -20,6 +20,8 @@ class CreateSoldItemsTable extends Migration {
             $table->integer('transaction_id');
 
 
+            $table->string('sku')->nullable();
+
             $table->string('name');
             $table->decimal('price');
             $table->string('currency');
