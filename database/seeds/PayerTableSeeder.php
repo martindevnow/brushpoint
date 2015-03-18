@@ -11,7 +11,6 @@ class PayerTableSeeder extends Seeder {
     public function run()
     {
         Payer::truncate();
-        Address::truncate();
 
         $faker = Faker::create();
 
@@ -25,23 +24,7 @@ class PayerTableSeeder extends Seeder {
         ]);
 
 
-        $payer->addresses()->create([
-            'name' => 'Ben Martin',
-            'street_1' => $faker->streetAddress,
-            'city' => $faker->city,
-            'province' => $faker->word,
-            'postal_code' => $faker->postcode,
-            'country' => $faker->countryCode,
-        ]);
 
-        $payer->addresses()->create([
-            'name' => 'Atsuko Martin',
-            'street_1' => $faker->streetAddress,
-            'city' => $faker->city,
-            'province' => $faker->word,
-            'postal_code' => $faker->postcode,
-            'country' => $faker->countryCode,
-        ]);
     }
 
 }

@@ -261,6 +261,22 @@ Route::get('checkout/cancelled', 'CheckoutController@cancelled'); */
 ]);*/
 
 
+/**
+ * Temporary
+ */
+
+Route::get('getPayerFromPayment', function() {
+    $ecomPayment = \Martin\Ecom\Payment::find(2);
+    $ecomPayer = $ecomPayment->payer;
+    dd($ecomPayer);
+});
+Route::get('getAddressesFromPayer', function() {
+    $ecomPayer = \Martin\Ecom\Payer::find(1);
+    $ecomAddresses = $ecomPayer->addresses()->where('name', 'Atsuko Martin')->first();
+    // echo $ecomAddresses->id;
+    dd($ecomPayer->addresses->where('id', 5)->first());
+    dd($ecomAddresses);
+});
 
 
 

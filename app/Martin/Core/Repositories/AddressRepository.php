@@ -3,29 +3,26 @@
 namespace Martin\Core\Repositories;
 
 class AddressRepository {
-    public function findOrCreateFromPayPal(\PayPal\Api\Payer $payer)
+    public function createFromPayPal(\Martin\Ecom\Payer $ecomPayer, \PayPal\Api\Payment $payment)
     {
-        $DBPayer = \Martin\Ecom\Payer::where('payer_id', '=', $payer->getPayerInfo()->getPayerId())->first();
+        $shippingAddress = $payment->getPayer()->getPayerInfo()->getShippingAddress();
 
-        if ($DBPayer)
-        {
-            dd ($DBPayer->addresses());
-        }
+        $addressData = [
+            'name' => $shippingAddress->getRecipientName(),
+            'street_1'  => $shippingAddress->getLine1(),
+            'street_2' => $shippingAddress->getLine2(),
+            'city'  => $shippingAddress->getCity(),
+            'province' => $shippingAddress->getState(),
+            'postal_code'  => $shippingAddress->getPostalCode(),
+            'country' => $shippingAddress->getCountryCode(),
+            'phone'  => $shippingAddress->getPhone(),
+        ];
+        // $ecomAddress = $ecomPayer->addresses()->firstOrNew($addressData);
+        $ecomAddress = new \Martin\Core\Address($addressData);
 
+        // $ecomPayer->addresses()->save($ecomAddress);
 
-
-        $shippingAddress = $payer->getPayerInfo()->getShippingAddress();
-        $DBPayer = new \Martin\Core\Address();
-        $DBPayer->name = $shippingAddress->getRecipientName();
-        $DBPayer->street_1 = $shippingAddress->getLine1();
-        $DBPayer->street_2 = $shippingAddress->getLine2();
-        $DBPayer->city = $shippingAddress->getCity();
-        $DBPayer->province = $shippingAddress->getState();
-        $DBPayer->postal_code = $shippingAddress->getPostalCode();
-        $DBPayer->country = $shippingAddress->getCountryCode();
-        $DBPayer->phone = $shippingAddress->getPhone();
-
-        return $DBPayer;
+        return $ecomAddress;
     }
 
 }

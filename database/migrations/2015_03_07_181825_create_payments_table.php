@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration {
             $table->increments('id');
             $table->string('unique_id');
             $table->string('payment_id');
-            $table->string('hash');
+            $table->string('hash')->nullable();
 
             $table->string('state');
             $table->string('intent');

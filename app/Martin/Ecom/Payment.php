@@ -27,7 +27,7 @@ class Payment extends CoreModel {
 
     public function transactions()
     {
-        return $this->belongsToMany('Martin\Ecom\Transaction');
+        return $this->belongsToMany('Martin\Ecom\Transaction')->withTimestamps();
     }
 }
 

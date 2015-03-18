@@ -16,10 +16,11 @@ class CreatePayersTable extends Migration {
         {
             $table->increments('id');
 
+            // set by PayPal
             $table->string('payer_id')->index(); // STRING set by PayPal
 
 
-            // populate with paypal information
+            // populate with PayPal information
             $table->string('payment_method');
             $table->string('status');
 

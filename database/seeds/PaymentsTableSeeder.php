@@ -17,11 +17,14 @@ class PaymentsTableSeeder extends Seeder {
     {
         Payment::truncate();
         Transaction::truncate();
+        Address::truncate();
 
-                // $faker = Faker::create();
+        $faker = Faker::create();
 
+        // Get the Payer
         $payer = Payer::find(1);
 
+        // Set the payment
         $payment = Payment::create([
             'unique_id' => 'beta64jkesgjsioegse',
             'payment_id' => 'PAY-HIOHI42HI2',
@@ -29,9 +32,9 @@ class PaymentsTableSeeder extends Seeder {
             'state' => 'created',
             'intent' => 'sale',
         ]);
-
         $payer->payments()->save($payment);
 
+        // Set the Transaction
         $transaction = Transaction::create([
             'amount_subtotal' => '11.00',
             'amount_shipping' => '6.96',
@@ -41,6 +44,7 @@ class PaymentsTableSeeder extends Seeder {
             'description' => 'Your BrushPoint Order',
         ]);
 
+        // Set the Items
         $item = Item::where('sku', '=', 'RH-DMMED')->first();
         $soldItem = SoldItem::create([
             'name' => $item->name,
@@ -48,11 +52,31 @@ class PaymentsTableSeeder extends Seeder {
             'currency' => 'USD',
             'quantity' => 2
         ]);
-
         $transaction->soldItems()->save($soldItem);
 
-
+        // Associate the Transaction to the Payment
         $payment->transactions()->save($transaction);
+
+
+
+        // Set the Address
+        $payment->addresses()->create([
+            'name' => 'Ben Martin',
+            'street_1' => $faker->streetAddress,
+            'city' => $faker->city,
+            'province' => $faker->word,
+            'postal_code' => $faker->postcode,
+            'country' => $faker->countryCode,
+        ]);
+
+        $payment->addresses()->create([
+            'name' => 'Atsuko Martin',
+            'street_1' => $faker->streetAddress,
+            'city' => $faker->city,
+            'province' => $faker->word,
+            'postal_code' => $faker->postcode,
+            'country' => $faker->countryCode,
+        ]);
     }
 
 }

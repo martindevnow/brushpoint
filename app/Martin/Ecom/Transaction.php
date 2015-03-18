@@ -7,9 +7,9 @@ use Martin\Core\CoreModel;
 class Transaction extends CoreModel {
 
 
-    public function payment()
+    public function payments()
     {
-        return $this->belongsToMany('Martin\Ecom\Payment');
+        return $this->belongsToMany('Martin\Ecom\Payment')->withTimestamps();
     }
 
     public function soldItems()
