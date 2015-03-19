@@ -99,6 +99,10 @@ class ProcessPaymentStatusCommandHandler {
 
 
         // TRANSACTIONS
+        $transRepo = new \Martin\Ecom\Repositories\TransactionRepository();
+        $ecomTransactions = $transRepo->createFromPaypal($PPpayment, $ecomPayment);
+
+
         // add the transactions and sold items to the DB
         // associate together
 

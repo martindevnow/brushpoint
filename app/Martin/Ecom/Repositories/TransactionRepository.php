@@ -6,7 +6,7 @@ namespace Martin\Ecom\Repositories;
 
 class TransactionRepository {
 
-    public function createFromPaypal(\PayPal\Api\Payment $PPpayment)
+    public function createFromPaypal(\PayPal\Api\Payment $PPpayment, \Martin\Ecom\Payment $ecomPayment)
     {
         $transactions = $PPpayment->getTransactions();
 
@@ -36,7 +36,9 @@ class TransactionRepository {
             }
 
             $ecomTransaction->save();
+            $ecomPayment->transactions()->attach($ecomTransaction);
         }
+        // $ecomPayment = \Martin\Ecom\Payment::where('payment_id', '=', $PPpayment->getId())->last();
 
     }
 
