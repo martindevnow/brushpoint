@@ -106,6 +106,7 @@ class ProcessPaymentStatusCommandHandler {
         // add the transactions and sold items to the DB
         // associate together
 
+
         // PAYMENT
         // add the payment to the DB using the payment_id
         // associate the payment to the Payer

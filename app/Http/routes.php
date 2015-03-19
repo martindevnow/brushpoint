@@ -302,6 +302,9 @@ Route::group(['namespace' => 'Admin'], function()
     Route::resource('admins/products', 'ProductsController');
     Route::resource('admins/feedback', 'FeedbackController');
     Route::resource('admins/purchases', 'PurchasesController');
+    Route::resource('admins/payments', 'PaymentsController');
+
+    Route::get('admins/payments/invoice/{id}', 'PaymentsController@invoice');
 
     // Route::get('admins/products/create', 'ProductsController@create');
     // Route::post('admins/products/create', 'ProductsController@store');

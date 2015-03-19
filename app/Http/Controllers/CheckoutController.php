@@ -242,6 +242,13 @@ Payment {#316 ▼
       0 => Transaction {#322 ▼
         -_propMap: array:4 [▼
           "amount" => Amount {#326 ▶}
+            "total": "7.47",
+            "currency": "USD",
+            "details": {
+              "tax": "0.03",
+              "shipping": "0.03"
+            }
+          },
           "description" => "Your BrushPoint.com Purchase"
           "item_list" => ItemList {#330 ▼
             -_propMap: array:1 [▼

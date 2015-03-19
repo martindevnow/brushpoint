@@ -23,6 +23,7 @@ class TransactionRepository {
             $ecomTransaction->save();
 
             $items = $transaction->getItemList()->getItems();
+            // dd($items);
             foreach ($items as $item)
             {
                 $ecomItem = new \Martin\Ecom\SoldItem([
