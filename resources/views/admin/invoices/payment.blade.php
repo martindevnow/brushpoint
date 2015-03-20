@@ -3,15 +3,15 @@
 @section('content')
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-8">
-            <a href="/">
-                <img src="http://bpl5.dev/images/logo/bpi_longlogo.jpg" alt="Brushpoint Innovations" class="img-responsive"/>
-            </a>
-        </div>
-        <div class="col-xs-4">
-            <div class="invoice-address">
+<table style="width: 850px; margin-left: 15px">
+    <tbody style="padding-left: 15px;">
+        <tr>
+            <td style="width: 70%;">
+                <a href="/">
+                    <img src="http://bpl5.dev/images/logo/bpi_longlogo.jpg" alt="Brushpoint Innovations" class="img-responsive"/>
+                </a>
+            </td>
+            <td style="width: 30%; padding-top:25px;;">
                 <p class="address-name">
                     {{ $data['payer']->first_name }} {{ $data['payer']->last_name }}
                 </p>
@@ -21,51 +21,48 @@
                     <br />{{ $data['address']->postal_code }}
                     <br />{{ $data['address']->country }}
                 </p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-1"></div>
-        <div class="col-xs-10">
-            <h3>Dear {{ $data['payer']->first_name }} {{ $data['payer']->last_name }}</h3>
-            <p>Thank you for choosing BrushPoint Innovations for your oral care needs.</p>
-        </div>
-        <div class="col-xs-1"></div>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 100%" colspan="2">
+                <h3>&nbsp;&nbsp;Dear {{ $data['payer']->first_name }} {{ $data['payer']->last_name }}</h3>
+                <p>Thank you for choosing BrushPoint Innovations for your oral care needs.</p>
+            </td>
+        </tr>
 
-    </div>
-    @foreach($data['transactions'] as $transaction)
-    <div class="row" style="border: 1px solid darkblue; min-height: 500px;">
-        <div class="col-xs-12">
-             <table class="table">
-                <thead>
+        @foreach($data['transactions'] as $transaction)
+        <tr>
+            <td colspan="2">
+                <table class="table">
+                  <thead>
                     <tr>
-                      <th>Product</th>
+                      <th width="70%">Product</th>
                       <th>Unit Cost</th>
-                      <th>Quantity</th>
-                      <th>Extended Cost</th>
+                      <th>Qty</th>
+                      <th>Amount</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach($transaction->soldItems as $item)
-                        <tr>
-                          <td>{{ $item->name }}</td>
-                          <td>{{ $item->price }}</td>
-                          <td>{{ $item->quantity }}</td>
-                          <td>{{ ($item->price * $item->quantity) }}</td>
-                        </tr>
+                    <tr>
+                      <td>{{ $item->name }}</td>
+                      <td>${{ number_format($item->price,2) }}</td>
+                      <td>{{ $item->quantity }}</td>
+                      <td>${{ number_format($item->price * $item->quantity,2) }}</td>
+                    </tr>
                     @endforeach
                   </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-7">    {{-- Spacer --}}    </div>
-        <div class="col-xs-4">
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 100%" colspan="2">
             {{-- Show the Subtotal,
                             Shipping
                         and Total  --}}
-             <table class="table">
-                <thead>
+                <table width="100%"><tbody><tr><td width="55%">&nbsp;</td><td>{{-- TABLE --}}
+                <table class="table">
+                  <thead>
                     <tr>
                       <th>&nbsp;</th>
                       <th>&nbsp;</th>
@@ -73,39 +70,35 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td class="sub-table-strong"><b>Subtotal:</b> </td><td class="sub-table-value">{{ $transaction->amount_subtotal }}</td>
+                      <td class="sub-table-strong"><b>Subtotal:</b> </td><td class="sub-table-value">${{ number_format($transaction->amount_subtotal, 2) }}</td>
                     </tr>
                     <tr>
-                      <td class="sub-table-strong"><b>Shipping:</b> </td><td class="sub-table-value">{{ $transaction->amount_shipping }}</td>
+                      <td class="sub-table-strong"><b>Shipping:</b> </td><td class="sub-table-value">${{ number_format($transaction->amount_shipping, 2) }}</td>
                     </tr>
                     <tr>
-                      <td class="sub-table-strong"><b>Total:</b> </td><td class="sub-table-value">{{ $transaction->amount_total }}</td>
+                      <td class="sub-table-strong"><b>Total:</b> </td><td class="sub-table-value">${{ number_format($transaction->amount_total, 2) }}</td>
                     </tr>
                   </tbody>
-            </table>
-        </div>
-        <div class="col-xs-1">{{-- Spacer --}}</div>
-    </div>
-    @endforeach
-    <div class="row">
-        <div class="col-xs-1"></div>
-        <div class="col-xs-10" style="border-top: 1px solid darkblue; height: 25px"></div>
-        <div class="col-xs-1"></div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-2">{{-- Spacer --}}</div>
-        <div class="col-xs-8 invoice-footer-top">
-            <p>Once again, we appreciate you choosing BrushPoint Innovations ® for your oral care needs.	</p>
-        </div>
-        <div class="col-xs-2">{{-- Spacer --}}</div>
-    </div>
-    <div class="row">
-        <div class="col-xs-2">{{-- Spacer --}}</div>
-        <div class="col-xs-8 invoice-footer-bottom">
-            <p>If you have any questions or feedback, please visit www.BrushPoint.com</p>
-        </div>
-        <div class="col-xs-2">{{-- Spacer --}}</div>
-    </div>
-</div>
+                </table>
+                </td><td width="15%"></td></tr></tbody></table>
+            </td>
+        </tr>
+        @endforeach
+        <tr>
+            <td style="width: 100%; border-top: 1px solid darkblue;" colspan="2">
+            <br />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <p>Once again, we appreciate you choosing BrushPoint Innovations ® for your oral care needs.	</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+               <p>If you have any questions or feedback, please visit www.BrushPoint.com</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
 @stop

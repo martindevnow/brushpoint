@@ -10,6 +10,7 @@ use Martin\Ecom\Repositories\PaymentRepository;
 use Martin\Notifications\Flash;
 use Martin\Products\Product;
 use Martin\Products\ProductRepository;
+use mikehaertl\wkhtmlto\Pdf;
 
 class PaymentsController extends Controller {
 
@@ -20,7 +21,7 @@ class PaymentsController extends Controller {
 
     function __construct(PaymentRepository $paymentRepository)
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => 'invoiceHtml']);
         $this->paymentRepository = $paymentRepository;
     }
 
@@ -38,15 +39,26 @@ class PaymentsController extends Controller {
 
     public function invoice($id)
     {
-        $data = $this->paymentRepository->generateInvoiceData($id);
-        $view =  view('admin.invoices.payment')->with(['data'=> $data]);
+        // You can pass a filename, a HTML string or an URL to the constructor
+        $pdf = new Pdf("bpl5.dev/admins/payments/invoice/html/". $id);
+        $pdf->saveAs('C:/wamp/www/dev/bpl5/public//tmp/new'. $id .'.pdf');
+        // dd($pdf);
+        // return "Generating...";
+        return response()->download("C:/wamp/www/dev/bpl5/public/tmp/new". $id .".pdf");
 
-        // return $view;
-        $html2pdf = new HTML2PDF('P', 'Letter', 'en');
-//      $html2pdf->setModeDebug();
-        $html2pdf->setDefaultFont('Arial');
-        $html2pdf->writeHTML($view);
-        dd($html2pdf->Output('exemple00.pdf'));
+    }
+
+    /**
+     * Display the invoice in HTML
+     *
+     * @param $id
+     * @return $this
+     */
+    public function invoiceHtml($id)
+    {
+        $data = $this->paymentRepository->generateInvoiceData($id);
+        $view =  view('admin.invoices.csspayment')->with(['data'=> $data]);
+        return $view;
     }
 
 } 

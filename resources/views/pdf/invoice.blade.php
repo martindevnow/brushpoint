@@ -1,28 +1,25 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>BrushPoint Invoice</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://bpl5.dev/css/bootstrap.min.css">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="http://bpl5.dev/css/bootstrap-theme.min.css">
-
     <style>
-
+    * {
+        /*border: 1px solid black;*/
+    }
     .body {
         font-size: 16px;
         padding-top: 15px;
+        width: 850px;
     }
+
 
     .container {
         width: 760px;
     }
+
     .invoice-address {
         float: right;
         border: 1px solid darkblue;
@@ -30,10 +27,21 @@
         width: 100%;
     }
     .sub-table-strong {
-
+      padding: 8px;
+      line-height: 1.42857143;
+      vertical-align: top;
+      border-top: 1px solid #ddd;
     }
     .sub-table-value {
-        text-align: right;;
+        text-align: right;
+        padding: 8px;
+      line-height: 1.42857143;
+      vertical-align: top;
+      border-top: 1px solid #ddd;
+    }
+
+    .address-name {
+        font-size: 18px;
     }
 
     .invoice-footer-top > p
@@ -42,6 +50,14 @@
         text-align: center;
         /*position: absolute;*/
 
+    }
+
+    table>tbody>tr>td .blank-cell {
+        border-top: none;
+    }
+
+    table>thead>tr>th .blank-cell {
+        border-bottom: none;
     }
 
     </style>

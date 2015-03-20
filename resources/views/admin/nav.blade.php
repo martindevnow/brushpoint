@@ -258,6 +258,9 @@
                         <li>
                             <a href="/admins/purchases"><i class="fa fa-table fa-fw"></i> Purchases</a>
                         </li>
+                        <li>
+                            <a href="/admins/payments"><i class="fa fa-table fa-fw"></i> Payments</a>
+                        </li>
 
 
 

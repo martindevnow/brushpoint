@@ -305,6 +305,7 @@ Route::group(['namespace' => 'Admin'], function()
     Route::resource('admins/payments', 'PaymentsController');
 
     Route::get('admins/payments/invoice/{id}', 'PaymentsController@invoice');
+    Route::get('admins/payments/invoice/html/{id}', 'PaymentsController@invoiceHtml');
 
     // Route::get('admins/products/create', 'ProductsController@create');
     // Route::post('admins/products/create', 'ProductsController@store');
