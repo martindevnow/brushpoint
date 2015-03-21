@@ -26,7 +26,6 @@
     </div>
    <div class="row">
         <div class="col-sm-6 col-md-4">
-
            <a href="/purchase/id-{{ $product->id }}"><img src="/images/brushpoint/purchase/{{ $product->sku }}-240.png" alt="{{ $product->name }}"></a>
         </div>
         {!! Form::open(['method'=>'post', 'action' => 'CartController@addToCartConfirmed']) !!}

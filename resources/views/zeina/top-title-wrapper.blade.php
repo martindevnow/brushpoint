@@ -12,10 +12,11 @@
                     @endif
                 </h1>
 
+                {{--
                 <h2 class="h2-page-desc">
                     {{ $page['short_description'] }}
                 </h2>
-
+                --}}
 
 
 

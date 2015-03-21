@@ -5,7 +5,7 @@
                 <div class="row">
                     @if (isset($tech))
                     <!-- Footer Col. -->
-                    <div class="footer-col-md-3 col-sm-3 footer-col">
+                    <div class="footer-col-md-3 col-sm-3 col-xs-12 footer-col">
                         <div class="footer-content" style="padding-bottom: 0px;">
                             <ul class="contact-info">
                                 <li>
@@ -20,7 +20,7 @@
                     <!-- //Footer Col.// -->
 
                     <!-- Footer Col. -->
-                    <div class="footer-col-md-3 col-sm-3 footer-col">
+                    <div class="footer-col-md-3 col-sm-3 col-xs-12 footer-col">
                         <div class="footer-content">
                             <ul class="contact-info">
                                 <li>
@@ -34,7 +34,7 @@
                     </div>
                     <!-- //Footer Col.// -->
                     <!-- Footer Col. -->
-                    <div class="footer-col-md-3 col-sm-3 footer-col">
+                    <div class="footer-col-md-3 col-sm-3 col-xs-12 footer-col">
                         <div class="footer-content">
                             <ul class="contact-info">
                                 <li>
@@ -49,7 +49,7 @@
                     <!-- //Footer Col.// -->
 
                     <!-- Footer Col. -->
-                    <div class="footer-col-md-3 col-sm-3 footer-col">
+                    <div class="footer-col-md-3 col-sm-3 col-xs-12 footer-col">
                         <div class="footer-content">
                             <ul class="contact-info">
                                 <li>

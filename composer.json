@@ -27,8 +27,7 @@
 			"App\\": "app/",
             "Martin\\": "app/Martin"
 		},
-        "files": ["app/Http/helpers.php",
-                "app/Html2Pdf/HTML2PDF.php"]
+        "files": ["app/Http/helpers.php"]
 	},
 	"autoload-dev": {
 		"classmap": [

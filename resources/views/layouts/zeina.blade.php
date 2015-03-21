@@ -92,7 +92,8 @@
         }
         h1.h1-page-title {
             color: #0031a0;
-            font-size: 2em;
+            font-size: 2.5em;
+            font-style: bold;
             margin-top: 7px;
         }
         h2.h2-page-desc {

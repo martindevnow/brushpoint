@@ -44,7 +44,8 @@ class PaymentsController extends Controller {
         $pdf->saveAs('C:/wamp/www/dev/bpl5/public//tmp/new'. $id .'.pdf');
         // dd($pdf);
         // return "Generating...";
-        return response()->download("C:/wamp/www/dev/bpl5/public/tmp/new". $id .".pdf");
+        // dd();
+        return response()->download(public_path()."/tmp/new". $id .".pdf");
 
     }
 

@@ -14,14 +14,13 @@ class PagesController extends Controller {
      */
     public function index()
     {
-        //
         return view('pages.index2');
     }
 
     public function about()
     {
-        $this->layout->content = view('pages.about');
-        // return view('pages.about');
+        // $this->layout->content = view('pages.about');
+        return view('pages.about');
     }
 
     public function capabilities()

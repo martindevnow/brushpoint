@@ -10,16 +10,22 @@
 
         public function run()
         {
-            DB::table('users')->delete();
+            DB::table('users')->truncate();
 
             $faker = Faker::create();
 
-            foreach(range(1,25) as $index)
+            User::create([
+                'name' => 'Ben',
+                'email' => 'ben@me.com',
+                'password' => bcrypt('123456')
+            ]);
+
+            foreach(range(1,3) as $index)
             {
                 User::create([
                     'name' => $faker->word . $index,
                     'email' => $faker->email,
-                    'password' => 'secret'
+                    'password' => bcrypt('secret')
                 ]);
             }
         }

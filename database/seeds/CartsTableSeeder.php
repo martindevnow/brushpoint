@@ -15,20 +15,14 @@ class CartsTableSeeder extends Seeder {
         DB::table('carts')->truncate();
 
         $faker = Faker::create();
-
         $users = User::lists('id');
-        $products = Product::lists('id', 'price');
 
-
-        foreach(range(1,100) as $index)
+        foreach(range(1,10) as $index)
         {
             $items = Item::lists('id');
             $prices = Item::lists('price');
-            $names = Item::lists('name');
-
 
             $item = $faker->randomElement($items);
-
 
             Cart::create([
                 'user_id' => $faker->randomElement($users),

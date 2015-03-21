@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class SendFeedbackRequest extends Request {
+class GetAddressRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -22,12 +22,12 @@ class SendFeedbackRequest extends Request {
 	public function rules()
 	{
 		return [
-			'name' => 'required',
-			'email' => 'required|email',
-			'phone' => 'required',
-			'retailer' => 'required',
-			// 'lot_code' => '',
-			'issue' => 'required',
+			'street_1' => 'required',
+            // 'street_2' => '',
+            'city' => 'required',
+            'province' => 'required',
+            'postal_code' => 'required',
+            'country' => 'required'
 		];
 	}
 

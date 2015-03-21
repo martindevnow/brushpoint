@@ -26,6 +26,8 @@
                 Leave A Message
             </h3>
 
+            @include('errors.list')
+
             <p class="body_paragraph">
                 If you have any feedback for us, we'd love to hear it! Tell us about any issues you've had with
                 our products and we'll happily take care of it for you! Just fill out the forms below and we'll
@@ -35,7 +37,7 @@
 
 
 
-            {!! Form::open(['method' => 'POST', 'action' => 'FeedbackController@store', 'id' => 'contact-form', 'class'=>'form-wrapper']) !!}
+            {!! Form::open(['method' => 'POST', 'url' => 'feedback/send', 'id' => 'contact-form', 'class'=>'form-wrapper']) !!}
                 <!-- Name Form Input -->
                 <div class="col-md-6">
                     <div class="form-group clearfix">
@@ -66,7 +68,7 @@
                     </div>
                 </div>
 
-                <!-- Address Form Input -->
+                <!-- Address Form Input
                 <div class="col-md-6">
                     <div class="form-group clearfix">
                         {!! Form::label('address', 'Address', ['class' => 'control-label']) !!}
@@ -74,7 +76,7 @@
                             {!! Form::text('address', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
                 <!-- Retailer Form Input -->
@@ -103,82 +105,16 @@
                     <div class="form-group clearfix">
                         {!! Form::label('issue', 'Issue *', ['class' => 'control-label']) !!}
                         <div class="col-xs-10">
-                            {!! Form::textarea('isssue', null, ['class' => 'form-control']) !!}
+                            {!! Form::textarea('issue', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
                 </div>
 
+                {!! Form::submit('Send Feedback', ['class' => 'btn btn-primary']) !!}
 
 
             {!! Form::close() !!}
 
-
-<!--
-
-            <form class="form-wrapper" id="contact-form2" method="post" role="form" novalidate>
-                <div class="col-md-12">
-                    <div class="form-group clearfix">
-                        <label class="control-label" for="name">Name *</label>
-                        <div class="col-xs-6">
-                            <input type="text" id="name" name="name" class="form-control" required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group clearfix">
-                        <label class="control-label" for="user-email"> E-mail *</label>
-                        <div class="col-xs-6">
--->
-                            <!-- type email used by jquery validate -->
-<!--
-                            <input type="text" name="email" id="user-email" class="form-control" required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group clearfix">
-                        <label class="control-label" for="phone">Phone *</label>
-                        <div class="col-xs-6">
-                            <input type="text" id="phone" name="phone" class="form-control" required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group clearfix">
-                        <label class="control-label" for="retailer">Retailer *</label>
-                        <div class="col-xs-6">
-                            <input type="text" id="retailer" name="retailer" class="form-control" required/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group clearfix">
-                        <label class="control-label" for="lotcode">Lot Code *</label>
-                        <div class="col-xs-6">
-                            <input type="text" id="lotcode" name="lotcode" class="form-control" required/>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group clearfix">
-                    <label class="control-label" for="issue">  Issue *</label>
-                    <div class="col-xs-6">
--->
-                        <!-- type email used by jquery validate -->
-<!--
-                        <textarea name="issue" id="issue" class="form-control" required></textarea>
-                    </div>
-                </div>
-
-
-                <div class="form-group clearfix">
-                    <label class="control-label"></label>
-                    <div class="col-xs-6">
-                        <input type="submit" value="Send" class="btn btn-primary"/>
-                    </div>
-                </div>
-            </form>
--->
 
 
         </div>
