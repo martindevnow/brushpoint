@@ -20,7 +20,7 @@
             <tr>
               <td>{{ $product->name }}</td>
               <td>{{ $product->sku }}</td>
-              <td><a href="/admins/products/{{ $product->id }}">Edit</a></td>
+              <td><a href="/admins/products/{{ $product->id }}/edit">Edit</a></td>
               <td>
               {!! Form::open() !!}
                   <div class="form-group">

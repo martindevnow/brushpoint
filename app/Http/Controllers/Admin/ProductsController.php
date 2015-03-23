@@ -68,4 +68,11 @@ class ProductsController extends Controller {
         return redirect("admins/products");
     }
 
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        $this->layout->content = view('admin.products.edit')->with(compact('product'));
+    }
+
+
 }
