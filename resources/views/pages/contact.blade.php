@@ -26,14 +26,17 @@
                 Leave A Message
             </h3>
 
+
             <p class="body_paragraph">
                 Our head office is located in King City, Ontario Canada. For more information or questions please fill
                 out the form below with your name, email and message. Please provide all relevant information so that
                 we may respond to your inquiry as soon as possible.
             </p>
 
-            <form class="form-wrapper" id="contact-form" method="post" role="form" novalidate>
+            @include('errors.list')
 
+            <form class="form-wrapper" id="bp-contact-form" method="post" role="form" novalidate>
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <div class="form-group clearfix">
                     <label class="control-label" for="name">Name *</label>
                     <div class="col-xs-6">
@@ -50,10 +53,10 @@
                 </div>
 
                 <div class="form-group clearfix">
-                    <label class="control-label" for="message">  Message *</label>
+                    <label class="control-label" for="user_message">  Message *</label>
                     <div class="col-xs-6">
                         <!-- type email used by jquery validate -->
-                        <textarea name="message" id="message" class="form-control" required></textarea>
+                        <textarea name="user_message" id="user_message" class="form-control" required></textarea>
                     </div>
                 </div>
 

@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Martin\Notifications\Flash;
 
 class PagesController extends Controller {
 
@@ -31,6 +33,23 @@ class PagesController extends Controller {
     public function contact()
     {
         return view('pages.contact');
+    }
+
+    public function sendContact(Requests\SendContactRequest $request)
+    {
+        $data = $request->only('name', 'email', 'user_message');
+
+        Mail::send('emails.contact', $data, function($message) use ($data)
+            {
+                $message->from($data['email'], $data['name']);
+                $message->to('benjaminm@brushpoint.com', 'Admin')
+                    ->subject('Contact from '. $data['name']);
+            });
+
+        Flash::message('Thank you for contacting us!');
+
+        // return view('pages.index2');
+        return redirect('contact');
     }
 
     public function video()

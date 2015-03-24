@@ -42,6 +42,8 @@ Route::get('home', 'PagesController@index');
 Route::get('about', 'PagesController@about');
 Route::get('capabilities', 'PagesController@capabilities');
 Route::get('contact', 'PagesController@contact');
+Route::post('contact', 'PagesController@sendContact');
+
 Route::get('video', 'PagesController@video');
 
 /**
