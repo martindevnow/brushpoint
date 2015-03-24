@@ -37,6 +37,20 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <style>
+    .flash {
+        background: #F6624a;
+        color: #ffffff;
+        width: 200px;
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        padding: 1em;
+        display: none;
+
+    }
+    </style>
+
 </head>
 
 <body>
@@ -75,6 +89,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/admin/sb-admin/dist/js/sb-admin-2.js"></script>
+    <script src="/js/all.js"></script>
 
 </body>
 

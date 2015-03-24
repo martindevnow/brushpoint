@@ -3,6 +3,8 @@
 @section('content')
 <div class="container">
 
+
+
     <table class="table">
         <thead>
             <tr>
@@ -18,35 +20,44 @@
           <tbody>
             @foreach($products as $product)
             <tr>
+
               <td>{{ $product->name }}</td>
               <td>{{ $product->sku }}</td>
               <td><a href="/admins/products/{{ $product->id }}/edit">Edit</a></td>
               <td>
-              {!! Form::open() !!}
                   <div class="form-group">
-                  {!! Form::checkbox('active', $product->active, $product->active) !!}
+{!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/products/active/'. $product->id]) !!}
+{!! Form::checkbox('active', $product->active, $product->active, ['data-click-submits-form']) !!}
+{!! Form::close() !!}
+
                   </div>
-              {!! Form::close() !!}
               </td>
               <td>
-                {!! Form::open() !!}
                     <div class="form-group">
-                    {!! Form::checkbox('portfolio', $product->portfolio, $product->portfolio) !!}
+{!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/products/portfolio/'. $product->id]) !!}
+{!! Form::checkbox('portfolio', $product->portfolio, $product->portfolio, ['data-click-submits-form']) !!}
+{!! Form::close() !!}
+
                     </div>
-                {!! Form::close() !!}
               </td>
               <td>
-                {!! Form::open() !!}
                     <div class="form-group">
-                    {!! Form::checkbox('purchase', $product->purchase, $product->purchase) !!}
+{!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/products/purchase/'. $product->id]) !!}
+{!! Form::checkbox('purchase', $product->purchase, $product->purchase, ['data-click-submits-form']) !!}
+{!! Form::close() !!}
+
                     </div>
-                {!! Form::close() !!}
               </td>
+
             </tr>
+
             @endforeach
           </tbody>
     </table>
 </div>
 
+<div class="flash">
+    Updated...
+</div>
 
 @stop

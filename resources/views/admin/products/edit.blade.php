@@ -2,15 +2,23 @@
 
 @section('content')
 <div class="container">
-    {!! Form::open() !!}
+    {!! Form::open(['method' => 'patch', 'route' => ['admins.products.update', $product->id]]) !!}
+
+    <!-- Save Form Input -->
+    <div class="form-group">
+        {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
+    </div>
+
     <div class="form-group">
         {!! Form::label('name', 'Name:') !!}
         {!! Form::text('name', $product->name, ['class' => 'form-control']) !!}
     </div>
+
     <div class="form-group">
         {!! Form::label('description', 'Description:') !!}
         {!! Form::text('description', $product->description, ['class' => 'form-control']) !!}
     </div>
+
     <div class="form-group">
         {!! Form::label('sku', 'SKU:') !!}
         {!! Form::text('sku', $product->sku, ['class' => 'form-control']) !!}
@@ -78,7 +86,6 @@
         {!! Form::label('active', 'Active:') !!}
         {!! Form::checkbox('active', $product->active, $product->active) !!}
     </div>
-
 
     <div class="form-group">
         {!! Form::label('portfolio', 'Portfolio (Display):') !!}

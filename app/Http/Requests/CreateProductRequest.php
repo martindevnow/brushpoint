@@ -23,7 +23,7 @@ class CreateProductRequest extends Request {
 	{
 		return [
 			'name'          => 'required',
-			'description'   => 'required',
+			/*'description'   => 'required',*/
 			'sku'           => 'required',
 			'price'         => 'required|numeric',
 		];

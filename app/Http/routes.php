@@ -121,6 +121,10 @@ Route::group(['namespace' => 'Admin'], function()
 {
     Route::get('admins', 'AdminController@index');
     Route::resource('admins/products', 'ProductsController');
+    Route::patch('admins/products/active/{id}', 'ProductsController@ajaxActive');
+    Route::patch('admins/products/portfolio/{id}', 'ProductsController@ajaxPortfolio');
+    Route::patch('admins/products/purchase/{id}', 'ProductsController@ajaxPurchase');
+
     Route::resource('admins/feedback', 'FeedbackController');
     Route::resource('admins/purchases', 'PurchasesController');
     Route::resource('admins/payments', 'PaymentsController');
