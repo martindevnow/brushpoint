@@ -96,7 +96,7 @@
         {!! Form::label('purchase', 'Purchase(able):') !!}
         {!! Form::checkbox('purchase', $product->purchase, $product->purchase) !!}
     </div>
-
+    {!! Form::close() !!}
 </div>
 
 

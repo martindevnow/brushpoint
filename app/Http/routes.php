@@ -19,8 +19,6 @@ Route::controllers([
 
 // TODO: all pages -- make the title collapse properly when resized too small (text doesn't wrap well)
 // TODO: navbar -- when the page is shrunk, change text to smaller and change logo to only (BRUSHPOINT)
-// TODO: portfolio.show -- make it so the right side of the screen is on top when the page size shrinks
-// TODO: portfolio.show -- reduce the size of the breadcrumb
 // TODO: all pages -- consider removing the breadcrumb all together
 
 // TODO: pages.contact -- make the email addresses clickable
@@ -128,12 +126,17 @@ Route::group(['namespace' => 'Admin'], function()
     Route::patch('admins/products/purchase/{id}', 'ProductsController@ajaxPurchase');
 
     Route::resource('admins/feedback', 'FeedbackController');
+    Route::patch('admins/feedback/resolved/{id}', 'FeedbackController@ajaxResolved');
+
+
     Route::resource('admins/purchases', 'PurchasesController');
     Route::resource('admins/payments', 'PaymentsController');
 
     Route::get('admins/payments/invoice/{id}', 'PaymentsController@invoice');
     Route::get('admins/payments/invoice/html/{id}', 'PaymentsController@invoiceHtml');
 
+
+    Route::post('admins/note/store', 'NotesController@ajaxStore');
     // Route::get('admins/products/create', 'ProductsController@create');
     // Route::post('admins/products/create', 'ProductsController@store');
 });

@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model {
 
-    protected $table = 'addresses';
+    protected $table = 'notes';
 
     protected $fillable = [
         'user_id',

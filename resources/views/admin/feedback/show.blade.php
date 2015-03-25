@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="container">
-
+{{ get_class($feedback) }}
         <table class="table">
             <thead>
                 <tr>
@@ -43,5 +43,7 @@
                 </tr>
               </tbody>
         </table>
+
+        @include('admin.layouts.partials._note', ['model' => $feedback])
     </div>
 @stop

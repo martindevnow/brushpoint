@@ -19,8 +19,8 @@ class CreateNotesTable extends Migration {
             $table->text('content');
 
             // polymorphic relations
-            $table->integer('noteable_id');
-            $table->string('noteable_type');
+            $table->integer('noteable_id')->nullable();
+            $table->string('noteable_type')->nullable();
             $table->timestamps();
         });
     }

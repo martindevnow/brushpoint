@@ -29,11 +29,11 @@
                   <td>{{ $feedback->issue }}</td>
                   <td>{{ $feedback->created_at->diffForHumans() }}</td>
                   <td>
-                  {!! Form::open() !!}
                       <div class="form-group">
-                      {!! Form::checkbox('resolved', $feedback->resolved, $feedback->resolved) !!}
+                        {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/resolved/'. $feedback->id]) !!}
+                        {!! Form::checkbox('resolved', $feedback->resolved, $feedback->resolved, ['data-click-submits-form']) !!}
+                        {!! Form::close() !!}
                       </div>
-                  {!! Form::close() !!}
                   </td>
 
                 </tr>
@@ -41,6 +41,8 @@
               </tbody>
         </table>
     </div>
-
+<div class="flash">
+    Updated...
+</div>
 
 @stop
