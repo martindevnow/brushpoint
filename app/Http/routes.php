@@ -130,6 +130,7 @@ Route::group(['namespace' => 'Admin'], function()
 
 
     Route::resource('admins/purchases', 'PurchasesController');
+    
     Route::resource('admins/payments', 'PaymentsController');
 
     Route::get('admins/payments/invoice/{id}', 'PaymentsController@invoice');

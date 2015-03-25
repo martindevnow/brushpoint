@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use HTML2PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Martin\Ecom\Payment;
 use Martin\Ecom\Repositories\PaymentRepository;
 use Martin\Notifications\Flash;
 use Martin\Products\Product;
@@ -35,6 +36,15 @@ class PaymentsController extends Controller {
         $this->layout->content =  view('admin.payments.index')->with([
             'payments' => $payments
         ]);
+    }
+
+    public function show($id)
+    {
+        $payment = Payment::find($id);
+
+        $this->layout->conte = view('admin.payments.show')
+            ->with(['payment' => $payment]);
+
     }
 
     public function invoice($id)
