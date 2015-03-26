@@ -7,7 +7,7 @@ use App\Http\Requests\GetAddressRequest;
 use App\Http\Requests\SendFeedbackRequest;
 use Illuminate\Http\Request;
 use Martin\Notifications\Flash;
-use Martin\Products\Feedback;
+use Martin\Quality\Feedback;
 
 class FeedbackController extends Controller {
 

@@ -1,7 +1,4 @@
-<?php
-
-
-namespace Martin\Products;
+<?php namespace Martin\Quality;
 
 
 use Martin\Core\CoreModel;

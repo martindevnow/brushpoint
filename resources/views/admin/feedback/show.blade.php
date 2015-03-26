@@ -44,6 +44,8 @@
               </tbody>
         </table>
 
+        @include('admin.layouts.partials.notes', ['notes' => $feedback->notes])
+
         @include('admin.layouts.partials._note', ['model' => $feedback])
     </div>
 @stop

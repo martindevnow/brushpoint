@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Martin\Notifications\Flash;
-use Martin\Products\Feedback;
+use Martin\Quality\Feedback;
 
 class FeedbackController extends Controller {
 
