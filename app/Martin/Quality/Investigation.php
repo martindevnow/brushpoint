@@ -1,13 +1,17 @@
 <?php namespace Martin\Quality;
 
-use Illuminate\Database\Eloquent\Model;
+use Martin\Core\CoreModel;
 
-class Investigation extends Model {
+class Investigation extends CoreModel {
 
+    protected $fillable = [
+        'field_sample_requested_at',
+        'field_sample_received_at'
+    ];
 
-    public function feedbacks()
+    public function feedback()
     {
-        return $this->belongsTo()
+        return $this->belongsTo('Martin\Quality\Feedback');
     }
 
 }

@@ -1,9 +1,18 @@
 <?php namespace Martin\Quality;
 
-use Illuminate\Database\Eloquent\Model;
+use Martin\Core\CoreModel;
 
-class Issue extends Model {
+class Issue extends CoreModel {
 
-	//
+    protected $fillable = [
+        'type',
+        'complaint'
+    ];
+
+	public function feedbacks()
+    {
+        return $this->hasMany('Martin\Quality\Feedbacks');
+    }
+
 
 }

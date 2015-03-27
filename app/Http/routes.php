@@ -128,7 +128,6 @@ Route::group(['namespace' => 'Admin'], function()
     Route::resource('admins/feedback', 'FeedbackController');
     Route::patch('admins/feedback/resolved/{id}', 'FeedbackController@ajaxResolved');
 
-
     Route::resource('admins/purchases', 'PurchasesController');
     
     Route::resource('admins/payments', 'PaymentsController');

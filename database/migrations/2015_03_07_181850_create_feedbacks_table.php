@@ -42,8 +42,6 @@ class CreateFeedbacksTable extends Migration {
             $table->boolean('closed')->default(false);
             $table->timestamp('closed_at');
 
-
-
             $table->timestamps();
         });
     }

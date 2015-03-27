@@ -3,13 +3,13 @@
 use Illuminate\Database\Seeder;
 
 use Faker\Factory as Faker;
-use Martin\Products\Feedback;
+use Martin\Quality\Feedback;
 
 class FeedbackTableSeeder extends Seeder {
 
     public function run()
     {
-        DB::table('feedbacks')->delete();
+        DB::table('feedbacks')->truncate();
 
         $faker = Faker::create();
 
