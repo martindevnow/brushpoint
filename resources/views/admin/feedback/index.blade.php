@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="container">
-
-        <table class="table">
+        <table class="table form-table">
             <thead>
                 <tr>
                   <th>ID</th>

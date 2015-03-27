@@ -30,7 +30,17 @@ class FeedbackController extends Controller {
 
     public function store(Request $request)
     {
+        $data = $request->except('_token');
+        $feedback = Feedback::create($data);
+        $feedback->save();
 
+        // store the feedback to the session
+        session(['feedback' => $feedback->id]);
+
+        Flash::message('The customer Complaint has been Stored');
+
+        // display the form to request their address
+        return redirect()->to('admins/feedback');
         // $this->layout->content = view('admin.feedback.index');
     }
 

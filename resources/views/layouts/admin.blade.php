@@ -47,7 +47,10 @@
         bottom: 20px;
         padding: 1em;
         display: none;
-
+    }
+    .form-table
+    {
+        width: inherit;
     }
     </style>
 

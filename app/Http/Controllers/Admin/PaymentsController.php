@@ -51,7 +51,7 @@ class PaymentsController extends Controller {
     {
         // You can pass a filename, a HTML string or an URL to the constructor
         $pdf = new Pdf("bpl5.dev/admins/payments/invoice/html/". $id);
-        $pdf->saveAs('C:/wamp/www/dev/bpl5/public//tmp/new'. $id .'.pdf');
+        $pdf->saveAs(public_path(). '/tmp/new'. $id .'.pdf');
         // dd($pdf);
         // return "Generating...";
         // dd();

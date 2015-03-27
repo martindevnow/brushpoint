@@ -40,8 +40,7 @@ class PaymentRepository {
 
         $address = $payment->addresses->first();
 
-        $transactions = $payment->transactions;
-        // dd($transactions);
+        $transactions = $payment->transactions->first();
 
 
         return [
