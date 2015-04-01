@@ -28,10 +28,8 @@
 
             <div class="col-md-4 col-sm-4">
                 <div class="center-title">
-                    <div class="heading-title">
-                        <!-- <h2 class="h2-section-title">Brushpoint</h2> -->
-                        <img src="/images/logo/brushpoint.jpg" width="500" height="222" class="img-responsive">
-                    </div>
+                    <!-- <h2 class="h2-section-title">Brushpoint</h2> -->
+                    <img src="/images/logo/brushpoint.jpg" width="500" height="222" class="img-responsive">
                  </div>
             </div>
             <div class="col-md-8 col-sm-8">
