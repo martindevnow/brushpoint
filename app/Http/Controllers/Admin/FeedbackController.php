@@ -97,29 +97,6 @@ class FeedbackController extends Controller {
     }
 
 
-    /**
-     * Update the Resolved field of the Feedback
-     *
-     * @param $feedbackId
-     * @param Request $request
-     * @return string
-     */
-    /*public function ajaxResolved($feedbackId, Request $request)
-    {
-        $feedback = Feedback::find($feedbackId);
-        $feedback->resolved = $request->has('resolved');
-        $feedback->save();
-        return "Passed";
-    }*/
-
-
-    /*public function ajaxClosed($feedbackId, Request $request)
-    {
-        $feedback = Feedback::find($feedbackId);
-        $feedback->closed = $request->has('closed');
-        $feedback->save();
-        return "Passed";
-    }*/
 
     public function ajaxPatch($feedbackId, Request $request)
     {
@@ -134,24 +111,6 @@ class FeedbackController extends Controller {
         return "Passed";
     }
 
-
-    /**
-     * Update the feedback by Ajaz request
-     *
-     * @param $feedbackId
-     * @param $data
-     * @return string
-     */
-    /*protected function ajaxUpdate($feedbackId, $data)
-    {
-        // The goal was to use the following ...
-
-            // return $this->ajaxUpdate($productId, ['purchase' => $request->has('purchase')]);
-
-        $feedback = Feedback::find($feedbackId);
-        $feedback->update($data);
-        return "Passed";
-    }*/
 
 
     /**

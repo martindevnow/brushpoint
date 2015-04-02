@@ -10,11 +10,13 @@
             data: form.serialize(),
             success: function() {
                 $.publish('form.submitted', form);
+                $('#noteModal').modal('hide');
+                $('#issueModal').modal('hide');
+
+
             }
         });
-
         e.preventDefault();
-
     };
 
 

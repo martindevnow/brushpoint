@@ -26,10 +26,16 @@
             data: form.serialize(),
             success: function() {
                 $.publish('form.submitted', form);
+                $('#noteModal').modal('hide');
+                $('#issueModal').modal('hide');
+
+
             }
         });
         e.preventDefault();
     };
+
+
 
     // forms marked with 'data-remote' will submit via AJAX
     $('form[data-remote]').on('submit', submitAjaxRequest);
