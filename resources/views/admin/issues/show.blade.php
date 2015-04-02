@@ -59,7 +59,7 @@
                         <td>{{ $feedback->phone }}</td> -->
                   <td>{{ $feedback->retailer }}</td>
                   <td>{{ $feedback->lot_code }}</td>
-                  <td>{{ $feedback->issue }}</td>
+                  <td>{{ $feedback->issue_text }}</td>
                   <td>{{ $feedback->created_at->diffForHumans() }}</td>
                   <td>
                       <div class="form-group">

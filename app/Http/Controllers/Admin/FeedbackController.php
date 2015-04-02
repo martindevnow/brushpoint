@@ -123,7 +123,6 @@ class FeedbackController extends Controller {
 
     public function ajaxPatch($feedbackId, Request $request)
     {
-        // dd($request->all());
         $field = $request->get('field');
         $value = $request->has($field);
 

@@ -86,40 +86,15 @@ class ProductsController extends Controller {
     }
 
 
-    public function ajaxActive($productId, Request $request)
+    public function ajaxPatch($productId, Request $request)
     {
-        $product = Product::find($productId);
-        $product->active = $request->has('active');
-        $product->save();
-        return "Passed";
+        $field = $request->get('field');
+        $value = $request->has($field);
 
-    }
-    public function ajaxPortfolio($productId, Request $request)
-    {
         $product = Product::find($productId);
-        $product->portfolio = $request->has('portfolio');
-        $product->save();
-        return "Passed";
-
-    }
-    public function ajaxPurchase($productId, Request $request)
-    {
-        $product = Product::find($productId);
-        $product->purchase = $request->has('purchase');
+        $product->$field = $value;
         $product->save();
         return "Passed";
     }
 
-
-    protected function ajaxUpdate($productId, $data)
-    {
-        // The goal was to use the following ...
-        /*
-         * return $this->ajaxUpdate($productId, ['purchase' => $request->has('purchase')]);
-         */
-        $product = Product::find($productId);
-        $product->update($data);
-        dd($product);
-        return "Passed";
-    }
 }

@@ -33,7 +33,7 @@
               <td><a href="/admins/products/{{ $product->id }}/edit">Edit</a></td>
               <td>
                   <div class="form-group">
-{!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/products/active/'. $product->id]) !!}
+{!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/products/ajax/'. $product->id .'?field=active']) !!}
 {!! Form::checkbox('active', $product->active, $product->active, ['data-click-submits-form']) !!}
 {!! Form::close() !!}
 
@@ -41,7 +41,7 @@
               </td>
               <td>
                     <div class="form-group">
-{!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/products/portfolio/'. $product->id]) !!}
+{!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/products/ajax/'. $product->id. '?field=portfolio']) !!}
 {!! Form::checkbox('portfolio', $product->portfolio, $product->portfolio, ['data-click-submits-form']) !!}
 {!! Form::close() !!}
 
@@ -49,7 +49,7 @@
               </td>
               <td>
                     <div class="form-group">
-{!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/products/purchase/'. $product->id]) !!}
+{!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/products/ajax/'. $product->id .'?field=purchase']) !!}
 {!! Form::checkbox('purchase', $product->purchase, $product->purchase, ['data-click-submits-form']) !!}
 {!! Form::close() !!}
 

@@ -126,36 +126,35 @@ Route::get('payment/execute', 'CartController@paymentTestExecute');
 Route::group(['namespace' => 'Admin'], function()
 {
     Route::get('admins', 'AdminController@index');
-    Route::resource('admins/products', 'ProductsController');
-    // TODO: Replace these 3 with one Ajax method that will accept a variety of info to be updated via PATCH
-    Route::patch('admins/products/active/{id}', 'ProductsController@ajaxActive');
-    Route::patch('admins/products/portfolio/{id}', 'ProductsController@ajaxPortfolio');
-    Route::patch('admins/products/purchase/{id}', 'ProductsController@ajaxPurchase');
+    Route::resource('admins/products',      'ProductsController');
+    Route::patch('admins/products/ajax/{id}',   'ProductsController@ajaxPatch');
 
-    Route::get('admins/feedback/filter', 'FeedbackController@filtered');
-    Route::resource('admins/feedback', 'FeedbackController');
-    Route::patch('admins/feedback/resolved/{id}', 'FeedbackController@ajaxResolved');
-    Route::patch('admins/feedback/closed/{id}', 'FeedbackController@ajaxClosed');
-    Route::patch('admins/feedback/ajax/{id}', 'FeedbackController@ajaxPatch');
+    Route::patch('admins/products/active/{id}',         'ProductsController@ajaxActive');
+    Route::patch('admins/products/portfolio/{id}',      'ProductsController@ajaxPortfolio');
+    Route::patch('admins/products/purchase/{id}',       'ProductsController@ajaxPurchase');
+
+    Route::resource(    'admins/feedback',             'FeedbackController');
+    Route::get(         'admins/feedback/filter',      'FeedbackController@filtered');
+    Route::patch(       'admins/feedback/ajax/{id}',   'FeedbackController@ajaxPatch');
 
 
-    Route::resource('admins/purchases', 'PurchasesController');
+    Route::resource(    'admins/purchases',         'PurchasesController');
     
-    Route::resource('admins/payments', 'PaymentsController');
+    Route::resource(    'admins/payments',          'PaymentsController');
 
-    Route::get('admins/payments/invoice/{id}', 'PaymentsController@invoice');
-    Route::get('admins/payments/invoice/html/{id}', 'PaymentsController@invoiceHtml');
+    Route::get(         'admins/payments/invoice/{id}',         'PaymentsController@invoice');
+    Route::get(         'admins/payments/invoice/html/{id}',    'PaymentsController@invoiceHtml');
 
 
-    Route::post('admins/note/store', 'NotesController@ajaxStore');
+    Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
 
-    Route::resource('admins/issues', 'IssuesController');
+    Route::resource(    'admins/issues',            'IssuesController');
     // store a new
-    Route::post('admins/issues/store', 'IssuesController@ajaxStore');
-    Route::patch('admins/issues/ajax/{id}', 'IssuesController@ajaxPatch');
+    Route::post(        'admins/issues/store',      'IssuesController@ajaxStore');
+    Route::patch(       'admins/issues/ajax/{id}',  'IssuesController@ajaxPatch');
 
-    // Route::get('admins/products/create', 'ProductsController@create');
-    // Route::post('admins/products/create', 'ProductsController@store');
+    // Route::get(      'admins/products/create',   'ProductsController@create');
+    // Route::post(     'admins/products/create',   'ProductsController@store');
 });
 
 
