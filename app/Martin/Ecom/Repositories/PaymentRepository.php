@@ -26,9 +26,7 @@ class PaymentRepository {
 
     public function getRecentPayments()
     {
-        $payments = Payment::orderBy('created_at', 'desc')->get();
-        // dd($payments);
-            //->all();
+        $payments = Payment::orderBy('created_at', 'desc')->paginate(25);
         return $payments;
     }
 

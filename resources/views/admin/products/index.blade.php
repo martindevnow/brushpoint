@@ -2,7 +2,14 @@
 
 @section('content')
 <div class="container">
-
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="page-header">Products</h1>
+        </div>
+        <div class="col-lg-3" style="margin-top: 10px;">
+             {!!  $products->render() !!}
+        </div>
+    </div>
 
 
     <table class="table">

@@ -28,7 +28,7 @@ class ProductsController extends Controller {
     public function index()
     {
         // get all portfolio products
-        $products = $this->productRepository->getPaginated(100);
+        $products = $this->productRepository->getPaginated(25);
 
         // return a view
         $this->layout->content = view('admin.products.index')->with(['products'=>$products]);

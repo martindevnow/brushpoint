@@ -122,6 +122,7 @@ Route::group(['namespace' => 'Admin'], function()
 {
     Route::get('admins', 'AdminController@index');
     Route::resource('admins/products', 'ProductsController');
+    // TODO: Replace these 3 with one Ajax method that will accept a variety of info to be updated via PATCH
     Route::patch('admins/products/active/{id}', 'ProductsController@ajaxActive');
     Route::patch('admins/products/portfolio/{id}', 'ProductsController@ajaxPortfolio');
     Route::patch('admins/products/purchase/{id}', 'ProductsController@ajaxPurchase');
