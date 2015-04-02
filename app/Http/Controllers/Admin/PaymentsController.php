@@ -50,12 +50,14 @@ class PaymentsController extends Controller {
     public function invoice($id)
     {
         // You can pass a filename, a HTML string or an URL to the constructor
-        $pdf = new Pdf("bpl5.dev/admins/payments/invoice/html/". $id);
-        $pdf->saveAs(public_path(). '/tmp/new'. $id .'.pdf');
-        // dd($pdf);
-        // return "Generating...";
-        // dd();
-        return response()->download(public_path()."/tmp/new". $id .".pdf");
+        $pdf = new Pdf(url('/') . "/admins/payments/invoice/html/". $id);
+
+        $saved = $pdf->saveAs(public_path(). '/tmp/new-'. $id .'.pdf');
+
+        if (!$saved)
+            dd($pdf->getError());
+
+        return response()->download(public_path()."/tmp/new-". $id .".pdf");
 
     }
 
@@ -68,6 +70,8 @@ class PaymentsController extends Controller {
     public function invoiceHtml($id)
     {
         $data = $this->paymentRepository->generateInvoiceData($id);
+        // dd($data['transactions']);
+
         $view =  view('admin.invoices.csspayment')->with(['data'=> $data]);
         return $view;
     }

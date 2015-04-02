@@ -15,6 +15,11 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
+Route::get('testpath', function(){
+    $path = url('/');
+    dd($path);
+});
+
 
 
 // TODO: all pages -- make the title collapse properly when resized too small (text doesn't wrap well)

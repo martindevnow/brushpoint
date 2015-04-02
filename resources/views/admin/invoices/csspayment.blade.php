@@ -31,7 +31,7 @@
         <div class="col-xs-1"></div>
 
     </div>
-    @foreach($data['transactions'] as $transaction)
+    <?php $transaction = $data['transactions']; ?>
     <div class="row" style="border: 1px solid darkblue; min-height: 500px;">
         <div class="col-xs-12">
              <table class="table">
@@ -84,7 +84,7 @@
         </div>
         <div class="col-xs-1">{{-- Spacer --}}</div>
     </div>
-    @endforeach
+    <?php // end the if/else stuff ?>
     <div class="row">
         <div class="col-xs-1"></div>
         <div class="col-xs-10" style="border-top: 1px solid darkblue; height: 25px"></div>
