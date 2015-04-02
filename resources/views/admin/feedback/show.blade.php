@@ -121,6 +121,9 @@
               </tbody>
         </table>
 
+
+            @include('admin.feedback.partials._issue')
+
     </div>
 </div>
 

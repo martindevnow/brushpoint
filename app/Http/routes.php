@@ -148,6 +148,7 @@ Route::group(['namespace' => 'Admin'], function()
 
 
     Route::post('admins/note/store', 'NotesController@ajaxStore');
+    Route::post('admins/issue/store', 'IssuesController@ajaxStore');
     // Route::get('admins/products/create', 'ProductsController@create');
     // Route::post('admins/products/create', 'ProductsController@store');
 });
