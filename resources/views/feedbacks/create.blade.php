@@ -103,9 +103,9 @@
                 <!-- Lot Code Form Input -->
                 <div class="col-md-12">
                     <div class="form-group clearfix">
-                        {!! Form::label('issue', 'Issue *', ['class' => 'control-label']) !!}
+                        {!! Form::label('issue_text', 'Issue *', ['class' => 'control-label']) !!}
                         <div class="col-xs-10">
-                            {!! Form::textarea('issue', null, ['class' => 'form-control']) !!}
+                            {!! Form::textarea('issue_text', null, ['class' => 'form-control']) !!}
                         </div>
                     </div>
                 </div>

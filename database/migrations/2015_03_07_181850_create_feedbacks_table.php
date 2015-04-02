@@ -22,7 +22,7 @@ class CreateFeedbacksTable extends Migration {
             // has an address
             $table->string('retailer');
             $table->string('lot_code')->nullable();
-            $table->text('issue');
+            $table->text('issue_text');
             $table->boolean('resolved')->default(false);
 
             // BACK END FOR QA

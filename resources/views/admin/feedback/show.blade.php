@@ -43,8 +43,14 @@
                   <td>{{ $feedback->lot_code }}</td>
                 </tr>
                 <tr>
-                  <td>Issue</td>
-                  <td>{{ $feedback->issue }}</td>
+                  <td>Issue <br />
+                        @if (isset($feedback->issue_id))
+                            {{ $feedback->issue->type }}
+                        @else
+                            Select Bar Here
+                        @endif
+                   </td>
+                  <td>{{ $feedback->issue_text }}</td>
                 </tr>
               </tbody>
         </table>
@@ -111,7 +117,7 @@
                   Closed
                   </td>
                   <td>
-                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=adverse_event' ]) !!}
+                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=closed' ]) !!}
                       <div class="form-group">
                       {!! Form::checkbox('closed', $feedback->closed, $feedback->closed) !!}
                       </div>

@@ -249,6 +249,9 @@
                         <li>
                             <a href="/admins/payments"><i class="fa fa-table fa-fw"></i> Payments</a>
                         </li>
+                        <li>
+                            <a href="/admins/issues"><i class="fa fa-table fa-fw"></i> Issues</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
