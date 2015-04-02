@@ -33,6 +33,8 @@ class Feedback extends CoreModel {
         'closed',
         'closed_at',
 
+        'resolved',
+
     ];
 
 

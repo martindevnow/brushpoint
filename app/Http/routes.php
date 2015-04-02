@@ -125,8 +125,12 @@ Route::group(['namespace' => 'Admin'], function()
     Route::patch('admins/products/portfolio/{id}', 'ProductsController@ajaxPortfolio');
     Route::patch('admins/products/purchase/{id}', 'ProductsController@ajaxPurchase');
 
+    Route::get('admins/feedback/filter', 'FeedbackController@filtered');
     Route::resource('admins/feedback', 'FeedbackController');
     Route::patch('admins/feedback/resolved/{id}', 'FeedbackController@ajaxResolved');
+    Route::patch('admins/feedback/closed/{id}', 'FeedbackController@ajaxClosed');
+    Route::patch('admins/feedback/ajax/{id}', 'FeedbackController@ajaxPatch');
+
 
     Route::resource('admins/purchases', 'PurchasesController');
     

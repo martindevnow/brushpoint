@@ -224,7 +224,27 @@
                             <a href="/admins/products"><i class="fa fa-table fa-fw"></i> Products</a>
                         </li>
                         <li>
-                            <a href="/admins/feedback"><i class="fa fa-table fa-fw"></i> Feedback</a>
+                            <a href=""><i class="fa fa-table fa-fw"></i> Feedback <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/admins/feedback">All</a>
+                                </li>
+                                <li>
+                                    <a href="/admins/feedback/filter?closed=0">Open</a>
+                                </li>
+                                <li>
+                                    <a href="/admins/feedback/filter?resolved=0">Unresolved</a>
+                                </li>
+                                <li>
+                                    <a href="/admins/feedback/filter?resolved=1">Resolved</a>
+                                </li>
+                                <li>
+                                    <a href="/admins/feedback/filter?closed=0">Open</a>
+                                </li>
+                                <li>
+                                    <a href="/admins/feedback/filter?closed=1">Closed</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="/admins/payments"><i class="fa fa-table fa-fw"></i> Payments</a>

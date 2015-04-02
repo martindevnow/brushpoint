@@ -50,7 +50,10 @@
     }
     .form-table
     {
-        width: inherit;
+        width: 100%;
+    }
+    .container {
+        width: 100%;
     }
     </style>
 

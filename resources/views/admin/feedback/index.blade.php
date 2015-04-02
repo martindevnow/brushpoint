@@ -2,6 +2,16 @@
 
 @section('content')
     <div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <h1 class="page-header">Feedback</h1>
+        </div>
+        <div class="col-lg-3" style="margin-top: 10px;">
+             {!!  $feedbacks->render() !!}
+        </div>
+    </div>
+
+
         <table class="table form-table">
             <thead>
                 <tr>
@@ -14,6 +24,7 @@
                   <th>Issue</th>
                   <th>Date</th>
                   <th>Resolved</th>
+                  <th>Closed</th>
                 </tr>
               </thead>
               <tbody>
@@ -35,10 +46,20 @@
                       </div>
                   </td>
 
+                  <td>
+                      <div class="form-group">
+                        {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/closed/'. $feedback->id]) !!}
+                        {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
+                        {!! Form::close() !!}
+                      </div>
+                  </td>
+
                 </tr>
                 @endforeach
               </tbody>
         </table>
+
+        {!!  $feedbacks->render() !!}
     </div>
 <div class="flash">
     Updated...
