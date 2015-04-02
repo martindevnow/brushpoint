@@ -11,7 +11,7 @@ class Issue extends CoreModel {
 
 	public function feedbacks()
     {
-        return $this->hasMany('Martin\Quality\Feedbacks');
+        return $this->hasMany('Martin\Quality\Feedback');
     }
 
 

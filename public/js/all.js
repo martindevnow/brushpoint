@@ -28,12 +28,8 @@
                 $.publish('form.submitted', form);
             }
         });
-
         e.preventDefault();
-
     };
-
-
 
     // forms marked with 'data-remote' will submit via AJAX
     $('form[data-remote]').on('submit', submitAjaxRequest);
