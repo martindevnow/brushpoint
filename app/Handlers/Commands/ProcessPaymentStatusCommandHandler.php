@@ -36,9 +36,11 @@ class ProcessPaymentStatusCommandHandler {
         // PAYMENT
         // try to find the payment to see if it is a new payment or what not.
         $PPpayment = Payment::get($command->paymentId, $this->api);
+
         Log::info(print_r($PPpayment,1));
 
         $paymentRepo = new \Martin\Ecom\Repositories\PaymentRepository();
+
         $ecomPayment = $paymentRepo->findOrCreateFromPaypal($PPpayment);
 
         if ($ecomPayment->state == "created" || $ecomPayment->state == "approved")
