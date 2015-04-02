@@ -141,7 +141,7 @@ class CheckoutController extends Controller {
     {
 
         // dd($request->all());
-        $this->dispatch(new ProcessPaymentStatusCommand($request->get('paymentId')));
+        $payment = $this->dispatch(new ProcessPaymentStatusCommand($request->get('paymentId')));
 
         // return true;
 
@@ -154,7 +154,7 @@ class CheckoutController extends Controller {
         // $checkout = new Checkout();
         // $payment = $checkout->getPayment($paymentId);
 
-        // dd($payment);
+        dd($payment);
     }
 
     public function completed()

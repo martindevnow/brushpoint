@@ -90,6 +90,7 @@ Route::get('checkout/confirm', 'CheckoutController@confirmPayerInfo');
 Route::get('checkout/process', 'CheckoutController@checkout');
 Route::get('checkout/error', 'CheckoutController@error');
 Route::get('checkout/status', 'CheckoutController@status');
+
 Route::get('cart/checkout/status', 'CheckoutController@status');
 Route::get('checkout/cancel', 'CheckoutController@cancel');
 
