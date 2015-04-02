@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Martin\Notifications\Flash;
 use Martin\Quality\Feedback;
+use Martin\Quality\Issue;
 
 class FeedbackController extends Controller {
 
@@ -65,7 +66,8 @@ class FeedbackController extends Controller {
     public function show($feedbackId)
     {
         $feedback = Feedback::find($feedbackId);
-        return $this->layout->content = view('admin.feedback.show')->with(compact('feedback'));
+        $issues = Issue::lists('type', 'id');
+        return $this->layout->content = view('admin.feedback.show')->with(compact('feedback', 'issues'));
     }
 
 

@@ -47,7 +47,11 @@
                         @if (isset($feedback->issue_id))
                             {{ $feedback->issue->type }}
                         @else
-                            Select Bar Here
+                          {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=issue_id' ]) !!}
+                              <div class="form-group">
+                              {!! Form::select('issue_id', $issues, null, ['data-click-submits-form']) !!}
+                              </div>
+                          {!! Form::close() !!}
                         @endif
                    </td>
                   <td>{{ $feedback->issue_text }}</td>
