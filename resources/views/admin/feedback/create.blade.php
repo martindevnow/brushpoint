@@ -55,16 +55,7 @@
                   {!! Form::textarea('issue', null, ['class' => 'form-control']) !!}
               </div></td>
             </tr>
-            <tr>
-              <td>
-              Resolved
-              </td>
-              <td>
-                <div class="form-group">
-                  {!! Form::checkbox('resolved', false) !!}
-                </div>
-              </td>
-            </tr>
+
             <tr>
               <td>BP Code</td>
               <td><div class="form-group">

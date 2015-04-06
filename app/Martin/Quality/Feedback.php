@@ -1,6 +1,7 @@
 <?php namespace Martin\Quality;
 
 
+use DateTime;
 use Martin\Core\CoreModel;
 
 class Feedback extends CoreModel {
@@ -33,9 +34,25 @@ class Feedback extends CoreModel {
         'closed',
         'closed_at',
 
-        'resolved',
+        // Replaced by 'closed' field
+        // 'resolved',
 
     ];
+
+
+    public function toggleClose($status)
+    {
+        // $status = ($this->closed + 1) % 2;
+        $this->closed = $status;
+        $dt = new DateTime;
+        if ($status)
+            $this->closed_at = $dt->format('y-m-d H:i:s');
+        else
+            $this->closed_at = 0;
+        $this->save();
+    }
+
+
 
 
     public function issue()
@@ -47,6 +64,8 @@ class Feedback extends CoreModel {
     {
         return $this->hasMany('Martin\Quality\Investigation');
     }
+
+
 
 
 

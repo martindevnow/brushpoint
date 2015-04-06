@@ -1,5 +1,4 @@
-<footer>
-    <div class="footer {{ (isset($tech)?'bp-footer':'') }}">
+
         <div class="container">
             <div class="footer-wrapper">
                 <div class="row">
@@ -67,20 +66,3 @@
                 </div>
             </div>
         </div>
-        <div class="copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="copyright-text">&copy; 2015 BrushPoint Innovations</div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
-
-</footer>

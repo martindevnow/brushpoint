@@ -46,10 +46,14 @@ class PagesController extends Controller {
                     ->subject('Contact from '. $data['name']);
             });
 
-        Flash::message('Thank you for contacting us!');
+        Flash::message('Your message has been delivered!');
 
-        // return view('pages.index2');
-        return redirect('contact');
+        return redirect('contact/thankyou');
+    }
+
+    public function thankyouContact()
+    {
+        return view('pages.contact_thankyou');
     }
 
     public function video()

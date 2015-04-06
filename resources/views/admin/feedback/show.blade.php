@@ -106,18 +106,6 @@
                 </tr>
                 <tr>
                   <td>
-                  Resolved
-                  </td>
-                  <td>
-                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=resolved' ]) !!}
-                      <div class="form-group">
-                      {!! Form::checkbox('resolved', $feedback->resolved, $feedback->resolved, ['data-click-submits-form']) !!}
-                      </div>
-                  {!! Form::close() !!}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
                   Closed
                   </td>
                   <td>

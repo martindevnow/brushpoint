@@ -106,9 +106,11 @@ class FeedbackController extends Controller {
         $value = $request->has($field);
 
         $feedback = Feedback::find($feedbackId);
-        $feedback->$field = $value;
+
         if ($field == "closed")
-            $feedback->closed_at = time();
+            $feedback->toggleClose($value);
+        else
+            $feedback->$field = $value;
         $feedback->save();
         return "Passed";
     }

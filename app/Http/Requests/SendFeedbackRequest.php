@@ -27,7 +27,7 @@ class SendFeedbackRequest extends Request {
 			'phone' => 'required',
 			'retailer' => 'required',
 			// 'lot_code' => '',
-			'issue' => 'required',
+			'issue_text' => 'required',
 		];
 	}
 

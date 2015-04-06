@@ -23,7 +23,9 @@ class CreateFeedbacksTable extends Migration {
             $table->string('retailer');
             $table->string('lot_code')->nullable();
             $table->text('issue_text');
-            $table->boolean('resolved')->default(false);
+
+            // Replaced by 'closed' field
+            // $table->boolean('resolved')->default(false);
 
             // BACK END FOR QA
             $table->string('bp_code')->nullable();

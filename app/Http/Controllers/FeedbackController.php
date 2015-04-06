@@ -19,7 +19,7 @@ class FeedbackController extends Controller {
     public function create()
     {
         // show the form for submitting a complaint
-        return view('feedbacks.create');
+        return view('feedback.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class FeedbackController extends Controller {
         Flash::message('Your feedback has been received!');
 
         // display the form to request their address
-        return view('feedbacks.address');
+        return view('feedback.address');
     }
 
     /**
@@ -68,10 +68,16 @@ class FeedbackController extends Controller {
 
         session()->forget('feedback');
 
-        Flash::message('Thank you for providing your address. We will contact you within 1-2 business days.');
-        return redirect('feedback');
+        Flash::message('Your message has been sent!');
+
+        return redirect('feedback/thankyou');
 
     }
 
+
+    public function thankyou()
+    {
+        return view('feedback.thankyou');
+    }
 
 }

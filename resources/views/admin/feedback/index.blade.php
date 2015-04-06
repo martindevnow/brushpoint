@@ -23,7 +23,6 @@
                   <th>Lot Code</th>
                   <th>Issue</th>
                   <th>Date</th>
-                  <th>Resolved</th>
                   <th>Closed</th>
                 </tr>
               </thead>
@@ -40,20 +39,11 @@
                   <td>{{ $feedback->created_at->diffForHumans() }}</td>
                   <td>
                       <div class="form-group">
-                        {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=resolved']) !!}
-                        {!! Form::checkbox('resolved', $feedback->resolved, $feedback->resolved, ['data-click-submits-form']) !!}
-                        {!! Form::close() !!}
-                      </div>
-                  </td>
-
-                  <td>
-                      <div class="form-group">
                         {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id . '?field=closed']) !!}
                         {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
                         {!! Form::close() !!}
                       </div>
                   </td>
-
                 </tr>
                 @endforeach
               </tbody>

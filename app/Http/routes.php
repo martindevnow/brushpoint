@@ -46,7 +46,7 @@ Route::get('about', 'PagesController@about');
 Route::get('capabilities', 'PagesController@capabilities');
 Route::get('contact', 'PagesController@contact');
 Route::post('contact', 'PagesController@sendContact');
-
+Route::get('contact/thankyou', 'PagesController@thankyouContact');
 Route::get('video', 'PagesController@video');
 
 /**
@@ -55,6 +55,7 @@ Route::get('video', 'PagesController@video');
 Route::get('feedback', 'FeedbackController@create');
 Route::post('feedback/send', 'FeedbackController@send');
 Route::post('feedback/address', 'FeedbackController@address');
+Route::get('feedback/thankyou', 'FeedbackController@thankyou');
 //Route::get('feedback/send', 'FeedbackController@send');
 
 

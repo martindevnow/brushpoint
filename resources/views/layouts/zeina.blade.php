@@ -324,7 +324,24 @@
 </div>  <!-- END div  body-wrapper -->
 
 </div><!--.content-wrapper end -->
-@yield('footer')
+
+<footer>
+    <div class="footer bp-footer">
+        @yield('footer')
+
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="copyright-text">&copy; 2015 BrushPoint Innovations</div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </div><!-- wrapper end -->
 
