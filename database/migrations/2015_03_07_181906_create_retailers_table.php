@@ -14,7 +14,7 @@ class CreateRetailersTable extends Migration {
         Schema::create('retailers', function ($table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->boolean('active');
             $table->timestamps();
         });

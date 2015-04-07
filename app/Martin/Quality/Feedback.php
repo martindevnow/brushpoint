@@ -65,6 +65,10 @@ class Feedback extends CoreModel {
         return $this->hasMany('Martin\Quality\Investigation');
     }
 
+    public function retailer()
+    {
+        return $this->belongsTo('Martin\Quality\Retailer');
+    }
 
 
 

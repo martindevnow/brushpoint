@@ -146,13 +146,17 @@ Route::group(['namespace' => 'Admin'], function()
     Route::get(         'admins/payments/invoice/{id}',         'PaymentsController@invoice');
     Route::get(         'admins/payments/invoice/html/{id}',    'PaymentsController@invoiceHtml');
 
-
     Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
 
-    Route::resource(    'admins/issues',            'IssuesController');
-    // store a new
     Route::post(        'admins/issues/store',      'IssuesController@ajaxStore');
     Route::patch(       'admins/issues/ajax/{id}',  'IssuesController@ajaxPatch');
+    Route::resource(    'admins/issues',            'IssuesController');
+
+    Route::post(        'admins/retailers/store',      'RetailersController@ajaxStore');
+    Route::patch(       'admins/retailers/ajax/{id}',  'RetailersController@ajaxPatch');
+    Route::resource(    'admins/retailers',         'RetailersController');
+    // store a new
+
 
     // Route::get(      'admins/products/create',   'ProductsController@create');
     // Route::post(     'admins/products/create',   'ProductsController@store');

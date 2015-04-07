@@ -28,7 +28,7 @@ class FeedbackController extends Controller {
      */
     public function send(SendFeedbackRequest $request)
     {
-        $data = $request->only('name', 'email', 'phone', 'retailer', 'lot_code', 'issue_text');
+        $data = $request->only('name', 'email', 'phone', 'retailer_text', 'lot_code', 'issue_text');
 
         $feedback = Feedback::create($data);
 

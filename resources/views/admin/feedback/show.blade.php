@@ -36,7 +36,19 @@
                 </tr>
                 <tr>
                   <td>Retailer</td>
-                  <td>{{ $feedback->retailer }}</td>
+                  <td>
+                    {{ $feedback->retailer_text }}
+                    @if (isset($feedback->retailer_id))
+                        [[ <a href="{{ url('admins/retailers') }}"> {{ $feedback->retailer->name }}</a> ]]
+                    @else
+                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=retailer_id' ]) !!}
+                          <div class="form-group">
+                          {!! Form::select('retailer_id', $retailers, null, ['data-click-submits-form']) !!}
+                          </div>
+                      {!! Form::close() !!}
+                    @endif
+
+                  </td>
                 </tr>
                 <tr>
                   <td>Lot Code</td>
@@ -121,6 +133,7 @@
 
 
             @include('admin.feedback.partials._issue')
+            @include('admin.feedback.partials._retailer')
 
     </div>
 </div>

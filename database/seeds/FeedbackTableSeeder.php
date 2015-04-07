@@ -19,7 +19,7 @@ class FeedbackTableSeeder extends Seeder {
                 'name' => $faker->name,
                 'email' => $faker->email,
                 'phone' => $faker->phoneNumber,
-                'retailer' => ucfirst($faker->word),
+                'retailer_text' => ucfirst($faker->word),
                 'lot_code' => $faker->word,
                 'issue_text' => $faker->sentence() . " " . $faker->sentence(),
 

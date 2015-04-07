@@ -20,7 +20,7 @@ class CreateFeedbacksTable extends Migration {
             $table->string('phone');
 
             // has an address
-            $table->string('retailer');
+            $table->string('retailer_text');
             $table->string('lot_code')->nullable();
             $table->text('issue_text');
 
