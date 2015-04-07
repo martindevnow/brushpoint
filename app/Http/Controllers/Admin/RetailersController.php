@@ -12,14 +12,14 @@ class RetailersController extends Controller {
     public function index()
     {
         $retailers = Retailer::all();
-        return view('admin.retailers.index')->withIssues($retailers);
+        return view('admin.retailers.index')->withRetailers($retailers);
     }
 
     public function show($retailerId)
     {
         $retailer = Retailer::find($retailerId);
 
-        return view('admin.retailers.show')->withIssue($retailer);
+        return view('admin.retailers.show')->withRetailer($retailer);
 
     }
 

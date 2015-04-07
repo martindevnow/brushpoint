@@ -4,22 +4,40 @@
     <div class="container">
     <div class="row">
         <div class="col-lg-9">
-            <h1 class="page-header">Feedback</h1>
+            <h1 class="page-header">Retailer</h1>
         </div>
         <div class="col-lg-3" style="margin-top: 10px;">
-             {!!  $feedbacks->render() !!}
         </div>
     </div>
-
 
         <table class="table form-table">
             <thead>
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
-                  <!--  <th>Email</th>
-                        <th>Phone</th> -->
-                  <th>Retailer</th>
+                  <th>Complaint</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="/admins/retailers/{{ $retailer->id }}">{{ $retailer->id }}</a></td>
+                  <td>{{ $retailer->type }}</td>
+                  <td>
+                      <div class="form-group">
+                        {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/retailers/ajax/'. $retailer->id. '?field=active']) !!}
+                        {!! Form::checkbox('active', $retailer->active, $retailer->active, ['data-click-submits-form']) !!}
+                        {!! Form::close() !!}
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+        </table>
+
+        <table class="table form-table">
+            <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
                   <th>Lot Code</th>
                   <th>Issue</th>
                   <th>Date</th>
@@ -27,33 +45,28 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($feedbacks as $feedback)
+                @foreach($retailer->feedbacks as $feedback)
                 <tr>
                   <td><a href="/admins/feedback/{{ $feedback->id }}">{{ $feedback->id }}</a></td>
                   <td>{{ $feedback->name }}</td>
                   <!--  <td>{{ $feedback->email }}</td>
                         <td>{{ $feedback->phone }}</td> -->
-                  @if($feedback->retailer)
-                  <td><a href="/admins/retailers/{{ $feedback->retailer->id }}">{{ $feedback->retailer->name }}</a></td>
-                  @else
-                  <td>{{ $feedback->retailer_text }}</td>
-                  @endif
                   <td>{{ $feedback->lot_code }}</td>
                   <td>{{ $feedback->issue_text }}</td>
                   <td>{{ $feedback->created_at->diffForHumans() }}</td>
                   <td>
                       <div class="form-group">
-                        {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id . '?field=closed']) !!}
+                        {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=closed']) !!}
                         {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
                         {!! Form::close() !!}
                       </div>
                   </td>
+
                 </tr>
                 @endforeach
               </tbody>
         </table>
 
-        {!!  $feedbacks->render() !!}
     </div>
 <div class="flash">
     Updated...

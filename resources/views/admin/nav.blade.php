@@ -233,15 +233,6 @@
                                     <a href="/admins/feedback/filter?closed=0">Open</a>
                                 </li>
                                 <li>
-                                    <a href="/admins/feedback/filter?resolved=0">Unresolved</a>
-                                </li>
-                                <li>
-                                    <a href="/admins/feedback/filter?resolved=1">Resolved</a>
-                                </li>
-                                <li>
-                                    <a href="/admins/feedback/filter?closed=0">Open</a>
-                                </li>
-                                <li>
                                     <a href="/admins/feedback/filter?closed=1">Closed</a>
                                 </li>
                             </ul>
@@ -251,6 +242,9 @@
                         </li>
                         <li>
                             <a href="/admins/issues"><i class="fa fa-table fa-fw"></i> Issues</a>
+                        </li>
+                        <li>
+                            <a href="/admins/retailers"><i class="fa fa-table fa-fw"></i> Retailers</a>
                         </li>
                     </ul>
                 </div>
