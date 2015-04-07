@@ -57,7 +57,15 @@
                   <td>{{ $feedback->name }}</td>
                   <!--  <td>{{ $feedback->email }}</td>
                         <td>{{ $feedback->phone }}</td> -->
-                  <td>{{ $feedback->retailer }}</td>
+                  <td>
+
+                      @if (isset($feedback->retailer_id))
+                          <a href="{{ url('admins/retailers/'. $feedback->retailer->id) }}"> {{ $feedback->retailer->name }}</a>
+                      @else
+                          {{ $feedback->retailer_text }}
+                      @endif
+
+                  </td>
                   <td>{{ $feedback->lot_code }}</td>
                   <td>{{ $feedback->issue_text }}</td>
                   <td>{{ $feedback->created_at->diffForHumans() }}</td>

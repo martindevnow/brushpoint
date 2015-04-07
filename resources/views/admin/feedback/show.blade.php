@@ -39,7 +39,7 @@
                   <td>
                     {{ $feedback->retailer_text }}
                     @if (isset($feedback->retailer_id))
-                        [[ <a href="{{ url('admins/retailers') }}"> {{ $feedback->retailer->name }}</a> ]]
+                        [[ <a href="{{ url('admins/retailers/'. $feedback->retailer->id) }}"> {{ $feedback->retailer->name }}</a> ]]
                     @else
                       {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=retailer_id' ]) !!}
                           <div class="form-group">
@@ -57,7 +57,7 @@
                 <tr>
                   <td>Issue <br />
                         @if (isset($feedback->issue_id))
-                            {{ $feedback->issue->type }}
+                            [[ <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a> ]]
                         @else
                           {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=issue_id' ]) !!}
                               <div class="form-group">

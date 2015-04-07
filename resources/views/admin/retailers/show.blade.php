@@ -49,10 +49,16 @@
                 <tr>
                   <td><a href="/admins/feedback/{{ $feedback->id }}">{{ $feedback->id }}</a></td>
                   <td>{{ $feedback->name }}</td>
-                  <!--  <td>{{ $feedback->email }}</td>
-                        <td>{{ $feedback->phone }}</td> -->
                   <td>{{ $feedback->lot_code }}</td>
-                  <td>{{ $feedback->issue_text }}</td>
+                  <td>
+                    @if (isset($feedback->issue_id))
+                        [ <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a> ]
+                    @endif
+
+                    {{ $feedback->issue_text }}
+
+
+                  </td>
                   <td>{{ $feedback->created_at->diffForHumans() }}</td>
                   <td>
                       <div class="form-group">

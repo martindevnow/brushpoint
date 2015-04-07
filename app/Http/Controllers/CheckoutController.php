@@ -13,9 +13,6 @@ use PayPal\Api\Payment;
 
 class CheckoutController extends Controller {
 
-
-
-
     protected $cartRepository;
 
     function __construct(CartRepository $cartRepository)
@@ -24,67 +21,17 @@ class CheckoutController extends Controller {
     }
 
 
-    public function getPayerInfo()
-    {
-        // SAVE the cart to the DB (DONE AUTOMATICALLY BY unique_id)
-
-        // DISPLAY a form to get name and address from user, save it, add that key to session
-
-        // DISPLAY total and a confirm button
-
-        return view('cart/address');
-
-
-    }
-
-    public function confirmPayerInfo(SetPayerInfoRequest $request)
-    {
-        // RECEIVE the form filled out by the user with name and address.
-
-        // SAVE this info into the DB
-        //      Associate the unique_id to it too.
-        //      rare, but this id is save to cookies.
-        //      IF we want, we can use that to fill in their address for them
-
-        // PUT the id of the address into the session
-
-        // DISPLAY the info received from the user
-
-        // DISPLAY the items to be purchased
-
-        // USE a hidden field with the total amount and some other reference to make sure
-        //    no changes have been made to the cart between confirmation and check out etc..
-
-        // DISPLAY a Checkout Now button -> CartCOntroller@checkout
-    }
-
-    public function checkout()
-    {
-        // RECEIVE confirmation
-
-        // CONFIRM that the order is the same as what was pushed from the last page.
-
-        // SAVE a payment object to the Database with all relevant information for tracking purposes
-        // link to address, cart items, etc...
-
-        // BUILD the paypal payment and payer objects etc according to paypal's API
-
-        // SEND the user to paypal to complete their purchase
-
-    }
-
 
     public function expressCheckout()
     {
-
         $checkout = new \Martin\Ecom\Checkout();
 
         $checkout->newPayment($this->cartRepository);
 
         return $checkout->redirect();
-
-
     }
+
+
 
     public function getPaymentStatus(Request $request)
     {
@@ -139,68 +86,17 @@ class CheckoutController extends Controller {
 
     public function status(Request $request)
     {
-
         // dd($request->all());
         $payment = $this->dispatch(new ProcessPaymentStatusCommand($request->get('paymentId')));
-
         // return true;
-
-
-
-
         // $paymentId = $request->get('paymentId');
-
-
         // $checkout = new Checkout();
         // $payment = $checkout->getPayment($paymentId);
-
         dd($payment);
     }
 
-    public function completed()
-    {
-        // DISPLAY a message to thank the user for their purchase
-        // DISPLAY a receipt number for the user
 
-    }
 
-    public function cancelled()
-    {
-        // DISPLAY a message to the user that the payment could not be completed
-        // DISPLAY any error messages from PayPal
-    }
-
-    public function IPN()
-    {
-        // THIS METHOD WILL NOT EXIST
-
-        // TODO: build the IPN notification file so that paypal can notify us when a payment haas been processed correctly.
-        // this will update the purchase/payment object generated in the checkout method
-        // from there, generate an invoice and send it to the user in HTML format to their email address
-
-        // also, generate an invoice/receipt in PDF form to send to BrushPoint for printing.
-
-        // TODO: add to one of the methods above a way to calculate the shipping cost based on several criteria
-        // such as weight, number of items, thickness of some items etc.
-
-        /*
-         * if ($cart->has(FLOSSERS)
-         *      $smallPacket = true;
-         *
-         * if ($cart->numberOfItems() > 4
-         *      $smallPacket = true;
-         *
-         * if ($smallPacket){
-         *      switch($orcerWeight):
-         *          case (,...)
-         *
-         *      break;
-         *
-         * }
-         *
-         *
-         */
-    }
 }
 
 
