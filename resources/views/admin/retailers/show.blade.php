@@ -4,7 +4,7 @@
     <div class="container">
     <div class="row">
         <div class="col-lg-9">
-            <h1 class="page-header">Retailer</h1>
+            <h1 class="page-header">Retailer: {{ $retailer->name }}</h1>
         </div>
         <div class="col-lg-3" style="margin-top: 10px;">
         </div>
@@ -15,13 +15,13 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
-                  <th>Complaint</th>
+                  <th>Active</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td><a href="/admins/retailers/{{ $retailer->id }}">{{ $retailer->id }}</a></td>
-                  <td>{{ $retailer->type }}</td>
+                  <td>{{ $retailer->name }}</td>
                   <td>
                       <div class="form-group">
                         {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/retailers/ajax/'. $retailer->id. '?field=active']) !!}
@@ -61,12 +61,10 @@
                         {!! Form::close() !!}
                       </div>
                   </td>
-
                 </tr>
                 @endforeach
               </tbody>
         </table>
-
     </div>
 <div class="flash">
     Updated...

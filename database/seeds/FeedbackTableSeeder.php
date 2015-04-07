@@ -22,9 +22,6 @@ class FeedbackTableSeeder extends Seeder {
                 'retailer_text' => ucfirst($faker->word),
                 'lot_code' => $faker->word,
                 'issue_text' => $faker->sentence() . " " . $faker->sentence(),
-
-                // Replaced by 'closed' field
-                // 'resolved' => false,
             ]);
         }
     }
