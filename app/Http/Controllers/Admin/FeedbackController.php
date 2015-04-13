@@ -31,7 +31,7 @@ class FeedbackController extends Controller {
      */
     public function create()
     {
-        $this->layout->content = view('admin.feedback.create');
+        return $this->layout->content = view('admin.feedback.create');
     }
 
 

@@ -21,8 +21,14 @@ class CreateFeedbacksTable extends Migration {
 
             // has an address
             $table->string('retailer_text');
+            $table->integer('retailer_id')->nullable();
+            $table->string('retailer_reference')->nullable();
+
             $table->string('lot_code')->nullable();
+
             $table->text('issue_text');
+            $table->string('issue_id')->nullable()->index();
+
 
             // Replaced by 'closed' field
             // $table->boolean('resolved')->default(false);
@@ -32,8 +38,7 @@ class CreateFeedbacksTable extends Migration {
             $table->string('ip_address')->nullable();
             $table->string('country')->nullable();
 
-            $table->integer('retailer_id')->nullable();
-            $table->string('retailer_reference')->nullable();
+
 
             $table->integer('address_id')->nullable();
             $table->boolean('adverse_event')->default(false);
@@ -41,7 +46,6 @@ class CreateFeedbacksTable extends Migration {
             $table->boolean('capa_required')->default(false);
             $table->string('capa_reason')->nullable();
 
-            $table->string('issue_id')->nullable()->index();
 
             $table->boolean('closed')->default(false);
             $table->timestamp('closed_at');

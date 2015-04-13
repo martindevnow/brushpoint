@@ -143,6 +143,8 @@ Route::group(['namespace' => 'Admin'], function()
     
     Route::resource(    'admins/payments',          'PaymentsController');
 
+    Route::resource(    'admins/users',          'UsersController');
+
     Route::get(         'admins/payments/invoice/{id}',         'PaymentsController@invoice');
     Route::get(         'admins/payments/invoice/html/{id}',    'PaymentsController@invoiceHtml');
 

@@ -12,8 +12,9 @@
                 $.publish('form.submitted', form);
                 $('#noteModal').modal('hide');
                 $('#issueModal').modal('hide');
+                $('#retailerModal').modal('hide');
 
-
+                window.location.reload();
             }
         });
         e.preventDefault();

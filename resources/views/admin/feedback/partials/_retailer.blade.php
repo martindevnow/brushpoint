@@ -14,6 +14,8 @@
               {!! Form::text('name', null, ['class' => 'form-control']) !!}
               {!! Form::hidden('feedback_id', $feedback->id) !!}
 
+
+
           </div>
       </div>
       <div class="modal-footer">

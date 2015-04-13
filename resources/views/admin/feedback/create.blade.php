@@ -52,7 +52,7 @@
             <tr>
               <td>Issue</td>
               <td><div class="form-group">
-                  {!! Form::textarea('issue', null, ['class' => 'form-control']) !!}
+                  {!! Form::textarea('issue_text', null, ['class' => 'form-control']) !!}
               </div></td>
             </tr>
 

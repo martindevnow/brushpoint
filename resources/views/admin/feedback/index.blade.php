@@ -22,7 +22,7 @@
                   <th>Retailer</th>
                   <th>Lot Code</th>
                   <th>Issue</th>
-                  <th>Date</th>
+                  <th>Received</th>
                   <th>Closed</th>
                 </tr>
               </thead>
@@ -33,10 +33,10 @@
                   <td>{{ $feedback->name }}</td>
                   <!--  <td>{{ $feedback->email }}</td>
                         <td>{{ $feedback->phone }}</td> -->
-                  @if($feedback->retailer)
-                  <td><a href="/admins/retailers/{{ $feedback->retailer->id }}">{{ $feedback->retailer->name }}</a></td>
+                  @if(isset($feedback->retailer_id))
+                    <td><a href="/admins/retailers/{{ $feedback->retailer->id }}">{{ $feedback->retailer->name }}</a></td>
                   @else
-                  <td>{{ $feedback->retailer_text }}</td>
+                    <td>{{ $feedback->retailer_text }}</td>
                   @endif
                   <td>{{ $feedback->lot_code }}</td>
                   <td>{{ $feedback->issue_text }}</td>
@@ -47,6 +47,9 @@
                         {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
                         {!! Form::close() !!}
                       </div>
+                      @if($feedback->closed_at != "0000-00-00 00:00:00")
+                        [[ {{ $feedback->closed_at }} ]]
+                      @endif
                   </td>
                 </tr>
                 @endforeach

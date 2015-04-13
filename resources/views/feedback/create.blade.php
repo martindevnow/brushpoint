@@ -82,9 +82,9 @@
                 <!-- Retailer Form Input -->
                 <div class="col-md-6">
                     <div class="form-group clearfix">
-                        {!! Form::label('retailer', 'Retailer *', ['class' => 'control-label']) !!}
+                        {!! Form::label('retailer_text', 'Retailer *', ['class' => 'control-label']) !!}
                         <div class="col-xs-8">
-                            {!! Form::text('retailer', null, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::text('retailer_text', null, ['class' => 'form-control', 'required']) !!}
                         </div>
                     </div>
                 </div>

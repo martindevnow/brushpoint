@@ -15,13 +15,15 @@ class Feedback extends CoreModel {
 
         'retailer',
         'lot_code',
-        'issue',
+
+        'issue_text',
         'issue_id',
 
         'bp_code',
         'ip_address',
         'country',
 
+        'retailer_text',
         'retailer_id',
         'retailer_reference',
 
