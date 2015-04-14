@@ -17,8 +17,6 @@
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
-                  <!--  <th>Email</th>
-                        <th>Phone</th> -->
                   <th>Retailer</th>
                   <th>Lot Code</th>
                   <th>Issue</th>
@@ -31,8 +29,6 @@
                 <tr>
                   <td><a href="/admins/feedback/{{ $feedback->id }}">{{ $feedback->id }}</a></td>
                   <td>{{ $feedback->name }}</td>
-                  <!--  <td>{{ $feedback->email }}</td>
-                        <td>{{ $feedback->phone }}</td> -->
                   @if(isset($feedback->retailer_id))
                     <td><a href="/admins/retailers/{{ $feedback->retailer->id }}">{{ $feedback->retailer->name }}</a></td>
                   @else

@@ -14,4 +14,9 @@ class UsersController extends Controller {
         return $this->layout->content = view('admin.users.index')->withUsers($users);
     }
 
+    public function show($userId)
+    {
+        $user = User::find($userId);
+        return $this->layout->content = view('admin.users.show')->withUser($user);
+    }
 }
