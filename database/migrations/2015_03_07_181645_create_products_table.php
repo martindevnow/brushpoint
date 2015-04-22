@@ -56,6 +56,21 @@ class CreateProductsTable extends Migration {
 
             $table->smallInteger("display_order")->default(100);
 
+            $table->integer('unit_weight_g')->nullable();
+            $table->integer('inner_weight_g')->nullable();
+            $table->integer('case_weight_g')->nullable();
+
+            $table->decimal('unit_height_cm', 3,3)->nullable();
+            $table->decimal('unit_width_cm', 3,3)->nullable();
+            $table->decimal('unit_depth_cm', 3,3)->nullable();
+
+            $table->decimal('inner_height_cm', 3,3)->nullable();
+            $table->decimal('inner_width_cm', 3,3)->nullable();
+            $table->decimal('inner_depth_cm', 3,3)->nullable();
+
+            $table->decimal('case_height_cm', 3,3)->nullable();
+            $table->decimal('case_width_cm', 3,3)->nullable();
+            $table->decimal('case_depth_cm', 3,3)->nullable();
 
 
             $table->timestamps();

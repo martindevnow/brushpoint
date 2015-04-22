@@ -410,37 +410,43 @@ class ProductsTableSeeder extends Seeder {
                 'name' => 'Dual Zone Replacement Heads - (4 Pack)',
                 'description' => 'Ocillating power for the top zone and stationary bristles on the lower zone provides excellent cleaning power',
                 'sku' => 'RH-DZ',
-                'price' => 5.00
+                'price' => 5.00,
+                'unit_weight_g' => 48
             ],
             [
                 'name' => 'Dual Motion Replacement Heads - (4 Pack)',
                 'description' => 'Ocillating power for the top zone and rocking bristles on the lower zone provides the ultimate in cleaning power',
                 'sku' => 'RH-DM',
-                'price' => 5.50
+                'price' => 5.50,
+                'unit_weight_g' => 50
             ],
             [
                 'name' => 'Single Oscillating Replacement Head - (4 Pack)',
                 'description' => 'Targeted Oscillating power for ultimate maneuverability and targeted cleaning.',
                 'sku' => 'RH-OSC',
-                'price' => 5.00
+                'price' => 5.00,
+                'unit_weight_g' => 40
             ],
             [
                 'name' => 'Sonic Replacement Head - (4 Pack)',
                 'description' => 'Sonic vibrations break up plaque and destroy cavity causing bacteria. (Only fits the sonic toothbrush)',
                 'sku' => 'RH-SONIC',
-                'price' => 6.00
+                'price' => 6.00,
+                'unit_weight_g' => 33
             ],
             [
                 'name' => 'InterDental Care Kit - (9 Pack)',
                 'description' => 'Replacements for the various attachements for the Inter Dental Care Kit. (6 Sulcus Tips and 3 Gum Stimulators)',
                 'sku' => 'ID-CARE',
-                'price' => 3.00
+                'price' => 3.00,
+                'unit_weight_g' => 12
             ],
             [
                 'name' => 'InterDental Floss Heads - (60 Pack)',
                 'description' => 'Clean those hard to reach spots with the InterDental Floss Heads available in sets of 60/pack.',
                 'sku' => 'ID-FLOSS',
-                'price' => 6.00
+                'price' => 6.00,
+                'unit_weight_g' => 115
             ]
         ];
 
@@ -454,7 +460,8 @@ class ProductsTableSeeder extends Seeder {
                 'on_hand' => $faker->numberBetween(100,500),
                 'active' => 1,
                 'portfolio' => 0,
-                'purchase' => 1
+                'purchase' => 1,
+                'unit_weight_g' => $rh['unit_weight_g'],
             ]);
 
             $image1 = Image::create([
