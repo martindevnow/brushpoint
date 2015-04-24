@@ -46,6 +46,9 @@ class CartController extends Controller {
         $product = Product::find($id);
         $cart = $this->cartRepository->getCartByItemId($id);
 
+
+        // dd($product->items[0]);
+
         $selections = array();
         if ($product->items()->count())
             $selections = $product->items()->lists('variance', 'id');
@@ -73,7 +76,7 @@ class CartController extends Controller {
         if ($success)
         {
             Flash::message('It has been added to your cart.');
-            return redirect('/purchase/id-'. $item->product->id);
+            return redirect('/cart');
         }
         else
         {

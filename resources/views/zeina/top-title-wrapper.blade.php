@@ -57,7 +57,9 @@
                     @foreach($cartData as $cart)
                         <li role="presentation"><a role="menuitem" href="#">{{ $cart['name'] }} x {{ $cart['quantity'] }}</a></li>
                     @endforeach
-                        <li role="presentation"><a role="menuitem" href="/cart">View Cart</a></li>
+                        <li role="presentation" style="margin-top: 5px;"><a role="menuitem" href="/cart" class="btn btn-primary" style="display: inline; margin-left: 15px;">View Cart</a>
+                        <!-- <a href="/checkout/express" class="btn btn-sale" style="display: inline; margin-right: 15px;">Checkout</a> -->
+                        </li>
                     @else
                         <li role="presentation"><a role="menuitem" href="#">Empty</a></li>
                     @endif

@@ -494,7 +494,7 @@ class ProductsTableSeeder extends Seeder {
         $products = Product::where('active', '=', 1)->get();
         foreach($products as $prod)
         {
-            if ($prod->purchase)
+            if ($prod->purchase && ($prod->sku == "RH-DM" || $prod->sku == "RH-DZ"))
             {
                 $sku = str_replace('**', '', $prod->sku);
                 Item::create([

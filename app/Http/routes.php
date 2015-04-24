@@ -165,7 +165,12 @@ Route::group(['namespace' => 'Admin'], function()
 });
 
 
+Route::get('destroyCart', function(){
+    $cartRepo = new \Martin\Products\CartRepository();
+    $cartRepo->clearCart();
 
+    return print_r(Session::all(), 1);
+});
 
 
 

@@ -35,6 +35,8 @@ class CartRepository {
                 $data[] = [
                     'id'        => str_replace('item-', '', $id),
                     'name'      => $cart['name'],
+                    'sku'       => $cart['sku'],
+                    'product_id'       => $cart['product_id'],
                     'price'     => $cart['price'],
                     'quantity'  => $cart['quantity']
                 ];
@@ -72,6 +74,8 @@ class CartRepository {
             $data['item-'. $cart->item_id] = [
                 'id'        => $cart->item_id,
                 'name'      => $cart->item->name,
+                'sku'       => $cart->item->product->sku,
+                'product_id'       => $cart->item->product->product_id,
                 'price'     => $cart->price,
                 'quantity'  => $cart->quantity
             ];
@@ -144,6 +148,8 @@ class CartRepository {
             $cart = Session::get($cartId);
             Session::put($cartId, [
                 'name'      => $item->name,
+                'sku'       => $item->product->sku,
+                'product_id'       => $item->product->id,
                 'price'     => $item->price,
                 'quantity'  => $cart['quantity'] + $quantity
             ]);
@@ -151,6 +157,8 @@ class CartRepository {
         else{
             Session::put($cartId, [
                 'name'      => $item->name,
+                'sku'       => $item->product->sku,
+                'product_id'       => $item->product->id,
                 'price'     => $item->price,
                 'quantity'  => $quantity
             ]);
