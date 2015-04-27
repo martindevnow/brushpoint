@@ -23,6 +23,9 @@ class CartRepository {
             $this->user_id = Auth::user()->id;
         else
             $this->user_id = 0;
+
+        if (session()->has('shippingAndHandling'))
+            $this->shippingAndHandling = session('shippingAndHandling');
     }
 
     public function getCartData()
@@ -238,6 +241,8 @@ class CartRepository {
         $this->$shippingAndHandling = $shippingAndHandling;
         Session::put('shippingAndHandling', $shippingAndHandling);
 
+        return $this->shippingAndHandling;
+
 
         /*
          * Here is where I could include other factors to ACTUALLY calculate the shipping cost.
@@ -257,25 +262,15 @@ class CartRepository {
     public function getTotalWeight()
     {
         foreach ($this->getCartData() as $item)
-        {
             $productsArray[$item['product_id']] = $item['quantity'];
-        }
 
-
-        $products = Product::whereIn('id', array_keys($productsArray))->get()->toArray();
-
-        //dd($products);
+        $products = Product::whereIn('id', array_keys($productsArray))->get();;
 
         $weight = 0;
         foreach($products as $product)
-            $weight += $product['unit_weight_g'] * $productsArray[$product['id']];
-        // dd ($weight);
+            $weight += $product->unit_weight_g * $productsArray[$product->id];
 
         return $weight;
-
-
-
-
     }
 
     /**
@@ -335,6 +330,7 @@ class CartRepository {
      */
     public function refreshCartFromDB()
     {
+        $this->calculateShipping();
         session()->put('cart', $this->getCartDataDB());
     }
 
@@ -372,12 +368,29 @@ class CartRepository {
         // dd($items);
     }
 
-    /*
-    public function getCartByItemId($itemId)
+    private function getTotalNumberOfItems()
     {
-        $item = Item::find($itemId);
-        return $item->carts()->where('unique_id', '=', $this->unique_id);
-    }*/
+        $numberOfItems = 0;
+
+        foreach ($this->getCartData() as $item)
+            $numberOfItems += $item['quantity'];
+
+        return $numberOfItems;
+    }
+
+    private function getThickness()
+    {
+        foreach ($this->getCartData() as $item)
+            $productsArray[] = $item['product_id'];
+
+        $products = Product::whereIn('id', $productsArray)->get();;
+
+        $thicknessInMM = 0;
+        foreach($products as $product)
+            $thicknessInMM = max($thicknessInMM, $product->unit_depth_cm * 10);
+
+        return $thicknessInMM;
+    }
 }
 
 

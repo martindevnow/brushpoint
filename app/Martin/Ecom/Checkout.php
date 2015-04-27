@@ -152,9 +152,7 @@ class Checkout {
         /**
          * The is the shipping cost to the customer
          */
-        if ($cartRepository->getCartTotal() <= 20)
-            return "6.95";
-        return "9.95";
+        return $cartRepository->getShippingAndHandling();
     }
 
 

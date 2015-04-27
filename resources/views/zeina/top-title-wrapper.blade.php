@@ -1,7 +1,7 @@
 <div class="top-title-wrapper bp-header" style="overflow: visible;" >
     <div class="container" style="overflow: visible;">
         <div class="row" style="overflow: visible">
-            <div class="col-md-12 col-sm-12 page-info" style="overflow: visible;">
+            <div class="col-md-12 col-sm-12 page-info" style="overflow: visible; padding-bottom: 0px;">
                 <h1 class="h1-page-title">
                     @if (isset($page['link']))
                     <a href="{{ $page['link'] }}">
@@ -47,7 +47,7 @@
 
                 @if(isset($showCart) && $showCart==true)
                 <!-- Shopping cart -->
-                <div class="dropdown pull-right" style="float: right; margin-top: -9px ">
+                <div class="dropdown pull-right" style="float: right; margin-top: 10px ">
                   <button class="btn btn-primary dropdown-toggle bp-cart" type="button" id="dropdownMenu1"
                   data-toggle="dropdown" aria-expanded="true">
                     <i class="icon-shopping-cart"></i> Cart (${{ number_format($cartRepo->getCartTotal(),2) }})

@@ -51,17 +51,22 @@
 
           </tbody>
     </table>
-    <table>
+
+    <table class="table cart-contents" style="width: 40%; float: right;">
         <thead>
             <tr>
-                <td>Fee</td>
+                <td>&nbsp;</td>
                 <td>Amount</td>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>Shipping and Handling</td>
-                <td>{{ $cartRepo->getShippingAndHandling() }}</td>
+                <td>{{ asMoney($cartRepo->getShippingAndHandling()) }}</td>
+            </tr>
+            <tr>
+                <td><b>Total:</b></td>
+                <td><b>{{ asMoney($cartRepo->getShippingAndHandling() + $cartRepo->getCartTotal()) }}</b></td>
             </tr>
         </tbody>
     </table>
