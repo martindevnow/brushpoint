@@ -12,6 +12,9 @@ class CartRepository {
 
     public $user_id;
     public $unique_id;
+    public $shippingAndHandling;
+    // public $totalNumberOfItems;
+    // public $totalWeight;
 
     function __construct()
     {
@@ -40,6 +43,7 @@ class CartRepository {
                     'price'     => $cart['price'],
                     'quantity'  => $cart['quantity']
                 ];
+                // $this->totalNumberOfItems += $cart['quantity'];
             }
         }
         else
@@ -166,6 +170,7 @@ class CartRepository {
 
         $cart = $this->addToCartDB($item, $quantity);
 
+
         return $cart;
     }
 
@@ -200,6 +205,8 @@ class CartRepository {
             $cart->save();
         }
 
+        $this->calculateShipping();
+
         return $cart;
     }
 
@@ -211,9 +218,25 @@ class CartRepository {
      */
     public function calculateShipping()
     {
-        if ($this->getCartTotal() >= 20)
+        /*if ($this->getCartTotal() >= 20)
             return 6.95;
-        return 9.95;
+        return 9.95;*/
+
+        $shippingAndHandling = 0;
+
+        if ($this->getTotalWeight() > 300)
+            $shippingAndHandling = 5;
+        if ($this->getTotalNumberOfItems() > 4)
+            $shippingAndHandling = 5;
+        if ($this->getThickness() > 20)
+            $shippingAndHandling = 5;
+
+        // ADD OTHER CONDITIONALS AND CALCULATIONS HERE
+        if ($shippingAndHandling == 0)
+            $shippingAndHandling = 4;
+
+        $this->$shippingAndHandling = $shippingAndHandling;
+        Session::put('shippingAndHandling', $shippingAndHandling);
 
 
         /*
@@ -221,6 +244,39 @@ class CartRepository {
          */
     }
 
+    public function getShippingAndHandling()
+    {
+        if (!$this->shippingAndHandling)
+            return $this->calculateShipping();
+
+        return $this->shippingAndHandling;
+    }
+
+
+
+    public function getTotalWeight()
+    {
+        foreach ($this->getCartData() as $item)
+        {
+            $productsArray[$item['product_id']] = $item['quantity'];
+        }
+
+
+        $products = Product::whereIn('id', array_keys($productsArray))->get()->toArray();
+
+        //dd($products);
+
+        $weight = 0;
+        foreach($products as $product)
+            $weight += $product['unit_weight_g'] * $productsArray[$product['id']];
+        // dd ($weight);
+
+        return $weight;
+
+
+
+
+    }
 
     /**
      * Get an item from the cart DB based on the item id

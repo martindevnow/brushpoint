@@ -51,6 +51,20 @@
 
           </tbody>
     </table>
+    <table>
+        <thead>
+            <tr>
+                <td>Fee</td>
+                <td>Amount</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Shipping and Handling</td>
+                <td>{{ $cartRepo->getShippingAndHandling() }}</td>
+            </tr>
+        </tbody>
+    </table>
 
     <!-- {!! Form::open(['method' => 'POST', 'action' => 'CartController@getPayerInfo']) !!}
          <div class="form-group">

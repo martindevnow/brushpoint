@@ -173,6 +173,12 @@ Route::get('destroyCart', function(){
 });
 
 
+Route::get('cartWeight', function()
+{
+    $cartRepo = new \Martin\Products\CartRepository();
+    $cartRepo->getTotalWeight();
+});
+
 
 
 

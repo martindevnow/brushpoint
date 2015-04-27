@@ -47,8 +47,6 @@ class CartController extends Controller {
         $cart = $this->cartRepository->getCartByItemId($id);
 
 
-        // dd($product->items[0]);
-
         $selections = array();
         if ($product->items()->count())
             $selections = $product->items()->lists('variance', 'id');
