@@ -25,9 +25,9 @@
             @foreach($payments as $payment)
             <tr>
               <td>{{ $payment->created_at->diffForHumans() }}</td>
-              <td>{{ $payment->payer->first_name . " " . $payment->payer->last_name }}</td>
-              <td>{{ $payment->addresses->first()->city }}</td>
-              <td>{{ $payment->transactions->first()->amount_total }}</td>
+              <td>{{ $payment->payer? $payment->payer->first_name . " " . $payment->payer->last_name: "Not Completed Yet" }}</td>
+              <td>{{ $payment->addresses->first() ? $payment->addresses->first()->city: "Not Entered Yet" }}</td>
+              <td>{{ $payment->transactions->first()? $payment->transactions->first()->amount_total: "Not completed Yet" }}</td>
               <td>
                 {!! Form::open() !!}
                     <div class="form-group">

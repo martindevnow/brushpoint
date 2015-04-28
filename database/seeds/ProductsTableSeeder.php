@@ -456,6 +456,10 @@ class ProductsTableSeeder extends Seeder {
             ]
         ];
 
+
+        /**
+         * Add the Replacement Heads as Products
+         */
         foreach($replacementHeads as $rh)
         {
             $product = Product::create([
@@ -472,13 +476,20 @@ class ProductsTableSeeder extends Seeder {
             ]);
 
             $image1 = Image::create([
-                'height' => 150,
-                'width' => 240,
+                'height' => 115,
+                'width' => 115,
                 'path' => '/images/brushpoint/purchase/'. $rh['sku'] . '-115.png',
                 'thumbnail' => true
             ]);
 
             $image2 = Image::create([
+                'height' => 150,
+                'width' => 240,
+                'path' => '/images/brushpoint/purchase/'. $rh['sku'] . '-240.png',
+                'thumbnail' => true
+            ]);
+
+            $image3 = Image::create([
                 'height' => 300,
                 'width' => 555,
                 'path' => '/images/brushpoint/purchase/'. $rh['sku'] . '-555.png',
@@ -486,12 +497,7 @@ class ProductsTableSeeder extends Seeder {
             ]);
             $product->images()->save($image1);
             $product->images()->save($image2);
-
-
-
-
-
-
+            $product->images()->save($image3);
         }
 
 
@@ -521,7 +527,6 @@ class ProductsTableSeeder extends Seeder {
                     'price' => $prod->price,
                     'on_hand' => $prod->on_hand,
                     'variance' => 'Medium',
-
                 ]);
             }
             else{
@@ -535,8 +540,6 @@ class ProductsTableSeeder extends Seeder {
                     'on_hand' => $prod->on_hand,
                 ]);
             }
-
         }
     }
-
 }

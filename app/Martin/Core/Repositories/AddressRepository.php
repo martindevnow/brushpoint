@@ -16,6 +16,7 @@ class AddressRepository {
             'postal_code'  => $shippingAddress->getPostalCode(),
             'country' => $shippingAddress->getCountryCode(),
             'phone'  => $shippingAddress->getPhone(),
+            'ppid'  => $shippingAddress->getId(),
         ];
         // $ecomAddress = $ecomPayer->addresses()->firstOrNew($addressData);
         $ecomAddress = new \Martin\Core\Address($addressData);

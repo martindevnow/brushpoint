@@ -92,7 +92,13 @@ class CheckoutController extends Controller {
         // $paymentId = $request->get('paymentId');
         // $checkout = new Checkout();
         // $payment = $checkout->getPayment($paymentId);
-        dd($payment);
+        // dd($payment);
+
+
+
+        // TODO: Show the thank you page with invoice number etc..
+        // TODO: Make an email template to send to the customer to complete the transaction
+        // TODO: Fire off an email to the user
     }
 
 

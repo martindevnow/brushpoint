@@ -95,9 +95,9 @@ Route::get('checkout/express', 'CheckoutController@expressCheckout');
 Route::get('checkout/confirm', 'CheckoutController@confirmPayerInfo');
 Route::get('checkout/process', 'CheckoutController@checkout');
 Route::get('checkout/error', 'CheckoutController@error');
-Route::get('checkout/status', 'CheckoutController@status');
+Route::get('checkout/status', 'CheckoutController@status'); // Route is HIT
 
-Route::get('cart/checkout/status', 'CheckoutController@status');
+Route::get('cart/checkout/status', 'CheckoutController@status'); // used???
 Route::get('checkout/cancel', 'CheckoutController@cancel');
 
 
@@ -126,13 +126,13 @@ Route::get('payment/execute', 'CartController@paymentTestExecute');
  */
 Route::group(['namespace' => 'Admin'], function()
 {
-    Route::get('admins', 'AdminController@index');
-    Route::resource('admins/products',      'ProductsController');
-    Route::patch('admins/products/ajax/{id}',   'ProductsController@ajaxPatch');
+    Route::get(         'admins', 'AdminController@index');
+    Route::resource(    'admins/products',      'ProductsController');
+    Route::patch(       'admins/products/ajax/{id}',   'ProductsController@ajaxPatch');
 
-    Route::patch('admins/products/active/{id}',         'ProductsController@ajaxActive');
-    Route::patch('admins/products/portfolio/{id}',      'ProductsController@ajaxPortfolio');
-    Route::patch('admins/products/purchase/{id}',       'ProductsController@ajaxPurchase');
+    Route::patch(       'admins/products/active/{id}',         'ProductsController@ajaxActive');
+    Route::patch(       'admins/products/portfolio/{id}',      'ProductsController@ajaxPortfolio');
+    Route::patch(       'admins/products/purchase/{id}',       'ProductsController@ajaxPurchase');
 
     Route::get(         'admins/feedback/filter',      'FeedbackController@filtered');
     Route::resource(    'admins/feedback',             'FeedbackController');

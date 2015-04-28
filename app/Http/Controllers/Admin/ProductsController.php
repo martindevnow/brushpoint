@@ -44,8 +44,6 @@ class ProductsController extends Controller {
     {
         $product = Product::find($id);
 
-        // $products = $this->productRepository->getPortfolioPaginated();
-
         $this->layout->content =  view('products.show')->with([
             'product' => $product
         ]);

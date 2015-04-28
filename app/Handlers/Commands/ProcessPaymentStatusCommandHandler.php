@@ -5,9 +5,12 @@ use App\Commands\ProcessPaymentStatusCommand;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Martin\Ecom\Checkout;
+use Martin\Ecom\PaymentLog;
 use PayPal\Api\Payment;
 
 class ProcessPaymentStatusCommandHandler {
+
+    protected $paymentRepo;
     /**
      * @var Checkout
      */
@@ -23,6 +26,7 @@ class ProcessPaymentStatusCommandHandler {
 	{
         $this->checkout = $checkout;
         $this->api = $this->checkout->getApi();
+        $this->paymentRepo = new \Martin\Ecom\Repositories\PaymentRepository();
     }
 
 	/**
@@ -33,15 +37,42 @@ class ProcessPaymentStatusCommandHandler {
 	 */
 	public function handle(ProcessPaymentStatusCommand $command)
 	{
+
+        $paymentLog = new PaymentLog($this->api);
+
+        $dbPayment = $paymentLog->fetchPaymentFromPaPal($command->paymentId);
+
+        if ($paymentLog->isDuplicateEntry())
+        {
+            // TODO: Flag, send email, etc...
+            // die / throw exception
+        }
+
+        $paymentLog->logPayment();
+
+        $paymentLog->updateState();
+
+        $dbPayer = $paymentLog->findOrCreatePayer();
+
+        $dbAddress = $paymentLog->findOrCreateAddress();
+
+
+        // TRANSACTIONS
+        $transRepo = new \Martin\Ecom\Repositories\TransactionRepository();
+        $ecomTransactions = $transRepo->createFromPaypal($PPpayment, $ecomPayment);
+
+
+
         // PAYMENT
         // try to find the payment to see if it is a new payment or what not.
         $PPpayment = Payment::get($command->paymentId, $this->api);
 
-        Log::info(print_r($PPpayment,1));
+        Log::info(print_r($this->payPalPayment,1));
+
 
         $paymentRepo = new \Martin\Ecom\Repositories\PaymentRepository();
 
-        $ecomPayment = $paymentRepo->findOrCreateFromPaypal($PPpayment);
+        $ecomPayment = $paymentRepo->findOrCreateFromPayPal($PPpayment);
 
         if ($ecomPayment->state == "created" || $ecomPayment->state == "approved")
         {
