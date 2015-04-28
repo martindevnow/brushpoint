@@ -39,6 +39,7 @@ class TransactionRepository {
             $ecomTransaction->save();
             $ecomPayment->transactions()->attach($ecomTransaction);
         }
+        return $ecomPayment->transactions;
         // $ecomPayment = \Martin\Ecom\Payment::where('payment_id', '=', $PPpayment->getId())->last();
 
     }

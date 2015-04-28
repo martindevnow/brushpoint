@@ -11,14 +11,13 @@ use PayPal\Api\ShippingAddress;
 
 class PaymentLog {
 
-
-
     protected $paymentRepo;
     protected $payerRepo;
 
     protected $dbPayment;
     protected $dbPayer;
     protected $dbAddress;
+    protected $dbTransactions;
 
     protected $payPalPayment;
     protected $payPalAddress;
@@ -32,12 +31,14 @@ class PaymentLog {
         // TODO: Implement __construct() method.
     }
 
+
     public function fetchPaymentFromPayPal($paymentId)
     {
         $this->payPalPayment = Payment::get($paymentId, $this->api);
         return $this->fetchFromDbByPayPalPayment();
 
     }
+
 
     public function isDuplicateEntry()
     {
@@ -60,11 +61,13 @@ class PaymentLog {
         return $this->dbPayment = $this->paymentRepo->findOrCreateFromPayPal($this->payPalPayment);
     }
 
+
     public function updateState()
     {
         if (!$this->dbPayment)
             $this->fetchFromDbByPayPalPayment();
     }
+
 
     public function findOrCreatePayer()
     {
@@ -93,10 +96,7 @@ class PaymentLog {
 
         // no match found
         return $this->addNewAddress();
-
-
     }
-
 
 
     public function addNewAddress()
@@ -106,6 +106,7 @@ class PaymentLog {
         $this->dbPayer->addresses()->save($this->dbAddress);
         return $this->dbAddress;
     }
+
 
     public function addressesMatch(Address $address)
     {
@@ -133,6 +134,14 @@ class PaymentLog {
         if ($this->payPalAddress->getRecipientName() != $address->name)
             return false;
         return true;
+    }
+
+
+    public function createTransactions()
+    {
+        $transRepo = new \Martin\Ecom\Repositories\TransactionRepository();
+        return $this->dbTransactions = $transRepo->createFromPaypal($this->payPalPayment, $this->dbPayment);
+
     }
 
 } 

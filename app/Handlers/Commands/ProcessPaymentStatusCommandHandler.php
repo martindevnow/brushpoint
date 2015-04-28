@@ -56,10 +56,12 @@ class ProcessPaymentStatusCommandHandler {
 
         $dbAddress = $paymentLog->findOrCreateAddress();
 
+        $dbTransactions = $paymentLog->createTransactions();
 
-        // TRANSACTIONS
-        $transRepo = new \Martin\Ecom\Repositories\TransactionRepository();
-        $ecomTransactions = $transRepo->createFromPaypal($PPpayment, $ecomPayment);
+        Log::info('Seemed to work...');
+        return 1;
+
+
 
 
 
@@ -147,22 +149,6 @@ class ProcessPaymentStatusCommandHandler {
 
         // END IF NEW ---
 
-
-        /*
-         * Payer
-         *      Address
-         *      Address
-         *
-         *
-         */
-
-
-
-
-
-
-
-        // return $payment;
 	}
 
 }
