@@ -64,6 +64,12 @@ class ProcessPaymentStatusCommandHandler {
 
 
 
+        // TODO: If the above is working, the bottom can be removed.
+        // TODO: the code below has been refactored already, remove it
+
+
+
+
 
         // PAYMENT
         // try to find the payment to see if it is a new payment or what not.

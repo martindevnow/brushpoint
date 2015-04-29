@@ -10,15 +10,22 @@ use Session;
 
 class CartRepository {
 
+    // TODO: remove the reliance on sessions.
+    // TODO: use only DB for storing cart stuff
+    // TODO: Look up eager loading the product/item information for the cart
+
     public $user_id;
     public $unique_id;
     public $shippingAndHandling;
+
+    public $data;
+
     // public $totalNumberOfItems;
     // public $totalWeight;
 
     function __construct()
     {
-        $this->unique_id = Session::get('unique_id');
+        $this->unique_id = session('unique_id');
         if (Auth::user())
             $this->user_id = Auth::user()->id;
         else
@@ -26,60 +33,57 @@ class CartRepository {
 
         if (session()->has('shippingAndHandling'))
             $this->shippingAndHandling = session('shippingAndHandling');
-    }
 
-    public function getCartData()
-    {
-
-        return $this->getCartDataDB();
-
-        $data = array();
-
-        if (Session::has('cart'))
+        if (session()->has('refreshCart'))
         {
-            $carts = Session::get('cart');
-
-            foreach ($carts as $id => $cart)
-            {
-                $data[] = [
-                    'id'        => str_replace('item-', '', $id),
-                    'name'      => $cart['name'],
-                    'sku'       => $cart['sku'],
-                    'product_id'       => $cart['product_id'],
-                    'price'     => $cart['price'],
-                    'quantity'  => $cart['quantity']
-                ];
-                // $this->totalNumberOfItems += $cart['quantity'];
-            }
+            $this->refreshCartFromDB();
+            session()->pull('refreshCart');
         }
         else
-            return array();
-
-        return $data;
-
+            $this->loadCartFromSession();
     }
 
 
     /**
-     * Gets the data for the cart from the DB
+     * Load the cart from the session and return the item array
      *
-     * @param null $identifier
      * @return array
      */
-    public function getCartDataDB($identifier = null)
+    public function loadCartFromSession()
+    {
+        $this->data = session('cart');
+        return $this->data;
+    }
+
+
+    /**
+     * Get the array of items in the cart
+     *
+     * @return array
+     */
+    public function getCartData()
+    {
+        if ($this->data && !empty($this->data))
+            return $this->data;
+
+        return $this->refreshCartFromDB();
+    }
+
+
+
+    /**
+     * Rebuild the session cart from the DB
+     */
+    public function refreshCartFromDB()
     {
         $data = array();
 
-        if ($identifier)
-            $carts = Cart::where('user_id', '=', $identifier)
-                ->orWhere('unique_id', '=', $identifier);
+        if ($this->user_id)
+            $carts = Cart::where('user_id', '=', $this->user_id)
+                ->orWhere('unique_id', '=', $this->unique_id);
         else
-        {
-            if ($this->user_id)
-                $carts = Cart::where('user_id', '=', $this->user_id);
-            else
-                $carts = Cart::where('unique_id', '=', $this->unique_id);
-        }
+            $carts = Cart::where('unique_id', '=', $this->unique_id);
+
 
         foreach ($carts->get() as $cart)
         {
@@ -90,14 +94,23 @@ class CartRepository {
             }
 
             $data['item-'. $cart->item_id] = [
-                'id'        => $cart->item_id,
-                'name'      => $cart->item->name,
-                'sku'       => $cart->item->product->sku,
-                'product_id'       => $cart->item->product->product_id,
-                'price'     => $cart->price,
-                'quantity'  => $cart->quantity
+                'id'            => $cart->item->id,
+                'name'          => $cart->item->name,
+                'sku'           => $cart->item->product->sku,
+                'product_id'    => $cart->item->product_id,
+                'price'         => $cart->price,
+                'quantity'      => $cart->quantity
             ];
         }
+
+        // Calculate S&H
+        // $this->calculateShippingFroMCarts($carts);
+
+        // save to session
+        session()->put('cart', $data);
+
+        // save to instance
+        $this->data = $data;
         return $data;
     }
 
@@ -110,13 +123,15 @@ class CartRepository {
      */
     public function getCartTotal($identifier = null)
     {
+        if (!isset($this->data))
+            $this->refreshCartFromDB();
 
         $total = 0;
 
-        if ( ! Session::has('cart'))
+        if ( ! session()->has('cart'))
             return $total;
 
-        $cartItems = Session::get('cart');
+        $cartItems = session('cart');
 
         foreach ($cartItems as $cart)
             $total += $cart['price'] * $cart['quantity'];
@@ -125,30 +140,6 @@ class CartRepository {
     }
 
 
-    /**
-     * Get the total cost of the cart from the DB
-     * @param null $identifier
-     * @return int
-     */
-    public function getCartTotalDB($identifier = null)
-    {
-
-        $total = 0;
-        if ($identifier)
-            $cartItems = Cart::where('unique_id', '=', $identifier)
-                ->orWhere('user_id', '=', $identifier)->get();
-        else
-            $cartItems = Cart::where('unique_id', '=', $this->unique_id)
-                ->orWhere('user_id', '=', $this->user_id)->get();
-
-        if ( ! $cartItems->count())
-            return $total;
-
-        foreach ($cartItems as $cart)
-            $total += $cart->getCartExtendedPrice();
-
-        return $total;
-    }
 
 
     /**
@@ -162,24 +153,27 @@ class CartRepository {
     {
         $cartId = $this->getCartIdentifier($item->id);
 
-        if (Session::has($cartId)){
-            $cart = Session::get($cartId);
-            Session::put($cartId, [
+        // dd($item);
+        if (session()->has($cartId)){
+            $cart = session($cartId);
+            session([$cartId => [
+                'id'        => $item->id,
                 'name'      => $item->name,
                 'sku'       => $item->product->sku,
-                'product_id'       => $item->product->id,
+                'product_id'=> $item->product_id,
                 'price'     => $item->price,
                 'quantity'  => $cart['quantity'] + $quantity
-            ]);
+            ]]);
         }
         else{
-            Session::put($cartId, [
-                'name'      => $item->name,
+           session([$cartId => [
+               'id'        => $item->id,
+               'name'      => $item->name,
                 'sku'       => $item->product->sku,
-                'product_id'       => $item->product->id,
+                'product_id'   => $item->product_id,
                 'price'     => $item->price,
                 'quantity'  => $quantity
-            ]);
+            ]]);
         }
 
         $cart = $this->addToCartDB($item, $quantity);
@@ -196,7 +190,7 @@ class CartRepository {
      * @param $quantity
      * @return Cart
      */
-    public function addToCartDB(Item $item, $quantity)
+    protected function addToCartDB(Item $item, $quantity)
     {
         $cart = Cart::where('unique_id', '=', $this->unique_id)
             ->where('item_id', '=', $item->id)->get();
@@ -250,11 +244,14 @@ class CartRepository {
             $shippingAndHandling = 4;
 
         $this->$shippingAndHandling = $shippingAndHandling;
-        Session::put('shippingAndHandling', $shippingAndHandling);
+
+        session(['shippingAndHandling' => $shippingAndHandling]);
 
         return $this->shippingAndHandling;
 
 
+        // TODO: Make sure it calculates the letter mail correctly too.
+        
         /*
          * Here is where I could include other factors to ACTUALLY calculate the shipping cost.
          */
@@ -269,7 +266,11 @@ class CartRepository {
     }
 
 
-
+    /**
+     * Get the total weight of the items in the cart
+     *
+     * @return int
+     */
     public function getTotalWeight()
     {
         foreach ($this->getCartData() as $item)
@@ -293,34 +294,28 @@ class CartRepository {
     public function getCartByItemId($id)
     {
         return Cart::where('item_id', '=', $id)
-            ->where('unique_id', '=', Session::get('unique_id'))->first();
+            ->where('unique_id', '=', session('unique_id'))->first();
     }
 
 
     /**
      * Completely Empty the cart
      *
-     * @param null $identifier
      */
-    public function clearCart($identifier = null)
+    public function clearCart()
     {
-        if (!$identifier)
-            Session::forget('cart');
+        session()->forget('cart');
 
-        $this->clearCartDB($identifier);
+        $this->clearCartDB();
     }
 
     /**
      * Empty the cart from the DB
      *
-     * @param null $identifier
      */
-    public function clearCartDB($identifier = null)
+    public function clearCartDB()
     {
-        if ($identifier)
-            Cart::where('unique_id', '=', $identifier)->orWhere('user_id', '=', $identifier)->delete();
-        else
-            Cart::where('unique_id', '=', $this->unique_id)->orWhere('user_id', '=', $this->user_id)->delete();
+        Cart::where('unique_id', '=', $this->unique_id)->orWhere('user_id', '=', $this->user_id)->delete();
     }
 
 
@@ -336,14 +331,7 @@ class CartRepository {
         $this->refreshCartFromDB();
     }
 
-    /**
-     * Rebuild the session cart from the DB
-     */
-    public function refreshCartFromDB()
-    {
-        $this->calculateShipping();
-        session()->put('cart', $this->getCartDataDB());
-    }
+
 
 
     /**
@@ -357,6 +345,11 @@ class CartRepository {
         return 'cart.item-'.$id;
     }
 
+    /**
+     * Update the cart when the cart page quantities have been changed.
+     *
+     * @param array $data
+     */
     public function updateQuantities(array $data)
     {
         foreach ($data as $cartItem => $quantity)
@@ -376,9 +369,13 @@ class CartRepository {
         }
         $this->refreshCartFromDB();
 
-        // dd($items);
     }
 
+    /**
+     * Get the Total number of units in the cart
+     *
+     * @return int
+     */
     private function getTotalNumberOfItems()
     {
         $numberOfItems = 0;
@@ -389,6 +386,12 @@ class CartRepository {
         return $numberOfItems;
     }
 
+    /**
+     * Get the thickness of the package
+     * Returns the thickest object in the cart
+     *
+     * @return int|mixed
+     */
     private function getThickness()
     {
         foreach ($this->getCartData() as $item)
@@ -401,6 +404,35 @@ class CartRepository {
             $thicknessInMM = max($thicknessInMM, $product->unit_depth_cm * 10);
 
         return $thicknessInMM;
+    }
+
+
+
+
+
+
+
+    /**
+     * Gets the data for the cart from the DB
+     * @deprecated use getCartData()
+     * @param null $identifier
+     * @return array
+     */
+    public function getCartDataDB($identifier = null)
+    {
+        return $this->getCartData();
+    }
+
+
+    /**
+     * Get the total cost of the cart from the DB
+     * @deprecated use getCartTotal()
+     * @param null $identifier
+     * @return int
+     */
+    public function getCartTotalDB($identifier = null)
+    {
+        return $this->getCartTotal();
     }
 }
 

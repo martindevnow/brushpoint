@@ -31,7 +31,6 @@
             </tr>
           </thead>
           <tbody>
-
             @foreach($cartData as $item)
             <tr>
               <td>
