@@ -31,11 +31,11 @@
              <link rel="stylesheet" href="/css/font-awesome.min.css">
              <link rel="stylesheet" href="/css/revolution_settings.css">
              <link rel="stylesheet" href="/css/bootstrap.min.css">
-             <link rel="stylesheet" href="/css/eislider.css">
+             <!-- <link rel="stylesheet" href="/css/eislider.css">
              <link rel="stylesheet" href="/css/tipsy.css">
              <link rel="stylesheet" href="/css/prettyPhoto.css">
              <link rel="stylesheet" href="/css/isotop_animation.css">
-             <link rel="stylesheet" href="/css/animate.css">
+             <link rel="stylesheet" href="/css/animate.css"> -->
              <link rel="stylesheet" href="/css/flexslider.css">
              <link rel="stylesheet" href="/css/brushpoint.css">
 
@@ -44,9 +44,9 @@
 
 
 
-        <link href='/css/style.css' rel='stylesheet' type='text/css'>
-        <link href='/css/responsive.css' rel='stylesheet' type='text/css'>
-        <link href="/css/skins/flat-blue.css" rel='stylesheet' type='text/css' id="skin-file">
+            <link href='/css/style.css' rel='stylesheet' type='text/css'>
+            <link href='/css/responsive.css' rel='stylesheet' type='text/css'>
+            <link href="/css/skins/flat-blue.css" rel='stylesheet' type='text/css' id="skin-file">
 
 
         <!--
@@ -220,12 +220,7 @@
             font-size: 16px;
             padding-top: 16px;
         }
-
-
         </style>
-
-
-
 
         @yield('header_inside')
 
@@ -284,11 +279,6 @@
         </div>
     </header>
     <!-- //Header// -->
-
-
-
-
-
 </div><!--.top wrapper end -->
 
 <!--
@@ -307,23 +297,18 @@
 
 <!-- <div class="content-wrapper hide-until-loading"> -->
 <div class="content-wrapper">
-@yield('header_bottom')
-
-<div class="body-wrapper" style="padding-top: 30px; padding-bottom: 30px; ">
-    <div class="container">
-        <div class="row">
-            @include('layouts.partials._flash')
+    @yield('header_bottom')
+    <div class="body-wrapper" style="padding-top: 30px; padding-bottom: 30px; ">
+        <div class="container">
+            <div class="row">
+                @include('layouts.partials._flash')
+            </div>
         </div>
-    </div>
-
-
-    @yield('content')
-
-
-
-</div>  <!-- END div  body-wrapper -->
-
+        @yield('content')
+    </div>  <!-- END div  body-wrapper -->
 </div><!--.content-wrapper end -->
+
+
 
 <footer>
     <div class="footer bp-footer">
