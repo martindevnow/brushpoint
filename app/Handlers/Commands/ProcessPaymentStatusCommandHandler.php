@@ -40,7 +40,7 @@ class ProcessPaymentStatusCommandHandler {
 
         $paymentLog = new PaymentLog($this->api);
 
-        $dbPayment = $paymentLog->fetchPaymentFromPaPal($command->paymentId);
+        $dbPayment = $paymentLog->fetchPaymentFromPayPal($command->paymentId);
 
         if ($paymentLog->isDuplicateEntry())
         {

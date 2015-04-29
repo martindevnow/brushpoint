@@ -106,6 +106,7 @@ class CartController extends Controller {
      */
     public function update(Request $request)
     {
+        // dd($request);
         $this->cartRepository->updateQuantities($request->except('_token'));
 
         Flash::message('Quantities have been updated');
