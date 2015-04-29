@@ -30,6 +30,10 @@ class CreateAddressesTable extends Migration {
             $table->string('phone')->nullable();
             $table->string('buzzer')->nullable();
 
+            $table->string('ppid')->nullable();
+            $table->string('recipient_name')->nullable();
+            $table->boolean('default_address')->default(false);
+
             // polymorphic relations
             $table->integer('addressable_id');
             $table->string('addressable_type');

@@ -66,6 +66,11 @@ class PaymentLog {
     {
         if (!$this->dbPayment)
             $this->fetchFromDbByPayPalPayment();
+        $this->dbPayment->state = $this->payPalPayment->getState();
+        $this->dbPayment->intent = $this->payPalPayment->getIntent();
+        $this->dbPayment->save();
+
+
     }
 
 

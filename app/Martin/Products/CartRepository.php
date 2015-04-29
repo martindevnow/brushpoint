@@ -30,6 +30,9 @@ class CartRepository {
 
     public function getCartData()
     {
+
+        return $this->getCartDataDB();
+
         $data = array();
 
         if (Session::has('cart'))
@@ -71,13 +74,21 @@ class CartRepository {
             $carts = Cart::where('user_id', '=', $identifier)
                 ->orWhere('unique_id', '=', $identifier);
         else
-            $carts = Cart::where('unique_id', '=', $this->unique_id)
-                ->orWhere('user_id', '=', $this->user_id);
-        // dd($carts->count());
+        {
+            if ($this->user_id)
+                $carts = Cart::where('user_id', '=', $this->user_id);
+            else
+                $carts = Cart::where('unique_id', '=', $this->unique_id);
+        }
 
         foreach ($carts->get() as $cart)
         {
-            // dd($cart);
+            if ($cart->unique_id != $this->unique_id)
+            {
+                $cart->unique_id = $this->unique_id;
+                $cart->save();
+            }
+
             $data['item-'. $cart->item_id] = [
                 'id'        => $cart->item_id,
                 'name'      => $cart->item->name,
