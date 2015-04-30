@@ -16,6 +16,7 @@ class ProductsTableSeeder extends Seeder {
          */
         DB::table('products')->truncate();
         DB::table('items')->truncate();
+        DB::table('images')->truncate();
 
         $faker = Faker::create();
 
@@ -193,7 +194,7 @@ class ProductsTableSeeder extends Seeder {
             ];
         $products[] =
             [
-                "sku" => "DualZOneHighRotation",
+                "sku" => "DualZoneHighRotation",
                 "name" => "Dual Zone High Rotation Toothbrush",
                 "benefits" => serialize(["Superior High Rotation Head Helps Break up plaque and bottom zone bristles clean between teeth", "Fantastic Value!"]),
 

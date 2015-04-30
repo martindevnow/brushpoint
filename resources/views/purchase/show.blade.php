@@ -66,7 +66,7 @@
                 id="product-show-image"/>
             </div>
 
-            @include('zeina.flickr-images', ['images'=> ['/images/brushpoint/purchase/'. $product->sku .'-115.png', 'two', 'three', 'four']])
+            @include('zeina.flickr-images', ['images'=> $product->images])
         </div>
 
     </div>

@@ -51,7 +51,7 @@
                 </span>
             </a>
             <ul>
-                <li>
+                <li class="hidden-lg hidden-md">
                     <a href="/purchase/retailers">
                         Toothbrushes
                     </a>

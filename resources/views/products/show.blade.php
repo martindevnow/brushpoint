@@ -44,11 +44,11 @@
                 <div class="left-title">
                     <div class="heading-title">
                         <h2 class="left-text"><b>@if (isset($product))
-                         {{ $product->name }} @else Please select a product @endif </b></h2>
+                         {!! $product->name !!} @else Please select a product @endif </b></h2>
                     </div>
 
                     @if(isset($product->claim))
-                    <p>{{ $product->claim }}</p>
+                    <p>{!! $product->claim !!}</p>
                     @endif
 
 
@@ -59,7 +59,7 @@
                         </div>
                         <ul class="icons-list check-2 colored-list ">
                             @foreach($product->benefits as $benefit)
-                            <li>{{ $benefit }}</li>
+                            <li>{!! $benefit !!}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -75,7 +75,7 @@
                         </div>
                         <ul class="icons-list check-2 colored-list ">
                             @foreach($product->features as $feature)
-                            <li>{{ $feature }}</li>
+                            <li>{!! $feature !!}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -91,12 +91,12 @@
                             </div>
                             <ul class="icons-list check-2 colored-list ">
                                 @foreach($product->other_list as $point)
-                                <li>{{ $point }}</li>
+                                <li>{!! $point !!}</li>
                                 @endforeach
                             </ul>
                         </div>
                     @elseif (isset($product->other) && empty($product->other_list))
-                        <p>{{ $product->other }}</p>
+                        <p>{!! $product->other !!}</p>
 
                     @endif
 
