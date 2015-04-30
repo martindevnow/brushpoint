@@ -36,6 +36,14 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
+
+        if ($e instanceof PaymentAlreadyProcessed)
+        {
+            // return view('errors.checkout.duplicate');
+            dd($request);
+
+            return redirect('/');
+        }
 		return parent::render($request, $e);
 	}
 

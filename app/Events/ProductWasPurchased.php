@@ -11,7 +11,7 @@ class ProductWasPurchased extends Event {
     /**
      * @var Payment
      */
-    private $payment;
+    public $payment;
 
     /**
 	 * Create a new event instance.

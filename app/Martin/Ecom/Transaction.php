@@ -11,7 +11,7 @@ class Transaction extends CoreModel {
         'amount_shipping',
         'amount_shipping_real',
         'amount_total',
-        'amount_currencyl',
+        'amount_currency',
         'description',
     ];
 

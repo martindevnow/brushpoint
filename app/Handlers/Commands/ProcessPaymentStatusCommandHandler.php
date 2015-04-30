@@ -2,6 +2,7 @@
 
 use App\Commands\ProcessPaymentStatusCommand;
 
+use App\Exceptions\PaymentAlreadyProcessed;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Martin\Ecom\Checkout;
@@ -46,6 +47,8 @@ class ProcessPaymentStatusCommandHandler {
         {
             // TODO: Flag, send email, etc...
             // die / throw exception
+            throw new PaymentAlreadyProcessed('Duplicate Entry');
+
         }
 
         $paymentLog->logPayment();
@@ -59,7 +62,8 @@ class ProcessPaymentStatusCommandHandler {
         $dbTransactions = $paymentLog->createTransactions();
 
         Log::info('Seemed to work...');
-        return 1;
+
+        return $dbPayment;
 
 
 

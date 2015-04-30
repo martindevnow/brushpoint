@@ -1,11 +1,13 @@
 <?php namespace App\Http\Controllers;
 
 use App\Commands\ProcessPaymentStatusCommand;
+use App\Events\ProductWasPurchased;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 use Martin\Ecom\Checkout;
 use Martin\Products\CartRepository;
 use PayPal\Api\Payment;
@@ -86,8 +88,12 @@ class CheckoutController extends Controller {
 
     public function status(Request $request)
     {
-        // dd($request->all());
+
         $payment = $this->dispatch(new ProcessPaymentStatusCommand($request->get('paymentId')));
+
+        $response = Event::fire(new ProductWasPurchased($payment));
+
+
         // return true;
         // $paymentId = $request->get('paymentId');
         // $checkout = new Checkout();
