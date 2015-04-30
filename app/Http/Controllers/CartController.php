@@ -114,5 +114,19 @@ class CartController extends Controller {
         return redirect()->back();
     }
 
+    public function shippingToCountry(Request $request)
+    {
+        if (!array_key_exists($request->country_code, $this->cartRepository->getCountryCodeArray()))
+            Flash::error('Error in country selected');
+        else
+            $this->cartRepository->setRecipientCountry($request->country_code);
+        return redirect()->back();
+    }
+
+    public function clearRecipientCountry()
+    {
+        $this->cartRepository->setRecipientCountry(null);
+        return redirect()->back();
+    }
 
 }

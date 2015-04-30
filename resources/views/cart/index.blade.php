@@ -18,69 +18,93 @@
 
 @section('content')
 <div class="container">
+    @if ($cartData)
+        {!! Form::open(['method' => 'post', 'url' => 'cart/update']) !!}
+        <table class="table cart-contents">
+            <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Extended Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($cartData as $item)
+                <tr>
+                  <td>
+                    <a href="cart/remove/{{ $item['id'] }}"><button type="button" class="btn btn-danger btn-xs">X</button></a>
+                    <img src="/images/brushpoint/purchase/{{ $item['sku'] }}-115.png" class="img-responsive" style="max-height: 35px; display: inline;"/>
+                    <a href="/purchase/id-{{ $item['product_id'] }}">{{ $item['name'] }}</a></td>
+                  <td>{{ asMoney($item['price']) }}</td>
+                  <td>
+                    <!--  Form Input -->
+                    <div class="form-group" style="margin-bottom: 0px">
+                        {!! Form::text($item['id'] . '-quantity', $item['quantity'], ['class' => 'form-control cart-item-quantity']) !!}
+                    </div>
+                </td>
+                  <td>{{ asMoney($item['price'] * $item['quantity']) }}</td>
+                </tr>
+                @endforeach
 
-    {!! Form::open(['method' => 'post', 'url' => 'cart/update']) !!}
+              </tbody>
+        </table>
+        {!! Form::submit('Update Quantities', ['class' => "btn btn-sale" ]) !!}
+        {!! Form::close() !!}
 
-    <table class="table cart-contents">
-        <thead>
-            <tr>
-              <th>Item</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Extended Cost</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach($cartData as $item)
-            <tr>
-              <td>
-                <a href="cart/remove/{{ $item['id'] }}"><button type="button" class="btn btn-danger btn-xs">X</button></a>
-                <img src="/images/brushpoint/purchase/{{ $item['sku'] }}-115.png" class="img-responsive" style="max-height: 35px; display: inline;"/>
-                <a href="/purchase/id-{{ $item['product_id'] }}">{{ $item['name'] }}</a></td>
-              <td>{{ asMoney($item['price']) }}</td>
-              <td>
-                <!--  Form Input -->
-                <div class="form-group" style="margin-bottom: 0px">
-                    {!! Form::text($item['id'] . '-quantity', $item['quantity'], ['class' => 'form-control cart-item-quantity']) !!}
-                </div>
-            </td>
-              <td>{{ asMoney($item['price'] * $item['quantity']) }}</td>
-            </tr>
-            @endforeach
 
-          </tbody>
-    </table>
+        @if ($cartRepo->isSetRecipientCountry())
+            <a href="/checkout/express" class="btn btn-sale">Checkout</a>
+        @endif
+        <table class="table cart-contents" style="width: 40%; float: right;">
+            <thead>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>Amount</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Shipping to: {{ $cartRepo->getRecipientCountryFull() }}</td>
+                    @if ($cartRepo->isSetRecipientCountry())
+                        <td>{{ asMoney($cartRepo->getShippingAndHandling()) }} [<a href="cart/shipping/clear">Change Country</a>]</td>
+                    @else
+                        <td>
+                            Select Country to Checkout
+                              {!! Form::open(['method' => 'post', 'url' => 'cart/shipping/country' ]) !!}
+                                  <div class="form-group">
+                                  {!! Form::select('country_code', $cartRepo->getCountryCodeArray(), null) !!}
+                                  </div>
+                                  <div class="form-group">
+                                      {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
+                                  </div>
+                              {!! Form::close() !!}
+                        </td>
+                    @endif
+                </tr>
+                <tr>
+                    <td><b>Total:</b></td>
+                    <td><b>{{ asMoney($cartRepo->getShippingAndHandling() + $cartRepo->getCartTotal()) }}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    @else
+        <div class="jumbotron">
+            <h1>Your cart is empty.</h1><br /><br/>
+            <h2><a href="http://bpl5.dev/purchase">Click here to view our products.</a></h2>
+        </div>
+    @endif
 
-    <table class="table cart-contents" style="width: 40%; float: right;">
-        <thead>
-            <tr>
-                <td>&nbsp;</td>
-                <td>Amount</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Shipping and Handling</td>
-                <td>{{ asMoney($cartRepo->getShippingAndHandling()) }}</td>
-            </tr>
-            <tr>
-                <td><b>Total:</b></td>
-                <td><b>{{ asMoney($cartRepo->getShippingAndHandling() + $cartRepo->getCartTotal()) }}</b></td>
-            </tr>
-        </tbody>
-    </table>
 
-    <!-- {!! Form::open(['method' => 'POST', 'action' => 'CartController@getPayerInfo']) !!}
-         <div class="form-group">
-             {!! Form::submit('Checkout', ['class' => 'btn btn-primary']) !!}
-         </div>
-    {!! Form::close() !!} -->
+
+
+
+
+
+
+
     <a href="/purchase" class="btn btn-primary">Continue Browsing</a>
-    {!! Form::submit('Update Quantities', ['class' => "btn btn-sale" ]) !!}
-    {{-- <a href="/cart/update" class="btn btn-sale">Update Quantities</a> --}}
-    <a href="/checkout/express" class="btn btn-sale">Checkout</a>
 
-    {!! Form::close() !!}
 
 
 </div>

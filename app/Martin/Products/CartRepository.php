@@ -251,18 +251,66 @@ class CartRepository {
 
 
         // TODO: Make sure it calculates the letter mail correctly too.
-        
+
         /*
          * Here is where I could include other factors to ACTUALLY calculate the shipping cost.
          */
     }
 
+
+    /**
+     * Retrieve the cost of shipping and handling
+     *
+     * @return float
+     */
     public function getShippingAndHandling()
     {
         if (!$this->shippingAndHandling)
             return $this->calculateShipping();
 
         return $this->shippingAndHandling;
+    }
+
+    public function isSetRecipientCountry()
+    {
+        return session()->has('country');
+    }
+
+    public function setRecipientCountry($countryCode)
+    {
+        if ($countryCode == null)
+            session()->forget('country');
+
+        return session(['country' => $countryCode]);
+    }
+
+    public function getCountryCodeArray()
+    {
+        return [
+            '' => 'SELECT',
+            'CA' => 'Canada',
+            'US' => 'United States',
+            'MX' => 'Mexico',
+            'GB' => 'United Kingdom',
+            'IE' => 'Ireland',
+            'AS' => 'American Samoa',
+            'AU' => 'Australia',
+            'GU' => 'Guam',
+            'UM' => 'United States Outlying Islands',
+        ];
+
+    }
+
+    public function getRecipientCountryFull()
+    {
+        if (session()->has('country'))
+        {
+            if (session('country') == 'US')
+                return 'United States';
+            if (session('country') == 'CA')
+                return 'Canada';
+            return 'International';
+        }
     }
 
 
