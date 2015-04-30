@@ -417,10 +417,13 @@ class CartRepository {
             else{
                 $cartItem = explode('-', $cartItem);
                 // $items[$cartItem[0]] = $quantity;
-                $cart = $this->getCartByItemId($cartItem[0]);
-                $cart->quantity = $quantity;
-                $cart->save();
+                if ($cart = $this->getCartByItemId($cartItem[0]))
+                {
+                    $cart->quantity = $quantity;
+                    $cart->save();
+                }
             }
+
 
         }
         $this->refreshCartFromDB();

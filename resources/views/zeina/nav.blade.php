@@ -7,7 +7,6 @@
                 </span>
             </a>
         </li>
-
         <li>
             <a href="/about">
                 <span class="label-nav">

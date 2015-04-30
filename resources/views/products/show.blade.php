@@ -97,7 +97,6 @@
                         </div>
                     @elseif (isset($product->other) && empty($product->other_list))
                         <p>{!! $product->other !!}</p>
-
                     @endif
 
                 </div>

@@ -25,7 +25,7 @@
             <h1>Thank you for choosing BrushPoint Innovations</h1>
             </div>
 
-            <p>Dear {{ $customer_name }}, an email has been sent to {{ $customer_email }} with the details of your order.</p>
+            <p>Dear {{ $payment->payer->first_name }} {{ $payment->payer->last_name }}, an email has been sent to {{ $payment->payer->email }} with the details of your order.</p>
             <p>Orders generally ship out within 1-2 business days depending on the volume of orders. Orders are not processed on weekends or holidays.</p>
         </div>
     </div>

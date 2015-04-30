@@ -42,6 +42,7 @@ class ProductsController extends Controller {
     public function show($id)
     {
         $product = $this->productRepository->getPortfolioById($id);
+        
         $products = $this->productRepository->getPortfolioPaginated();
 
         return view('products.show')->with([

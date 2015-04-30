@@ -94,6 +94,8 @@ class CheckoutController extends Controller {
         $response = Event::fire(new ProductWasPurchased($payment));
 
 
+        return redirect('checkout/thankyou')->with(['payment' => $payment]);
+
         // return true;
         // $paymentId = $request->get('paymentId');
         // $checkout = new Checkout();
@@ -107,7 +109,10 @@ class CheckoutController extends Controller {
         // TODO: Fire off an email to the user
     }
 
-
+    public function thankyou()
+    {
+        return view('checkout.thankyou')->with(session('payment'));
+    }
 
 }
 

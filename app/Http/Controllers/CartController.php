@@ -116,7 +116,8 @@ class CartController extends Controller {
 
     public function shippingToCountry(Request $request)
     {
-        if (!array_key_exists($request->country_code, $this->cartRepository->getCountryCodeArray()))
+        if (!array_key_exists($request->country_code, $this->cartRepository->getCountryCodeArray())
+            || $request->country_code == '')
             Flash::error('Error in country selected');
         else
             $this->cartRepository->setRecipientCountry($request->country_code);

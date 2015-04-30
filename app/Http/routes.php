@@ -10,6 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Illuminate\Support\Facades\Request;
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
@@ -96,10 +98,14 @@ Route::get('checkout/express', 'CheckoutController@expressCheckout');
 Route::get('checkout/confirm', 'CheckoutController@confirmPayerInfo');
 Route::get('checkout/process', 'CheckoutController@checkout');
 Route::get('checkout/error', 'CheckoutController@error');
-Route::get('checkout/status', 'CheckoutController@status'); // Route is HIT
+Route::get('checkout/status', 'CheckoutController@status'); // Route is HI
+
+Route::get('checkout/thankyou', 'CheckoutController@thankyou');
 
 Route::get('cart/checkout/status', 'CheckoutController@status'); // used???
 Route::get('checkout/cancel', 'CheckoutController@cancel');
+
+
 
 
 /*
