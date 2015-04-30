@@ -63,6 +63,10 @@
 
 
 
+@include('layouts.partials._analytics')
+
+
+
         <style>
         .bp-breadcrumb {
             color: #ffffff;

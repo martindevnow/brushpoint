@@ -123,9 +123,12 @@ class CartController extends Controller {
         return redirect()->back();
     }
 
-    public function clearRecipientCountry()
+    public function clearShippingCountry()
     {
         $this->cartRepository->setRecipientCountry(null);
+
+        Flash::message('Please select a new country.');
+
         return redirect()->back();
     }
 

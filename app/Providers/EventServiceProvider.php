@@ -11,8 +11,9 @@ class EventServiceProvider extends ServiceProvider {
 	 * @var array
 	 */
 	protected $listen = [
-		'event.name' => [
-			'EventListener',
+		'App\Events\ProductWasPurchased' => [
+			'App\Handlers\Events\EmailPurchaseConfirmation',
+            'App\Handlers\Events\GenerateInvoicePdf',
 		],
 	];
 

@@ -85,6 +85,7 @@ Route::post('cart/add/confirm', 'CartController@addToCartConfirmed');
 Route::get('cart/remove/{id}', 'CartController@remove');
 Route::post('cart/update', 'CartController@update');
 Route::post('cart/shipping/country', 'CartController@shippingToCountry');
+Route::get('cart/shipping/clear', 'CartController@clearShippingCountry');
 
 
 /**

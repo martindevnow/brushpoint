@@ -2,7 +2,6 @@
 
 use Closure;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Session;
 
 class SetCartId {
 
@@ -16,17 +15,20 @@ class SetCartId {
 	public function handle($request, Closure $next)
 	{
 
-        if (!Session::has('unique_id')) {
+        if (!session()->has('unique_id')) {
+
             // check cookie
             $unique_id = Cookie::get('unique_id');
-            if ($unique_id)
-                Session::put('unique_id', $unique_id);
-            else
+            if (! $unique_id)
             {
                 $unique_id = uniqid("beta64", true);
-                Session::put('unique_id', $unique_id);
                 Cookie::queue('unique_id', $unique_id, 100000);
             }
+
+            session(['unique_id' => $unique_id]);
+
+            // set cart to be refreshed
+            session(['refreshCart' => true]);
         }
         // dd(Session::get('unique_id'));
 		return $next($request);

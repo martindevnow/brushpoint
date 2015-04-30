@@ -65,9 +65,14 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Shipping to: {{ $cartRepo->getRecipientCountryFull() }}</td>
+                    <td>
+                        Shipping to: {{ $cartRepo->getRecipientCountryFull() }}
+                        @if($cartRepo->isSetRecipientCountry())
+                         [<a href="cart/shipping/clear">Change Country</a>]
+                        @endif
+                    </td>
                     @if ($cartRepo->isSetRecipientCountry())
-                        <td>{{ asMoney($cartRepo->getShippingAndHandling()) }} [<a href="cart/shipping/clear">Change Country</a>]</td>
+                        <td>{{ asMoney($cartRepo->getShippingAndHandling()) }}</td>
                     @else
                         <td>
                             Select Country to Checkout

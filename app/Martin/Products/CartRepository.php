@@ -31,8 +31,6 @@ class CartRepository {
         else
             $this->user_id = 0;
 
-        if (session()->has('shippingAndHandling'))
-            $this->shippingAndHandling = session('shippingAndHandling');
 
         if (session()->has('refreshCart'))
         {
@@ -41,6 +39,11 @@ class CartRepository {
         }
         else
             $this->loadCartFromSession();
+
+        if (session()->has('shippingAndHandling'))
+            $this->shippingAndHandling = session('shippingAndHandling');
+        else
+            $this->calculateShipping();
     }
 
 
@@ -232,6 +235,10 @@ class CartRepository {
 
         $shippingAndHandling = 0;
 
+        // dd(session('country'));
+
+        if (session('country') != "CA")
+            $shippingAndHandling = 5;
         if ($this->getTotalWeight() > 300)
             $shippingAndHandling = 5;
         if ($this->getTotalNumberOfItems() > 4)
@@ -281,6 +288,7 @@ class CartRepository {
         if ($countryCode == null)
             session()->forget('country');
 
+        $this->calculateShipping();
         return session(['country' => $countryCode]);
     }
 
@@ -416,6 +424,7 @@ class CartRepository {
 
         }
         $this->refreshCartFromDB();
+        $this->calculateShipping();
 
     }
 
