@@ -10,11 +10,11 @@ use Martin\Ecom\Payment;
 
 class EmailPurchaseConfirmation {
 
-	/**
-	 * Create the event handler.
-	 *
-	 * @return void
-	 */
+    /**
+     * Create the event handler.
+     *
+     * @return \App\Handlers\Events\EmailPurchaseConfirmation
+     */
 	public function __construct()
 	{
 		//
@@ -34,12 +34,13 @@ class EmailPurchaseConfirmation {
             'customer_email' => $event->payment->payer->email,
             'customer_address' => $event->payment->payer->addresses->first(),
 
+
         ];
 
-        Log::info(print_r($event->payment->payer->addresses,1));
+        /// Log::info(print_r($event->payment->payer->addresses,1));
 
 		Mail::send('emails.customer.invoice', $data, function($message) use ($event) {
-            $message->to('the.one.martin@gmail.com')
+            $message->to($event->payment->payer->email)
                 ->subject("BrushPoint: Purchase Receipt");
         });
 	}
