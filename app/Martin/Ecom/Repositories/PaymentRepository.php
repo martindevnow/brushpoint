@@ -36,7 +36,7 @@ class PaymentRepository {
 
         $payer = $payment->payer;
 
-        $address = $payment->addresses->first();
+        $address = $payment->address;
 
         $transactions = $payment->transactions->first();
 

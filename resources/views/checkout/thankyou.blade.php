@@ -18,7 +18,6 @@
             <div class="jumbotron">
                 <h1>Thank you!</h1>
 
-
                 <p>Dear <b>{{ $payment->address->name }} </b>, an email has been sent to <b>{{ $payment->payer->email }}</b> with the details of your order.</p>
                 <p>Orders generally ship out within 1-2 business days depending on the volume of orders. Orders are not processed on weekends or holidays.</p>
                 <p>Shipping times depend on the destination. Please allow 5-10 business days for delivery.</p>

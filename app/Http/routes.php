@@ -149,6 +149,7 @@ Route::group(['namespace' => 'Admin'], function()
     Route::resource(    'admins/purchases',         'PurchasesController');
     
     Route::resource(    'admins/payments',          'PaymentsController');
+    Route::patch(       'admins/payments/ajax/{id}',   'PaymentsController@ajaxPatch');
 
     Route::resource(    'admins/users',          'UsersController');
 

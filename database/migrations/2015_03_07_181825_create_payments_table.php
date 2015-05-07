@@ -22,6 +22,9 @@ class CreatePaymentsTable extends Migration {
             $table->string('state');
             $table->string('intent');
 
+            $table->boolean('shipped');
+            $table->timestamp('shipped_at');
+
             // Has Many Transactions (Many to Many??)
             // $table->integer('transaction_id')->nullable();
             $table->integer('payer_id')->nullable();

@@ -1,5 +1,6 @@
 <?php namespace Martin\Ecom;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 use Martin\Core\CoreModel;
@@ -14,7 +15,17 @@ class Payment extends CoreModel {
         $this->unique_id = session('unique_id');
     }
 
-
+    public function toggleShipped($status)
+    {
+        // $status = ($this->closed + 1) % 2;
+        $this->shipped = $status;
+        $dt = new DateTime;
+        if ($status)
+            $this->shipped_at = $dt->format('y-m-d H:i:s');
+        else
+            $this->shipped_at = 0;
+        $this->save();
+    }
 
     /**
      * Relationships

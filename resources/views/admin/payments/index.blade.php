@@ -26,14 +26,17 @@
             <tr>
               <td>{{ $payment->created_at->diffForHumans() }}</td>
               <td>{{ $payment->payer? $payment->payer->first_name . " " . $payment->payer->last_name: "Not Completed Yet" }}</td>
-              <td>{{ $payment->addresses->first() ? $payment->addresses->first()->city: "Not Entered Yet" }}</td>
+              <td>{{ $payment->address ? $payment->address->city: "Not Entered Yet" }}</td>
               <td>{{ $payment->transactions->first()? $payment->transactions->first()->amount_total: "Not completed Yet" }}</td>
               <td>
-                {!! Form::open() !!}
-                    <div class="form-group">
-                    {!! Form::checkbox('shipped', $payment->portfolio, $payment->portfolio) !!}
-                    </div>
-                {!! Form::close() !!}
+                <div class="form-group">
+                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/payments/ajax/'. $payment->id . '?field=shipped']) !!}
+                  {!! Form::checkbox('shipped', $payment->shipped, $payment->shipped, ['data-click-submits-form']) !!}
+                  {!! Form::close() !!}
+                </div>
+                @if($payment->shipped_at != "0000-00-00 00:00:00")
+                  [[ {{ $payment->shipped_at }} ]]
+                @endif
               </td>
               <td><a href="/admins/payments/invoice/{{ $payment->id }}">Invoice</a></td>
             </tr>
@@ -41,4 +44,9 @@
           </tbody>
     </table>
 </div>
+
+<div class="flash">
+    Updated...
+</div>
+
 @stop

@@ -76,4 +76,20 @@ class PaymentsController extends Controller {
         return $view;
     }
 
+
+
+    public function ajaxPatch($paymentId, Request $request)
+    {
+        $field = $request->get('field');
+        $value = $request->has($field);
+
+        $payment = Payment::find($paymentId);
+
+        if ($field == "shipped")
+            $payment->toggleShipped($value);
+        else
+            $payment->$field = $value;
+        $payment->save();
+        return "Passed";
+    }
 } 
