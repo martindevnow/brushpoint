@@ -6,8 +6,11 @@
                     <i class="fa fa-shopping-cart fa-5x"></i>
                 </div>
                 <div class="col-xs-9 text-right">
-                    <div class="huge">###</div>
-                    <div>Orders Received</div>
+                    <div class="huge">
+                      {{ \Martin\Ecom\Payment::where('shipped', '=', '0')->count() }}
+
+                    </div>
+                    <div>Orders Pending</div>
                 </div>
             </div>
         </div>

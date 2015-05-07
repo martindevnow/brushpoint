@@ -6,8 +6,8 @@
                     <i class="fa fa-comments fa-5x"></i>
                 </div>
                 <div class="col-xs-9 text-right">
-                    <div class="huge">###</div>
-                    <div>Feedback Received</div>
+                    <div class="huge">{{ \Martin\Quality\Feedback::where('closed', '=', '0')->count() }}</div>
+                    <div>Feedback Open</div>
                 </div>
             </div>
         </div>
