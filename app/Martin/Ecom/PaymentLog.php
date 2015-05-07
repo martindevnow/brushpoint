@@ -6,7 +6,7 @@ namespace Martin\Ecom;
 
 use Illuminate\Support\Facades\Log;
 use Martin\Core\Address;
-use PayPal\Api\Payment;
+ use PayPal\Api\Payment;
 use PayPal\Api\ShippingAddress;
 
 class PaymentLog {
@@ -79,8 +79,14 @@ class PaymentLog {
         if (! $this->dbPayment->payer)
         {
             $this->payerRepo = new \Martin\Ecom\Repositories\PayerRepository();
+            Log::info('paypal payer: '. print_r($this->payPalPayment->getPayer(),1));
+
             $this->dbPayer = $this->payerRepo->findOrCreateFromPayPal($this->payPalPayment->getPayer());
+
+
             $this->dbPayer->payments()->save($this->dbPayment);
+            Log::info("payer: ". print_r($this->dbPayer,1));
+
             return $this->dbPayer;
         }
         return $this->dbPayer = $this->dbPayment->payer;

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Martin\Ecom\Checkout;
+use Martin\Ecom\PaymentLog;
 use Martin\Products\CartRepository;
 use PayPal\Api\Payment;
 
@@ -86,13 +87,22 @@ class CheckoutController extends Controller {
     }
 
 
-    public function status(Request $request)
+    public function status(Request $request, Checkout $checkout)
     {
 
         $payment = $this->dispatch(new ProcessPaymentStatusCommand($request->get('paymentId')));
 
+        // dd($payment);
+
+        $paymentLog = new PaymentLog($checkout->getApi());
+
+        $payment = $paymentLog->fetchPaymentFromPayPal($request->get('paymentId'));
+
+        // dd($payment);
+
         $response = Event::fire(new ProductWasPurchased($payment));
 
+        session(['payment' => $payment]);
 
         return redirect('checkout/thankyou')->with(['payment' => $payment]);
 
@@ -109,9 +119,19 @@ class CheckoutController extends Controller {
         // TODO: Fire off an email to the user
     }
 
-    public function thankyou()
+    public function thankyou(Checkout $checkout)
     {
-        return view('checkout.thankyou')->with(session('payment'));
+        $payment = session('payment');
+        $paymentId = 'PAY-93G0212341949125TKVFL5ZA';
+
+        // dd($payment);
+
+        $paymentLog = new PaymentLog($checkout->getApi());
+
+        $payment = $paymentLog->fetchPaymentFromPayPal($paymentId);
+        //dd($payment);
+
+        return view('checkout.thankyou')->withPayment($payment);
     }
 
 }

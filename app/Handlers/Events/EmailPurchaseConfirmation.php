@@ -33,6 +33,7 @@ class EmailPurchaseConfirmation {
             'customer_name' => $event->payment->payer->first_name . " " . $event->payment->payer->last_name,
             'customer_email' => $event->payment->payer->email,
             'customer_address' => $event->payment->payer->addresses->first(),
+            'invoice_number' => $event->payment->id,
 
 
         ];

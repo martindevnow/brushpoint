@@ -9,16 +9,16 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <p>Thank you {{ $data['customer_name'] }} for your purchase!</p>
-                    <p>Invoice: {{ $data['invoice_number'] }}</p>
+                    <p>Thank you {{ $customer_name }} for your purchase!</p>
+                    <p>Invoice: {{ $invoice_number }}</p>
                 </div>
                 <div class="col-md-6">
-                    <p>Address: {{ $data['address']->street_1 }} <br />
-                            {{ $data['address']->street_2 }}     <br />
-                            {{ $data['address']->city }}         <br />
-                            {{ $data['address']->province }}     <br />
-                            {{ $data['address']->postal_code }}  <br />
-                            {{ $data['address']->country }}</p>
+                    <p>Address: {{ $customer_address->street_1 }} <br />
+                            {{ $customer_address->street_2 }}     <br />
+                            {{ $customer_address->city }}         <br />
+                            {{ $customer_address->province }}     <br />
+                            {{ $customer_address->postal_code }}  <br />
+                            {{ $customer_address->country }}</p>
                 </div>
             </div>
         </div>

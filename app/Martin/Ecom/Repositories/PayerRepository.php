@@ -29,10 +29,5 @@ class PayerRepository {
 
         return $DBPayer;
 
-
-
-
-
-
     }
 } 

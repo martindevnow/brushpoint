@@ -24,20 +24,19 @@ Route::get('testpath', function(){
 
 
 
+
+
 // TODO: all pages -- make the title collapse properly when resized too small (text doesn't wrap well)
 // TODO: navbar -- when the page is shrunk, change text to smaller and change logo to only (BRUSHPOINT)
 // TODO: all pages -- consider removing the breadcrumb all together
 
 // TODO: pages.contact -- make the email addresses clickable
 
-// TODO: build the cart functionality
 
-// TODO: 2015-02-23 -- Met with Paul Cira
-// - Add images to the purchase page (replacement head image/thumbnail)
-// - Add images to the homepage as per his email
-// - Add thumbnail images to the products page
-// - adjust the migrations to add Image(s) to the products.
 
+// May 6th 2015
+// TODO: - get proper copy from paul
+// TODO:
 
 /**
  * Pages
@@ -50,7 +49,7 @@ Route::get('contact', 'PagesController@contact');
 Route::post('contact', 'PagesController@sendContact');
 Route::get('contact/thankyou', 'PagesController@thankyouContact');
 Route::get('video', 'PagesController@video');
-
+Route::get('video.htm', 'PagesController@video');
 /**
  * Feedback
  */
@@ -186,6 +185,9 @@ Route::get('cartWeight', function()
     $cartRepo->getTotalWeight();
 });
 
+Route::get('sessionId', function() {
+    dd(session('unique_id'));
+});
 
 
 

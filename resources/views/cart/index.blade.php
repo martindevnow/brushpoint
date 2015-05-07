@@ -8,8 +8,8 @@
     $page['short_title'] = "Cart";
     $page['short_description'] = "Confirm Quantity";
 
-     $showCart = true;
-     $hideBreadcrumb = true;
+    $showCart = true;
+    $hideBreadcrumb = true;
 
     ?>
 
@@ -100,17 +100,7 @@
         </div>
     @endif
 
-
-
-
-
-
-
-
-
     <a href="/purchase" class="btn btn-primary">Continue Browsing</a>
-
-
 
 </div>
 @stop

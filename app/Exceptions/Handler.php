@@ -2,6 +2,7 @@
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Martin\Notifications\Flash;
 
 class Handler extends ExceptionHandler {
 
@@ -40,9 +41,10 @@ class Handler extends ExceptionHandler {
         if ($e instanceof PaymentAlreadyProcessed)
         {
             // return view('errors.checkout.duplicate');
-            dd($request);
+            // dd($request);
+            Flash::error('You cannot submit your order twice.');
 
-            return redirect('/');
+            return redirect('/cart');
         }
 		return parent::render($request, $e);
 	}

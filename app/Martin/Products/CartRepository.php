@@ -288,23 +288,26 @@ class CartRepository {
         if ($countryCode == null)
             session()->forget('country');
 
+        session(['country' => $countryCode]);
+
         $this->calculateShipping();
-        return session(['country' => $countryCode]);
+
+        return session('country');
     }
 
     public function getCountryCodeArray()
     {
         return [
-            '' => 'SELECT',
+            '' => 'Select',
             'CA' => 'Canada',
             'US' => 'United States',
-            'MX' => 'Mexico',
+            /*'MX' => 'Mexico',
             'GB' => 'United Kingdom',
             'IE' => 'Ireland',
             'AS' => 'American Samoa',
-            'AU' => 'Australia',
-            'GU' => 'Guam',
-            'UM' => 'United States Outlying Islands',
+            'AU' => 'Australia',*/
+            // 'GU' => 'Guam',
+            // 'UM' => 'United States Outlying Islands',
         ];
 
     }
@@ -410,13 +413,13 @@ class CartRepository {
     {
         foreach ($data as $cartItem => $quantity)
         {
+            $cartItem = explode('-', $cartItem);
             if ($quantity == 0)
             {
                 $this->removeByItemId($cartItem[0]);
             }
-            else{
-                $cartItem = explode('-', $cartItem);
-                // $items[$cartItem[0]] = $quantity;
+            else
+            {
                 if ($cart = $this->getCartByItemId($cartItem[0]))
                 {
                     $cart->quantity = $quantity;
