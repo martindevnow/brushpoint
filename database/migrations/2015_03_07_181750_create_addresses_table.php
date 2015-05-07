@@ -15,6 +15,7 @@ class CreateAddressesTable extends Migration {
         Schema::create('addresses', function(Blueprint $table)
         {
             $table->increments('id');
+
             $table->string('description')->nullable();
             $table->string('name');
             $table->string('company')->nullable();
@@ -37,6 +38,7 @@ class CreateAddressesTable extends Migration {
             // polymorphic relations
             $table->integer('addressable_id');
             $table->string('addressable_type');
+
             $table->timestamps();
         });
     }

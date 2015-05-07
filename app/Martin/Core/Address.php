@@ -34,6 +34,10 @@ class Address extends Model {
         return $this->morphTo();
     }
 
+    public function payments()
+    {
+        return $this->hasMany('Martin\Ecom\Payment');
+    }
 
 
 } 

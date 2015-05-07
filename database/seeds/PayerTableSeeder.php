@@ -15,7 +15,7 @@ class PayerTableSeeder extends Seeder {
         $faker = Faker::create();
 
         $payer = Payer::create([
-            'payer_id' => "P69HMJQPKX258",
+            'payer_id' => "P69HMJQPKK999",
             'payment_method' => "paypal",
             'status' => "VERIFIED",
             'email' => $faker->email,

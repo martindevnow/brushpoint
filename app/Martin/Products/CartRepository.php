@@ -332,7 +332,13 @@ class CartRepository {
      */
     public function getTotalWeight()
     {
-        foreach ($this->getCartData() as $item)
+        $cartData = $this->getCartData();
+
+        // dd ($cartData);
+        if (empty($cartData))
+            return 0;
+
+        foreach ($cartData as $item)
             $productsArray[$item['product_id']] = $item['quantity'];
 
         $products = Product::whereIn('id', array_keys($productsArray))->get();;
@@ -457,7 +463,13 @@ class CartRepository {
      */
     private function getThickness()
     {
-        foreach ($this->getCartData() as $item)
+        $cartData = $this->getCartData();
+
+        // dd ($cartData);
+        if (empty($cartData))
+            return 0;
+
+        foreach ($cartData as $item)
             $productsArray[] = $item['product_id'];
 
         $products = Product::whereIn('id', $productsArray)->get();;

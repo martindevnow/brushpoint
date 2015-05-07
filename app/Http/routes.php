@@ -99,7 +99,8 @@ Route::get('checkout/process', 'CheckoutController@checkout');
 Route::get('checkout/error', 'CheckoutController@error');
 Route::get('checkout/status', 'CheckoutController@status'); // Route is HI
 
-Route::get('checkout/thankyou', 'CheckoutController@thankyou');
+// Route::get('checkout/thankyou', 'CheckoutController@thankyou');
+Route::get('checkout/thankyou/{invoiceId}', 'CheckoutController@thankyou');
 
 Route::get('cart/checkout/status', 'CheckoutController@status'); // used???
 Route::get('checkout/cancel', 'CheckoutController@cancel');

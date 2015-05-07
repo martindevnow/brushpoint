@@ -92,19 +92,15 @@ class CheckoutController extends Controller {
 
         $payment = $this->dispatch(new ProcessPaymentStatusCommand($request->get('paymentId')));
 
-        // dd($payment);
-
         $paymentLog = new PaymentLog($checkout->getApi());
 
         $payment = $paymentLog->fetchPaymentFromPayPal($request->get('paymentId'));
-
-        // dd($payment);
 
         $response = Event::fire(new ProductWasPurchased($payment));
 
         session(['payment' => $payment]);
 
-        return redirect('checkout/thankyou')->with(['payment' => $payment]);
+        return redirect('checkout/thankyou/'. $payment->id);
 
         // return true;
         // $paymentId = $request->get('paymentId');
@@ -119,17 +115,13 @@ class CheckoutController extends Controller {
         // TODO: Fire off an email to the user
     }
 
-    public function thankyou(Checkout $checkout)
+    public function thankyou($invoiceId, Checkout $checkout)
     {
-        $payment = session('payment');
-        $paymentId = 'PAY-93G0212341949125TKVFL5ZA';
-
-        // dd($payment);
+        $payment = \Martin\Ecom\Payment::find($invoiceId);
 
         $paymentLog = new PaymentLog($checkout->getApi());
 
-        $payment = $paymentLog->fetchPaymentFromPayPal($paymentId);
-        //dd($payment);
+        $payment = $paymentLog->fetchPaymentFromPayPal($payment->payment_id);
 
         return view('checkout.thankyou')->withPayment($payment);
     }

@@ -25,6 +25,9 @@ class CreatePaymentsTable extends Migration {
             // Has Many Transactions (Many to Many??)
             // $table->integer('transaction_id')->nullable();
             $table->integer('payer_id')->nullable();
+
+            // Belongs to an address
+            $table->integer('address_id')->nullable();
             $table->timestamps();
         });
     }

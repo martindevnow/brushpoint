@@ -49,7 +49,7 @@ class ProcessPaymentStatusCommandHandler {
         {
             // TODO: Flag, send email, etc...
             // die / throw exception
-            throw new PaymentAlreadyProcessed('Duplicate Entry');
+            // throw new PaymentAlreadyProcessed('Duplicate Entry');
 
         }
 

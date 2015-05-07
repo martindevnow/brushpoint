@@ -6,7 +6,6 @@ namespace Martin\Ecom;
 
 use Illuminate\Support\Facades\Log;
 use Martin\Core\Address;
- use PayPal\Api\Payment;
 use PayPal\Api\ShippingAddress;
 
 class PaymentLog {
@@ -34,7 +33,7 @@ class PaymentLog {
 
     public function fetchPaymentFromPayPal($paymentId)
     {
-        $this->payPalPayment = Payment::get($paymentId, $this->api);
+        $this->payPalPayment = \PayPal\Api\Payment::get($paymentId, $this->api);
         return $this->fetchFromDbByPayPalPayment();
 
     }
@@ -83,7 +82,6 @@ class PaymentLog {
 
             $this->dbPayer = $this->payerRepo->findOrCreateFromPayPal($this->payPalPayment->getPayer());
 
-
             $this->dbPayer->payments()->save($this->dbPayment);
             Log::info("payer: ". print_r($this->dbPayer,1));
 
@@ -96,14 +94,12 @@ class PaymentLog {
     public function findOrCreateAddress()
     {
         // no addresses registered
-        if ($this->dbPayment->addresses->count())
+        if ( ! $this->dbPayment->address)
             return $this->addNewAddress();
 
         // has addresses registered
-        foreach($this->dbPayer->addresses as $address){
-            if ($this->addressesMatch($address))
-                return $address;
-        }
+        if ($this->addressesMatch($this->dbPayment->address))
+            return $this->dbPayment->address;
 
         // no match found
         return $this->addNewAddress();
@@ -115,6 +111,8 @@ class PaymentLog {
         $addressRepo = new \Martin\Core\Repositories\AddressRepository();
         $this->dbAddress = $addressRepo->createFromPayPal($this->dbPayer, $this->payPalPayment);
         $this->dbPayer->addresses()->save($this->dbAddress);
+        $this->dbAddress->payments()->save($this->dbPayment);
+
         return $this->dbAddress;
     }
 
@@ -152,7 +150,5 @@ class PaymentLog {
     {
         $transRepo = new \Martin\Ecom\Repositories\TransactionRepository();
         return $this->dbTransactions = $transRepo->createFromPaypal($this->payPalPayment, $this->dbPayment);
-
     }
-
-} 
+}
