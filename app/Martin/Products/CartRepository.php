@@ -380,7 +380,8 @@ class CartRepository {
      */
     public function clearCartDB()
     {
-        Cart::where('unique_id', '=', $this->unique_id)->orWhere('user_id', '=', $this->user_id)->delete();
+        Cart::where('unique_id', '=', $this->unique_id)
+            ->orWhere('user_id', '=', $this->user_id)->delete();
     }
 
 

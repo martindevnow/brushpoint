@@ -29,13 +29,15 @@ Route::get('testpath', function(){
 // TODO: all pages -- make the title collapse properly when resized too small (text doesn't wrap well)
 // TODO: navbar -- when the page is shrunk, change text to smaller and change logo to only (BRUSHPOINT)
 // TODO: all pages -- consider removing the breadcrumb all together
-
 // TODO: pages.contact -- make the email addresses clickable
 
 
 
 // May 6th 2015
 // TODO: - get proper copy from paul
+// TODO: - CLEAR out the cart after purchase
+// TODO: - generate the invoice on purhcase
+// TODO: - check the email that is generated and sent to the customer
 // TODO:
 
 /**

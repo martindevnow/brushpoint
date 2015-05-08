@@ -65,6 +65,8 @@ class ProcessPaymentStatusCommandHandler {
 
         Log::info('Seemed to work...');
 
+
+
         return $dbPayment;
 	}
 }
