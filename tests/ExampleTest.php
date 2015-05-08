@@ -15,9 +15,10 @@ class ExampleTest extends TestCase {
             );
 
         $this->visit('/products')
-            ->dump()
             ->verifyInDatabase('products', $data)
             ->andSee('Dual Motion Heads');
 	}
+
+
 
 }

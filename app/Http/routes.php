@@ -44,6 +44,9 @@ Route::get('testpath', function(){
 // TODO: build in the lot codes for the purchasing... '
 // TODO: need to add the ability to keep track of inventory levels
 
+// TODO: add middleware for moderators
+// TODO: enable the creation of users for MODERATORS only
+
 
 
 /**
@@ -107,22 +110,10 @@ Route::get('checkout/process', 'CheckoutController@checkout');
 Route::get('checkout/error', 'CheckoutController@error');
 Route::get('checkout/status', 'CheckoutController@status'); // Route is HI
 
-// Route::get('checkout/thankyou', 'CheckoutController@thankyou');
 Route::get('checkout/thankyou/{invoiceId}', 'CheckoutController@thankyou');
 
 Route::get('cart/checkout/status', 'CheckoutController@status'); // used???
 Route::get('checkout/cancel', 'CheckoutController@cancel');
-
-
-
-
-/*
-Route::get('checkout/success', 'CheckoutController@success');
-Route::get('checkout/cancelled', 'CheckoutController@cancelled'); */
-/*Route::get('checkout/status', [
-    'as' => 'payment_status',
-    'uses' => 'CheckoutController@getPaymentStatus'
-]);*/
 
 
 

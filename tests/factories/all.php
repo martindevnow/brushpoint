@@ -14,3 +14,9 @@ $factory('Martin\Products\Product', [
 ]);
 
 
+$factory('Martin\Users\User', [
+    'name' => $faker->name,
+    'email' => $faker->email,
+    'password' => bcrypt(12345),
+]);
+
