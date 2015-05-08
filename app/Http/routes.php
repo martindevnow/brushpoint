@@ -139,7 +139,7 @@ Route::get('payment/execute', 'CartController@paymentTestExecute');
  * Admin Routes
  *
  */
-Route::group(['namespace' => 'Admin'], function()
+Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 {
     Route::get(         'admins', 'AdminController@index');
     Route::resource(    'admins/products',      'ProductsController');

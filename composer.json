@@ -16,8 +16,9 @@
 		"phpspec/phpspec": "~2.1",
         "way/generators": "~3.0",
         "codeception/codeception": "~2.0",
-        "laracasts/testdummy": "~1.0",
-        "fzaninotto/faker": "1.4.*"
+        "laracasts/testdummy": "~2.0",
+        "fzaninotto/faker": "1.4.*",
+		"laracasts/integrated": "^0.15.4"
 	},
 	"autoload": {
 		"classmap": [
