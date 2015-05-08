@@ -224,6 +224,12 @@
             font-size: 16px;
             padding-top: 16px;
         }
+        @media (max-width: 767px){
+            .breadcrumb-container {
+              float: right;
+            }
+        }
+
         </style>
 
         @yield('header_inside')

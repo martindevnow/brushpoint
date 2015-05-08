@@ -47,18 +47,9 @@ class PaymentsController extends Controller {
 
     }
 
-    public function invoice($id)
+    public function invoice($paymentId)
     {
-        // You can pass a filename, a HTML string or an URL to the constructor
-        $pdf = new Pdf(url('/') . "/admins/payments/invoice/html/". $id);
-
-        $saved = $pdf->saveAs(public_path(). '/tmp/new-'. $id .'.pdf');
-
-        if (!$saved)
-            dd($pdf->getError());
-
-        return response()->download(public_path()."/tmp/new-". $id .".pdf");
-
+        return response()->download($this->paymentRepository->getInvoicePath($paymentId));
     }
 
     /**

@@ -47,9 +47,10 @@ class PaymentRepository {
             'address' => $address,
             'transactions' => $transactions,
         ];
+    }
 
-
-
-
+    public function getInvoicePath($paymentId)
+    {
+        return public_path(). '/tmp/BP-inv-'. $paymentId .'.pdf';
     }
 } 
