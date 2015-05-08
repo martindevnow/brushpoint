@@ -25,6 +25,10 @@ Route::get('testpath', function(){
 
 
 
+// Server Stuff
+// TODO: Make sure the Invoices can be generated to PDFs on the server!!!!!!!
+
+
 
 // TODO: all pages -- make the title collapse properly when resized too small (text doesn't wrap well)
 // TODO: navbar -- when the page is shrunk, change text to smaller and change logo to only (BRUSHPOINT)
