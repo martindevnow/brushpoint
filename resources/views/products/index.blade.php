@@ -17,13 +17,10 @@
         $page['short_title'] = $shortTitle;
     }
 
-
-
     $sep = false;
 
     ?>
     @include('zeina.top-title-wrapper', ['page' => $page])
-
 @stop
 
 
@@ -52,32 +49,5 @@
     </div>
     @endforeach
 </div>
-
-
-<!--
-
-<div class="container">
-    @foreach($products->chunk(4) as $productSet)
-    <div class="row">
-        @foreach($productSet as $product)
-        <div class="col-sm-3 col-md-3">
-            <div class="small-container">
-                <div>
-                    <p><a href="/products/id-{{ $product->id }}" class="btn btn-primary" role="button" style="float: right;">Details</a>
-                </div>
-                <div class="thumbnail" style="min-width: 185px;">
-                    <a href="/products/id-{{ $product->id }}"><img src="/images/brushpoint/products/{{ $product->sku }}-full.jpg" alt="{{ $product->name }}" class="img-responsive" style="max-height: 150px; "></a>
-                    <div class="caption">
-                        <h3>{{ $product->name }}</h3>
-                        <p>{{ $product->description }}</p>
-                     </div>
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div>
-    @endforeach
-</div>
--->
 @stop
 

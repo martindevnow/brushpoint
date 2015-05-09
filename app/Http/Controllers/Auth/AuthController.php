@@ -38,7 +38,8 @@ class AuthController extends Controller {
         // Set the redirect path after logging in/registering
 
 
-		$this->middleware('guest', ['except' => 'getLogout']);
+		$this->middleware('guest', ['except' => ['getLogout', 'getRegister', 'postRegister']]);
+        $this->middleware('auth', ['only' => ['getRegister', 'postRegister']]);
 	}
 
 }
