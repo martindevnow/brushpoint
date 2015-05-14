@@ -53,4 +53,14 @@ class PaymentRepository {
     {
         return public_path(). '/tmp/BP-inv-'. $paymentId .'.pdf';
     }
+
+    public function getSentCount()
+    {
+        return Payment::where('shipped', '=', '1')->count();
+    }
+
+    public function getOpenCount()
+    {
+        return Payment::where('shipped', '=', '0')->count();
+    }
 } 

@@ -230,15 +230,26 @@
                                     <a href="/admins/feedback">All</a>
                                 </li>
                                 <li>
-                                    <a href="/admins/feedback/filter?closed=0">Open</a>
+                                    <a href="/admins/feedback/filter?closed=0">Open ({{ $feedbackRepository->getOpenCount() }})</a>
                                 </li>
                                 <li>
-                                    <a href="/admins/feedback/filter?closed=1">Closed</a>
+                                    <a href="/admins/feedback/filter?closed=1">Closed ({{ $feedbackRepository->getClosedCount() }})</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="/admins/payments"><i class="fa fa-table fa-fw"></i> Payments</a>
+                            <a href=""><i class="fa fa-table fa-fw"></i> Payments <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/admins/payments">All</a>
+                                </li>
+                                <li>
+                                    <a href="/admins/payments/filter?shipped=0">Open ({{ $paymentRepository->getOpenCount() }})</a>
+                                </li>
+                                <li>
+                                    <a href="/admins/payments/filter?shipped=1">Sent ({{ $paymentRepository->getSentCount() }})</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="/admins/issues"><i class="fa fa-table fa-fw"></i> Issues</a>

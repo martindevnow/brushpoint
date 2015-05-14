@@ -2,6 +2,9 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Martin\Ecom\Repositories\PaymentRepository;
+use Martin\Products\ProductRepository;
+use Martin\Quality\Repositories\FeedbackRepository;
 
 class Authenticate {
 
@@ -43,6 +46,13 @@ class Authenticate {
 				return redirect()->guest('auth/login');
 			}
 		}
+
+        $feedbackRepository = new FeedbackRepository();
+        view()->share('feedbackRepository', $feedbackRepository);
+
+        $paymentRepository = new PaymentRepository();
+        view()->share('paymentRepository', $paymentRepository);
+
 
 		return $next($request);
 	}
