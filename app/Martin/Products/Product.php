@@ -18,49 +18,55 @@ class Product extends CoreModel {
 
     public function getBenefitsText()
     {
-        if (!$this->benefits)
-            return "";
-        return implode("\r", $this->benefits);
+        $benefits = $this->benefits;
+        return $this->virtuesToString($benefits);
     }
 
     public function getFeaturesText()
     {
-        if (! $this->features)
-            return "";
-        return implode("\r", $this->features);
+        $features = $this->features;
+        return $this->virtuesToString($features);
     }
 
     public function getOtherListText()
     {
-
-        return implode("\r", $this->other_list);
+        $others = $this->others;
+        return $this->virtuesToString($others);
     }
 
 
-    public function getBenefitsAttribute($value)
+
+
+    private function virtuesToString($virtues)
     {
-        if (! $value)
-            return [];
-        return unserialize($value);
+        $result = "";
+        foreach($virtues as $virtue)
+            $result .= "\r" . $virtue->body;
+        return $result;
     }
 
-    public function getFeaturesAttribute($value)
+
+
+
+    public function benefits()
     {
-        if (! $value)
-            return [];
-        return unserialize($value);
+        return $this->virtues()->where('type', 'benefit');
     }
 
-    public function getOtherListAttribute($value)
+    public function features()
     {
-        if (! $value)
-            return [];
-        return unserialize($value);
+        return $this->virtues()->where('type', 'feature');
+    }
+
+    public function others()
+    {
+        return $this->virtues()->where('type', 'other');
     }
 
 
 
 
+    
     public function carts()
     {
         return $this->morphMany('Martin\Carts\Cart', 'cartable');
@@ -69,5 +75,10 @@ class Product extends CoreModel {
     public function items()
     {
         return $this->hasMany('Martin\Products\Item');
+    }
+
+    public function virtues()
+    {
+        return $this->hasMany('Martin\Products\Virtue');
     }
 } 

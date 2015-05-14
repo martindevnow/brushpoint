@@ -11,6 +11,8 @@
 |
 */
 use Illuminate\Support\Facades\Request;
+use Martin\Products\Virtue;
+use Martin\Products\Product;
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -20,6 +22,37 @@ Route::controllers([
 Route::get('testpath', function(){
     $path = url('/');
     dd($path);
+});
+
+
+Route::get('prodatt', function()
+{
+    //$replh = Product::find(17);
+    //dd($replh->items()->get());
+
+
+
+    $product = Product::find(1);
+
+    /*$virtue_1 = Virtue::create([
+        'type' => 'feature',
+        'body'  =>  'THis is the first feature'
+    ]);
+
+
+
+    $virtue_2 = Virtue::create([
+        'type' => 'benefit',
+        'body'  =>  'THis is the first benefit'
+    ]);
+
+
+    $product->virtues()->save($virtue_1);
+    $product->virtues()->save($virtue_2);*/
+
+
+    dd($product->benefits);
+
 });
 
 
@@ -64,6 +97,8 @@ Route::post('contact', 'PagesController@sendContact');
 Route::get('contact/thankyou', 'PagesController@thankyouContact');
 Route::get('video', 'PagesController@video');
 Route::get('video.htm', 'PagesController@video');
+
+
 /**
  * Feedback
  */

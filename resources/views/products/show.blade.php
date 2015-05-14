@@ -48,26 +48,27 @@
                     </div>
 
                     @if(isset($product->claim))
-                    <p>{!! $product->claim !!}</p>
+                        <p>{!! $product->claim !!}</p>
                     @endif
 
 
-                    @if (isset($product->benefits) && !empty($product->benefits))
+                    @if ($product->benefits)
                     <div class="left-title">
                         <div class="heading-title">
                             <h2 class="h3-section-title left-text">Benefits</h2>
                         </div>
                         <ul class="icons-list check-2 colored-list ">
                             @foreach($product->benefits as $benefit)
-                            <li>{!! $benefit !!}</li>
+                            <li>{!! $benefit->body !!}</li>
                             @endforeach
                         </ul>
                     </div>
-                    <?php $sep = true; ?>
+                    <?php $sep = true;
+                        ?>
                     @endif
 
 
-                    @if (isset($product->features) && !empty($product->features))
+                    @if ($product->features)
                     @if($sep) <div class="space-sep20"></div> @endif
                     <div class="left-title">
                         <div class="heading-title">
@@ -75,14 +76,14 @@
                         </div>
                         <ul class="icons-list check-2 colored-list ">
                             @foreach($product->features as $feature)
-                            <li>{!! $feature !!}</li>
+                            <li>{!! $feature->body !!}</li>
                             @endforeach
                         </ul>
                     </div>
                     @endif
 
 
-                    @if(isset($product->other) && !empty($product->other_list))
+                    @if(isset($product->other) && $product->others)
                     @if($sep) <div class="space-sep20"></div> @endif
 
                         <div class="left-title">
@@ -90,13 +91,13 @@
                                 <h2 class="h3-section-title left-text">{{ $product->other }}</h2>
                             </div>
                             <ul class="icons-list check-2 colored-list ">
-                                @foreach($product->other_list as $point)
-                                <li>{!! $point !!}</li>
+                                @foreach($product->others as $point)
+                                <li>{!! $point->body !!}</li>
                                 @endforeach
                             </ul>
                         </div>
-                    @elseif (isset($product->other) && empty($product->other_list))
-                        <p>{!! $product->other !!}</p>
+                    @elseif (isset($product->other) && !$product->others)
+                        <p>{!! $product->others !!}</p>
                     @endif
 
                 </div>

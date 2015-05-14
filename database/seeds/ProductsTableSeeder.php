@@ -6,6 +6,7 @@ use Faker\Factory as Faker;
 use Martin\Core\Image;
 use Martin\Products\Item;
 use Martin\Products\Product;
+use Martin\Products\Virtue;
 
 class ProductsTableSeeder extends Seeder {
 
@@ -17,6 +18,7 @@ class ProductsTableSeeder extends Seeder {
         DB::table('products')->truncate();
         DB::table('items')->truncate();
         DB::table('images')->truncate();
+        DB::table('virtues')->truncate();
 
         $faker = Faker::create();
 
@@ -34,24 +36,24 @@ class ProductsTableSeeder extends Seeder {
                 "video_link" => "http://www.youtube.com/embed/LKrBUy8kui4",
                 "video_name" => "Play to See Dual Motion Head Action",
                 "name" => "Vital Health&reg; Power Oral Care System - Battery",
-                "benefits" => serialize(["10 Vital Oral Health Benefits",
+                "benefits" => ["10 Vital Oral Health Benefits",
                     "Complete Oral Care Solution in one kit – Brush – Floss – Care",
                     "Ideal for Braces, bridges and crowns",
-                    "Outstanding Value!"]),
+                    "Outstanding Value!"],
 
-                "features" => serialize(["Advanced Dual Motion Cleaning Action!",
+                "features" => ["Advanced Dual Motion Cleaning Action!",
                     "Top Oscillating Brush head surrounds each tooth to thoroughly clean and polish teeth",
                     "Bottom bristles move back and forth to help break up plaque and clean between teeth",
                     "2 Dual Motion Replacement heads (Fully tufted with Dupont Tynex bristles) included",
                     "Easy to use on & off buttons",
                     "Premium rubber comfort grips",
-                    "2 ‘AA’ Alkaline Batteries included"]),
+                    "2 ‘AA’ Alkaline Batteries included"],
 
                 "claim" => "<strong>Available in most Walmart Stores in the United States for $7.50.</strong>",
                 "other" => "Power Arm Kit Includes:",
-                "other_list" => serialize(["2 Sulcus Tip attachments help clean between teeth and along the gum line",
+                "other_list" => ["2 Sulcus Tip attachments help clean between teeth and along the gum line",
                     "1 Gum Stimulator helps firm and strengthen gums",
-                    "20 Floss Heads help clean between teeth"]),
+                    "20 Floss Heads help clean between teeth"],
 
                 "link_to_video" => 1,
                 "active" => 1,
@@ -67,24 +69,24 @@ class ProductsTableSeeder extends Seeder {
                     array("shape" => "rect", "coords" => "39,306,281,331", "href" => "/pdfs/IFandCA_Usage_Instructions.pdf", "target" => "_blank"),
                 ]),
                 "name" => "Vital  Health&reg; Power Oral Care System - Rechargeable",
-                "benefits" => serialize(["10 Vital Oral Health Benefits",
+                "benefits" => ["10 Vital Oral Health Benefits",
                     "Sustained Rechargeable Cleaning Power",
                     "Complete Oral Care Solution in one kit – Brush – Floss – Care",
                     "Ideal for Braces, bridges and crowns",
-                    "Outstanding Value!"]),
+                    "Outstanding Value!"],
 
-                "features" => serialize(["1 Rechargeable Power Toothbrush and a Compact Charger Stand",
+                "features" => ["1 Rechargeable Power Toothbrush and a Compact Charger Stand",
                     "Two Minute Timer",
                     "Dual Motion Deep Cleaning Power",
                     "High Motion Oscillating Heads helps polish teeth and clean along the gum line",
                     "Interdental Power Arm Kit",
                     "Easy to use on & off buttons",
-                    "Slim Design "]),
+                    "Slim Design "],
 
                 "other" => "Power Arm Kit Includes:",
-                "other_list" => serialize(["2 Sulcus Tip attachments help clean between teeth and along the gum line",
+                "other_list" => ["2 Sulcus Tip attachments help clean between teeth and along the gum line",
                     "1 Gum Stimulator helps firm and strengthen gums",
-                    "20 Floss Heads help clean between teeth"]),
+                    "20 Floss Heads help clean between teeth"],
                 "active" => 1,
                 "display_order" => "12" // SHOW
             ];
@@ -93,20 +95,20 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "VitalHealthSonicPower",
                 "name" => "Vital Health&reg; Sonic Power Oral Care System &ndash; Battery",
-                "benefits" => serialize(["10 Vital Oral Health Benefits",
+                "benefits" => ["10 Vital Oral Health Benefits",
                     "Complete Sonic Oral Care Solution in one kit &ndash; Brush &ndash; Floss &ndash; Care",
                     "Ideal for Braces, bridges and crowns",
-                    "Outstanding Value!"]),
+                    "Outstanding Value!"],
 
-                "features" => serialize(["Unique Battery powered Sonic toothbrush",
+                "features" => ["Unique Battery powered Sonic toothbrush",
                     "Over 22,000 active sonic vibrations per minute",
                     "Multi-level bristles for deep cleaning",
-                    "1 AA battery included"]),
+                    "1 AA battery included"],
 
                 "other" => "Power Arm Kit Includes:",
-                "other_list" => serialize(["2 Sulcus Tip attachments help clean between teeth and along the gum line",
+                "other_list" => ["2 Sulcus Tip attachments help clean between teeth and along the gum line",
                     "1 Gum Stimulator helps firm and strengthen gums",
-                    "20 Floss Heads help clean between teeth"]),
+                    "20 Floss Heads help clean between teeth"],
                 "active" => 1,
                 "display_order" => "13" // SHOW THIRD
             ];
@@ -123,15 +125,15 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "ChildrensPower",
                 "name" => "Children&#8217;s Power Toothbrush",
-                "benefits" => serialize(["Children will have fun brushing longer",
-                    "Gently Cleans Teeth "]),
-                "features" => serialize(["Small Oscillating Head gently cleans teeth",
+                "benefits" => ["Children will have fun brushing longer",
+                    "Gently Cleans Teeth "],
+                "features" => ["Small Oscillating Head gently cleans teeth",
                     "Fully tufted Extra Soft Dupont Tynex bristles",
                     "Easy Hold Design is comfortable for small hands",
                     "Long brush head to clean hard to reach places",
                     "Easy to use on/off button",
                     "Stands upright or sits flat so brush head stays off the counter",
-                    "2 replaceable ‘AAA’ Alkaline Batteries included"]),
+                    "2 replaceable ‘AAA’ Alkaline Batteries included"],
                 "spacer_height" => "125",
                 "active" => 1,
                 "display_order" => "33"
@@ -140,13 +142,13 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "ChildrensManual",
                 "name" => "Children&#8217;s Manual Toothbrush",
-                "benefits" => serialize(["Gently Cleans Teeth and Tongue",
-                    "Easy Hold Design"]),
-                "features" => serialize(["Small Head gently cleans teeth and massages gums",
+                "benefits" => ["Gently Cleans Teeth and Tongue",
+                    "Easy Hold Design"],
+                "features" => ["Small Head gently cleans teeth and massages gums",
                     "Fully tufted Extra Soft Dupont Tynex bristles",
                     "Slim handle and rubber grips are ideal for small hands",
                     "Tongue Cleaner gently cleans tongue and cheeks",
-                    "Ideal for Children 4 to 8 years old"]),
+                    "Ideal for Children 4 to 8 years old"],
                 "spacer_height" => "175",
                 "active" => 1,
                 "display_order" => "32"
@@ -158,15 +160,16 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "ChildrensSonicPower",
                 "name" => "Children&#8217;s Sonic Power Toothbrush",
-                "benefits" => serialize(["<strong>Gentle sonic wave vibrations  provide a deep clean for smaller mouths</strong>"]),
+                "benefits" => ["<strong>Gentle sonic wave vibrations
+                        provide a deep clean for smaller mouths</strong>"],
 
-                "features" => serialize(["Unique Battery powered Children`s Sonic toothbrush",
+                "features" => ["Unique Battery powered Children`s Sonic toothbrush",
                     "Over 18,000 active sonic vibrations per minute",
                     "Multi-level bristles for deep cleaning",
                     "Slim Easy to Hold handle design",
                     "Extra Soft Bristles",
                     "Patent Pending Technology",
-                    "1 AA battery included"]),
+                    "1 AA battery included"],
                 "active" => 1,
                 "display_order" => "31"
             ];
@@ -181,14 +184,14 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "SonicPower",
                 "name" => "Sonic Power Toothbrush",
-                "benefits" => serialize(["Active sonic wave vibrations  provide a deep clean"]),
-                "features" => serialize(["Unique Battery powered Sonic toothbrush",
+                "benefits" => ["Active sonic wave vibrations  provide a deep clean"],
+                "features" => ["Unique Battery powered Sonic toothbrush",
                     "Over 22,000 active sonic vibrations per minute",
                     "Multi-level bristles for deep cleaning",
                     "Slim handle design",
                     "Metallic handle colors",
                     "Patent Pending Technology",
-                    "1 AA battery included"]),
+                    "1 AA battery included"],
                 "active" => 1,
                 "display_order" => "41"
             ];
@@ -196,16 +199,17 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "DualZoneHighRotation",
                 "name" => "Dual Zone High Rotation Toothbrush",
-                "benefits" => serialize(["Superior High Rotation Head Helps Break up plaque and bottom zone bristles clean between teeth", "Fantastic Value!"]),
+                "benefits" => ["Superior High Rotation Head Helps Break up plaque and bottom zone bristles clean between teeth",
+                    "Fantastic Value!"],
 
-                "features" => serialize(["Up to 60% more rotation than the leading brands",
+                "features" => ["Up to 60% more rotation than the leading brands",
                     "<strong>Patented</strong> rotational Brush head technology",
                     "Fully tufted with Dupont Tynex bristles",
                     "Long replaceable brush head to clean hard to reach places",
                     "Easy to use on & off buttons",
                     "Premium rubber comfort grips",
                     "2 ‘AA’ Alkaline Batteries included",
-                    "2 pack replacement heads available"]),
+                    "2 pack replacement heads available"],
 
                 "claim" => "",
                 "patent_link" => "file_group006536066-001.pdf",
@@ -220,10 +224,10 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "PowerWhitening",
                 "name" => "Power Whitening Toothbrush",
-                "benefits" => serialize(["<strong>Patented</strong> whitening technology to remove stains and clean teeth for a naturally whiter smile!",
-                    "Clinically Proven Whitening technology†!"]),
+                "benefits" => ["<strong>Patented</strong> whitening technology to remove stains and clean teeth for a naturally whiter smile!",
+                    "Clinically Proven Whitening technology†!"],
 
-                "features" => serialize(["Full motion pulsating brush head",
+                "features" => ["Full motion pulsating brush head",
                     "End rounded, fully tufted Dupont Tynex Bristles",
                     "Elastomeric Gum Stimulators",
                     "Rubber Bottom blade helps whisk away stains",
@@ -232,7 +236,7 @@ class ProductsTableSeeder extends Seeder {
                     "Metallic designer colors",
                     "Ergonomic Slim design with finger grips",
                     "2 ‘AA’ Alkaline Batteries included",
-                    "2 Pack replacement heads available"]),
+                    "2 Pack replacement heads available"],
 
                 "claim" => "†this pulsating bristle technology has been clinically proven to provide superior stain removal versus a manual toothbrush",
                 "video_name" => "Power Whitening Brush Head Action – BrushPoint",
@@ -247,9 +251,9 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "ProfessionalCleanPower",
                 "name" => "Professional Clean Power Toothbrush",
-                "benefits" => serialize(["Helps remove Plaque for a Professional Clean feel"]),
+                "benefits" => ["Helps remove Plaque for a Professional Clean feel"],
 
-                "features" => serialize(["Innovative Dual Motion brush head to actively sweep away plaque",
+                "features" => ["Innovative Dual Motion brush head to actively sweep away plaque",
                     "Top Oscillating Brush head surrounds each tooth to thoroughly clean and polish teeth",
                     "Bottom bristles move back and forth to help break up plaque and clean between teeth",
                     "End rounded, fully tufted Dupont Tynex Bristles",
@@ -258,7 +262,7 @@ class ProductsTableSeeder extends Seeder {
                     "Metallic Silver with designer colored on/off button",
                     "Ergonomic Slim design with finger grips",
                     "2 ‘AA’ Alkaline Batteries included",
-                    "2 Pack replacement heads available"]),
+                    "2 Pack replacement heads available"],
 
                 "patent_link" => "",
                 "patent_name" => "",
@@ -272,17 +276,17 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "Pulsating",
                 "name" => "Pulsating Toothbrush",
-                "benefits" => serialize(["Pulsating bristles provide deep cleaning power!",
-                    "Slim manual design in a power brush"]),
+                "benefits" => ["Pulsating bristles provide deep cleaning power!",
+                    "Slim manual design in a power brush"],
 
-                "features" => serialize(["Gentle Pulsating Bristles penetrate deep between teeth",
+                "features" => ["Gentle Pulsating Bristles penetrate deep between teeth",
                     "Vibrating Flex Head helps break up plaque",
                     "Fully tufted Dupont Tynex Bristles",
                     "Flexible Side Bristles pivot to get deep between teeth",
                     "Cleans and gently stimulates gums ",
                     "Slim ergonomic rubber comfort grip handle",
                     "Easy to use on and off buttons",
-                    "1 replaceable AAA alkaline battery included"]),
+                    "1 replaceable AAA alkaline battery included"],
                 "active" => 1,
                 "display_order" => "53"
             ];
@@ -291,9 +295,9 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "OscillatingCleanRechargeable",
                 "name" => "Oscillating Clean Rechargeable Toothbrush",
-                "benefits" => serialize(["Deep thorough cleaning that surrounds each tooth",
-                    "Sustained rechargeable cleaning power"]),
-                "features" => serialize(["High motion single oscillating head",
+                "benefits" => ["Deep thorough cleaning that surrounds each tooth",
+                    "Sustained rechargeable cleaning power"],
+                "features" => ["High motion single oscillating head",
                     "Oscillating cleaning action designed to break up plaque and clean between the teeth",
                     "Designed to easily get to hard-to-reach areas",
                     "Angled replaceable brush head",
@@ -301,7 +305,7 @@ class ProductsTableSeeder extends Seeder {
                     "Metallic designer colors",
                     "Compact Charger Stand",
                     "Ideal for travel as it lasts 5 days between charges",
-                    "3 Pack replacement heads available"]),
+                    "3 Pack replacement heads available"],
                 "active" => 1,
                 "display_order" => "52"
             ];
@@ -310,9 +314,9 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "PulsatingCleanRechargeable",
                 "name" => "Pulsating Clean Rechargeable Toothbrush",
-                "benefits" => serialize(["Advanced pulsating cleaning technology that is clinically proven† to effectively remove plaque and reduce gingivitis",
-                    "Sustained rechargeable cleaning power"]),
-                "features" => serialize(["<strong>Patented</strong> Pulsating Full Motion Head Technology",
+                "benefits" => ["Advanced pulsating cleaning technology that is clinically proven† to effectively remove plaque and reduce gingivitis",
+                    "Sustained rechargeable cleaning power"],
+                "features" => ["<strong>Patented</strong> Pulsating Full Motion Head Technology",
                     "Active pulsations provide deep cleaning to help remove plaque, reduce gingivitis and superior stain removal",
                     "Gets at hard-to-reach areas",
                     "Angled and replaceable brush head",
@@ -320,7 +324,7 @@ class ProductsTableSeeder extends Seeder {
                     "Metallic designer colors",
                     "Compact Charger Stand",
                     "Ideal for travel as it lasts 5 days between charges",
-                    "3 Pack replacement heads available"]),
+                    "3 Pack replacement heads available"],
                 "claim" => "†this pulsating bristle technology has been clinically proven to provide superior plaque removal, reduce gingivitis and remove stains better versus a manual toothbrush",
                 "patent_link" => "us0re035941-group.pdf",
                 "patent_name" => "U.S. Patent No. Re. 35,941",
@@ -347,16 +351,16 @@ class ProductsTableSeeder extends Seeder {
                 "sku" => "WhiteningDentalStrips",
                 "name" => "Whitening Dental Strips",
                 "heading" => "<strong>BrushPoint offers premium Whitening Dental Strips for the North American market.  Several formats are available including Advanced, Professional and 2 Hour systems.</strong>",
-                "benefits" => serialize(["Get a visibly Whiter Smile!",
-                    "See results in as little as 3 days!"]),
+                "benefits" => ["Get a visibly Whiter Smile!",
+                    "See results in as little as 3 days!"],
 
-                "features" => serialize(["Stay-on, Non-slip Technology",
+                "features" => ["Stay-on, Non-slip Technology",
                     "Easy Application",
                     "Dramatically Whitens Teeth and removes stains",
                     "Uses the same Whitening agents as your Dentist",
                     "Enamel Safe",
                     "3 Layer System",
-                    "Patent Pending Technology"]),
+                    "Patent Pending Technology"],
                 "claim" => "Available in daily 30 minute and 2 Hour Whitening Release Systems.",
                 "active" => 0,
                 "display_order" => "999"
@@ -367,16 +371,16 @@ class ProductsTableSeeder extends Seeder {
                 "sku" => "WhiteningPen",
                 "name" => "Whitening Pen",
                 "heading" => "<strong>Whitening Pen Heading Here</strong>",
-                "benefits" => serialize(["Get a visibly Whiter Smile!",
-                    "See results in as little as 3 days!"]),
+                "benefits" => ["Get a visibly Whiter Smile!",
+                    "See results in as little as 3 days!"],
 
-                "features" => serialize(["Stay-on, Non-slip Technology",
+                "features" => ["Stay-on, Non-slip Technology",
                     "Easy Application",
                     "Dramatically Whitens Teeth and removes stains",
                     "Uses the same Whitening agents as your Dentist",
                     "Enamel Safe",
                     "3 Layer System",
-                    "Patent Pending Technology"]),
+                    "Patent Pending Technology"],
                 "claim" => "Available in daily 30 minute and 2 Hour Whitening Release Systems.",
                 "active" => 1,
                 "display_order" => "22"
@@ -389,7 +393,53 @@ class ProductsTableSeeder extends Seeder {
             $prod['portfolio'] = 1;
             $prod['purchase'] = 0;
 
+            if (isset($prod['features']))
+            {
+                $virtues['feature'] = $prod['features'];
+                unset($prod['features']);
+            }
+
+            if (isset($prod['benefits']))
+            {
+                $virtues['benefit'] = $prod['benefits'];
+                unset($prod['benefits']);
+            }
+
+
+            if (isset($prod['other_list']))
+            {
+                $virtues['other'] = $prod['other_list'];
+                unset($prod['other_list']);
+            }
+
+
             $dbProd = Product::create($prod);
+
+
+            foreach($virtues as $type => $virtue)
+            {
+                if (is_array($virtue))
+                {
+                    foreach ($virtue as $virt)
+                    {
+                        $dbVirtue = Virtue::create([
+                            'type' => $type,
+                            'body' => $virt
+                        ]);
+                        $dbProd->virtues()->save($dbVirtue);
+                    }
+                }
+                else
+                {
+                    $dbVirtue = Virtue::create([
+                        'type' => $type,
+                        'body' => $virtue
+                    ]);
+                    $dbProd->virtues()->save($dbVirtue);
+                }
+            }
+
+
             $image1 = Image::create([
                 'height' => 150,
                 'width' => 240,

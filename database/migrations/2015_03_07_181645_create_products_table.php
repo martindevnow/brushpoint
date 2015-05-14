@@ -29,8 +29,8 @@ class CreateProductsTable extends Migration {
             $table->string('video_name')->nullable();
             $table->string('video_link')->nullable();
 
-            $table->text('benefits')->nullable();
-            $table->text('features')->nullable();
+            //$table->text('benefits')->nullable();
+            //$table->text('features')->nullable();
 
             $table->text('claim')->nullable();
 
@@ -41,7 +41,7 @@ class CreateProductsTable extends Migration {
             $table->text('map_info')->nullable();
 
             $table->text('other')->nullable();
-            $table->text('other_list')->nullable();
+            //$table->text('other_list')->nullable();
 
             $table->boolean('link_to_video')->nullable();
 
