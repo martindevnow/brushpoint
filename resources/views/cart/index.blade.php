@@ -81,7 +81,7 @@
                                   {!! Form::select('country_code', $cartRepo->getCountryCodeArray(), null) !!}
                                   </div>
                                   <div class="form-group">
-                                      {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
+                                      {!! Form::submit('Update Country', ['class' => 'btn btn-primary', 'id' => 'Update']) !!}
                                   </div>
                               {!! Form::close() !!}
                         </td>

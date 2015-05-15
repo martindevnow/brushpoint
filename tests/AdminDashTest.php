@@ -20,7 +20,7 @@ class AdminDashTest extends TestCase {
         $this->visit('/admins')
             ->andSee('Login');
 
-        $this->visits('/admins/products')
+        $this->visit('/admins/products')
             ->andSee('Login');
 	}
 

@@ -63,11 +63,11 @@ class ProductsTableSeeder extends Seeder {
         $products[] =
             [
                 "sku" => "VitalHealthRechargeable",
-                "map" => 1,
-                "map_info" => serialize([
+                // "map" => 1,
+                /* "map_info" => serialize([
                     array("shape" => "rect", "coords" => "39,335,299,359", "href" => "/video/IMG_1094.MOV"),
                     array("shape" => "rect", "coords" => "39,306,281,331", "href" => "/pdfs/IFandCA_Usage_Instructions.pdf", "target" => "_blank"),
-                ]),
+                ]),*/
                 "name" => "Vital  Health&reg; Power Oral Care System - Rechargeable",
                 "benefits" => ["10 Vital Oral Health Benefits",
                     "Sustained Rechargeable Cleaning Power",
