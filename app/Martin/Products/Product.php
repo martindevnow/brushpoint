@@ -16,22 +16,22 @@ class Product extends CoreModel {
         'sku'
     ];
 
-    public function getBenefitsText()
+    public function getBenefits()
     {
         $benefits = $this->benefits;
-        return $this->virtuesToString($benefits);
+        return $this->virtuesToArray($benefits);
     }
 
-    public function getFeaturesText()
+    public function getFeatures()
     {
         $features = $this->features;
-        return $this->virtuesToString($features);
+        return $this->virtuesToArray($features);
     }
 
-    public function getOtherListText()
+    public function getOthers()
     {
         $others = $this->others;
-        return $this->virtuesToString($others);
+        return $this->virtuesToArray($others);
     }
 
 
@@ -45,7 +45,13 @@ class Product extends CoreModel {
         return $result;
     }
 
-
+    private function virtuesToArray($virtues)
+    {
+        $result = [];
+        foreach($virtues as $virtue)
+            $result [] = $virtue->body;
+        return $result;
+    }
 
 
     public function benefits()

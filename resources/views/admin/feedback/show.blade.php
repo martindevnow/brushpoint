@@ -37,10 +37,11 @@
                 <tr>
                   <td>Retailer</td>
                   <td>
-                    {{ $feedback->retailer_text }}
+
                     @if (isset($feedback->retailer_id))
-                        [[ <a href="{{ url('admins/retailers/'. $feedback->retailer->id) }}"> {{ $feedback->retailer->name }}</a> ]]
+                        <a href="{{ url('admins/retailers/'. $feedback->retailer->id) }}"> {{ $feedback->retailer->name }}</a> <a href="/admins/feedback/{{ $feedback->id }}/retailer/remove">[Remove]</a>
                     @else
+                        {{ $feedback->retailer_text }}
                       {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=retailer_id' ]) !!}
                           <div class="form-group">
                           {!! Form::select('retailer_id', $retailers, null, ['data-click-submits-form']) !!}
@@ -57,7 +58,7 @@
                 <tr>
                   <td>Issue <br />
                         @if (isset($feedback->issue_id))
-                            [[ <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a> ]]
+                            <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a> <a href="/admins/feedback/{{ $feedback->issue->id }}/issue/remove/">[Remove]</a>
                         @else
                           {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=issue_id' ]) !!}
                               <div class="form-group">
@@ -131,10 +132,12 @@
               </tbody>
         </table>
 
-
+        @if(!$feedback->issue)
             @include('admin.feedback.partials._issue')
+        @endif
+        @if(!$feedback->retailer)
             @include('admin.feedback.partials._retailer')
-
+        @endif
     </div>
 </div>
 

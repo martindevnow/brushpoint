@@ -1,7 +1,3 @@
-
-<div class="row" id="note_list">
-@foreach($notes as $note)
-
 <div class="col-lg-4">
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -14,6 +10,4 @@
             Made by {{ $note->user->name }}
         </div>
     </div>
-</div>
-@endforeach
 </div>

@@ -15,12 +15,12 @@ class NotesController extends Controller {
 
         $model = $model::find($request->noteable_id);
 
-        $model->notes()->create([
+        $note = $model->notes()->create([
             'content' => $request->content,
             'user_id' => \Auth::user()->id
         ]);
 
-        return "passed";
+        return view('admin.ajax.notes._single')->with(compact('note'));
     }
 
 }

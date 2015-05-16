@@ -179,6 +179,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::patch(       'admins/products/purchase/{id}',       'ProductsController@ajaxPurchase');
 
     Route::get(         'admins/feedback/filter',      'FeedbackController@filtered');
+    Route::get(         'admins/feedback/{feedbackId}/retailer/remove', 'FeedbackController@removeRetailer');
+    Route::get(         'admins/feedback/{feedbackId}/issue/remove',     'FeedbackController@removeIssue');
     Route::resource(    'admins/feedback',             'FeedbackController');
     Route::patch(       'admins/feedback/ajax/{id}',   'FeedbackController@ajaxPatch');
 
@@ -198,6 +200,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::post(        'admins/issues/store',      'IssuesController@ajaxStore');
     Route::patch(       'admins/issues/ajax/{id}',  'IssuesController@ajaxPatch');
     Route::resource(    'admins/issues',            'IssuesController');
+
+    Route::post(        'admins/virtues/store',      'VirtuesController@ajaxStore');
+    Route::get(        'admins/virtues/delete',     'VirtuesController@ajaxDelete');
+    // Route::resource(    'admins/virtues',            'VirtuesController');
 
     Route::post(        'admins/retailers/store',      'RetailersController@ajaxStore');
     Route::patch(       'admins/retailers/ajax/{id}',  'RetailersController@ajaxPatch');

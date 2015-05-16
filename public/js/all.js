@@ -24,18 +24,34 @@
             type: method,
             url: form.prop('action'),
             data: form.serialize(),
-            success: function() {
+            success: function(message) {
                 $.publish('form.submitted', form);
                 $('#noteModal').modal('hide');
                 $('#issueModal').modal('hide');
+                $('#featureModal').modal('hide');
+                $('#virtueModal').modal('hide');
+                $('#retailerModal').modal('hide');
+
+                if (form.attr('id') == "virtue_ajax_form")
+                {
+                    var list_type = $("#virtue_ajax_form select[name=type]").val();
+                    $('#'+ list_type + '_list').append(message);
+                    form.find("input[type=text]").val("");
+                }
+                else if (form.attr('id') == "note_ajax_form")
+                {
+                    var list_type = "note"
+                    // alert(list_type);
+                    $('#'+ list_type + '_list').append(message);
+                    form.find("input[type=text], textarea").val("");
+                }
+
 
 
             }
         });
         e.preventDefault();
     };
-
-
 
     // forms marked with 'data-remote' will submit via AJAX
     $('form[data-remote]').on('submit', submitAjaxRequest);
@@ -52,5 +68,28 @@
     });
 })();
 
+(function() {
+    $("body").on("click", ".del_button", function(e){
+        e.preventDefault();
+        var clickedId = this.id.split('-');
+        var dbNumberId = clickedId[1];
+        var myData = 'virtueToDelete=' + dbNumberId;
 
-//# sourceMappingURL=all.js.map
+        $('#virtue_' + dbNumberId).addClass("sel");
+        $(this).hide();
+        jQuery.ajax({
+            type: "GET",
+            url: "/admins/virtues/delete",
+            dataType: "text",
+            data:myData,
+            success:function(response) {
+                $('#virtue_'+dbNumberId).fadeOut();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError);
+            }
+        });
+    });
+})();
+
+

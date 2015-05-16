@@ -70,7 +70,9 @@ class FeedbackController extends Controller {
         $issues = Issue::lists('type', 'id');
         $retailers = Retailer::lists('name', 'id');
 
-        // dd($feedback->retailer);
+        array_unshift($issues, "Select");
+        array_unshift($retailers, "Select");
+
         return $this->layout->content = view('admin.feedback.show')
             ->with(compact('feedback', 'issues', 'retailers'));
     }
@@ -141,6 +143,26 @@ class FeedbackController extends Controller {
         $feedbacks = $feedbacks->orderBy('created_at', 'desc')->paginate(25);
         $feedbacks->appends($request->all());
         return $this->layout->content = view('admin.feedback.index')->with(compact('feedbacks'));
+    }
+
+
+    public function removeRetailer($feedbackId)
+    {
+        $feedback = Feedback::findOrFail($feedbackId);
+        $feedback->retailer_id = null;
+        $feedback->save();
+        // $retailer->feedbacks()->detach($feedbackId);
+        return redirect('/admins/feedback/'. $feedbackId);
+
+    }
+
+
+    public function removeIssue($feedbackId)
+    {
+        $feedback = Feedback::findOrFail($feedbackId);
+        $feedback->issue_id = null;
+        $feedback->save();
+        return redirect('/admins/feedback/'. $feedbackId);
 
     }
 

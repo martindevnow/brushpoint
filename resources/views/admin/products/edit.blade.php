@@ -5,6 +5,7 @@
     <div class="row">
         <div class="col-md-6">
 
+
             {!! Form::open(['method' => 'patch', 'route' => ['admins.products.update', $product->id]]) !!}
 
             <!-- Save Form Input -->
@@ -37,15 +38,9 @@
                 {!! Form::text('on_hand', $product->on_hand, ['class' => 'form-control']) !!}
             </div>
 
-            <div class="form-group">
-                {!! Form::label('benefits', 'Benefits:') !!}
-                {!! Form::textarea('benefits', $product->getBenefitsText(), ['class' => 'form-control']) !!}
-            </div>
 
-            <div class="form-group">
-                {!! Form::label('features', 'Features:') !!}
-                {!! Form::textarea('features', $product->getFeaturesText(), ['class' => 'form-control']) !!}
-            </div>
+
+
 
             <div class="form-group">
                 {!! Form::label('claim', 'Claim:') !!}
@@ -57,10 +52,9 @@
                 {!! Form::text('other', $product->other, ['class' => 'form-control']) !!}
             </div>
 
-            <div class="form-group">
-                {!! Form::label('other_list', 'Other List:') !!}
-                {!! Form::textarea('other_list', $product->getOtherListText(), ['class' => 'form-control']) !!}
-            </div>
+
+
+
 
             <div class="form-group">
                 {!! Form::label('link_to_video', 'Link to Video:') !!}
@@ -102,12 +96,57 @@
                 </tbody>
             </table>
 
+            <h3>Virtues:</h3>
+            <div class="form-group">
+                <h4>List of Benefits</h4>
+                <ul id="benefit_list">
+                @foreach($product->benefits as $benefit)
+                    <li id="virtue_{{$benefit->id}}">{{ ($benefit->body) }}
+                    <div class="del-wrapper" style="display: inline"><a href="#" class="del_button" id="del-{{$benefit->id}}">
+                    [ x ]</a></div>
+                    </li>
+                @endforeach
+                </ul>
+            </div>
 
-            {{{ var_dump($product->images) }}}
+
+
+            <div class="form-group">
+                <h4>List of Features</h4>
+                <ul id="feature_list">
+                @foreach($product->features as $feature)
+                    <li id="virtue_{{$feature->id}}">{{ ($feature->body) }}
+                    <div class="del-wrapper" style="display: inline"><a href="#" class="del_button" id="del-{{$feature->id}}">
+                    [ x ]</a></div>
+                    </li>
+                @endforeach
+                </ul>
+            </div>
+
+
+
+            <div class="form-group">
+                <h4>List of Others</h4>
+                <ul id="other_list">
+                @foreach($product->others as $other)
+                    <li id="virtue_{{$other->id}}">{{ ($other->body) }}
+                    <div class="del-wrapper" style="display: inline"><a href="#" class="del_button" id="del-{{$other->id}}">
+                    [ x ]</a></div>
+                    </li>
+                @endforeach
+                </ul>
+            </div>
+
+            <div>
+            @include('admin.products.partials._virtues')
+
+            </div>
 
         </div>
     </div>
 </div>
 
-
+<div class="flash">
+    Updated...
+</div>
 @stop

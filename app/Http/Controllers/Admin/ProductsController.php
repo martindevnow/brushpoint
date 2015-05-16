@@ -76,7 +76,9 @@ class ProductsController extends Controller {
     public function update($id, Requests\CreateProductRequest $request)
     {
 
-        Product::findOrFail($id)->update($request->all());
+        $product = $this->productRepository->updateProduct($id, $request->all());
+
+        // Product::findOrFail($id)->update($request->all());
 
         Flash::message('The product has been listed successfully');
 
