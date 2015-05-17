@@ -4,3 +4,4 @@
 .env.production
 /.idea
 /nbproject
+selenium-server-standalone-2.45.0.jar
