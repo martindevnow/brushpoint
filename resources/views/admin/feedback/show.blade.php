@@ -124,7 +124,7 @@
                   <td>
                   {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=closed' ]) !!}
                       <div class="form-group">
-                      {!! Form::checkbox('closed', $feedback->closed, $feedback->closed) !!}
+                      {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
                       </div>
                   {!! Form::close() !!}
                   </td>
