@@ -4,8 +4,9 @@ use App\Events\ProductWasPurchased;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Martin\Core\Pdf;
 use Martin\Ecom\Repositories\PaymentRepository;
-use mikehaertl\wkhtmlto\Pdf;
+// use mikehaertl\wkhtmlto\Pdf;
 
 class GenerateInvoicePdf {
 
