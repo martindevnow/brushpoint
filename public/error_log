@@ -1,0 +1,2 @@
+[14-Mar-2015 23:21:16 America/Denver] PHP Warning:  require(/home/martioo7/brushpoint/bootstrap/../vendor/autoload.php): failed to open stream: No such file or directory in /home/martioo7/brushpoint/bootstrap/autoload.php on line 17
+[14-Mar-2015 23:21:16 America/Denver] PHP Fatal error:  require(): Failed opening required '/home/martioo7/brushpoint/bootstrap/../vendor/autoload.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/martioo7/brushpoint/bootstrap/autoload.php on line 17

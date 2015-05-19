@@ -1,0 +1,1 @@
+[01-Apr-2015 01:19:02 UTC] PHP Fatal error:  Class 'CreatePurchasesTable' not found in /home/martioo7/brushpoint/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 301
