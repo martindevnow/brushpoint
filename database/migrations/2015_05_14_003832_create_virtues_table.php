@@ -22,7 +22,7 @@ class CreateVirtuesTable extends Migration {
                 'other'
             ]);
             $table->integer('product_id');
-            $table->integer('priority')->default(1);
+            $table->integer('priority')->default(99);
 			$table->timestamps();
 		});
 	}
