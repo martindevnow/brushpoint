@@ -43,6 +43,7 @@ class EmailPurchaseConfirmation {
 		Mail::send('emails.customer.invoice', $data, function($message) use ($event) {
             $message->to($event->payment->payer->email)
                 ->subject("BrushPoint: Purchase Receipt");
+            $message->from('orders@brushpoint.com', 'BrushPoint Orders');
         });
 	}
 
