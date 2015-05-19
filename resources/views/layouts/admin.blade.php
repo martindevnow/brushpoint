@@ -10,6 +10,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <meta name="csrf-token" content="{{{ Session::token() }}}">
+
     <title>BrushPoint - Administration</title>
 
     <!-- Bootstrap Core CSS -->
@@ -37,6 +39,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+
     <style>
     .flash {
         background: #F6624a;
@@ -54,6 +58,25 @@
     }
     .container {
         width: 100%;
+    }
+
+    .sortable_list {
+        display: block;
+        margin: 5px;
+        padding: 5px;
+        border: 1px solid #cccccc;
+        color: #0088cc;
+        background: #eeeeee;
+    }
+
+    .virtue_list {
+        padding-left: 0px;
+    }
+
+    .del_button {
+
+        display: inline;
+        float: right;
     }
     </style>
 
@@ -81,6 +104,7 @@
 
     <!-- jQuery -->
     <script src="/admin/sb-admin/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/js/jquery-ui.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/admin/sb-admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

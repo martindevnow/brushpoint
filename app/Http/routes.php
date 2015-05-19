@@ -177,6 +177,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::patch(       'admins/products/active/{id}',         'ProductsController@ajaxActive');
     Route::patch(       'admins/products/portfolio/{id}',      'ProductsController@ajaxPortfolio');
     Route::patch(       'admins/products/purchase/{id}',       'ProductsController@ajaxPurchase');
+    Route::get(         'admins/products/virtues/saveOrder',   'ProductsController@ajaxSaveListOrder');
+
 
     Route::get(         'admins/feedback/filter',      'FeedbackController@filtered');
     Route::get(         'admins/feedback/{feedbackId}/retailer/remove', 'FeedbackController@removeRetailer');

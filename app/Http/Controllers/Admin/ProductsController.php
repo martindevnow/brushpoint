@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Martin\Notifications\Flash;
 use Martin\Products\Product;
 use Martin\Products\ProductRepository;
+use Martin\Products\Virtue;
 
 class ProductsController extends Controller {
 
@@ -95,6 +96,20 @@ class ProductsController extends Controller {
         $product->$field = $value;
         $product->save();
         return "Passed";
+    }
+
+    public function ajaxSaveListOrder (Request $request)
+    {
+        // dd($request->all());
+
+        foreach($request->virtue as $priority => $virtue_id)
+        {
+            $virtue = Virtue::find($virtue_id);
+            // dd($virtue);
+            $virtue->priority = $priority;
+            $virtue->save();
+        }
+        return 1;
     }
 
 }

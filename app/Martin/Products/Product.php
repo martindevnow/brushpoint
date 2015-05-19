@@ -56,17 +56,17 @@ class Product extends CoreModel {
 
     public function benefits()
     {
-        return $this->virtues()->where('type', 'benefit');
+        return $this->virtues()->where('type', 'benefit')->orderBy('priority', 'ASC');
     }
 
     public function features()
     {
-        return $this->virtues()->where('type', 'feature');
+        return $this->virtues()->where('type', 'feature')->orderBy('priority', 'ASC');
     }
 
     public function others()
     {
-        return $this->virtues()->where('type', 'other');
+        return $this->virtues()->where('type', 'other')->orderBy('priority', 'ASC');
     }
 
 
