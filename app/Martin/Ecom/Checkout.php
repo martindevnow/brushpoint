@@ -97,8 +97,8 @@ class Checkout {
             ->setDescription("Your BrushPoint.com Purchase")
             ->setItemList($this->itemList);
 
-        $this->redirectUrls->setReturnUrl('http://bpl5.dev/checkout/status')
-            ->setCancelUrl('http://bpl5.dev/checkout/cancel');
+        $this->redirectUrls->setReturnUrl(url('/').'/checkout/status')
+            ->setCancelUrl(url('/'). '/checkout/cancel');
 
         $this->payment->setIntent('sale')
             ->setPayer($this->payer)
@@ -130,7 +130,7 @@ class Checkout {
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
             $err_data = json_decode($ex->getData(), true);
             echo "Exception: " . $ex->getMessage() . PHP_EOL . print_r($err_data, true);
-            header('Location: http://bpl5.dev/checkout/error');
+            header('Location: '. url('/') .'/checkout/error');
             exit;
         }
 

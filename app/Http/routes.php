@@ -24,35 +24,11 @@ Route::get('testpath', function(){
     dd($path);
 });
 
-
-Route::get('prodatt', function()
-{
-    //$replh = Product::find(17);
-    //dd($replh->items()->get());
-
-
-
-    $product = Product::find(1);
-
-    /*$virtue_1 = Virtue::create([
-        'type' => 'feature',
-        'body'  =>  'THis is the first feature'
-    ]);
-
-
-
-    $virtue_2 = Virtue::create([
-        'type' => 'benefit',
-        'body'  =>  'THis is the first benefit'
-    ]);
-
-
-    $product->virtues()->save($virtue_1);
-    $product->virtues()->save($virtue_2);*/
-
-
-    dd($product->benefits);
-
+Route::get('pathvars', function() {
+    echo "app path: " . app_path().
+        "\n base path: ". base_path() .
+        "\n public path: ". public_path().
+        "\n url(/) " . url('/');
 });
 
 
