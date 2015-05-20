@@ -41,7 +41,10 @@ Route::get('googletopdf', function(){
     // On some systems you may have to set the binary path.
     // $pdf->binary = 'C:\...';
 
-        $pdf->saveAs('/home/martioo7/brushpoint/public/tmp/new.pdf');
+
+    if (!$pdf->saveAs(public_path() . '/tmp/new.pdf')) {
+        throw new Exception('Could not create PDF: '.$pdf->getError());
+    }
 });
 
 
