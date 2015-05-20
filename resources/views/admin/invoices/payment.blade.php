@@ -8,7 +8,7 @@
         <tr>
             <td style="width: 70%;">
                 <a href="/">
-                    <img src="http://bpl5.dev/images/logo/bpi_longlogo.jpg" alt="Brushpoint Innovations" class="img-responsive"/>
+                    <img src="{{ url('/') }}/images/logo/bpi_longlogo.jpg" alt="Brushpoint Innovations" class="img-responsive"/>
                 </a>
             </td>
             <td style="width: 30%; padding-top:25px;;">
