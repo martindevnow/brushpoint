@@ -42,7 +42,8 @@ Route::get('googletopdf', function(){
     // $pdf->binary = 'C:\...';
 
 
-    if (!$pdf->saveAs(public_path() . '/tmp/new.pdf')) {
+    if (!$pdf->saveAs('/home/martioo7/brushpoint/public/tmp/new.pdf')) {
+        // dd($pdf->getCommand()->getOutput());
         throw new Exception('Could not create PDF: '.$pdf->getError());
     }
 });
