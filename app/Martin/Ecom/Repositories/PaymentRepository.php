@@ -51,7 +51,7 @@ class PaymentRepository {
 
     public function getInvoicePath($paymentId)
     {
-        return public_path(). '/tmp/BP-inv-'. $paymentId .'.pdf';
+        return storage_path(). '/tmp/BP-inv-'. $paymentId .'.pdf';
     }
 
     public function getSentCount()
