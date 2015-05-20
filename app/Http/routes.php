@@ -171,7 +171,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::resource(    'admins/users',          'UsersController');
 
     Route::get(         'admins/payments/invoice/{id}',         'PaymentsController@invoice');
-    Route::get(         'admins/payments/invoice/html/{id}',    'PaymentsController@invoiceHtml');
 
     Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
 
@@ -193,6 +192,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     // Route::post(     'admins/products/create',   'ProductsController@store');
 });
 
+Route::group(['namespace' => 'Admin'], function()
+{
+    Route::get('admins/payments/invoice/html/{id}', 'PaymentsController@invoiceHtml');
+});
 
 Route::get('destroyCart', function(){
     $cartRepo = new \Martin\Products\CartRepository();
