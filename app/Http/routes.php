@@ -13,6 +13,7 @@
 use Illuminate\Support\Facades\Request;
 use Martin\Products\Virtue;
 use Martin\Products\Product;
+use mikehaertl\wkhtmlto\Pdf;
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -31,6 +32,17 @@ Route::get('pathvars', function() {
         "\n url(/) " . url('/');
 });
 
+
+Route::get('googletopdf', function(){
+
+    // You can pass a filename, a HTML string or an URL to the constructor
+        $pdf = new Pdf('http://www.google.com');
+
+    // On some systems you may have to set the binary path.
+    // $pdf->binary = 'C:\...';
+
+        $pdf->saveAs('/home/martioo7/brushpoint/public/tmp/new.pdf');
+});
 
 
 
