@@ -10,5 +10,6 @@ class Pdf extends \mikehaertl\wkhtmlto\Pdf {
     {
         parent::__construct($options);
         $this->tmpDir = public_path()."/tmp";
+        $this->_command = "/usr/local/bin/wkhtmltopdf ";
     }
 } 

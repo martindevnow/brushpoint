@@ -4,7 +4,6 @@ use \App\Handlers\Events\GenerateInvoicePdf;
 use \App\Http\Requests;
 use \App\Http\Controllers\Controller;
 
-use HTML2PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Martin\Ecom\Payment;

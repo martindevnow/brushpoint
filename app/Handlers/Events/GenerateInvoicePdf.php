@@ -5,13 +5,13 @@ use App\Events\ProductWasPurchased;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Illuminate\Support\Facades\Log;
 use Martin\Core\Pdf;
 use Martin\Ecom\Repositories\PaymentRepository;
 // use mikehaertl\wkhtmlto\Pdf;
 
-class GenerateInvoicePdf implements SelfHandling{
+class GenerateInvoicePdf {
 
-    use SelfHandling;
 
     /**
      * @var PaymentRepository
@@ -39,15 +39,21 @@ class GenerateInvoicePdf implements SelfHandling{
 	{
         $paymentId = $event->payment->id;
 
+        $invoiceUrl = url('/') . "/admins/payments/invoice/html/". $paymentId;
         $pdfPath = $this->paymentRepository->getInvoicePath($paymentId);
 
+        $stdOut = exec('wkhtmltopdf '. $invoiceUrl . ' ' . $pdfPath . ' 2>&1');
+
+
         // You can pass a filename, a HTML string or an URL to the constructor
-        $pdf = new Pdf(url('/') . "/admins/payments/invoice/html/". $paymentId);
+        // $pdf = new Pdf();
 
-        $saved = $pdf->saveAs($pdfPath);
+        // $saved = $pdf->saveAs($pdfPath);
 
-        if (!$saved)
-            dd($pdf->getError());
+        // if (!$saved)
+            // dd($pdf->getError());
+        Log::info($stdOut);
+
 	}
 
 }
