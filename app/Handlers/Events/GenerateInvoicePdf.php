@@ -2,13 +2,16 @@
 
 use App\Events\ProductWasPurchased;
 
+use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 use Martin\Core\Pdf;
 use Martin\Ecom\Repositories\PaymentRepository;
 // use mikehaertl\wkhtmlto\Pdf;
 
-class GenerateInvoicePdf {
+class GenerateInvoicePdf implements SelfHandling{
+
+    use SelfHandling;
 
     /**
      * @var PaymentRepository

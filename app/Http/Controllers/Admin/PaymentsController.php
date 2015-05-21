@@ -1,7 +1,8 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use \App\Handlers\Events\GenerateInvoicePdf;
+use \App\Http\Requests;
+use \App\Http\Controllers\Controller;
 
 use HTML2PDF;
 use Illuminate\Http\Request;
@@ -51,7 +52,16 @@ class PaymentsController extends Controller {
 
     public function invoice($paymentId)
     {
-        return response()->download($this->paymentRepository->getInvoicePath($paymentId));
+        $file = $this->paymentRepository->getInvoicePath($paymentId);
+        if (file_exists($file))
+            return response()->download($file);
+
+        //otherwise, generate the invoice
+
+        // TODO: Make a command to do this action
+        $this->paymentRepository->generateInvoiceData($paymentId);
+        return "Generating ... ";
+
     }
 
     /**

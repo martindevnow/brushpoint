@@ -183,10 +183,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     
     Route::resource(    'admins/payments',          'PaymentsController');
     Route::patch(       'admins/payments/ajax/{id}',   'PaymentsController@ajaxPatch');
+    // TODO: Make a command for this action
+    Route::get(         'admins/payments/invoice/{id}',         'PaymentsController@invoice');
+
 
     Route::resource(    'admins/users',          'UsersController');
 
-    Route::get(         'admins/payments/invoice/{id}',         'PaymentsController@invoice');
 
     Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
 
