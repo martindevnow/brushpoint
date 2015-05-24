@@ -39,20 +39,7 @@ class GenerateInvoicePdf {
 	{
         $paymentId = $event->payment->id;
 
-        $invoiceUrl = url('/') . "/admins/payments/invoice/html/". $paymentId;
-        $pdfPath = $this->paymentRepository->getInvoicePath($paymentId);
-
-        $stdOut = exec('wkhtmltopdf '. $invoiceUrl . ' ' . $pdfPath . ' 2>&1');
-
-
-        // You can pass a filename, a HTML string or an URL to the constructor
-        // $pdf = new Pdf();
-
-        // $saved = $pdf->saveAs($pdfPath);
-
-        // if (!$saved)
-            // dd($pdf->getError());
-        Log::info($stdOut);
+        $this->paymentRepository->generateInvoice($paymentId);
 
 	}
 

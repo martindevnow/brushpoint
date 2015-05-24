@@ -52,6 +52,7 @@ Route::get('googletopdf', function(){
 
 // Server Stuff
 // TODO: Make sure the Invoices can be generated to PDFs on the server!!!!!!!
+// TODO: THIS IS WORKING. Added a function to PaymentRepository
 
 
 
@@ -195,6 +196,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 
 
     Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
+
+    Route::resource(    'admins/inventory',     'InventoryController');
+
 
     Route::post(        'admins/issues/store',      'IssuesController@ajaxStore');
     Route::patch(       'admins/issues/ajax/{id}',  'IssuesController@ajaxPatch');

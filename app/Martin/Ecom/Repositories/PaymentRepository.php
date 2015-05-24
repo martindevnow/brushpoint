@@ -4,6 +4,7 @@
 namespace Martin\Ecom\Repositories;
 
 
+use Illuminate\Support\Facades\Log;
 use Martin\Ecom\Payment;
 
 class PaymentRepository {
@@ -62,5 +63,15 @@ class PaymentRepository {
     public function getOpenCount()
     {
         return Payment::where('shipped', '=', '0')->count();
+    }
+
+    public function generateInvoice($paymentId)
+    {
+        $invoiceUrl = url('/') . "/admins/payments/invoice/html/". $paymentId;
+        $pdfPath = $this->getInvoicePath($paymentId);
+
+        $stdOut = exec('wkhtmltopdf '. $invoiceUrl . ' ' . $pdfPath . ' 2>&1');
+
+        Log::info($stdOut);
     }
 } 

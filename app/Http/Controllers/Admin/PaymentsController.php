@@ -58,7 +58,7 @@ class PaymentsController extends Controller {
         //otherwise, generate the invoice
 
         // TODO: Make a command to do this action
-        $this->paymentRepository->generateInvoiceData($paymentId);
+        $this->paymentRepository->generateInvoice($paymentId);
         return "Generating ... ";
 
     }
