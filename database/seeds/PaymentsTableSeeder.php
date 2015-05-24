@@ -37,7 +37,7 @@ class PaymentsTableSeeder extends Seeder {
         // Set the Transaction
         $transaction = Transaction::create([
             'amount_subtotal' => '11.00',
-            'amount_shipping' => '6.96',
+            'amount_shipping' => '6.95',
             'amount_shipping_real' => '5.00',
             'amount_total' => '17.95',
             'amount_currency' => 'USD',
@@ -45,10 +45,12 @@ class PaymentsTableSeeder extends Seeder {
         ]);
 
         // Set the Items
-        $item = Item::where('sku', '=', 'RH-DMMED')->first();
+        $item = Item::where('sku', '=', 'RH-DM-MED')->first();
         $soldItem = SoldItem::create([
             'name' => $item->name,
             'price' => $item->price,
+            'sku' => $item->sku,
+            'item_id' => $item->id,
             'currency' => 'USD',
             'quantity' => 2
         ]);

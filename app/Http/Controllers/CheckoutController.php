@@ -38,6 +38,9 @@ class CheckoutController extends Controller {
 
     public function getPaymentStatus(Request $request)
     {
+        dd('This function should not be called anymore. Once confirmed, delete this function.');
+
+
         // get the payment ID before session clear
         $payment_id = session()->get('paypal_payment_id');
 
@@ -82,8 +85,6 @@ class CheckoutController extends Controller {
 
         return redirect()->route('payment_status')
             ->with('error', 'Payment Failed');
-
-
     }
 
 

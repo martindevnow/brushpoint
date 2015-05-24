@@ -118,12 +118,11 @@ class PurchaseTableSeeder extends Seeder {
         {
             if ($prod->purchase && ($prod->sku == "RH-DM" || $prod->sku == "RH-DZ"))
             {
-                $sku = str_replace('**', '', $prod->sku);
                 Item::create([
                     'product_id' => $prod->id,
                     'name' => $prod->name . " [Soft]",
                     'description' => $prod->description,
-                    'sku' => $sku . "SOFT",
+                    'sku' => $prod->sku . "-SOFT",
                     'price' => $prod->price,
                     'on_hand' => $prod->on_hand,
                     'variance' => 'Soft',
@@ -132,19 +131,18 @@ class PurchaseTableSeeder extends Seeder {
                     'product_id' => $prod->id,
                     'name' => $prod->name . " [Medium]",
                     'description' => $prod->description,
-                    'sku' => $sku . "MED",
+                    'sku' => $prod->sku . "-MED",
                     'price' => $prod->price,
                     'on_hand' => $prod->on_hand,
                     'variance' => 'Medium',
                 ]);
             }
             else{
-                $sku = str_replace('**', '', $prod->sku);
                 Item::create([
                     'product_id' => $prod->id,
                     'name' => $prod->name,
                     'description' => $prod->description,
-                    'sku' => $sku,
+                    'sku' => $prod->sku,
                     'price' => $prod->price,
                     'on_hand' => $prod->on_hand,
                 ]);

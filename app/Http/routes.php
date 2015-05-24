@@ -49,6 +49,11 @@ Route::get('googletopdf', function(){
 });
 
 
+Route::get('dumpcart', function(){
+    $cartRepo =  new \Martin\Products\CartRepository();
+    var_dump(session()->all());
+});
+
 
 // Server Stuff
 // TODO: Make sure the Invoices can be generated to PDFs on the server!!!!!!!

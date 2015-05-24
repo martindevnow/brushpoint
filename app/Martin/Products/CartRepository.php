@@ -99,7 +99,7 @@ class CartRepository {
             $data['item-'. $cart->item_id] = [
                 'id'            => $cart->item->id,
                 'name'          => $cart->item->name,
-                'sku'           => $cart->item->product->sku,
+                'sku'           => $cart->item->sku,
                 'product_id'    => $cart->item->product_id,
                 'price'         => $cart->price,
                 'quantity'      => $cart->quantity
@@ -162,7 +162,7 @@ class CartRepository {
             session([$cartId => [
                 'id'        => $item->id,
                 'name'      => $item->name,
-                'sku'       => $item->product->sku,
+                'sku'       => $item->sku,
                 'product_id'=> $item->product_id,
                 'price'     => $item->price,
                 'quantity'  => $cart['quantity'] + $quantity
@@ -172,7 +172,7 @@ class CartRepository {
            session([$cartId => [
                'id'        => $item->id,
                'name'      => $item->name,
-                'sku'       => $item->product->sku,
+                'sku'       => $item->sku,
                 'product_id'   => $item->product_id,
                 'price'     => $item->price,
                 'quantity'  => $quantity

@@ -14,7 +14,8 @@ class InventoryController extends Controller {
 	 */
 	public function index()
 	{
-
+        // display overview of inventory
+        // current levels of all
 	}
 
 	/**

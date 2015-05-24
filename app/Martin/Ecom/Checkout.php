@@ -48,6 +48,8 @@ class Checkout {
     {
         return $this->api;
     }
+
+
     /**
      * Build the Payment for PayPal and store all relevant information to the DB
      *
@@ -76,7 +78,8 @@ class Checkout {
                 $i->setName($item['name'])
                     ->setPrice($item['price'])
                     ->setQuantity($item['quantity'])
-                    ->setCurrency('USD');
+                    ->setCurrency('USD')
+                    ->setSku($item['sku']);
                 $order[] = $i;
             }
         }

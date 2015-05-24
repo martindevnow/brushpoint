@@ -8,32 +8,37 @@ class TransactionRepository {
 
     public function createFromPaypal(\PayPal\Api\Payment $PPpayment, \Martin\Ecom\Payment $ecomPayment)
     {
-        $transactions = $PPpayment->getTransactions();
+        $PPtransactions = $PPpayment->getTransactions();
 
-        foreach ($transactions as $transaction)
+        foreach ($PPtransactions as $PPtransaction)
         {
-            $amount = $transaction->getAmount();
+            $PPamount = $PPtransaction->getAmount();
             $ecomTransaction = new \Martin\Ecom\Transaction([
-                'amount_subtotal' => $amount->getDetails()->getSubtotal(),
-                'amount_shipping' => $amount->getDetails()->getShipping(),
-                'amount_total' => $amount->getTotal(),
-                'amount_currency' => $amount->getCurrency(),
-                'description' => $transaction->getDescription(),
+                'amount_subtotal' => $PPamount->getDetails()->getSubtotal(),
+                'amount_shipping' => $PPamount->getDetails()->getShipping(),
+                'amount_total' => $PPamount->getTotal(),
+                'amount_currency' => $PPamount->getCurrency(),
+                'description' => $PPtransaction->getDescription(),
             ]);
             $ecomTransaction->save();
 
-            $items = $transaction->getItemList()->getItems();
-            // dd($items);
-            foreach ($items as $item)
+            $PPitems = $PPtransaction->getItemList()->getItems();
+            // dd($PPitems);
+            foreach ($PPitems as $PPitem)
             {
-                $ecomItem = new \Martin\Ecom\SoldItem([
-                    'name' => $item->getName(),
-                    'price' => $item->getPrice(),
-                    'currency' => $item->getCurrency(),
-                    'quantity' => $item->getQuantity(),
-                    'sku' => $item->getSku(),
+                ///dd($PPitem);
+                $ecomItem = \Martin\Products\Item::where('sku', '=', $PPitem->sku)->first();
+                //dd($ecomItem);
+
+                $ecomSoldItem = new \Martin\Ecom\SoldItem([
+                    'name' => $PPitem->getName(),
+                    'price' => $PPitem->getPrice(),
+                    'currency' => $PPitem->getCurrency(),
+                    'quantity' => $PPitem->getQuantity(),
+                    'sku' => $PPitem->getSku(),
+                    'item_id' => $ecomItem->id,
                 ]);
-                $ecomTransaction->soldItems()->save($ecomItem);
+                $ecomTransaction->soldItems()->save($ecomSoldItem);
             }
 
             $ecomTransaction->save();
