@@ -28,7 +28,7 @@ class TransactionRepository {
             {
                 ///dd($PPitem);
                 $ecomItem = \Martin\Products\Item::where('sku', '=', $PPitem->sku)->first();
-                //dd($ecomItem);
+                // dd($ecomItem);
 
                 $ecomSoldItem = new \Martin\Ecom\SoldItem([
                     'name' => $PPitem->getName(),
