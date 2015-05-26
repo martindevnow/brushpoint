@@ -20,6 +20,7 @@ class CartController extends Controller {
     function __construct(CartRepository $cartRepository)
     {
         $this->cartRepository = $cartRepository;
+        $this->cartRepository->calculateShipping();
     }
 
 
