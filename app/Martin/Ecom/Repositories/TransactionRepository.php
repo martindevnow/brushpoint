@@ -36,9 +36,12 @@ class TransactionRepository {
                     'currency' => $PPitem->getCurrency(),
                     'quantity' => $PPitem->getQuantity(),
                     'sku' => $PPitem->getSku(),
-                    'item_id' => $ecomItem->id,
+                    // 'item_id' => $ecomItem->id,
                 ]);
-                $ecomTransaction->soldItems()->save($ecomSoldItem);
+                $ecomSoldItem = $ecomTransaction->soldItems()->save($ecomSoldItem);
+                // dd($ret);
+                $ecomSoldItem = $ecomItem->soldItems()->save($ecomSoldItem);
+                // dd($ecomSoldItem);
             }
 
             $ecomTransaction->save();

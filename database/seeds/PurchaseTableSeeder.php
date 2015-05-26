@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use Faker\Factory as Faker;
 use Martin\Core\Image;
+use Martin\Products\Inventory;
 use Martin\Products\Item;
 use Martin\Products\Product;
 
@@ -76,7 +77,7 @@ class PurchaseTableSeeder extends Seeder {
                 'description' => $rh['description'],
                 'sku' => $rh['sku'],
                 'price' =>  $rh['price'],
-                'on_hand' => $faker->numberBetween(100,500),
+                'on_hand' => 500,
                 'active' => 1,
                 'portfolio' => 0,
                 'purchase' => 1,
@@ -118,33 +119,49 @@ class PurchaseTableSeeder extends Seeder {
         {
             if ($prod->purchase && ($prod->sku == "RH-DM" || $prod->sku == "RH-DZ"))
             {
-                Item::create([
+                $item1 = Item::create([
                     'product_id' => $prod->id,
                     'name' => $prod->name . " [Soft]",
                     'description' => $prod->description,
                     'sku' => $prod->sku . "-SOFT",
                     'price' => $prod->price,
-                    'on_hand' => $prod->on_hand,
+                    'on_hand' => $prod->on_hand / 2,
                     'variance' => 'Soft',
                 ]);
-                Item::create([
+                $item2 = Item::create([
                     'product_id' => $prod->id,
                     'name' => $prod->name . " [Medium]",
                     'description' => $prod->description,
                     'sku' => $prod->sku . "-MED",
                     'price' => $prod->price,
-                    'on_hand' => $prod->on_hand,
+                    'on_hand' => $prod->on_hand / 2,
                     'variance' => 'Medium',
+                ]);
+
+                Inventory::create([
+                    'item_id' => $item1->id,
+                    'quantity' => $item1->on_hand,
+                    'description' => 'restock'
+                ]);
+                Inventory::create([
+                    'item_id' => $item2->id,
+                    'quantity' => $item2->on_hand,
+                    'description' => 'restock'
                 ]);
             }
             else{
-                Item::create([
+                $item = Item::create([
                     'product_id' => $prod->id,
                     'name' => $prod->name,
                     'description' => $prod->description,
                     'sku' => $prod->sku,
                     'price' => $prod->price,
                     'on_hand' => $prod->on_hand,
+                ]);
+                Inventory::create([
+                    'item_id' => $item->id,
+                    'quantity' => $item->on_hand,
+                    'description' => 'restock'
                 ]);
             }
         }

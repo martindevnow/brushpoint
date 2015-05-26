@@ -15,6 +15,7 @@ class EventServiceProvider extends ServiceProvider {
 			'App\Handlers\Events\EmailPurchaseConfirmation',
             'App\Handlers\Events\GenerateInvoicePdf',
             'App\Handlers\Events\ClearCurrentCart',
+            'App\Handlers\Events\AdjustPurchasedInventory',
 		],
 	];
 

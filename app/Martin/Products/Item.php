@@ -32,4 +32,13 @@ class Item extends CoreModel {
         return $this->hasMany('Martin\Products\Cart');
     }
 
+    public function soldItems()
+    {
+        return $this->hasMany('Martin\Ecom\SoldItem');
+    }
+
+    public function inventories()
+    {
+        return $this->hasMany('Martin\Products\Inventory');
+    }
 } 

@@ -33,6 +33,14 @@ Route::get('pathvars', function() {
 });
 
 
+
+
+
+// TODO: Make the /cart calculate shipping cost everytime that page loads.
+
+
+
+
 Route::get('googletopdf', function(){
 
     // You can pass a filename, a HTML string or an URL to the constructor
