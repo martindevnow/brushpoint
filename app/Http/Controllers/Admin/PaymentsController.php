@@ -101,13 +101,16 @@ class PaymentsController extends Controller {
     {
         $payments = new Payment();
         $attributes = $payments->getFillable();
+
         foreach ($request->all() as $field => $value)
         {
             if (in_array($field, $attributes))
                 $payments = $payments->where($field, '=', $value);
         }
-        $payments = $payments->orderBy('created_at', 'desc')->paginate(25);
+        $payments = $payments->orderBy('created_at', 'desc');
+        $payments = $payments->paginate(25);
         $payments->appends($request->all());
+        
         return $this->layout->content = view('admin.payments.index')->with(compact('payments'));
 
     }

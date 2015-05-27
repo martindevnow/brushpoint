@@ -194,14 +194,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 
 
     Route::resource(    'admins/purchases',         'PurchasesController');
-    
+
+    Route::get(         'admins/payments/filter',      'PaymentsController@filtered');
     Route::resource(    'admins/payments',          'PaymentsController');
     Route::patch(       'admins/payments/ajax/{id}',   'PaymentsController@ajaxPatch');
     // TODO: Make a command for this action
     // TODO: using the full path /usr/local/bin/wkhtmltopdf works.
     // TODO: see if I can override the command set in phpwkhtmltopdf
-
-
     Route::get(         'admins/payments/invoice/{id}',         'PaymentsController@invoice');
 
 

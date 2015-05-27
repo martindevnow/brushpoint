@@ -9,6 +9,16 @@ class Payment extends CoreModel {
 
 	protected $table = "payments";
 
+    protected $fillable = [
+        'shipped',
+        'payment_id',
+        'state',
+        'intent',
+        'shipped_at',
+        'payer_id',
+        'address_id'
+    ];
+
 
     public function setUniqueId()
     {
