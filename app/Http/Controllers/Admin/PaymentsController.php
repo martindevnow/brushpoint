@@ -110,7 +110,7 @@ class PaymentsController extends Controller {
         $payments = $payments->orderBy('created_at', 'desc');
         $payments = $payments->paginate(25);
         $payments->appends($request->all());
-        
+
         return $this->layout->content = view('admin.payments.index')->with(compact('payments'));
 
     }

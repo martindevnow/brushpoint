@@ -29,7 +29,6 @@ class RetailersController extends Controller {
      */
     public function ajaxStore(Request $request)
     {
-        $feedback = Feedback::find($request->feedback_id);
 
         // WILL allow overwriting a feedback's Retailer
 
@@ -41,7 +40,12 @@ class RetailersController extends Controller {
             'active' => 1
         ]);
 
-        $retailer->feedbacks()->save($feedback);
+        if ($request->feedback_id)
+        {
+            $feedback = Feedback::find($request->feedback_id);
+            $retailer->feedbacks()->save($feedback);
+        }
+
 
         return "passed";
     }

@@ -254,4 +254,11 @@ Route::get('sessionId', function() {
 });
 
 
-
+/**
+ * TODO: Adjust shipping calculation to do real shipping cost
+ *      Other
+        (Non-standard
+        and Oversize)	0 - 100 g | 100 - 200 g | 200 - 300 g | 300 - 400 g	| 400 - 500 g
+        Stamp(s)	    $1.80		$2.95	      $4.10			$4.70		  $5.05
+ *
+ */

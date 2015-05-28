@@ -10,6 +10,7 @@
         </div>
     </div>
 
+        @include('admin.feedback.partials._issue', ['feedback' => null])
 
         <table class="table form-table">
             <thead>

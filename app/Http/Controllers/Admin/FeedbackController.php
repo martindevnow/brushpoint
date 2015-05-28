@@ -31,7 +31,12 @@ class FeedbackController extends Controller {
      */
     public function create()
     {
-        return $this->layout->content = view('admin.feedback.create');
+        $retailers = Retailer::lists('name', 'id');
+        $issues = Issue::lists('type', 'id');
+
+
+        return $this->layout->content = view('admin.feedback.create')
+            ->with(compact('retailers', 'issues'));
     }
 
 
@@ -104,6 +109,7 @@ class FeedbackController extends Controller {
         Flash::message('The product has been listed successfully');
         return redirect("admins/feedback/{$feedbackId}");
     }
+
 
 
 

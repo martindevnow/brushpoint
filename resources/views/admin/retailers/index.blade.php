@@ -11,6 +11,8 @@
     </div>
 
 
+        @include('admin.feedback.partials._retailer', ['feedback' => null])
+
         <table class="table form-table">
             <thead>
                 <tr>
@@ -35,6 +37,9 @@
                 @endforeach
               </tbody>
         </table>
+
+
+
 
     </div>
 <div class="flash">

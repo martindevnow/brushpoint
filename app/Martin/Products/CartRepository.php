@@ -229,22 +229,22 @@ class CartRepository {
      */
     public function calculateShipping()
     {
-        /*if ($this->getCartTotal() >= 20)
-            return 6.95;
-        return 9.95;*/
-
-        $shippingAndHandling = 0;
-
-        // dd(session('country'));
-
-        if (session('country') != "CA")
+        if (session('country') == "CA")
+        {
+            if ($this->getTotalNumberOfItems() <= 3)
+                $shippingAndHandling = 4;
+            else
+                $shippingAndHandling = 5;
+        }
+        else
             $shippingAndHandling = 5;
-        if ($this->getTotalWeight() > 300)
+
+        if ($this->getTotalWeight() > 200)
             $shippingAndHandling = 5;
         if ($this->getTotalNumberOfItems() > 4)
             $shippingAndHandling = 5;
         if ($this->getThickness() > 20)
-            $shippingAndHandling = 5;
+            $shippingAndHandling = 7;
 
         // ADD OTHER CONDITIONALS AND CALCULATIONS HERE
         if ($shippingAndHandling == 0)

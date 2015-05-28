@@ -14,7 +14,9 @@
               {!! Form::text('type', null, ['class' => 'form-control']) !!}
               {!! Form::label('complaint', 'Complaint:') !!}
               {!! Form::checkbox('complaint', null, null, ['class' => 'form-control']) !!}
-              {!! Form::hidden('feedback_id', $feedback->id) !!}
+              @if($feedback)
+                  {!! Form::hidden('feedback_id', $feedback->id) !!}
+              @endif
 
           </div>
       </div>

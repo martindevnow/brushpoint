@@ -7,7 +7,7 @@
             <h1 class="page-header">Payments</h1>
         </div>
         <div class="col-lg-3" style="margin-top: 10px;">
-             @{{  $payments->render() }}
+             {!!  $payments->render() !!}
         </div>
     </div>
     <table class="table">

@@ -5,6 +5,7 @@
     <div class="row">
         <div class="col-lg-9">
             <h1 class="page-header">Feedback</h1>
+            <a href="/admins/feedback/create" class="btn btn-primary" style="float: right;">New Feedback</a>
         </div>
         <div class="col-lg-3" style="margin-top: 10px;">
              {!!  $feedbacks->render() !!}

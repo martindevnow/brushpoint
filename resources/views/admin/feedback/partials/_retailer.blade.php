@@ -12,7 +12,9 @@
           <div class="form-group">
               {!! Form::label('name', 'Name:') !!}
               {!! Form::text('name', null, ['class' => 'form-control']) !!}
-              {!! Form::hidden('feedback_id', $feedback->id) !!}
+              @if($feedback)
+                {!! Form::hidden('feedback_id', $feedback->id) !!}
+              @endif
 
 
 

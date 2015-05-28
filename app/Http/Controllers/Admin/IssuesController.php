@@ -29,7 +29,6 @@ class IssuesController extends Controller {
      */
 	public function ajaxStore(Request $request)
     {
-        $feedback = Feedback::find($request->feedback_id);
 
         // WILL allow overwriting a feedback's issue
 
@@ -41,7 +40,13 @@ class IssuesController extends Controller {
             'complaint' => $complaint
         ]);
 
-        $issue->feedbacks()->save($feedback);
+        if ($request->feedback_id)
+        {
+            $feedback = Feedback::find($request->feedback_id);
+
+            $issue->feedbacks()->save($feedback);
+        }
+
 
         return "passed";
     }

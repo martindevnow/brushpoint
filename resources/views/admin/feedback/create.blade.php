@@ -34,7 +34,7 @@
             <tr>
               <td>Retailer</td>
               <td>
-                {!! Form::select('retailer', [], null, ['class' => 'form-control']) !!}
+                {!! Form::select('retailer_id', $retailers, null, ['class' => 'form-control']) !!}
               </td>
             </tr>
             <tr>
@@ -49,8 +49,15 @@
                 {!! Form::text('lot_code', null, ['class' => 'form-control']) !!}
               </td>
             </tr>
+
             <tr>
               <td>Issue</td>
+              <td>
+                {!! Form::select('issue_id', $issues, null, ['class' => 'form-control']) !!}
+              </td>
+            </tr>
+            <tr>
+              <td>Issue Description</td>
               <td><div class="form-group">
                   {!! Form::textarea('issue_text', null, ['class' => 'form-control']) !!}
               </div></td>

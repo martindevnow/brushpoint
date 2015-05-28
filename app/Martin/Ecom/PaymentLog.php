@@ -93,6 +93,20 @@ class PaymentLog {
 
     public function findOrCreateAddress()
     {
+        $addressesRegisteredToPayer = $this->getPayersAddresses();
+
+        foreach($addressesRegisteredToPayer as $registeredAddress)
+        {
+            if ($this->addressesMatch($registeredAddress))
+            {
+                // is registered
+                // can return this model, it matches the payer and the details.
+                $this->dbAddress->payments()->save($registeredAddress);
+                return $registeredAddress;
+            }
+        }
+
+
         // no addresses registered
         if ( ! $this->dbPayment->address)
             return $this->addNewAddress();
@@ -106,6 +120,7 @@ class PaymentLog {
     }
 
 
+
     public function addNewAddress()
     {
         $addressRepo = new \Martin\Core\Repositories\AddressRepository();
@@ -114,6 +129,11 @@ class PaymentLog {
         $this->dbAddress->payments()->save($this->dbPayment);
 
         return $this->dbAddress;
+    }
+
+
+    public function getPayersAddresses() {
+        return $this->dbPayer->addresses;
     }
 
 
