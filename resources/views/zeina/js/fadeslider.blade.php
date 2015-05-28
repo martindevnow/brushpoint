@@ -22,14 +22,16 @@
     </script>
 
     <script type="text/javascript">
-
+        var host = "http://" + window.location.hostname;
+        var image1 = host + "/images/slideshow/about/dz.png";
+        var image2 = host + "/images/slideshow/about/sonic.png";
         var mygallery = new fadeSlideShow({
         wrapperid: "fadeshow1", //ID of blank DIV on page to house Slideshow
                 //dimensions: [600, 600], //width/height of gallery in pixels. Should reflect dimensions of largest image
                 dimensions: [525, 460], //width/height of gallery in pixels. Should reflect dimensions of largest image
                 imagearray: [
-                        ["/images/slideshow/about/dz.png"],
-                        ["/images/slideshow/about/sonic.png"] //<--no trailing comma after very last image element!
+                        [ image1 ],
+                        [ image2 ] //<--no trailing comma after very last image element!
                 ],
                 displaymode: {type:'auto', pause:3500, cycles:0, wraparound:false},
                 persist: false, //remember last viewed slide and recall within same session?
@@ -37,4 +39,5 @@
                 descreveal: "always",
                 togglerid: ""
                 })
+
     </script>
