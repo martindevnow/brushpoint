@@ -13,8 +13,20 @@ class Product extends CoreModel {
         'name',
         'description',
         'price',
-        'sku'
+        'sku',
+        'unit_weight_g',
+        'unit_depth_cm',
+        'pack_size',
+        'pack_description',
     ];
+
+
+    public function urlToProductPage()
+    {
+        return '/products/id-'. $this->id;
+    }
+
+
 
     public function getBenefits()
     {

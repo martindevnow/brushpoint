@@ -57,7 +57,7 @@ class ProductsTableSeeder extends Seeder {
 
                 "link_to_video" => 1,
                 "active" => 1,
-                "display_order" => "11"  // SHOW FIRST
+                "display_order" => "1"  // SHOW FIRST
             ];
 
         $products[] =
@@ -88,7 +88,7 @@ class ProductsTableSeeder extends Seeder {
                     "1 Gum Stimulator helps firm and strengthen gums",
                     "20 Floss Heads help clean between teeth"],
                 "active" => 1,
-                "display_order" => "12" // SHOW
+                "display_order" => "2" // SHOW
             ];
 
         $products[] =
@@ -110,7 +110,7 @@ class ProductsTableSeeder extends Seeder {
                     "1 Gum Stimulator helps firm and strengthen gums",
                     "20 Floss Heads help clean between teeth"],
                 "active" => 1,
-                "display_order" => "13" // SHOW THIRD
+                "display_order" => "3" // SHOW THIRD
             ];
 
 
@@ -136,7 +136,7 @@ class ProductsTableSeeder extends Seeder {
                     "2 replaceable ‘AAA’ Alkaline Batteries included"],
                 "spacer_height" => "125",
                 "active" => 1,
-                "display_order" => "33"
+                "display_order" => "11"
             ];
         $products[] =
             [
@@ -151,7 +151,7 @@ class ProductsTableSeeder extends Seeder {
                     "Ideal for Children 4 to 8 years old"],
                 "spacer_height" => "175",
                 "active" => 1,
-                "display_order" => "32"
+                "display_order" => "12"
             ];
 
 
@@ -170,8 +170,8 @@ class ProductsTableSeeder extends Seeder {
                     "Extra Soft Bristles",
                     "Patent Pending Technology",
                     "1 AA battery included"],
-                "active" => 1,
-                "display_order" => "31"
+                "active" => 0,
+                "display_order" => "99"
             ];
 
 
@@ -193,7 +193,7 @@ class ProductsTableSeeder extends Seeder {
                     "Patent Pending Technology",
                     "1 AA battery included"],
                 "active" => 1,
-                "display_order" => "41"
+                "display_order" => "6"
             ];
         $products[] =
             [
@@ -217,7 +217,7 @@ class ProductsTableSeeder extends Seeder {
                 "video_name" => "",
                 "video_link" => "",
                 "active" => 1,
-                "display_order" => "56"
+                "display_order" => "7"
             ];
 
         $products[] =
@@ -244,7 +244,7 @@ class ProductsTableSeeder extends Seeder {
                 "patent_link" => "us0re035941-group.pdf",
                 "patent_name" => "U.S. Patent No. Re. 35,941",
                 "active" => 1,
-                "display_order" => "55"
+                "display_order" => "5"
             ];
 
         $products[] =
@@ -269,7 +269,7 @@ class ProductsTableSeeder extends Seeder {
                 "video_link" => "http://www.youtube.com/embed/iBiKqVDwKtI",
                 "video_name" => "Play to See Dual Motion Head Action",
                 "active" => 1,
-                "display_order" => "54"
+                "display_order" => "4"
             ];
 
         $products[] =
@@ -288,7 +288,7 @@ class ProductsTableSeeder extends Seeder {
                     "Easy to use on and off buttons",
                     "1 replaceable AAA alkaline battery included"],
                 "active" => 1,
-                "display_order" => "53"
+                "display_order" => "8"
             ];
 
         $products[] =
@@ -307,7 +307,7 @@ class ProductsTableSeeder extends Seeder {
                     "Ideal for travel as it lasts 5 days between charges",
                     "3 Pack replacement heads available"],
                 "active" => 1,
-                "display_order" => "52"
+                "display_order" => "9"
             ];
 
         $products[] =
@@ -329,7 +329,7 @@ class ProductsTableSeeder extends Seeder {
                 "patent_link" => "us0re035941-group.pdf",
                 "patent_name" => "U.S. Patent No. Re. 35,941",
                 "active" => 1,
-                "display_order" => "51"
+                "display_order" => "10"
             ];
 
 
@@ -343,7 +343,7 @@ class ProductsTableSeeder extends Seeder {
             Other Dental Brushes and accessories are also available and include a Travel Brush, Interdental Picks, Manual Interdental Oral Care System, Manual Denture Brush, Flossers, Dental Floss and Premium No Shred Dental Tape.
             </p>",
                 "active" => 1,
-                "display_order" => "21"
+                "display_order" => "14"
             ];
 
         $products[] =
@@ -371,19 +371,16 @@ class ProductsTableSeeder extends Seeder {
                 "sku" => "WhiteningPen",
                 "name" => "Whitening Pen",
                 "heading" => "<strong>Whitening Pen Heading Here</strong>",
-                "benefits" => ["Get a visibly Whiter Smile!",
-                    "See results in as little as 3 days!"],
+                "benefits" => ["Specially designed for on-the-go use",
+                    "It will noticeably whiten teeth within 1 to 2 weeks"],
 
-                "features" => ["Stay-on, Non-slip Technology",
-                    "Easy Application",
-                    "Dramatically Whitens Teeth and removes stains",
-                    "Uses the same Whitening agents as your Dentist",
-                    "Enamel Safe",
-                    "3 Layer System",
-                    "Patent Pending Technology"],
+                "features" => ["Easy to use brush on application",
+                    "Mint gel is easy to apply",
+                    "Portable Container",
+                    ],
                 "claim" => "Available in daily 30 minute and 2 Hour Whitening Release Systems.",
                 "active" => 1,
-                "display_order" => "22"
+                "display_order" => "13"
             ];
 
 

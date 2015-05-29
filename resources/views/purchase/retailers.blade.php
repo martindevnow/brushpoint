@@ -38,7 +38,7 @@
     </div>
     <div class="row">
         <div class="col-md-3 col-sm-6">
-            <a target="_blank" href="http://www.walmart.com/search/search-ng.do?search_query=BrushPoint&ic=16_0&Find=Find&search_constraint=976760">
+            <a target="_blank" href="http://www.walmart.com/search/search-ng.do?query=BrushPoint&cat_id=976760&facet=retailer:Walmart.com">
                 <img class="img-responsive" src="/images/retailers/walmart.jpg"/>
             </a>
         </div>
@@ -49,6 +49,7 @@
         </div>
         <div class="col-md-3 col-sm-6">
             <a target="_blank" href="http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dhpc&field-keywords=brushpoint">
+            <!-- http://www.amazon.com/s?ie=UTF8&field-keywords=Brushpoint%20Innovations&index=blended&link_code=qs&sourceid=Mozilla-search&tag=mozilla-20 -->
                 <img class="img-responsive" src="/images/retailers/amazon.jpg"/>
             </a>
         </div>

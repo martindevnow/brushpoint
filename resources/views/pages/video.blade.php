@@ -19,6 +19,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6">
+
+                <div class="left-image-container center-text">
+                    <img class="img-responsive inline-block" src="/images/brushpoint/products/VitalHealthBattery-full.jpg" style="padding: 1% 0px 3% 1%; height: auto; width: 350px;" />
+                </div>
+
+            </div>
+            <div class="col-md-6 col-sm-6">
+
+
                 <div class="embed-responsive embed-responsive-16by9">
                     <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/cTwejR4LoSk?rel=0" allowfullscreen></iframe>
                 </div>
@@ -33,8 +42,9 @@
                         aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui.
                     </p> -->
                 </p>
-            </div>
-            <div class="col-md-6 col-sm-6">
+
+
+
                 <!-- 16:9 aspect ratio -->
                 <div class="embed-responsive embed-responsive-16by9">
                   <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/i3f4hFfPzak?rel=0" allowfullscreen></iframe>
@@ -49,6 +59,16 @@
                         voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
                         aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui.
                     </p> -->
+                </p>
+
+
+
+                <p>
+                Two Videos are available to watch, if watching from a mobile device your standard data plan rates would apply.
+                </p>
+
+                <p>
+                To Read more about the Vital Health® Power Oral Care System, <a href="{{ $vitalHealthDM->urlToProductPage() }}">click here</a>.
                 </p>
             </div>
         </div>

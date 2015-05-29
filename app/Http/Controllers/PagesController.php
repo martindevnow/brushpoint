@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Martin\Notifications\Flash;
+use Martin\Products\Product;
 
 class PagesController extends Controller {
 
@@ -58,7 +59,9 @@ class PagesController extends Controller {
 
     public function video()
     {
-        return view('pages.video');
+        $vitalHealthDM = Product::find(1);
+
+        return view('pages.video')->with(compact('vitalHealthDM'));
     }
 
 }

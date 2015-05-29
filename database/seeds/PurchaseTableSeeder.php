@@ -23,6 +23,8 @@ class PurchaseTableSeeder extends Seeder {
                 'price' => 5.00,
                 'unit_weight_g' => 48,
                 'unit_depth_cm' => 1.5,
+                'pack_size' => 4,
+                'pack_description' => '4 Pack',
             ],
             [
                 'name' => 'Dual Motion Replacement Heads - (4 Pack)',
@@ -31,6 +33,8 @@ class PurchaseTableSeeder extends Seeder {
                 'price' => 5.50,
                 'unit_weight_g' => 50,
                 'unit_depth_cm' => 1.5,
+                'pack_size' => 4,
+                'pack_description' => '4 Pack',
             ],
             [
                 'name' => 'Single Oscillating Replacement Head - (4 Pack)',
@@ -39,6 +43,8 @@ class PurchaseTableSeeder extends Seeder {
                 'price' => 5.00,
                 'unit_weight_g' => 40,
                 'unit_depth_cm' => 1.5,
+                'pack_size' => 4,
+                'pack_description' => '4 Pack',
             ],
             [
                 'name' => 'Sonic Replacement Head - (4 Pack)',
@@ -47,6 +53,8 @@ class PurchaseTableSeeder extends Seeder {
                 'price' => 6.00,
                 'unit_weight_g' => 33,
                 'unit_depth_cm' => 2.2,
+                'pack_size' => 4,
+                'pack_description' => '4 Pack',
             ],
             [
                 'name' => 'InterDental Care Kit - (9 Pack)',
@@ -55,6 +63,8 @@ class PurchaseTableSeeder extends Seeder {
                 'price' => 3.00,
                 'unit_weight_g' => 12,
                 'unit_depth_cm' => 1.5,
+                'pack_size' => 9,
+                'pack_description' => '6 Sulcus Tips and 3 Gum Stimulators',
             ],
             [
                 'name' => 'InterDental Floss Heads - (60 Pack)',
@@ -63,6 +73,8 @@ class PurchaseTableSeeder extends Seeder {
                 'price' => 6.00,
                 'unit_weight_g' => 115,
                 'unit_depth_cm' => 2.5,
+                'pack_size' => 60,
+                'pack_description' => '60 Pack',
             ]
         ];
 
@@ -83,6 +95,8 @@ class PurchaseTableSeeder extends Seeder {
                 'purchase' => 1,
                 'unit_weight_g' => $rh['unit_weight_g'],
                 'unit_depth_cm' => $rh['unit_depth_cm'],
+                'pack_size' => $rh['pack_size'],
+                'pack_description' => $rh['pack_description'],
             ]);
 
             $image1 = Image::create([

@@ -229,26 +229,33 @@ class CartRepository {
      */
     public function calculateShipping()
     {
+
         if (session('country') == "CA")
         {
             if ($this->getTotalNumberOfItems() <= 3)
                 $shippingAndHandling = 4;
+            elseif ($this->getTotalNumberOfItems() >= 6)
+                $shippingAndHandling = 7;
             else
                 $shippingAndHandling = 5;
         }
         else
             $shippingAndHandling = 5;
 
-        if ($this->getTotalWeight() > 200)
-            $shippingAndHandling = 5;
-        if ($this->getTotalNumberOfItems() > 4)
-            $shippingAndHandling = 5;
-        if ($this->getThickness() > 20)
-            $shippingAndHandling = 7;
+        if ($shippingAndHandling < 5)
+        {
+            if ($this->getTotalWeight() > 200)
+                $shippingAndHandling = 5;
+            if ($this->getTotalNumberOfItems() > 4)
+                $shippingAndHandling = 5;
+            if ($this->getThickness() > 20)
+                $shippingAndHandling = 7;
 
-        // ADD OTHER CONDITIONALS AND CALCULATIONS HERE
-        if ($shippingAndHandling == 0)
-            $shippingAndHandling = 4;
+            // ADD OTHER CONDITIONALS AND CALCULATIONS HERE
+            if ($shippingAndHandling == 0)
+                $shippingAndHandling = 4;
+        }
+
 
         $this->$shippingAndHandling = $shippingAndHandling;
 
@@ -462,7 +469,7 @@ class CartRepository {
      *
      * @return int|mixed
      */
-    private function getThickness()
+    public function getThickness()
     {
         $cartData = $this->getCartData();
 
@@ -473,7 +480,7 @@ class CartRepository {
         foreach ($cartData as $item)
             $productsArray[] = $item['product_id'];
 
-        $products = Product::whereIn('id', $productsArray)->get();;
+        $products = Product::whereIn('id', $productsArray)->get();
 
         $thicknessInMM = 0;
         foreach($products as $product)

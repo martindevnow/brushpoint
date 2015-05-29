@@ -17,6 +17,10 @@ class CreateProductsTable extends Migration {
             $table->increments('id');
             $table->string('name');
             $table->text('description');
+
+            $table->integer('pack_size')->nullable();
+            $table->string('pack_description')->nullable();
+
             $table->string('sku');
             $table->double('price', 6, 2);
             $table->integer('on_hand');
@@ -58,17 +62,17 @@ class CreateProductsTable extends Migration {
             $table->integer('inner_weight_g')->nullable();
             $table->integer('case_weight_g')->nullable();
 
-            $table->decimal('unit_height_cm', 3,3)->nullable();
-            $table->decimal('unit_width_cm', 3,3)->nullable();
-            $table->decimal('unit_depth_cm', 3,3)->nullable();
+            $table->decimal('unit_height_cm', 8,3)->nullable();
+            $table->decimal('unit_width_cm', 8,3)->nullable();
+            $table->decimal('unit_depth_cm', 8,3)->nullable();
 
-            $table->decimal('inner_height_cm', 3,3)->nullable();
-            $table->decimal('inner_width_cm', 3,3)->nullable();
-            $table->decimal('inner_depth_cm', 3,3)->nullable();
+            $table->decimal('inner_height_cm', 8,3)->nullable();
+            $table->decimal('inner_width_cm', 8,3)->nullable();
+            $table->decimal('inner_depth_cm', 8,3)->nullable();
 
-            $table->decimal('case_height_cm', 3,3)->nullable();
-            $table->decimal('case_width_cm', 3,3)->nullable();
-            $table->decimal('case_depth_cm', 3,3)->nullable();
+            $table->decimal('case_height_cm', 8,3)->nullable();
+            $table->decimal('case_width_cm', 8,3)->nullable();
+            $table->decimal('case_depth_cm', 8,3)->nullable();
 
             $table->timestamps();
         });
