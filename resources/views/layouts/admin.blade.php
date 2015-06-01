@@ -80,6 +80,8 @@
     }
     </style>
 
+@yield('admin_head')
+
 </head>
 
 <body>

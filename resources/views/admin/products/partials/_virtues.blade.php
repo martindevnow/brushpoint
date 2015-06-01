@@ -16,7 +16,6 @@
               {!! Form::label('body', 'Body:') !!}
               {!! Form::text('body', null, ['class' => 'form-control']) !!}
               {!! Form::hidden('product_id', $product->id) !!}
-
           </div>
       </div>
       <div class="modal-footer">

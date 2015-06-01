@@ -259,3 +259,62 @@ $("ol.other_list").sortable({
         });
     }
 });
+
+
+
+
+
+
+
+
+
+$("ol.product_list").sortable({
+    group: 'other_list',
+    pullPlaceholder: false,
+    // animation on drop
+    /*onDrop: function  (item, targetContainer, _super) {
+        var clonedItem = $('<li/>').css({height: 0})
+        item.before(clonedItem)
+        clonedItem.animate({'height': item.height()})
+
+        item.animate(clonedItem.position(), function  () {
+            clonedItem.detach()
+            _super(item)
+        })
+    },
+
+    // set item relative to cursor position
+    onDragStart: function ($item, container, _super) {
+        var offset = $item.offset(),
+            pointer = container.rootGroup.pointer
+
+        adjustment = {
+            left: pointer.left - offset.left,
+            top: pointer.top - offset.top
+        }
+
+        _super($item, container)
+    },
+    onDrag: function ($item, position) {
+        $item.css({
+            left: position.left - adjustment.left,
+            top: position.top - adjustment.top
+        })
+    },*/
+    update: function (event, ui) {
+        var data = $(this).sortable('serialize');
+
+        var csrf_token = $("meta[name=csrf-token]").attr("content");
+        console.log(data);
+
+        // post with AJAX
+        $.ajax({
+            data: data + "&csrf-token=" + csrf_token,
+            type: 'GET',
+            url: '/admins/products/rearrange/saveOrder',
+            success: function(response) {
+                $('.flash').fadeIn(500).delay(1000).fadeOut(500);
+            }
+        });
+    }
+});

@@ -43,8 +43,8 @@
             <div class="col-md-8 col-sm-8">
                 <div class="left-title">
                     <div class="heading-title">
-                        <h2 class="left-text"><b>@if (isset($product))
-                         {!! $product->name !!} @else Please select a product @endif </b></h2>
+                        <h1 class="left-text"><b>@if (isset($product))
+                         {!! $product->name !!} @else Please select a product @endif </b></h1>
                     </div>
 
                     @if(isset($product->claim))
@@ -52,7 +52,7 @@
                     @endif
 
 
-                    @if ($product->benefits)
+                    @if ($product->benefits->count())
                     <div class="left-title">
                         <div class="heading-title">
                             <h2 class="h3-section-title left-text">Benefits</h2>
@@ -68,7 +68,7 @@
                     @endif
 
 
-                    @if ($product->features)
+                    @if ($product->features->count())
                     @if($sep) <div class="space-sep20"></div> @endif
                     <div class="left-title">
                         <div class="heading-title">
@@ -85,10 +85,9 @@
 
                     @if(isset($product->other) && $product->others)
                     @if($sep) <div class="space-sep20"></div> @endif
-
                         <div class="left-title">
                             <div class="heading-title">
-                                <h2 class="h3-section-title left-text">{{ $product->other }}</h2>
+                                <h2 class="h3-section-title left-text">{!! $product->other !!}</h2>
                             </div>
                             <ul class="icons-list check-2 colored-list ">
                                 @foreach($product->others as $point)
@@ -100,6 +99,18 @@
                         <p>{!! $product->others !!}</p>
                     @endif
 
+
+                    @if(isset($product->video_name) && $product->video_name)
+                    @if($sep) <div class="space-sep20"></div> @endif
+                        <div class="left-title">
+                            <div class="heading-title">
+                                <h2 class="h3-section-title left-text">
+                                    Video:
+                                </h2>
+                            </div>
+                            <h5><a href="{{$product->video_link}}" target="_blank" style="color: red">{{ $product->video_name }}</a></h5>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

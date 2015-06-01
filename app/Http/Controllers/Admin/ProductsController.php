@@ -112,4 +112,27 @@ class ProductsController extends Controller {
         return 1;
     }
 
+    public function rearrange()
+    {
+        $products = Product::all();
+
+        $this->layout->content = view('admin.products.rearrange')->with(compact('products'));
+    }
+
+
+    public function ajaxSaveProductOrder (Request $request)
+    {
+        // dd($request->all());
+
+        foreach($request->product as $priority => $product_id)
+        {
+
+            $product = Product::find($product_id);
+            // dd($virtue);
+            $product->display_order = $priority;
+            $product->save();
+        }
+        return 1;
+    }
+
 }

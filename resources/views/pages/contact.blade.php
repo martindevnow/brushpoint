@@ -39,14 +39,14 @@
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <div class="form-group clearfix">
                     <label class="control-label" for="name">Name *</label>
-                    <div class="col-xs-6">
+                    <div class="col-xs-8">
                         <input type="text" id="name" name="name" class="form-control" required/>
                     </div>
                 </div>
 
                 <div class="form-group clearfix">
                     <label class="control-label" for="user-email"> E-mail *</label>
-                    <div class="col-xs-6">
+                    <div class="col-xs-8">
                         <!-- type email used by jquery validate -->
                         <input type="text" name="email" id="user-email" class="form-control" required/>
                     </div>
@@ -54,7 +54,7 @@
 
                 <div class="form-group clearfix">
                     <label class="control-label" for="user_message">  Message *</label>
-                    <div class="col-xs-6">
+                    <div class="col-xs-10">
                         <!-- type email used by jquery validate -->
                         <textarea name="user_message" id="user_message" class="form-control" required></textarea>
                     </div>
@@ -63,7 +63,7 @@
 
                 <div class="form-group clearfix">
                     <label class="control-label"></label>
-                    <div class="col-xs-6">
+                    <div class="col-xs-8">
                         <input type="submit" value="Send" class="btn btn-primary"/>
                     </div>
                 </div>

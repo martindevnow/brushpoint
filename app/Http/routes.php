@@ -76,10 +76,6 @@ Route::get('dumpcart', function(){
 
 
 // May 6th 2015
-// TODO: - get proper copy from paul
-// TODO:        -- make a csv format that can be imported easily
-// TODO:        -- Make the CSV support arrays in the fields...
-
 // TODO: - RE-DISABLE duplication of 'Payments' in ProcessPaymentStatusCommandHandler.php
 // TODO: - check the email that is generated and sent to the customer
 // TODO: Build at least a little more on the admin area so that I can see what was purchased and how much
@@ -177,13 +173,19 @@ Route::get('payment/execute', 'CartController@paymentTestExecute');
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 {
     Route::get(         'admins', 'AdminController@index');
-    Route::resource(    'admins/products',      'ProductsController');
-    Route::patch(       'admins/products/ajax/{id}',   'ProductsController@ajaxPatch');
 
+
+
+
+    Route::patch(       'admins/products/ajax/{id}',   'ProductsController@ajaxPatch');
     Route::patch(       'admins/products/active/{id}',         'ProductsController@ajaxActive');
     Route::patch(       'admins/products/portfolio/{id}',      'ProductsController@ajaxPortfolio');
     Route::patch(       'admins/products/purchase/{id}',       'ProductsController@ajaxPurchase');
     Route::get(         'admins/products/virtues/saveOrder',   'ProductsController@ajaxSaveListOrder');
+    Route::get(         'admins/products/rearrange',            'ProductsController@rearrange');
+    Route::get(         'admins/products/rearrange/saveOrder',            'ProductsController@ajaxSaveProductOrder');
+    Route::resource(    'admins/products',      'ProductsController');
+
 
 
     Route::get(         'admins/feedback/filter',      'FeedbackController@filtered');

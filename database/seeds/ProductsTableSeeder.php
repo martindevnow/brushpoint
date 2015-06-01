@@ -101,7 +101,7 @@ class ProductsTableSeeder extends Seeder {
                     "Outstanding Value!"],
 
                 "features" => ["Unique Battery powered Sonic toothbrush",
-                    "Over 22,000 active sonic vibrations per minute",
+                    "30,000 active sonic vibrations per minute",
                     "Multi-level bristles for deep cleaning",
                     "1 AA battery included"],
 
@@ -186,7 +186,7 @@ class ProductsTableSeeder extends Seeder {
                 "name" => "Sonic Power Toothbrush",
                 "benefits" => ["Active sonic wave vibrations  provide a deep clean"],
                 "features" => ["Unique Battery powered Sonic toothbrush",
-                    "Over 22,000 active sonic vibrations per minute",
+                    "30,000 active sonic vibrations per minute",
                     "Multi-level bristles for deep cleaning",
                     "Slim handle design",
                     "Metallic handle colors",
@@ -337,7 +337,7 @@ class ProductsTableSeeder extends Seeder {
             [
                 "sku" => "ManualToothbrushes",
                 "name" => "Manual Toothbrushes & Accessories",
-                "other" => "<strong>BrushPoint offers the following premium German Engineered Manual Toothbrushes in the United States and Canada:</strong><br />
+                "other" => "<strong>BrushPoint offers premium German Engineered Manual Toothbrushes in the United States and Canada:</strong><br />
             <p>
             Manual models include Deep Clean, Sensitive, Whitening and  Vital Health&reg; benefits.<br /><br />
             Other Dental Brushes and accessories are also available and include a Travel Brush, Interdental Picks, Manual Interdental Oral Care System, Manual Denture Brush, Flossers, Dental Floss and Premium No Shred Dental Tape.
@@ -391,23 +391,17 @@ class ProductsTableSeeder extends Seeder {
             $prod['purchase'] = 0;
 
             if (isset($prod['features']))
-            {
                 $virtues['feature'] = $prod['features'];
-                unset($prod['features']);
-            }
+            unset($prod['features']);
 
             if (isset($prod['benefits']))
-            {
                 $virtues['benefit'] = $prod['benefits'];
-                unset($prod['benefits']);
-            }
+            unset($prod['benefits']);
 
 
             if (isset($prod['other_list']))
-            {
                 $virtues['other'] = $prod['other_list'];
-                unset($prod['other_list']);
-            }
+            unset($prod['other_list']);
 
 
             $dbProd = Product::create($prod);
@@ -435,6 +429,7 @@ class ProductsTableSeeder extends Seeder {
                     $dbProd->virtues()->save($dbVirtue);
                 }
             }
+            $virtues = array();
 
 
             $image1 = Image::create([

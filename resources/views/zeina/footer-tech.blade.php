@@ -40,7 +40,7 @@
                                     <div class="contact-title">
                                         <i class="icon-envelope"></i>eMail
                                     </div>
-                                    <div class="contact-details"><a href="mailto:info@brushpoint.com" class="footer-link">info@brushpoint.com</a></div>
+                                    <div class="contact-details"><a href="/contact" class="footer-link">info@brushpoint.com</a></div>
                                 </li>
                             </ul>
                         </div>
