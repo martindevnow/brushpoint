@@ -52,6 +52,8 @@ Route::get('emailBen', function()
         'invoice_number' => "1"
     ];
 
+    return view('emails.customer.invoice')->with($data);
+
     Mail::send('emails.customer.invoice', $data, function($message) use ($data) {
         $message->to($data['customer_email'])
             ->subject("BrushPoint: Purchase Receipt");
