@@ -46,25 +46,17 @@
                   <td>{{ asMoney($item['price'] * $item['quantity']) }}</td>
                 </tr>
                 @endforeach
-
               </tbody>
         </table>
 
         <a href="/purchase" class="btn btn-primary">Continue Browsing</a>
-
-
             @if ($cartRepo->isSetRecipientCountry())
                 <a href="/checkout/express" class="btn btn-sale btn-float-right">
                     <i class="icon-shopping-cart"></i>
                     Checkout</a>
             @endif
-
             {!! Form::submit('Update Quantities', ['class' => "btn btn-sale btn-float-right"]) !!}
-
-
         {!! Form::close() !!}
-
-
 
         <table class="table cart-contents" style="width: 40%; float: right;">
             <thead>
@@ -109,7 +101,5 @@
             <h2><a href="http://bpl5.dev/purchase">Click here to view our products.</a></h2>
         </div>
     @endif
-
-
 </div>
 @stop
