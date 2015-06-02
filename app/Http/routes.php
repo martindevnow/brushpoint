@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Martin\Products\Virtue;
 use Martin\Products\Product;
@@ -33,6 +34,30 @@ Route::get('pathvars', function() {
 });
 
 
+
+Route::get('emailBen', function()
+{
+    $address = new \Martin\Core\Address();
+    $address->street_1 = "15 Carousel Circle";
+    $address->city = "St. Cath";
+    $address->province = "ON";
+    $address->postal_code = "L2N 6C9";
+    $address->country = "Canada";
+
+
+    $data = [
+        'customer_name' => "Ben Martin",
+        'customer_email' => "the.one.martin@gmail.com",
+        'customer_address' => $address,
+        'invoice_number' => "1"
+    ];
+
+    Mail::send('emails.customer.invoice', $data, function($message) use ($data) {
+        $message->to($data['customer_email'])
+            ->subject("BrushPoint: Purchase Receipt");
+        $message->from('orders@brushpoint.com', 'BrushPoint Orders');
+    });
+});
 
 
 
