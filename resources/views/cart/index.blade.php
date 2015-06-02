@@ -49,13 +49,23 @@
 
               </tbody>
         </table>
-        {!! Form::submit('Update Quantities', ['class' => "btn btn-sale" ]) !!}
+
+        <a href="/purchase" class="btn btn-primary">Continue Browsing</a>
+
+
+            @if ($cartRepo->isSetRecipientCountry())
+                <a href="/checkout/express" class="btn btn-sale btn-float-right">
+                    <i class="icon-shopping-cart"></i>
+                    Checkout</a>
+            @endif
+
+            {!! Form::submit('Update Quantities', ['class' => "btn btn-sale btn-float-right"]) !!}
+
+
         {!! Form::close() !!}
 
 
-        @if ($cartRepo->isSetRecipientCountry())
-            <a href="/checkout/express" class="btn btn-sale">Checkout</a>
-        @endif
+
         <table class="table cart-contents" style="width: 40%; float: right;">
             <thead>
                 <tr>
@@ -100,7 +110,6 @@
         </div>
     @endif
 
-    <a href="/purchase" class="btn btn-primary">Continue Browsing</a>
 
 </div>
 @stop

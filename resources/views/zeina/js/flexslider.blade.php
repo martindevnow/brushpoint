@@ -7,11 +7,10 @@
             <img src="/images/brushpoint/slider/bp-slide-03.jpg" />
         </li> -->
         <li>
-            <img src="/images/brushpoint/slider/bp-slide-02.jpg" />
+            <img src="/images/brushpoint/slider/bp-slide-02-2200px.jpg" />
         </li>
-
         <li>
-            <img src="/images/brushpoint/slider/bp-slide-01.jpg" />
+            <img src="/images/brushpoint/slider/bp-slide-01-2200px.jpg" />
         </li>
     </ul>
 </div>

@@ -25,16 +25,16 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-sm-4">
+            <div class="col-md-3 col-sm-4">
                 <div class="center-title">
-                    <img src="/images/logo/brushpoint.jpg" width="500" height="222" class="img-responsive">
+                    <br /><br /><img src="/images/logo/brushpoint.jpg" width="250" height="111" class="img-responsive">
                  </div>
             </div>
-            <div class="col-md-8 col-sm-8">
-                <p><br /><br />
-                    BrushPoint Innovations Inc. is a privately held company that focuses on patented consumer Oral Care technology and products for global retailers in the area of
+            <div class="col-md-9 col-sm-8">
+                <p style="font-size: 1.5em"><br /><br />
+                    <b>BrushPoint Innovations Inc.</b> is a privately held company that focuses on patented consumer Oral Care technology and products for global retailers in the area of
                     Private Label and Branded products.
-                    <br/>
+                    <br/><br />
                     We pride ourselves on quality products that deliver innovation and uniqueness for our retail Customers' private brand offering to their valued consumer base.
                 </p>
             </div>

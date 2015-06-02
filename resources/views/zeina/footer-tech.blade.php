@@ -4,8 +4,8 @@
                 <div class="row">
                     @if (isset($tech))
                     <!-- Footer Col. -->
-                    <div class="footer-col-md-3 col-sm-3 col-xs-12 footer-col">
-                        <div class="footer-content" style="padding-bottom: 0px;">
+                    <div class="footer-col-md-3 col-sm-3 col-xs-6 footer-col" >
+                        <div class="footer-content bp-footer-content" style="">
                             <ul class="contact-info">
                                 <li>
                                     <div class="contact-title">
@@ -19,8 +19,8 @@
                     <!-- //Footer Col.// -->
 
                     <!-- Footer Col. -->
-                    <div class="footer-col-md-3 col-sm-3 col-xs-12 footer-col">
-                        <div class="footer-content">
+                    <div class="footer-col-md-3 col-sm-3 col-xs-6 footer-col">
+                        <div class="footer-content bp-footer-content">
                             <ul class="contact-info">
                                 <li>
                                     <div class="contact-title">
@@ -33,8 +33,8 @@
                     </div>
                     <!-- //Footer Col.// -->
                     <!-- Footer Col. -->
-                    <div class="footer-col-md-3 col-sm-3 col-xs-12 footer-col">
-                        <div class="footer-content">
+                    <div class="footer-col-md-3 col-sm-3 col-xs-6 footer-col">
+                        <div class="footer-content bp-footer-content">
                             <ul class="contact-info">
                                 <li>
                                     <div class="contact-title">
@@ -48,8 +48,8 @@
                     <!-- //Footer Col.// -->
 
                     <!-- Footer Col. -->
-                    <div class="footer-col-md-3 col-sm-3 col-xs-12 footer-col">
-                        <div class="footer-content">
+                    <div class="footer-col-md-3 col-sm-3 col-xs-6 footer-col">
+                        <div class="footer-content bp-footer-content">
                             <ul class="contact-info">
                                 <li>
                                     <div class="contact-title">

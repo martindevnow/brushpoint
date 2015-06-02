@@ -111,6 +111,7 @@
             background-repeat: repeat-x;
             /*border-bottom: 1px solid #000000;*/
         }
+
         .contact-title {
             color: white;
             text-transform: uppercase;
@@ -119,14 +120,28 @@
         .contact-details {
             color: white;
         }
-        .footer-col-md-3 {
-            background-color: #0032a1;
-            padding-bottom: 0px;
-            width: 23%;
+        .bp-footer-content {
             margin: 1%;
+            padding-bottom: 0px;
+            background-color: #0032a1;
+            width: 100%;
+            padding: 2px 15px 0px 13px;
+            // padding-left: 10px;;
+            // border: 3px solid black;
+            background-color: #0032a1;
+            min-height: 65px;
+        }
+
+        .footer-col-md-3 {
+            padding-bottom: 0px;
+            // width: 25%;
+            // margin: 1%;
             padding-left: 13px;
             padding-top: 2px;
             min-height: 65px;
+            // border: 2px solid red;
+            padding-left: 2px;
+            padding-right: 2px;
         }
         .footer-link a {
             color: #FFFFFF;
@@ -224,6 +239,15 @@
             font-size: 16px;
             padding-top: 16px;
         }
+        .btn-float-right {
+            float: right;
+        }
+
+
+
+
+
+
         @media (max-width: 767px){
             .breadcrumb-container {
               float: right;
