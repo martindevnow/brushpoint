@@ -251,6 +251,24 @@
         @media (max-width: 767px){
             .breadcrumb-container {
               float: right;
+
+            }
+
+
+        }
+
+        @media (max-width: 991px) and (min-width: 767px)
+        {
+            .logo{
+                padding: 0px;
+            }
+            .img-logo {
+                content: url('/images/logo/brushpoint.jpg');
+                width: 200px;
+                height: auto;
+            }
+            .bp-nav-header {
+                padding 0px;
             }
         }
 
@@ -274,16 +292,16 @@
             <div class="row header">
 
                 <!-- Logo -->
-                <div class="col-md-5 col-sm-10 col-xs-10 logo">
+                <div class="col-md-5 col-sm-3 col-xs-10 logo">
                     <a href="/">
-                        <img src="/images/logo/bpi_longlogo.jpg" alt="Brushpoint Innovations" class="img-responsive"/>
+                        <img src="/images/logo/bpi_longlogo.jpg" alt="Brushpoint Innovations" class="img-responsive img-logo"/>
                     </a>
                 </div>
                 <!-- //Logo// -->
 
 
                 <!-- Navigation File -->
-                <div class="col-md-7">
+                <div class="col-md-7 col-sm-9 bp-nav-header">
 
                     <!-- Mobile Button Menu -->
                     <div class="mobile-menu-button">

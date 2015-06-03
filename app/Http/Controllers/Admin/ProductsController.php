@@ -114,9 +114,16 @@ class ProductsController extends Controller {
 
     public function rearrange()
     {
-        $products = Product::all();
+        $products = Product::active()->portfolio()->get();
+        $numCols = 4;
+        $this->layout->content = view('admin.products.rearrange')->with(compact('products', 'numCols'));
+    }
 
-        $this->layout->content = view('admin.products.rearrange')->with(compact('products'));
+    public function rearrangePurchase()
+    {
+        $products = Product::active()->purchase()->get();
+        $numCols = 3;
+        $this->layout->content = view('admin.products.rearrange')->with(compact('products', 'numCols'));
     }
 
 
@@ -126,9 +133,7 @@ class ProductsController extends Controller {
 
         foreach($request->product as $priority => $product_id)
         {
-
             $product = Product::find($product_id);
-            // dd($virtue);
             $product->display_order = $priority;
             $product->save();
         }

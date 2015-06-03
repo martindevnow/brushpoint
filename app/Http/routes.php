@@ -125,6 +125,7 @@ Route::get('contact', 'PagesController@contact');
 Route::post('contact', 'PagesController@sendContact');
 Route::get('contact/thankyou', 'PagesController@thankyouContact');
 Route::get('video', 'PagesController@video');
+// Backwards compatible with the QR code on packaged goods
 Route::get('video.htm', 'PagesController@video');
 
 
@@ -222,7 +223,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::patch(       'admins/feedback/ajax/{id}',   'FeedbackController@ajaxPatch');
 
 
-    Route::resource(    'admins/purchases',         'PurchasesController');
+    Route::get(         'admins/purchase/rearrange',            'ProductsController@rearrangePurchase');
+    Route::get(         'admins/purchase/rearrange/saveOrder',   'ProductsController@ajaxSaveProductOrder');
+
+    // Route::resource(    'admins/purchases',         'PurchasesController');
 
     Route::get(         'admins/payments/filter',      'PaymentsController@filtered');
     Route::resource(    'admins/payments',          'PaymentsController');

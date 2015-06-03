@@ -11,7 +11,7 @@
                 <div class="sidebar-icon-item">
                     <i class="icon-envelope-alt"></i> <a href="/contact">info@brushpoint.com</a>
                 </div><div class="sidebar-icon-item">
-                    <i class="icon-envelope-alt"></i> <a href="/contact">sales@brushpoint.com</a>
+                    <i class="icon-envelope-alt"></i> <a href="mailto:sales@brushpoint.com">sales@brushpoint.com</a>
                 </div>
                 <div class="sidebar-icon-item">
                     <i class="icon-home"></i> 2189 King Road, King City, Ontario, Canada, L7B 1G3

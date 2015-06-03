@@ -21,6 +21,20 @@ class Product extends CoreModel {
     ];
 
 
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', '=', 1);
+    }
+    public function scopePurchase($query)
+    {
+        return $query->where('purchase', '=', 1);
+    }
+    public function scopePortfolio($query)
+    {
+        return $query->where('portfolio', '=', 1);
+    }
+
     public function urlToProductPage()
     {
         return '/products/id-'. $this->id;

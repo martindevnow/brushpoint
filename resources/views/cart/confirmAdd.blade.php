@@ -36,6 +36,10 @@
                     <div class="col-sm-6">
                         <div class="row">
                             <p>{{ $product->description }}</p>
+                            <span class="purchase-pack">[{{ $product->pack_description }}]</span>
+                            <h2 class="purchase-price">USD ${{ number_format($product->price, 2) }}</h2>
+
+
                             @include('purchase.partials.addToCart', ['product' => $product])
                         </div>
                     </div>

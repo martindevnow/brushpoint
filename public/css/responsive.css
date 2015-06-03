@@ -1418,10 +1418,8 @@
   }
 }
 
-@media (max-width: 992px)
+@media (max-width: 767px)
 {
-
-
   .top-bar {
     height: auto !important;
   }
@@ -1596,10 +1594,9 @@
   }
 }
 
-@media (min-width: 992px)
+/** CHANGED BY BRUSHPOINT */
+@media (min-width: 767px)
 {
-
-
   .mobile-nav {
     display: none !important;
   }

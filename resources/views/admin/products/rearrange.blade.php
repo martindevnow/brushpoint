@@ -25,9 +25,11 @@
 
 
 <div class="container">
-    <ol id="sortable" class="product_list">
+    <ol id="sortable" class="product_list" style="width: {{ $numCols * 165 }}px;">
     @foreach ($products as $product)
-        <li id="product_{{$product->id}}" class="ui-state-default">{{ $product->name }}</li>
+        <li id="product_{{$product->id}}" class="ui-state-default">{{ $product->name }}
+        {!! $product->active ? '' : "<br /><b>[Deactivated]</b>" !!}
+        </li>
     @endforeach
     </ol>
 </div>

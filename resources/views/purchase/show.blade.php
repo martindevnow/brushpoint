@@ -30,19 +30,12 @@
             <div class="left-title">
                 <div class="heading-title">
                     <h2 class="h2-section-title left-text">{{ $product->name }}</h2>
+                    <span class="purchase-pack">[{{ $product->pack_description }}]</span>
                     <h2 class="purchase-price">USD ${{ number_format($product->price, 2) }}</h2>
                 </div>
                 <p>
                     {{ $product->description }}
                 </p>
-                <!--
-                <ul class="icons-list check-2 colored-list ">
-                    <li>Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus</li>
-                    <li>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero</li>
-                    <li>Aenean imperdiet. Etiam ultricies nisi vel augue.</li>
-                    <li>Sed fringilla mauris sit amet nibh</li>
-                    <li>Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus</li>
-                </ul> -->
             </div>
             <div class="space-sep20"></div>
 

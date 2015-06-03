@@ -17,7 +17,7 @@ class PurchaseTableSeeder extends Seeder {
 
         $replacementHeads = [
             [
-                'name' => 'Dual Zone Replacement Heads - (4 Pack)',
+                'name' => 'Dual Zone Replacement Heads',
                 'description' => 'High oscillating power brush head combined with lower stationary bristles to provide a deep thorough clean.',
                 'sku' => 'RH-DZ',
                 'price' => 5.00,
@@ -28,7 +28,7 @@ class PurchaseTableSeeder extends Seeder {
                 'display_order' => 3,
             ],
             [
-                'name' => 'Dual Motion Replacement Heads - (4 Pack)',
+                'name' => 'Dual Motion Replacement Heads',
                 'description' => 'Dual motion brush head to actively sweep away plaque and clean teeth. Top oscillates while bottom bristles move back and forth.',
                 'sku' => 'RH-DM',
                 'price' => 5.50,
@@ -40,7 +40,7 @@ class PurchaseTableSeeder extends Seeder {
 
             ],
             [
-                'name' => 'Single Oscillating Replacement Head - (4 Pack)',
+                'name' => 'Single Oscillating Replacement Head',
                 'description' => 'Compact oscillating brush head that surrounds each tooth for a deep clean.',
                 'sku' => 'RH-OSC',
                 'price' => 5.00,
@@ -52,7 +52,7 @@ class PurchaseTableSeeder extends Seeder {
 
             ],
             [
-                'name' => 'Sonic Replacement Head - (4 Pack)',
+                'name' => 'Sonic Replacement Head',
                 'description' => 'Active Sonic vibrations helps sweep away plaque. Multi-level bristling. (Only fits the Sonic toothbrush)',
                 'sku' => 'RH-SONIC',
                 'price' => 6.00,
@@ -64,7 +64,7 @@ class PurchaseTableSeeder extends Seeder {
 
             ],
             [
-                'name' => 'InterDental Care Kit - (9 Pack)',
+                'name' => 'InterDental Care Kit',
                 'description' => '6 Sulcus tips and 3 gum stimulators. Compatible with our Vital Health battery and rechargeable Oral Care Systems. ',
                 'sku' => 'ID-CARE',
                 'price' => 3.00,
@@ -76,7 +76,7 @@ class PurchaseTableSeeder extends Seeder {
 
             ],
             [
-                'name' => 'InterDental Floss Heads - (60 Pack)',
+                'name' => 'InterDental Floss Heads',
                 'description' => '60 floss heads. Compatible with our Vital Health battery and rechargeable Oral Care Systems.',
                 'sku' => 'ID-FLOSS',
                 'price' => 6.00,
@@ -146,7 +146,7 @@ class PurchaseTableSeeder extends Seeder {
             {
                 $item1 = Item::create([
                     'product_id' => $prod->id,
-                    'name' => $prod->name . " [Soft]",
+                    'name' => $prod->name,
                     'description' => $prod->description,
                     'sku' => $prod->sku . "-SOFT",
                     'price' => $prod->price,
@@ -155,7 +155,7 @@ class PurchaseTableSeeder extends Seeder {
                 ]);
                 $item2 = Item::create([
                     'product_id' => $prod->id,
-                    'name' => $prod->name . " [Medium]",
+                    'name' => $prod->name,
                     'description' => $prod->description,
                     'sku' => $prod->sku . "-MED",
                     'price' => $prod->price,

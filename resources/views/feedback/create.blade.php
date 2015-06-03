@@ -18,6 +18,18 @@
 
 
 @section('content')
+  <script>
+      $(function() {
+        $( document ).tooltip();
+      });
+  </script>
+  <style>
+      label {
+        display: inline-block;
+        width: 5em;
+      }
+  </style>
+
 
 <div class="container">
    <div class="row">
@@ -43,7 +55,7 @@
                     <div class="form-group clearfix">
                         {!! Form::label('name', 'Name *', ['class' => 'control-label']) !!}
                         <div class="col-xs-8">
-                            {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                            {!! Form::text('name', null, ['class' => 'form-control', 'required', 'title' => 'Please enter your full name.']) !!}
                         </div>
                     </div>
                 </div>
@@ -53,7 +65,7 @@
                     <div class="form-group clearfix">
                         {!! Form::label('email', 'Email *', ['class' => 'control-label']) !!}
                         <div class="col-xs-8">
-                            {!! Form::text('email', null, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::text('email', null, ['class' => 'form-control', 'required', 'title' => 'Where can we contact you?']) !!}
                         </div>
                     </div>
                 </div>
@@ -63,7 +75,7 @@
                     <div class="form-group clearfix">
                         {!! Form::label('phone', 'Phone *', ['class' => 'control-label']) !!}
                         <div class="col-xs-8">
-                            {!! Form::text('phone', null, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::text('phone', null, ['class' => 'form-control', 'required', 'title' => 'Where can we reach you?']) !!}
                         </div>
                     </div>
                 </div>
@@ -84,7 +96,7 @@
                     <div class="form-group clearfix">
                         {!! Form::label('retailer_text', 'Retailer *', ['class' => 'control-label']) !!}
                         <div class="col-xs-8">
-                            {!! Form::text('retailer_text', null, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::text('retailer_text', null, ['class' => 'form-control', 'required', 'title' => 'The store it was purchased from.']) !!}
                         </div>
                     </div>
                 </div>
@@ -94,7 +106,7 @@
                     <div class="form-group clearfix">
                         {!! Form::label('lot_code', 'Lot Code', ['class' => 'control-label']) !!}
                         <div class="col-xs-8">
-                            {!! Form::text('lot_code', null, ['class' => 'form-control']) !!}
+                            {!! Form::text('lot_code', null, ['class' => 'form-control', 'title' => 'Found on the bottom of the toothbrush']) !!}
                         </div>
                     </div>
                 </div>
@@ -105,7 +117,7 @@
                     <div class="form-group clearfix">
                         {!! Form::label('issue_text', 'Issue *', ['class' => 'control-label']) !!}
                         <div class="col-xs-10">
-                            {!! Form::textarea('issue_text', null, ['class' => 'form-control']) !!}
+                            {!! Form::textarea('issue_text', null, ['class' => 'form-control', 'title' => 'Describe the problem you have with the toothbrush']) !!}
                         </div>
                     </div>
                 </div>
