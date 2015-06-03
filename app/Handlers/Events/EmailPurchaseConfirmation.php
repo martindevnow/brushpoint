@@ -34,10 +34,14 @@ class EmailPurchaseConfirmation {
             'customer_email' => $event->payment->payer->email,
             'customer_address' => $event->payment->payer->addresses->first(),
             'invoice_number' => $event->payment->id,
-
-
         ];
 
+        $payment = $event->payment;
+        $payer = $payment->payer;
+        $address = $payment->address; // can have different recipient
+        $transactions = $payment->transactions->all(); // array of transactions
+
+        $data = compact('payment', 'payer', 'address', 'transactions');
         /// Log::info(print_r($event->payment->payer->addresses,1));
 
 		Mail::send('emails.customer.invoice', $data, function($message) use ($event) {

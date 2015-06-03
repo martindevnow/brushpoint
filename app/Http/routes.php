@@ -12,6 +12,7 @@
 */
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
+use Martin\Ecom\Payment;
 use Martin\Products\Virtue;
 use Martin\Products\Product;
 use mikehaertl\wkhtmlto\Pdf;
@@ -45,14 +46,13 @@ Route::get('emailBen', function()
     $address->country = "Canada";
 
 
-    $data = [
-        'customer_name' => "Ben Martin",
-        'customer_email' => "the.one.martin@gmail.com",
-        'customer_address' => $address,
-        'invoice_number' => "1"
-    ];
+    $payment = Payment::find(1);
+    $payer = $payment->payer;
+    $address = $payment->address; // can have different recipient
+    $transactions = $payment->transactions->all(); // array of transactions
 
-    return view('emails.customer.invoice')->with($data);
+
+    return view('emails.customer.invoice')->with(compact('payment', 'payer', 'address', 'transactions'));
 
     Mail::send('emails.customer.invoice', $data, function($message) use ($data) {
         $message->to($data['customer_email'])

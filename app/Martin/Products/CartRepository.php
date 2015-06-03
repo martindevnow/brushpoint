@@ -242,7 +242,7 @@ class CartRepository {
         else
             $shippingAndHandling = 5;
 
-        if ($shippingAndHandling < 5)
+        if ($shippingAndHandling <= 5)
         {
             if ($this->getTotalWeight() > 200)
                 $shippingAndHandling = 5;

@@ -101,7 +101,7 @@ class PaymentLog {
             {
                 // is registered
                 // can return this model, it matches the payer and the details.
-                $this->dbAddress->payments()->save($registeredAddress);
+                $registeredAddress->payments()->save($this->dbPayment);
                 return $registeredAddress;
             }
         }
