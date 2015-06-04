@@ -204,7 +204,9 @@ $payment->created_at->timezone = 'America/Toronto';
                                         </a>
                                     </td>
                                     <td style="color:rgb(102,102,102);padding:10px 0 10px 10px;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
-                                        <a href="http://www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+
+                                        <a href="http://www.brushpoint.com/purchase" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                                            {!! $soldItem->quantity ? "<b>". $soldItem->quantity . " x </b>" : "" !!}
                                             {{ $soldItem->item->name }}
                                         </a>
                                         <br>

@@ -31,8 +31,8 @@ $payment->created_at->timezone = 'America/Toronto';
                                 <tbody>
                                 <tr>
                                     <td rowspan="2" style="width:115px;padding:20px 20px 0 0;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
-                                        <a href="http://www.brushpoint.com" title="Visit www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
-                                            <img src="http://www.brushpoint.martindevnow.com/images/logo/brushpoint.jpg" height="75" width="165" />
+                                        <a href="{{ url() }}" title="Visit www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                                            <img src="{{ url() }}/images/logo/brushpoint.jpg" height="75" width="165" />
                                             <!-- <img alt="BrushPoint.com" src="https://ci6.googleusercontent.com/proxy/WhmqLoMir5UYEN_mqZBtoDGctziWnxcd16JUuejFgylJH9MjVIUKe8NP3fxPs7ww8j41WBvy-JQKspLrhrPKLmmCwBuHQcWhwm7oPls8g7VZtkb0JoBGh-TAQx2I=s0-d-e1-ft#http://g-ec2.images-amazon.com/images/G/15/x-locale/cs/te/a_ca_logo.png" style="border:0;width:115px"> -->
                                         </a>
                                     </td>
@@ -52,7 +52,7 @@ $payment->created_at->timezone = 'America/Toronto';
                                         <span style="text-decoration:none;color:rgb(204,204,204);font-size:15px;font-family:Arial,sans-serif">
                                             &nbsp;|&nbsp;
                                         </span> -->
-                                        <a href="http://www.brushpoint.com" style="border:0;margin:0;padding:0;border-right:0px solid rgb(204,204,204);margin-right:0px;padding-right:0px;text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                                        <a href="{{ url() }}" style="border:0;margin:0;padding:0;border-right:0px solid rgb(204,204,204);margin-right:0px;padding-right:0px;text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                                             BrushPoint.com
                                         </a>
                                     </td>
@@ -63,7 +63,7 @@ $payment->created_at->timezone = 'America/Toronto';
                                             Shipping Confirmation
                                         </h2>
                                         Order #
-                                        <a href="http://www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                                        <a href="{{ url() }}" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                                             {{ $payment->payment_id }}
                                         </a>
                                         <br>
@@ -175,14 +175,15 @@ $payment->created_at->timezone = 'America/Toronto';
                                 <tbody>
                                 <tr>
                                     <td style="width:150px;text-align:center;padding:16px 0 10px 0;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
-                                        <a href="http://www.brushpoint.com" title="B005FWS0ZU" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                                        <a href="{{ url() }}/purchase/id-{{ $soldItem->item->product->id }}" title="B005FWS0ZU" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                                         <!-- PRODUCT IMAGE -->
-                                            <img src="http://www.brushpoint.martindevnow.com/images/brushpoint/purchase/{{ $soldItem->item->sku }}-115.png" class="img-responsive" style="max-height: 35px; display: inline;"/>
+                                            <img src="{{ url() }}/images/brushpoint/purchase/{{ $soldItem->item->sku }}-115.png" class="img-responsive" style="max-height: 35px; display: inline;"/>
                                             <!-- <img src="https://ci3.googleusercontent.com/proxy/s5qnvPL4BTDy60jHjxlmKEKp4MCauXDJcLY7c3s0DCt_C7Nm-9lbrmYA8Jy9evXE0cVYJb6qKvKg1DRmfJeJ3IwDuJnNkIUcHf5YeEtWsVxsuCIUzinUis2cZOXCKPBS7EBn4Z0=s0-d-e1-ft#http://ecx.images-amazon.com/images/I/41brDiU5u1L._SCLZZZZZZZ__SY115_SX115_.jpg" style="border:0"> -->
                                         </a>
                                     </td>
                                     <td style="color:rgb(102,102,102);padding:10px 0 10px 10px;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
-                                        <a href="http://www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                                        <a href="{{ url() }}/purchase" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                                            {!! $soldItem->quantity ? "<b>". $soldItem->quantity . " x </b>" : "" !!}
                                             {{ $soldItem->item->name }}
                                         </a>
                                         <br>
@@ -290,7 +291,7 @@ $payment->created_at->timezone = 'America/Toronto';
                         Ordering from BrushPoint.com
                         </a>.
                         <br> -->
-                        If you want more information or need more assistance, please don't hesitate to <a href="http://www.brushpoint.com/contact" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                        If you want more information or need more assistance, please don't hesitate to <a href="{{ url() }}/contact" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                         contact us
                         </a>.
                         </p>
