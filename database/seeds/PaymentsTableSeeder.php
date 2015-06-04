@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\DB;
 use Martin\Core\Address;
 use Martin\Ecom\Payer;
 use Martin\Ecom\Payment;
@@ -18,6 +19,7 @@ class PaymentsTableSeeder extends Seeder {
         Payment::truncate();
         Transaction::truncate();
         Address::truncate();
+        DB::table('payment_transaction')->truncate();
 
         $faker = Faker::create();
 
