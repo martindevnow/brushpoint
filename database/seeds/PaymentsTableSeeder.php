@@ -20,6 +20,7 @@ class PaymentsTableSeeder extends Seeder {
         Transaction::truncate();
         Address::truncate();
         DB::table('payment_transaction')->truncate();
+        SoldItem::truncate();
 
         $faker = Faker::create();
 
