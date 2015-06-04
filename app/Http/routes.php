@@ -38,12 +38,34 @@ Route::get('pathvars', function() {
 
 Route::get('emailBen', function()
 {
-    $address = new \Martin\Core\Address();
+
+
+    $payment = Payment::find(1);
+    $payer = $payment->payer;
+    $address = $payment->address; // can have different recipient
+    $transactions = $payment->transactions->all(); // array of transactions
+
+    return view('emails.customer.asn')->with(compact('payment', 'payer', 'address', 'transactions'));
+    Mail::send('emails.customer.asn', $data, function($message) use ($data) {
+        $message->to($data['customer_email'])
+            ->subject("BrushPoint: Your Order has Shipped!");
+        $message->from('orders@brushpoint.com', 'BrushPoint Orders');
+    });
+
+
+
+
+
+
+
+
+
+    /*$address = new \Martin\Core\Address();
     $address->street_1 = "15 Carousel Circle";
     $address->city = "St. Cath";
     $address->province = "ON";
     $address->postal_code = "L2N 6C9";
-    $address->country = "Canada";
+    $address->country = "Canada";*/
 
 
     $payment = Payment::find(1);

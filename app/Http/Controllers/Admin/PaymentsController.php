@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Admin;
 
+use App\Events\PackageWasShipped;
 use \App\Handlers\Events\GenerateInvoicePdf;
 use \App\Http\Requests;
 use \App\Http\Controllers\Controller;
@@ -88,7 +89,10 @@ class PaymentsController extends Controller {
         $payment = Payment::find($paymentId);
 
         if ($field == "shipped")
+        {
             $payment->toggleShipped($value);
+            event(new PackageWasShipped($payment));
+        }
         else
             $payment->$field = $value;
         $payment->save();

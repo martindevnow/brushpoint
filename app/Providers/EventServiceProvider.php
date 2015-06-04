@@ -17,6 +17,10 @@ class EventServiceProvider extends ServiceProvider {
             'App\Handlers\Events\ClearCurrentCart',
             'App\Handlers\Events\AdjustPurchasedInventory',
 		],
+
+        'App\Events\PackageWasShipped' => [
+            'App\Handlers\Events\EmailShippingConfirmation',
+        ]
 	];
 
 	/**

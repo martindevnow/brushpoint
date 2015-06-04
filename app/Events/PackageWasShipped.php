@@ -5,7 +5,7 @@ use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Martin\Ecom\Payment;
 
-class ProductWasPurchased extends Event {
+class PackageWasShipped extends Event {
 
 	use SerializesModels;
     /**
@@ -17,7 +17,7 @@ class ProductWasPurchased extends Event {
      * Create a new event instance.
      *
      * @param Payment $payment
-     * @return \App\Events\ProductWasPurchased
+     * @return \App\Events\PackageWasShipped
      */
 	public function __construct(Payment $payment)
 	{

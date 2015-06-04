@@ -1,5 +1,6 @@
 <?php namespace Martin\Ecom;
 
+use App\Events\PackageWasShipped;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,17 +26,52 @@ class Payment extends CoreModel {
         $this->unique_id = session('unique_id');
     }
 
+
+    /**
+     * Shipping
+     */
+
+
     public function toggleShipped($status)
     {
+
+
         // $status = ($this->closed + 1) % 2;
+
+
+
+
         $this->shipped = $status;
         $dt = new DateTime;
         if ($status)
+        {
             $this->shipped_at = $dt->format('y-m-d H:i:s');
+            // create an event
+            // EVENT WAS MOVED TO THE CONTROLLER
+            // event(new PackageWasShipped($this));
+            // add an event listener to this event so i can hook in and send a shipment confirmation
+        }
+
+
+
+
         else
             $this->shipped_at = 0;
         $this->save();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Relationships

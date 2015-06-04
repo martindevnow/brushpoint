@@ -20,6 +20,15 @@
         var form = $(this);
         var method = form.find('input[name="_method"]').val() || 'POST';
 
+        console.log($(this));
+        var button = form.find('input[name="shipped"]').val();
+        if (button)
+        {
+            console.log('hide...');
+            $(this).hide(2000);
+        }
+
+        console.log('send ajax request...');
         $.ajax({
             type: method,
             url: form.prop('action'),
@@ -47,7 +56,6 @@
                 }
 
 
-
             }
         });
         e.preventDefault();
@@ -56,9 +64,14 @@
     // forms marked with 'data-remote' will submit via AJAX
     $('form[data-remote]').on('submit', submitAjaxRequest);
 
+
     // the 'data-click-submits-form' auto submits the form
     $('*[data-click-submits-form]').on('change', function(){
         $(this).closest('form').submit();
+    });
+    $('*[button-disappears]').on('submit', function(){
+        console.log('hide...');
+        $(this).hide(2000);
     });
 })();
 

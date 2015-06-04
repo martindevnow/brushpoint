@@ -29,12 +29,14 @@
               <td>{{ $payment->address ? $payment->address->city: "Not Entered Yet" }}</td>
               <td>{{ $payment->transactions->first()? $payment->transactions->first()->amount_total: "Not completed Yet" }}</td>
               <td>
+              @if($payment->shipped_at == "0000-00-00 00:00:00")
                 <div class="form-group">
-                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/payments/ajax/'. $payment->id . '?field=shipped']) !!}
-                  {!! Form::checkbox('shipped', $payment->shipped, $payment->shipped, ['data-click-submits-form']) !!}
+                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/payments/ajax/'. $payment->id . '?field=shipped', 'id' => 'shipped-form']) !!}
+                  {!! Form::hidden('shipped', 1) !!}
+                  {!! Form::submit('Shipped',['data-click-submits-form button-disappears', 'class' => 'btn btn-primary']) !!}
                   {!! Form::close() !!}
                 </div>
-                @if($payment->shipped_at != "0000-00-00 00:00:00")
+                @else
                   [[ {{ $payment->shipped_at }} ]]
                 @endif
               </td>

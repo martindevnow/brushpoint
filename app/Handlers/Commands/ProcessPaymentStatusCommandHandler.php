@@ -53,7 +53,7 @@ class ProcessPaymentStatusCommandHandler {
 
         }
 
-        $paymentLog->logPayment();
+        // $paymentLog->logPayment();
 
         $paymentLog->updateState();
 
@@ -63,7 +63,7 @@ class ProcessPaymentStatusCommandHandler {
 
         $dbTransactions = $paymentLog->createTransactions();
 
-        Log::info('Seemed to work...');
+        // Log::info('Seemed to work...');
 
 
 
