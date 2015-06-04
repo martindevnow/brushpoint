@@ -4,6 +4,7 @@ use App\Events\PackageWasShipped;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Log;
 use Martin\Core\CoreModel;
 
 class Payment extends CoreModel {
@@ -34,12 +35,7 @@ class Payment extends CoreModel {
 
     public function toggleShipped($status)
     {
-
-
         // $status = ($this->closed + 1) % 2;
-
-
-
 
         $this->shipped = $status;
         $dt = new DateTime;
@@ -47,16 +43,15 @@ class Payment extends CoreModel {
         {
             $this->shipped_at = $dt->format('y-m-d H:i:s');
             // create an event
+            Log::info('payment updated: shipped = true');
             // EVENT WAS MOVED TO THE CONTROLLER
             // event(new PackageWasShipped($this));
             // add an event listener to this event so i can hook in and send a shipment confirmation
         }
-
-
-
-
         else
             $this->shipped_at = 0;
+
+
         $this->save();
     }
 

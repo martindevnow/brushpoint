@@ -4,6 +4,8 @@ use App\Events\PackageWasShipped;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class EmailShippingConfirmation {
 
@@ -26,8 +28,11 @@ class EmailShippingConfirmation {
 	public function handle(PackageWasShipped $event)
 	{
 
+        Log::info('Sending Email of Shipment Confirmation...');
+
         $payment = $event->payment;
         $payer = $payment->payer;
+        Log::info($payer);
         $address = $payment->address; // can have different recipient
         $transactions = $payment->transactions->all(); // array of transactions
 

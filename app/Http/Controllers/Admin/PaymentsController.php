@@ -101,6 +101,8 @@ class PaymentsController extends Controller {
 
 
 
+
+
     public function filtered(Request $request)
     {
         $payments = new Payment();

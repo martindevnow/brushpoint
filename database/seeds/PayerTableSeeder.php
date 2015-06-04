@@ -18,9 +18,9 @@ class PayerTableSeeder extends Seeder {
             'payer_id' => "P69HMJQPKK999",
             'payment_method' => "paypal",
             'status' => "VERIFIED",
-            'email' => $faker->email,
-            'first_name' => $faker->word,
-            'last_name' => ucfirst($faker->word),
+            'email' => "the.one.martin@gmail.com",
+            'first_name' => "Ben",
+            'last_name' => "Martin",
         ]);
 
 
