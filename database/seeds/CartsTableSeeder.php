@@ -17,7 +17,7 @@ class CartsTableSeeder extends Seeder {
         $faker = Faker::create();
         $users = User::lists('id');
 
-        foreach(range(1,10) as $index)
+        foreach(range(1,2) as $index)
         {
             $items = Item::lists('id');
             $prices = Item::lists('price');

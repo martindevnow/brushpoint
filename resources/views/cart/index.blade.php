@@ -30,20 +30,25 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($cartData as $item)
+                @foreach($cartItems as $item)
+                <?php
+                // dd($cartData);
+                $cartItem = $cartData['item-'. $item->id];
+                // dd($cartItem);
+              ?>
                 <tr>
                   <td>
                     <a href="cart/remove/{{ $item['id'] }}"><button type="button" class="btn btn-danger btn-xs">X</button></a>
                     <img src="/images/brushpoint/purchase/{{ $item['sku'] }}-115.png" class="img-responsive" style="max-height: 35px; display: inline;"/>
-                    <a href="/purchase/id-{{ $item['product_id'] }}">{{ $item['name'] }}</a></td>
-                  <td>{{ asMoney($item['price']) }}</td>
+                    <a href="/purchase/id-{{ $item['product_id'] }}">{{ $item['name'] }} {!! $item->variance ? "<i>". $item->variance . "</i>" : ""  !!} </a></td>
+                  <td>{{ asMoney($item->price) }}</td>
                   <td>
                     <!--  Form Input -->
                     <div class="form-group" style="margin-bottom: 0px">
-                        {!! Form::text($item['id'] . '-quantity', $item['quantity'], ['class' => 'form-control cart-item-quantity']) !!}
+                        {!! Form::text($item['id'] . '-quantity', $cartData['item-'.$item->id]['quantity'], ['class' => 'form-control cart-item-quantity']) !!}
                     </div>
                 </td>
-                  <td>{{ asMoney($item['price'] * $item['quantity']) }}</td>
+                  <td>{{ asMoney($item['price'] * $cartData['item-'.$item->id]['quantity']) }}</td>
                 </tr>
                 @endforeach
               </tbody>

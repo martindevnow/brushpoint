@@ -12,21 +12,24 @@
         {
             DB::table('users')->truncate();
 
-            $faker = Faker::create();
-
             User::create([
-                'name' => 'Ben',
+                'name' => 'Ben Martin',
                 'email' => 'ben@me.com',
-                'password' => bcrypt('123456')
+                'password' => bcrypt('123456'),
             ]);
 
-            foreach(range(1,3) as $index)
-            {
-                User::create([
-                    'name' => $faker->word . $index,
-                    'email' => $faker->email,
-                    'password' => bcrypt('secret')
-                ]);
-            }
+
+            User::create([
+                'name' => 'Paul',
+                'email' => 'paulc@brushpoint.com',
+                'password' => bcrypt('123456'),
+            ]);
+
+
+            User::create([
+                'name' => 'Vivian Wong',
+                'email' => 'vivianw@brushpoint.com',
+                'password' => bcrypt('123456'),
+            ]);
         }
     }

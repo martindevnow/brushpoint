@@ -19,6 +19,7 @@ class ProductsTableSeeder extends Seeder {
         DB::table('items')->truncate();
         DB::table('images')->truncate();
         DB::table('virtues')->truncate();
+        DB::table('inventories')->truncate();
 
         $faker = Faker::create();
 

@@ -32,7 +32,17 @@ class CartController extends Controller {
     public function index()
     {
         // show the contents of the cart
-        return view('cart.index');
+        $cartData = $this->cartRepository->getCartData();
+        // dd($cartData);
+        $cartItems = [];
+        if ($cartData)
+        {
+            foreach ($cartData as $itemArray)
+                $cartContents[] = $itemArray['id'];
+            $cartItems = Item::whereIn('id', $cartContents)->get();
+        }
+
+        return view('cart.index')->with(compact('cartItems'));
 
     }
 

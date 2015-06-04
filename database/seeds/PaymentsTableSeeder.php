@@ -78,14 +78,6 @@ class PaymentsTableSeeder extends Seeder {
         $address->payments()->save($payment);
 
         $payment->payer->addresses()->save($address);
-        /*$payment->addresses()->create([
-            'name' => 'Atsuko Martin',
-            'street_1' => $faker->streetAddress,
-            'city' => $faker->city,
-            'province' => $faker->word,
-            'postal_code' => $faker->postcode,
-            'country' => $faker->countryCode,
-        ]);*/
     }
 
 }
