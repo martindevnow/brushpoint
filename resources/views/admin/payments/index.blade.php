@@ -25,7 +25,7 @@
             @foreach($payments as $payment)
             <tr>
               <td>{{ $payment->created_at->diffForHumans() }}</td>
-              <td>{{ $payment->payer? $payment->payer->first_name . " " . $payment->payer->last_name: "Not Completed Yet" }}</td>
+              <td>{!! $payment->payer? '<a href="'. url('/') . '/admins/payers/' . $payment->payer->id . '">'. $payment->payer->first_name . " " . $payment->payer->last_name .'</a>': "Not Completed Yet" !!}</td>
               <td>{{ $payment->address ? $payment->address->city: "Not Entered Yet" }}</td>
               <td>{{ $payment->transactions->first()? $payment->transactions->first()->amount_total: "Not completed Yet" }}</td>
               <td>

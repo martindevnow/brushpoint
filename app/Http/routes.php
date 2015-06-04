@@ -192,6 +192,9 @@ Route::get('cart/shipping/clear', 'CartController@clearShippingCountry');
 
 /**
  * Checkout Controller
+ *
+ * There are some unused routes in here. Need to go through the code and identify them
+ * and remove the unused ones.
  */
 Route::get('checkout/address', 'CartController@getPayerInfo');
 Route::get('checkout/express', 'CheckoutController@expressCheckout');
@@ -217,16 +220,22 @@ Route::get('payment/execute', 'CartController@paymentTestExecute');
 
 
 /**
- * Admin Routes
+ * Admin Routes (Protected by Middleware)
  *
  */
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 {
+    /**
+     * Dashboard
+     */
     Route::get(         'admins', 'AdminController@index');
 
 
-
-
+    /**
+     * Products
+     */
+    // Route::get(      'admins/products/create',   'ProductsController@create');
+    // Route::post(     'admins/products/create',   'ProductsController@store');
     Route::patch(       'admins/products/ajax/{id}',   'ProductsController@ajaxPatch');
     Route::patch(       'admins/products/active/{id}',         'ProductsController@ajaxActive');
     Route::patch(       'admins/products/portfolio/{id}',      'ProductsController@ajaxPortfolio');
@@ -237,58 +246,100 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::resource(    'admins/products',      'ProductsController');
 
 
-
+    /**
+     * Feedback
+     */
     Route::get(         'admins/feedback/filter',      'FeedbackController@filtered');
     Route::get(         'admins/feedback/{feedbackId}/retailer/remove', 'FeedbackController@removeRetailer');
     Route::get(         'admins/feedback/{feedbackId}/issue/remove',     'FeedbackController@removeIssue');
-    Route::resource(    'admins/feedback',             'FeedbackController');
     Route::patch(       'admins/feedback/ajax/{id}',   'FeedbackController@ajaxPatch');
+    Route::resource(    'admins/feedback',             'FeedbackController');
 
 
+    /**
+     * Purchaseable Products Only
+     */
     Route::get(         'admins/purchase/rearrange',            'ProductsController@rearrangePurchase');
     Route::get(         'admins/purchase/rearrange/saveOrder',   'ProductsController@ajaxSaveProductOrder');
-
     // Route::resource(    'admins/purchases',         'PurchasesController');
 
+
+    /**
+     * Payments
+     */
     Route::get(         'admins/payments/filter',      'PaymentsController@filtered');
-    Route::resource(    'admins/payments',          'PaymentsController');
     Route::patch(       'admins/payments/ajax/{id}',   'PaymentsController@ajaxPatch');
     // TODO: Make a command for this action
     // TODO: using the full path /usr/local/bin/wkhtmltopdf works.
     // TODO: see if I can override the command set in phpwkhtmltopdf
     Route::get(         'admins/payments/invoice/{id}',         'PaymentsController@invoice');
+    Route::resource(    'admins/payments',          'PaymentsController');
 
 
+    /**
+     * Users
+     */
     Route::resource(    'admins/users',          'UsersController');
 
 
+    /**
+     * Notes
+     */
     Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
 
+
+    /**
+     * Inventory
+     */
     Route::resource(    'admins/inventory',     'InventoryController');
 
 
+    /**
+     * Issues
+     */
     Route::post(        'admins/issues/store',      'IssuesController@ajaxStore');
     Route::patch(       'admins/issues/ajax/{id}',  'IssuesController@ajaxPatch');
     Route::resource(    'admins/issues',            'IssuesController');
 
+
+    /**
+     * Virtues
+     */
     Route::post(        'admins/virtues/store',      'VirtuesController@ajaxStore');
-    Route::get(        'admins/virtues/delete',     'VirtuesController@ajaxDelete');
+    Route::get(         'admins/virtues/delete',     'VirtuesController@ajaxDelete');
     // Route::resource(    'admins/virtues',            'VirtuesController');
 
+
+    /**
+     * Retailers
+     */
     Route::post(        'admins/retailers/store',      'RetailersController@ajaxStore');
     Route::patch(       'admins/retailers/ajax/{id}',  'RetailersController@ajaxPatch');
     Route::resource(    'admins/retailers',         'RetailersController');
-    // store a new
 
 
-    // Route::get(      'admins/products/create',   'ProductsController@create');
-    // Route::post(     'admins/products/create',   'ProductsController@store');
+
+    /**
+     * Payers
+     */
+    Route::resource('admins/payers', 'PayersController');
+
 });
 
+
+/**
+ * Admin Routes
+ *  ( Not protected by middleware.
+ *  ( This is so that the server can visit these links to process the PDF from this
+ *  ( Need to find a work around for this so it can be locked.
+ */
 Route::group(['namespace' => 'Admin'], function()
 {
     Route::get('admins/payments/invoice/html/{id}', 'PaymentsController@invoiceHtml');
 });
+
+
+
 
 Route::get('destroyCart', function(){
     $cartRepo = new \Martin\Products\CartRepository();

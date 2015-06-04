@@ -36,9 +36,8 @@ class PaymentsController extends Controller {
 
         $payments = $this->paymentRepository->getRecentPayments();
 
-        $this->layout->content =  view('admin.payments.index')->with([
-            'payments' => $payments
-        ]);
+        $this->layout->content =  view('admin.payments.index')
+            ->with(compact('payments'));
     }
 
     public function show($id)
@@ -46,7 +45,7 @@ class PaymentsController extends Controller {
         $payment = Payment::find($id);
 
         $this->layout->conte = view('admin.payments.show')
-            ->with(['payment' => $payment]);
+            ->with(compact('payment'));
 
     }
 
