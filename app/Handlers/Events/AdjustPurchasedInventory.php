@@ -35,10 +35,7 @@ class AdjustPurchasedInventory {
             foreach($soldItems as $soldItem)
             {
 
-                $lotInventory = Inventory::where('item_id', '=', $soldItem->item->id);
-                dd($lotInventory);
-
-
+                // $lotInventory = Inventory::where('item_id', '=', $soldItem->item->id);
 
 
                 // dd($soldItem);

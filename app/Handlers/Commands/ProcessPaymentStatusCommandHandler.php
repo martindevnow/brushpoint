@@ -63,10 +63,6 @@ class ProcessPaymentStatusCommandHandler {
 
         $dbTransactions = $paymentLog->createTransactions();
 
-        // Log::info('Seemed to work...');
-
-
-
         return $dbPayment;
 	}
 }

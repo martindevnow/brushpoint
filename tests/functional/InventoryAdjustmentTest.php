@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Log;
 use Laracasts\Integrated\Services\Laravel\DatabaseTransactions;
 use Laracasts\TestDummy\Factory as TestDummy;
+use Martin\Ecom\Payer;
+use Martin\Ecom\Payment;
+use Martin\Ecom\SoldItem;
 use Martin\Products\Inventory;
 use Martin\Products\Item;
 use Martin\Users\User;
@@ -35,6 +38,41 @@ class InventoryAdjustmentTest extends TestCase {
 
 
     /** @test */
+    public function it_makes_payer_from_payment()
+    {
+        $payment = TestDummy::create('Martin\Ecom\Payment');
+
+        $this->assertEquals('Martin\Ecom\Payment', get_class($payment));
+
+        $payer = $payment->payer;
+
+        $this->assertEquals('Martin\Ecom\Payer', get_class($payer));
+
+        $transactions = $payment->transactions;
+
+        foreach ($transactions as $transaction)
+        {
+            $soldItems = $transaction->soldItems;
+            foreach($soldItems as $soldItem)
+            {
+                dd($soldItem);
+            }
+        }
+
+        event(new \App\Events\ProductWasPurchased($payment));
+    }
+
+    /** @test */
+    public function it_works_backwards()
+    {
+        $soldItem = new SoldItem([
+            'sku' => 'RH-DZ-MED',
+        ]);
+    }
+
+
+
+    /** @test */
     public function it_adds_to_the_database()
     {
         /*$item = new Item([
@@ -43,9 +81,32 @@ class InventoryAdjustmentTest extends TestCase {
     }
 
 
-    public function purchase(Item $item, $quantity = 1)
+    /** @test */
+    public function it_sets_up_payment_model()
     {
-        event(new \App\Events\ProductWasPurchased(Payment::find(1)));
+        $payment = new Payment([
+            'unique_id' => 'HIHDWJKFEWK',
+            'payment_id' => 'jskegesgsd',
+            'hash' => 'y34kl43htlk4h43htyoi4hyio43j',
+            'state' => 'completed',
+            'intent' => 'sale',
+            'shipped' => 0,
+        ]);
+
+        $payer = new Payer([
+            'payment_method' => 'PayPal',
+            'status' => 'verified',
+            'email' => 'the.one.martin@gmail.com',
+            'first_name' => 'Ben',
+            'last_name' => 'Martin',
+        ]);
+
+        $payer->payments()->save($payment);
+
+        $this->assertEquals($payment, $payer->payments->first());
+
+
+
     }
 
 
