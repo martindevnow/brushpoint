@@ -22,7 +22,7 @@ class GetAddressRequest extends Request {
 	public function rules()
 	{
 		return [
-			'street_1' => 'required',
+            'street_1' => 'required',
             // 'street_2' => '',
             'city' => 'required',
             'province' => 'required',

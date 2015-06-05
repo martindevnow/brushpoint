@@ -10,11 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Events\CustomerFeedbackSubmitted;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Martin\Ecom\Payment;
 use Martin\Products\Virtue;
 use Martin\Products\Product;
+use Martin\Quality\Contact;
+use Martin\Quality\Feedback;
 use mikehaertl\wkhtmlto\Pdf;
 
 Route::controllers([
@@ -35,53 +38,17 @@ Route::get('pathvars', function() {
 });
 
 
+Route::get('emailFeedback', function(){
+    $contact = Contact::find(1);
 
-Route::get('emailBen', function()
-{
-
-
-    $payment = Payment::find(1);
-    $payer = $payment->payer;
-    $address = $payment->address; // can have different recipient
-    $transactions = $payment->transactions->all(); // array of transactions
-
-    return view('emails.customer.asn')->with(compact('payment', 'payer', 'address', 'transactions'));
-    Mail::send('emails.customer.asn', $data, function($message) use ($data) {
-        $message->to($data['customer_email'])
-            ->subject("BrushPoint: Your Order has Shipped!");
-        $message->from('orders@brushpoint.com', 'BrushPoint Orders');
-    });
+    return view('emails.internal.contact')->with(compact('contact'));
 
 
+    event(new CustomerFeedbackSubmitted($feedback));
 
-
-
-
-
-
-
-    /*$address = new \Martin\Core\Address();
-    $address->street_1 = "15 Carousel Circle";
-    $address->city = "St. Cath";
-    $address->province = "ON";
-    $address->postal_code = "L2N 6C9";
-    $address->country = "Canada";*/
-
-
-    $payment = Payment::find(1);
-    $payer = $payment->payer;
-    $address = $payment->address; // can have different recipient
-    $transactions = $payment->transactions->all(); // array of transactions
-
-
-    return view('emails.customer.invoice')->with(compact('payment', 'payer', 'address', 'transactions'));
-
-    Mail::send('emails.customer.invoice', $data, function($message) use ($data) {
-        $message->to($data['customer_email'])
-            ->subject("BrushPoint: Purchase Receipt");
-        $message->from('orders@brushpoint.com', 'BrushPoint Orders');
-    });
+    return 1;
 });
+
 
 
 
@@ -154,9 +121,12 @@ Route::get('video.htm', 'PagesController@video');
 /**
  * Feedback
  */
-Route::get('feedback', 'FeedbackController@create');
-Route::post('feedback/send', 'FeedbackController@send');
-Route::post('feedback/address', 'FeedbackController@address');
+Route::get('feedback',          'FeedbackController@create');
+Route::post('feedback/send',    'FeedbackController@send');
+
+Route::get('feedback/address', 'FeedbackController@createAddress');
+Route::post('feedback/address', 'FeedbackController@storeAddress');
+
 Route::get('feedback/thankyou', 'FeedbackController@thankyou');
 //Route::get('feedback/send', 'FeedbackController@send');
 
@@ -323,6 +293,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      * Payers
      */
     Route::resource('admins/payers', 'PayersController');
+
+
+    /**
+     * Contacts
+     */
+    Route::resource('admins/contacts', 'ContactsController');
 
 });
 

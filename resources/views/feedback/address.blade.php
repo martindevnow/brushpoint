@@ -36,7 +36,7 @@
             </p>
 
 
-        {!! Form::open(['method' => 'post', 'url' => 'feedback/address']) !!}
+        {!! Form::open(['method' => 'post', 'url' => 'feedback/address/'.$feedback->id .'/'. $feedback->hash]) !!}
             @include('layouts.partials._address')
         {!! Form::close() !!}
 

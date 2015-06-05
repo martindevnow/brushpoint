@@ -19,6 +19,8 @@ class Feedback extends CoreModel {
         'issue_text',
         'issue_id',
 
+        'hash',
+
         'bp_code',
         'ip_address',
         'country',

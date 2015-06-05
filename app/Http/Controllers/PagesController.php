@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Events\CustomerContactedUs;
 use Martin\Quality\Contact;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -62,17 +63,12 @@ class PagesController extends Controller {
         $data = $request->only('name', 'email', 'user_message');
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
         $data['message'] = $request->user_message;
+        $data['hash'] = bcrypt(time());
 
         $contact = Contact::create($data);
+        $contact->save();
 
-        unset($data['message']);
-
-        Mail::send('emails.contact', $data, function($message) use ($data)
-        {
-            $message->from($data['email'], $data['name']);
-            $message->to('info@brushpoint.com', 'BrushPoint Info')
-                ->subject('Contact from '. $data['name']);
-        });
+        event(new CustomerContactedUs($contact));
 
         Flash::message('Your message has been delivered!');
 

@@ -19,6 +19,7 @@ class CreateContactsTable extends Migration {
             $table->string('email');
             $table->text('message');
             $table->string('ip');
+            $table->string('hash')->nullable();
 			$table->timestamps();
 		});
 	}

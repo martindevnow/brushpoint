@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Martin\Quality\Contact;
 
 class ContactsController extends Controller {
 
@@ -14,7 +15,7 @@ class ContactsController extends Controller {
 	 */
 	public function index()
 	{
-		$contacts = Contact::all();
+		$contacts = Contact::paginate(25);
         $this->layout->context = view('admin.contacts.index')
             ->with(compact('contacts'));
 	}
@@ -47,7 +48,10 @@ class ContactsController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$contact = Contact::find($id);
+
+        $this->layout->context = view('admin.contacts.show')
+            ->with(compact('contact'));
 	}
 
 	/**

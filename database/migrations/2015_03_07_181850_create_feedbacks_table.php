@@ -29,6 +29,7 @@ class CreateFeedbacksTable extends Migration {
             $table->text('issue_text');
             $table->string('issue_id')->nullable()->index();
 
+            $table->string('hash')->nullable();
 
             // Replaced by 'closed' field
             // $table->boolean('resolved')->default(false);

@@ -8,7 +8,8 @@ class Contact extends Model {
         'ip',
         'name',
         'email',
-        'message'
+        'message',
+        'hash',
     ];
 
 

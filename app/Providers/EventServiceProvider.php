@@ -20,7 +20,18 @@ class EventServiceProvider extends ServiceProvider {
 
         'App\Events\PackageWasShipped' => [
             'App\Handlers\Events\EmailShippingConfirmation',
-        ]
+        ],
+
+        'App\Events\CustomerContactedUs' => [
+            'App\Handlers\Events\EmailInternalContactNotice',
+            'App\Handlers\Events\EmailCustomerContactNotice',
+        ],
+
+        'App\Events\CustomerFeedbackSubmitted' => [
+            'App\Handlers\Events\EmailInternalFeedbackNotice',
+            'App\Handlers\Events\EmailCustomerFeedbackNotice',
+        ],
+
 	];
 
 	/**

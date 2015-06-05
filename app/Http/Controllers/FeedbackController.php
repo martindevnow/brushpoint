@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Events\CustomerFeedbackSubmitted;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -12,7 +13,7 @@ use Martin\Quality\Feedback;
 class FeedbackController extends Controller {
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new feedback submission.
      *
      * @return Response
      */
@@ -23,58 +24,78 @@ class FeedbackController extends Controller {
     }
 
     /**
+     * Submit the feedback to the server and save it
+     *
      * @param SendFeedbackRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function send(SendFeedbackRequest $request)
     {
         $data = $request->only('name', 'email', 'phone', 'retailer_text', 'lot_code', 'issue_text');
+        $data['hash'] = bcrypt(time());
 
         $feedback = Feedback::create($data);
+        // $feedback->save();
 
-        $feedback->save();
-
-        // store the feedback to the session
-        session(['feedback' => $feedback->id]);
-
-
+        event(new CustomerFeedbackSubmitted($feedback));
 
         Flash::message('Your feedback has been received!');
-
-        // display the form to request their address
-        return view('feedback.address');
-    }
-
-    /**
-     * @param GetAddressRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function address(GetAddressRequest $request)
-    {
-
-        // make sure the user has already submitted their feedback
-        if (! session()->has('feedback'))
-            return redirect('feedback');
-
-
-        $data = $request->only('street_1', 'street_2', 'city', 'province', 'postal_code', 'country');
-
-
-        $feedback = Feedback::find(session('feedback'));
-
-        $data['name'] = $feedback->name;
-
-        $feedback->addresses()->create($data);
-
-        session()->forget('feedback');
-
-        Flash::message('Your message has been sent!');
 
         return redirect('feedback/thankyou');
 
     }
 
 
+    /**
+     * Display the form to enter the address to send a replacement toothbrush
+     *
+     * @param $id
+     * @param $hash
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function createAddress($id, $hash)
+    {
+        $feedback = Feedback::find($id);
+
+        if ($hash == $feedback->hash)
+            return view('feedback.address')->with(compact('feedback'));
+        else
+            return redirect('/');
+
+    }
+
+    /**
+     * Save the address entered to the feedback it is related to
+     *
+     * @param GetAddressRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function storeAddress($id, $hash, GetAddressRequest $request)
+    {
+        $feedback = Feedback::find($id);
+
+        if ($feedback->hash != $hash)
+            return redirect('/');
+
+        $data = $request->only('street_1', 'street_2', 'city', 'province', 'postal_code', 'country');
+
+        $data['name'] = $feedback->name;
+
+        $feedback->addresses()->create($data);
+
+        Flash::message('Your message has been sent!');
+
+        // create event?
+        // send email to the user?
+        return redirect('feedback/thankyou');
+
+    }
+
+    /**
+     * Display a simple thank you page
+     *
+     * @return \Illuminate\View\View
+     */
     public function thankyou()
     {
         return view('feedback.thankyou');
