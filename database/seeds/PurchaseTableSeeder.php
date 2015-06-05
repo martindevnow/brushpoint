@@ -165,13 +165,43 @@ class PurchaseTableSeeder extends Seeder {
 
                 Inventory::create([
                     'item_id' => $item1->id,
+                    'quantity' => 53,
+                    'lot_code' => '15/13',
+                    'description' => 'on_hold'
+                ]);
+                Inventory::create([
+                    'item_id' => $item2->id,
+                    'quantity' => 25,
+                    'lot_code' => '15/13',
+                    'description' => 'on_hold'
+                ]);
+
+                Inventory::create([
+                    'item_id' => $item1->id,
                     'quantity' => $item1->on_hand,
-                    'description' => 'restock'
+                    'lot_code' => '10/14',
+                    'description' => 'available'
                 ]);
                 Inventory::create([
                     'item_id' => $item2->id,
                     'quantity' => $item2->on_hand,
-                    'description' => 'restock'
+                    'lot_code' => '10/14',
+                    'description' => 'available'
+                ]);
+
+
+
+                Inventory::create([
+                    'item_id' => $item1->id,
+                    'quantity' => $item1->on_hand,
+                    'lot_code' => '10/15',
+                    'description' => 'available'
+                ]);
+                Inventory::create([
+                    'item_id' => $item2->id,
+                    'quantity' => $item2->on_hand,
+                    'lot_code' => '10/15',
+                    'description' => 'available'
                 ]);
             }
             else{
@@ -185,8 +215,16 @@ class PurchaseTableSeeder extends Seeder {
                 ]);
                 Inventory::create([
                     'item_id' => $item->id,
+                    'quantity' => 52,
+                    'lot_code' => '15/13',
+                    'description' => 'on_hold'
+                ]);
+
+                Inventory::create([
+                    'item_id' => $item->id,
                     'quantity' => $item->on_hand,
-                    'description' => 'restock'
+                    'lot_code' => '10/15',
+                    'description' => 'available'
                 ]);
             }
         }

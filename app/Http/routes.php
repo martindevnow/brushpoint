@@ -50,6 +50,10 @@ Route::get('emailFeedback', function(){
 });
 
 
+Route::get('info', function() {
+    phpinfo();
+});
+
 
 
 // TODO: Make the /cart calculate shipping cost everytime that page loads.

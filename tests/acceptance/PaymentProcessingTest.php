@@ -16,7 +16,6 @@ class PaymentProcessingTest extends Selenium {
     public function it_visits_the_cart()
     {
         // $this->setBrowserUrl('http://bpl5.dev/');
-        $this->visit('/cart')
-            ->wait(5000);
+        $this->visit('/cart');
     }
 }

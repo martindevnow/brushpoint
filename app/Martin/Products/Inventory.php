@@ -5,11 +5,23 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model {
 
 	protected $fillable = [
-        'description',
-        'quantity',
+        'transaction_id',
+        'item_id',
+
         'lot_code',
-        'expiry_date'
+        'expiry_date',
+
+        'description',
+
+        'quantity',
     ];
+
+
+
+    public function scopeActive($query)
+    {
+        return $query->where('description', '!=', 'on_hold');
+    }
 
     public function item()
     {

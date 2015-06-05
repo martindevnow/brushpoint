@@ -2,7 +2,7 @@
 $factory('Martin\Core\Address', [
     'description' => $faker->sentence,
     'name' => $faker->word,
-    'company' => ucwords($faker->words),
+    'company' => ($faker->word),
     'street_1' => $faker->streetAddress,
     'street_2' => '',
     'city' => $faker->city,
@@ -42,17 +42,17 @@ $factory('Martin\Core\Note', [
 
 
 $factory('Martin\Ecom\Payer', [
-    'payer_id' => strtoupper($faker->word . $faker->word),
+    'payer_id' => $faker->name,
     'status' => 'completed',
     'email' => $faker->email,
-    'first_name' => ucwords($faker->word),
-    'last_name' => ucwords($faker->word),
+    'first_name' => ($faker->word),
+    'last_name' => ($faker->word),
 ]);
 
 $factory('Martin\Ecom\Payment', [
-    'unique_id' => $faker-> $faker->word,
-    'payment_id' => 'factory:Martin\Ecom\Payment',
-    'hash' => bcrypt($faker->word),
+    'unique_id' => $faker->firstName,
+    'payment_id' => $faker->firstName,
+    'hash' => bcrypt(time()),
     'state' => 'completed',
     'intent' => 'sale',
     'shipped' => 0,
@@ -86,7 +86,7 @@ $factory('Martin\Ecom\Transaction', [
 
 $factory('Martin\Products\Cart', [
     'user_id' => 'factory:Martin\Users\User',
-    'unique_id' => bcrypt($faker->word),
+    'unique_id' => bcrypt(time()),
     'item_id' => 'factory:Martin\Products\Item',
     'price' => '',
     'quantity' => '',
@@ -119,7 +119,7 @@ $factory('Martin\Products\Package', [
 
 $factory('Martin\Products\Product', [
     'name' => $faker->word,
-    'description' => $faker->sentences,
+    'description' => $faker->sentence,
     'sku' => $faker->word,
     'price' => 5.00,
     'on_hand' => $faker->numberBetween(100,500),
@@ -131,7 +131,7 @@ $factory('Martin\Products\Product', [
 
 $factory('Martin\Products\Virtue', [
     'body' => $faker->sentence,
-    'type' => $faker->randomElement(['feature', 'benefit', 'other']),
+    'type' => 'feature',
     'product_id' => 'factory:Martin\Products\Product',
     'priority' => $faker->numberBetween(1,100),
 ]);
@@ -146,20 +146,20 @@ $factory('Martin\Quality\Contact', [
     'email' => $faker->email,
     'message' => $faker->paragraph(),
     'ip' => $faker->ipv4,
-    'hash' => bcrypt(time(). $faker->word),
+    'hash' => bcrypt(time()),
 ]);
 // FEEDBACK
 $factory('Martin\Quality\Feedback', [
     'name' => $faker->name,
     'email' => $faker->email,
     'phone' => $faker->phoneNumber,
-    'retailer_text' => $faker->words,
+    'retailer_text' => $faker->word,
     'retailer_id' => 'factory:Martin\Quality\Retailer',
     'retailer_reference' => $faker->word,
     'lot_code' => '',
-    'issue_text' => $faker->words(),
+    'issue_text' => $faker->word,
     'issue_id' => 'factory:Martin\Quality\Issue',
-    'hash' => bcrypt(time().$faker->words),
+    'hash' => bcrypt(time()),
     'bp_code' => '',
     'ip_address' => $faker->ipv4,
     'country' => $faker->country,
@@ -179,12 +179,12 @@ $factory('Martin\Quality\Investigation', [
 ]);
 // ISSUE
 $factory('Martin\Quality\Issue', [
-    'type' => $faker->words(),
+    'type' => $faker->word,
     'complaint' => $faker->boolean(),
 ]);
 // RETAILER
 $factory('Martin\Quality\Retailer', [
-    'name' => $faker->words . $faker->name,
+    'name' => $faker->name,
     'description' => $faker->sentence(),
     'active' => 1,
 ]);
