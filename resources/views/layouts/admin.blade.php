@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,7 +73,6 @@
     }
 
     .del_button {
-
         display: inline;
         float: right;
     }
@@ -85,9 +83,7 @@
 </head>
 
 <body>
-
     <div id="wrapper">
-
         <!-- Navigation -->
         @include('admin.nav')
 

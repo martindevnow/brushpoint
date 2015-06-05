@@ -252,10 +252,16 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="/admins/payers"><i class="fa fa-table fa-fw"></i> Customers</a>
+                        </li>
+                        <li>
                             <a href="/admins/issues"><i class="fa fa-table fa-fw"></i> Issues</a>
                         </li>
                         <li>
                             <a href="/admins/retailers"><i class="fa fa-table fa-fw"></i> Retailers</a>
+                        </li>
+                        <li>
+                            <a href="/admins/emails"><i class="fa fa-table fa-fw"></i> Email Templates</a>
                         </li>
                     </ul>
                 </div>

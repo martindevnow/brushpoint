@@ -63,7 +63,8 @@ class PayersController extends Controller {
 	{
 		$payer = Payer::find($id);
 
-        $this->layout->context = view('admin.payers.show');
+        $this->layout->context = view('admin.payers.show')
+            ->with(compact('payer'));
 	}
 
 	/**

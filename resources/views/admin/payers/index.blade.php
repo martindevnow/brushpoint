@@ -22,7 +22,7 @@
                       <tbody>
                         @foreach($payers as $payer)
                         <tr>
-                          <td>{{ $payer->payer_id }}</td>
+                          <td><a href="{{ url('/') }}/admins/payers/{{ $payer->id }}">{{ $payer->payer_id }}</a></td>
                           <td>{{ $payer->first_name . " " . $payer->last_name }}</td>
                           <td>{{ $payer->email }}</td>
                           <td>{{ $payer->payments->count() }}</td>

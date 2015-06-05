@@ -36,7 +36,7 @@
           @foreach($payer->payments as $payment)
             <tr>
               <td>{{ $payment->created_at->diffForHumans() }}</td>
-              <td>{{ $payment->addresses->first()->city }}</td>
+              <td>{{ $payment->address ? $payment->address->city : "N/A" }}</td>
               <td>{{ $payment->transactions->first()->amount_total }}</td>
               <td>
                 {!! Form::open() !!}
@@ -51,6 +51,7 @@
           </tbody>
     </table>
 
-    @include('admin/layouts/partials/_note', ['model' => $payment])
+    @include('admin.layouts.partials.notes', ['notes' => $payer->notes])
+    @include('admin/layouts/partials/_note', ['model' => $payer])
 </div>
 @stop

@@ -300,6 +300,14 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      */
     Route::resource('admins/contacts', 'ContactsController');
 
+
+    /**
+     * Emails
+     * - view the email templates that are sent to different people.
+     */
+    Route::get('admins/emails', 'EmailsController@index');
+    Route::get('admins/emails/{emailScope}/{emailType}', 'EmailsController@show');
+
 });
 
 
