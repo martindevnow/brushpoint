@@ -26,7 +26,6 @@ class CreateRetailersTable extends Migration {
     public function down()
     {
         Schema::drop('retailers');
-
     }
 
 }

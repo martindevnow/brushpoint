@@ -18,6 +18,9 @@ class CreateInventoriesTable extends Migration {
             $table->integer('transaction_id')->nullable();
             $table->integer('item_id');
 
+            $table->string('lot_code');
+            $table->string('expiry_date')->nullable();
+
             $table->integer('quantity');
 
             $table->string('description')->default('sale');

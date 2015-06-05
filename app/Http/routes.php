@@ -288,7 +288,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::resource(    'admins/retailers',         'RetailersController');
 
 
-
     /**
      * Payers
      */

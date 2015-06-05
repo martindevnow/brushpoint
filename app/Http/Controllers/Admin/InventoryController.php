@@ -16,6 +16,7 @@ class InventoryController extends Controller {
 	{
         // display overview of inventory
         // current levels of all
+
 	}
 
 	/**

@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
 
+<h2>Customer Information</h2>
 <table class="table">
         <thead>
             <tr>
@@ -22,6 +23,7 @@
           </tbody>
     </table>
 
+<h2>Payments by this customer</h2>
     <table class="table">
         <thead>
             <tr>

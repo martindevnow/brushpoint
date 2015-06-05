@@ -17,7 +17,7 @@ class CreatePackagesTable extends Migration {
 			$table->increments('id');
             $table->integer('feedback_id');
             $table->integer('address_id');
-            $table->string('tracking_number');
+            $table->string('tracking_number')->nullable();
             $table->timestamps();
 		});
 	}

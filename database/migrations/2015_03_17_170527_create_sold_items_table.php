@@ -16,11 +16,11 @@ class CreateSoldItemsTable extends Migration {
 		{
 			$table->increments('id');
 
-            $table->integer('item_id')->nullable();;
-            $table->integer('transaction_id');
-
-
+            $table->integer('item_id')->nullable();
             $table->string('sku')->nullable();
+            $table->string('lot_code');
+
+            $table->integer('transaction_id');
 
             $table->string('name');
             $table->decimal('price');

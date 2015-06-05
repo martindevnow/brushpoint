@@ -6,7 +6,9 @@ class Inventory extends Model {
 
 	protected $fillable = [
         'description',
-        'quantity'
+        'quantity',
+        'lot_code',
+        'expiry_date'
     ];
 
     public function item()
