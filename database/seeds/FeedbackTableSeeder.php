@@ -21,6 +21,7 @@ class FeedbackTableSeeder extends Seeder {
                 'phone' => $faker->phoneNumber,
                 'retailer_text' => ucfirst($faker->word),
                 'lot_code' => $faker->word,
+                'hash' => bcrypt($faker->phoneNumber),
                 'issue_text' => $faker->sentence() . " " . $faker->sentence(),
             ]);
         }

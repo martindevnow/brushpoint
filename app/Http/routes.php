@@ -125,6 +125,9 @@ Route::get('video.htm', 'PagesController@video');
 /**
  * Feedback
  */
+Route::get('feedback/edit/{id}/{hash}', 'FeedbackController@editLotCodeAndAddress');
+Route::post('feedback/edit/{id}/{hash}', 'FeedbackController@storeLotCodeAndAddress');
+
 Route::get('feedback',          'FeedbackController@create');
 Route::post('feedback/send',    'FeedbackController@send');
 
@@ -223,6 +226,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     /**
      * Feedback
      */
+    Route::post(         'admins/feedback/email/requestRetailerInfo', 'FeedbackController@emailRequestRetailerInfo');
     Route::get(         'admins/feedback/filter',      'FeedbackController@filtered');
     Route::get(         'admins/feedback/{feedbackId}/retailer/remove', 'FeedbackController@removeRetailer');
     Route::get(         'admins/feedback/{feedbackId}/issue/remove',     'FeedbackController@removeIssue');

@@ -101,4 +101,39 @@ class FeedbackController extends Controller {
         return view('feedback.thankyou');
     }
 
+
+
+    public function editLotCodeAndAddress($id, $hash)
+    {
+        $feedback = Feedback::find($id);
+        if ($feedback->hash != $hash)
+            return redirect('/');
+
+        return view('feedback.editLotCodeAndAddress')
+            ->with(compact('feedback'));
+    }
+
+    public function storeLotCodeAndAddress($id, $hash, GetAddressRequest $request)
+    {
+        $feedback = Feedback::find($id);
+
+        if ($feedback->hash != $hash)
+            return redirect('/');
+
+        $data = $request->only('street_1', 'street_2', 'city', 'province', 'postal_code', 'country');
+
+        $data['name'] = $feedback->name;
+
+        $feedback->addresses()->create($data);
+        $feedback->lot_code = $request->lot_code;
+
+        $feedback->save();
+
+        Flash::message('Your message has been sent!');
+
+        // create event?
+        // send email to the user?
+        return redirect('feedback/thankyou');
+
+    }
 }

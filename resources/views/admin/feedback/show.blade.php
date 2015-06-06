@@ -47,6 +47,9 @@
                           {!! Form::select('retailer_id', $retailers, null, ['data-click-submits-form']) !!}
                           </div>
                       {!! Form::close() !!}
+                      @if(!$feedback->issue)
+                          @include('admin.feedback.partials._requestRetailInfo')
+                      @endif
                     @endif
 
                   </td>
@@ -135,6 +138,8 @@
         @if(!$feedback->issue)
             @include('admin.feedback.partials._issue')
         @endif
+
+
         @if(!$feedback->retailer)
             @include('admin.feedback.partials._retailer')
         @endif

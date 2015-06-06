@@ -35,7 +35,9 @@
             data: form.serialize(),
             success: function(message) {
                 $.publish('form.submitted', form);
+
                 $('#noteModal').modal('hide');
+                $('#requestRetailerInfoModal').modal('hide');
                 $('#issueModal').modal('hide');
                 $('#featureModal').modal('hide');
                 $('#virtueModal').modal('hide');
@@ -54,8 +56,10 @@
                     $('#'+ list_type + '_list').append(message);
                     form.find("input[type=text], textarea").val("");
                 }
+                else if (form.attr('id') == "requestRetailerInfo_ajax_form")
+                {
 
-
+                }
             }
         });
         e.preventDefault();
@@ -78,6 +82,12 @@
 (function() {
     $.subscribe('form.submitted', function() {
         $('.flash').fadeIn(500).delay(1000).fadeOut(500);
+    });
+})();
+
+(function() {
+    $.subscribe('email.sent', function () {
+        $('.email-sent').fadeIn(400).delay(1000).fadeOut(500);
     });
 })();
 

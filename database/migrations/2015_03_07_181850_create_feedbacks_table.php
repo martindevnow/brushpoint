@@ -25,6 +25,7 @@ class CreateFeedbacksTable extends Migration {
             $table->string('retailer_reference')->nullable();
 
             $table->string('lot_code')->nullable();
+            $table->timestamp('lot_code_requested_at');
 
             $table->text('issue_text');
             $table->string('issue_id')->nullable()->index();
@@ -42,6 +43,9 @@ class CreateFeedbacksTable extends Migration {
 
 
             $table->integer('address_id')->nullable();
+            $table->timestamp('address_requested_at');
+
+
             $table->boolean('adverse_event')->default(false);
             $table->boolean('health_canada_report')->default(false);
             $table->boolean('capa_required')->default(false);

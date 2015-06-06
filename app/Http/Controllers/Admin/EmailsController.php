@@ -58,6 +58,18 @@ class EmailsController extends Controller {
         ];
 
 
+        $emailLinks [] = [
+            'title' => 'External - Feedback - Info/Address Request [Battery]',
+            'scope' => 'customer',
+            'type' => 'lotCodeRequestBattery'
+        ];
+        $emailLinks [] = [
+            'title' => 'External - Feedback - Info/Address Request [Recharge]',
+            'scope' => 'customer',
+            'type' => 'lotCodeRequestRechargeable'
+        ];
+
+
         $this->layout->context = view('admin.emails.index')
             ->with(compact('emailLinks'));
 
@@ -94,13 +106,22 @@ class EmailsController extends Controller {
         $model = "";
 
         if ($emailType == 'contact')
+        {
             $model = Contact::find($id);
-        elseif($emailType == 'feedback')
+            $class = 'contact';
+
+        }
+        elseif($emailType == 'feedback'
+            || $emailType == 'lotCodeRequestRechargeable'
+            || $emailType == 'lotCodeRequestBattery')
+        {
             $model = Feedback::find($id);
+            $class = 'feedback';
+        }
 
         if ($model)
 		    return view('emails.'. $emailScope .'.'. $emailType .'')
-                ->with([$emailType => $model]);
+                ->with([$class => $model]);
 
         $payment = Payment::find($id);
         $payer = $payment->payer;

@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers\Admin;
 
+use App\Events\RequestForRetailerInfoIssued;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -138,7 +139,6 @@ class FeedbackController extends Controller {
      */
     public function filtered(Request $request)
     {
-
         $feedbacks = new Feedback();
         $attributes = $feedbacks->getFillable();
         foreach ($request->all() as $field => $value)
@@ -159,7 +159,6 @@ class FeedbackController extends Controller {
         $feedback->save();
         // $retailer->feedbacks()->detach($feedbackId);
         return redirect('/admins/feedback/'. $feedbackId);
-
     }
 
 
@@ -169,7 +168,18 @@ class FeedbackController extends Controller {
         $feedback->issue_id = null;
         $feedback->save();
         return redirect('/admins/feedback/'. $feedbackId);
+    }
 
+    public function emailRequestRetailerInfo(Request $request)
+    {
+        $feedback_id = $request->feedback_id;
+
+        $feedback = Feedback::findOrFail($feedback_id);
+        $brushType = $request->brush_type;
+
+        event(new RequestForRetailerInfoIssued($feedback, $brushType));
+
+        return 1;
     }
 
 }

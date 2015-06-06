@@ -80,28 +80,19 @@
                     </div>
                 </div>
 
-                <!-- Address Form Input
-                <div class="col-md-6">
-                    <div class="form-group clearfix">
-                        {!! Form::label('address', 'Address', ['class' => 'control-label']) !!}
-                        <div class="col-xs-8">
-                            {!! Form::text('address', null, ['class' => 'form-control']) !!}
-                        </div>
-                    </div>
-                </div> -->
-
 
                 <!-- Retailer Form Input -->
                 <div class="col-md-6">
                     <div class="form-group clearfix">
-                        {!! Form::label('retailer_text', 'Retailer *', ['class' => 'control-label']) !!}
+                        {!! Form::label('retailer_text', 'Retailer', ['class' => 'control-label']) !!}
                         <div class="col-xs-8">
-                            {!! Form::text('retailer_text', null, ['class' => 'form-control', 'required', 'title' => 'The store it was purchased from.']) !!}
+                            {!! Form::text('retailer_text', null, ['class' => 'form-control', 'title' => 'The store it was purchased from.']) !!}
                         </div>
                     </div>
                 </div>
 
                 <!-- Lot Code Form Input -->
+                <!--
                 <div class="col-md-6">
                     <div class="form-group clearfix">
                         {!! Form::label('lot_code', 'Lot Code', ['class' => 'control-label']) !!}
@@ -109,10 +100,10 @@
                             {!! Form::text('lot_code', null, ['class' => 'form-control', 'title' => 'Found on the bottom of the toothbrush']) !!}
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
-                <!-- Lot Code Form Input -->
+                <!-- Issue Form Input -->
                 <div class="col-md-12">
                     <div class="form-group clearfix">
                         {!! Form::label('issue_text', 'Issue *', ['class' => 'control-label']) !!}
@@ -122,7 +113,7 @@
                     </div>
                 </div>
 
-                {!! Form::submit('Send Feedback', ['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Send Feedback', ['class' => 'btn btn-primary', 'style' => 'float: right;']) !!}
 
 
             {!! Form::close() !!}
