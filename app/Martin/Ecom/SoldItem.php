@@ -5,11 +5,16 @@ use Illuminate\Database\Eloquent\Model;
 class SoldItem extends Model {
 
     protected $fillable = [
-         'sku',
-         'name',
-         'price',
-         'currency',
-         'quantity',
+        'sku',
+        'name',
+        'price',
+        'currency',
+        'quantity',
+        'lot_code',
+
+        'item_id',
+        'transaction_id',
+
     ];
 
     public function transaction()

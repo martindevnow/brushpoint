@@ -18,7 +18,10 @@ class Payment extends CoreModel {
         'intent',
         'shipped_at',
         'payer_id',
-        'address_id'
+        'address_id',
+        'unique_id',
+        'hash',
+
     ];
 
 

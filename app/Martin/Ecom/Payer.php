@@ -12,22 +12,15 @@ class Payer extends CoreModel {
 
         // NO PAYMENT_ID 'payment_id',
         // Payer can have many Payments
+        'payer_id', 		// string
 
         'payment_method', 	// string
-        'status', 		// string
-        'funding_option_id', 	// string
 
-        'email', 				// string
-        'external_remember_me_id', 	// string
-        'buyer_account_number', 		// string
+        'status', 		    // string
+        'email', 		    // string
+
         'first_name', 		// string
         'last_name', 		// string
-        'payer_id', 		// string
-        'phone', 			// string
-        'phone_type', 		// string
-        'birth_date', 		// string
-        'tax_id', 		    // string
-        'tax_id_type',
     ];
 
     protected $hidden = [];

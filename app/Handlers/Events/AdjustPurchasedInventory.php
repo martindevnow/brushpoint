@@ -34,11 +34,8 @@ class AdjustPurchasedInventory {
             $soldItems = $transaction->soldItems;
             foreach($soldItems as $soldItem)
             {
-
                 // $lotInventory = Inventory::where('item_id', '=', $soldItem->item->id);
 
-
-                // dd($soldItem);
                 $item = Item::find($soldItem->item->id);
                 $item->on_hand = $item->on_hand - $soldItem->quantity;
                 $item->save();

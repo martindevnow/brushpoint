@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Log;
 use Laracasts\Integrated\Services\Laravel\DatabaseTransactions;
 use Laracasts\TestDummy\Factory as TestDummy;
+use Martin\Core\Address;
 use Martin\Ecom\Payer;
 use Martin\Ecom\Payment;
 use Martin\Ecom\SoldItem;
+use Martin\Ecom\Transaction;
 use Martin\Products\Inventory;
 use Martin\Products\Item;
 use Martin\Users\User;
@@ -30,7 +32,6 @@ class InventoryAdjustmentTest extends TestCase {
         // oldest available SKU should be "10/14"
         $oldestInventory = $item->getOldestActiveInventory();
 
-        // dd($oldestInventory);
         $this->assertTrue($oldestInventory->lot_code == '10/14');
 
         // $this->makeNewPayment($item);
@@ -84,30 +85,56 @@ class InventoryAdjustmentTest extends TestCase {
     /** @test */
     public function it_sets_up_payment_model()
     {
-        $payment = new Payment([
-            'unique_id' => 'HIHDWJKFEWK',
-            'payment_id' => 'jskegesgsd',
-            'hash' => 'y34kl43htlk4h43htyoi4hyio43j',
-            'state' => 'completed',
-            'intent' => 'sale',
-            'shipped' => 0,
-        ]);
+        $item = Item::where('sku', '=', 'RH-DZ-MED')->first();
 
-        $payer = new Payer([
-            'payment_method' => 'PayPal',
-            'status' => 'verified',
-            'email' => 'the.one.martin@gmail.com',
-            'first_name' => 'Ben',
-            'last_name' => 'Martin',
-        ]);
+        $payment = $this->setUpPaymentTransaction($item);
 
-        $payer->payments()->save($payment);
 
+
+
+        $this->seeInDatabase('payments', ['unique_id' => 'UNIQUE_ID_THIS_IS_IT']);
         $this->assertEquals($payment, $payer->payments->first());
+
+        $this->assertEquals($payment->address_id, $address->id);
+
+
+        $invo = $item->getActiveInventory();
+        $activeInvo = $invo->total;
+
+        dd($activeInvo);
+
+
+        /**
+         * Taken from the AdjustPurchased Inventory Script
+         */
+
+        $transactions = $payment->transactions;
+
+        foreach($transactions as $transaction)
+        {
+            $soldItems = $transaction->soldItems;
+            foreach($soldItems as $soldItem)
+            {
+                // $lotInventory = Inventory::where('item_id', '=', $soldItem->item->id);
+
+                $item = Item::find($soldItem->item->id);
+                $item->on_hand = $item->on_hand - $soldItem->quantity;
+                $item->save();
+
+                $inventory = new Inventory();
+                $inventory->description = "sale";
+                $inventory->item_id = $soldItem->item->id;
+                $inventory->quantity = $soldItem->quantity * -1;
+                $inventory->transaction_id = $transaction->id;
+                $inventory->save();
+            }
+        }
 
 
 
     }
+
+
 
 
     public function getItemBySku($sku)
@@ -138,7 +165,6 @@ class InventoryAdjustmentTest extends TestCase {
             'lot_code' => '34/15',
             'expiry_date' => '2018',
             'item_id' => $item->id,
-
         ])->save();
     }
 
@@ -171,5 +197,76 @@ class InventoryAdjustmentTest extends TestCase {
 
             ->onPage('cart')
             ->see('Change Country');
+    }
+
+    public function setUpPaymentTransaction(Item $item)
+    {
+        $payer = Payer::create([
+            'payer_id' => 'PAYER_ID_THIS_IS_IT',
+            'payment_method' => 'paypal',
+            'status' => 'verified',
+            'email' => 'the.one.martin@gmail.com',
+            'first_name' => 'Mr. First',
+            'last_name' => 'LastName',
+        ]);
+
+        $payer->payments()->save(Payment::create([
+            'unique_id' => 'UNIQUE_ID_THIS_IS_IT',
+            'payment_id' => 'PAYMENT_ID_HERE',
+            'hash' => 'thisisthehashforthepaymenttable',
+            'state' => 'completed',
+            'intent' => 'sale',
+            'shipped' => 0,
+        ]));
+
+
+        // add an address too.
+        $address = Address::create([
+            'description' => 'Address',
+            'name' => 'Mr. First LastName',
+            'company' => 'The Company',
+
+            'street_1' => '123 Main Street.', 	// string
+            'street_2' => '', 	                // string
+            'city' => 'The Big City', 	        // string
+            'province' => 'ON',                 // string
+            'postal_code' => 'L2N 6C9',         // string
+            'country' => 'CA',                  // string
+
+            'phone' => '905-934-9625', 	        // string
+        ]);
+
+
+        // build transactions (with sold items)
+        $transaction = Transaction::create([
+            'amount_subtotal',
+            'amount_shipping',
+            'amount_shipping_real',
+            'amount_total',
+            'amount_currency',
+            'description',
+        ]);
+
+
+        $transaction->soldItems()->save(SoldItem::create([
+            'sku' => $item->sku,
+            'name' => $item->name,
+            'price' => $item->price,
+            'currency' => 'USD',
+            'quantity' => '1',
+            'item_id' => $item->id,
+        ]));
+
+
+        $payment = Payment::where('unique_id', '=', 'UNIQUE_ID_THIS_IS_IT')->first();
+        $payer = Payer::where('first_name', '=', 'Mr. First')->first();
+
+
+        $payer->addresses()->save($address);
+        $address->payments()->save($payment);
+        $payment->transactions()->attach($transaction);
+
+
+        return $payment;
     }
 }
