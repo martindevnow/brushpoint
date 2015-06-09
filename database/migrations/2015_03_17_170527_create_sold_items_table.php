@@ -20,13 +20,14 @@ class CreateSoldItemsTable extends Migration {
             $table->string('sku')->nullable();
             $table->string('lot_code');
 
-            $table->integer('transaction_id');
+            $table->integer('transaction_id')->nullable();
 
             $table->string('name');
             $table->decimal('price');
             $table->string('currency');
             $table->integer('quantity');
 
+            $table->string('intent')->nullable();
 
 			$table->timestamps();
 		});

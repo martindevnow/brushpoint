@@ -14,6 +14,7 @@ use App\Events\CustomerFeedbackSubmitted;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 use Martin\Ecom\Payment;
+use Martin\Products\Item;
 use Martin\Products\Virtue;
 use Martin\Products\Product;
 use Martin\Quality\Contact;
@@ -43,7 +44,6 @@ Route::get('emailFeedback', function(){
 
     return view('emails.internal.contact')->with(compact('contact'));
 
-
     event(new CustomerFeedbackSubmitted($feedback));
 
     return 1;
@@ -52,6 +52,17 @@ Route::get('emailFeedback', function(){
 
 Route::get('info', function() {
     phpinfo();
+});
+
+
+Route::get('addOneOfEach', function() {
+    $cartRepo = new \Martin\Products\CartRepository();
+
+    $items = Item::where('price', '>', 0)->get();
+    foreach($items as $item)
+    {
+        $cartRepo->addToCart($item, 1);
+    }
 });
 
 
@@ -83,27 +94,32 @@ Route::get('dumpcart', function(){
 });
 
 
-// Server Stuff
-// TODO: Make sure the Invoices can be generated to PDFs on the server!!!!!!!
-// TODO: THIS IS WORKING. Added a function to PaymentRepository
-
-
-
-// TODO: all pages -- make the title collapse properly when resized too small (text doesn't wrap well)
-// TODO: navbar -- when the page is shrunk, change text to smaller and change logo to only (BRUSHPOINT)
-// TODO: all pages -- consider removing the breadcrumb all together
-
-
 
 // May 6th 2015
 // TODO: - RE-DISABLE duplication of 'Payments' in ProcessPaymentStatusCommandHandler.php
 // TODO: - check the email that is generated and sent to the customer
+// TODO: - add the date to the invoice that is generated.
+
 // TODO: Build at least a little more on the admin area so that I can see what was purchased and how much
 // TODO: build in the lot codes for the purchasing... '
+
 // TODO: need to add the ability to keep track of inventory levels
 
 // TODO: add middleware for moderators
 // TODO: enable the creation of users for MODERATORS only
+
+
+
+
+// Server Stuff
+// TODO: Make sure the Invoices can be generated to PDFs on the server!!!!!!!
+// TODO: - Add a function to PaymentRepository (DONE?)
+
+
+
+// DONE: all pages -- make the title collapse properly when resized too small (text doesn't wrap well)
+// DONE: navbar -- when the page is shrunk, change text to smaller and change logo to only (BRUSHPOINT)
+// N//A: all pages -- consider removing the breadcrumb all together
 
 
 
@@ -248,7 +264,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::get(         'admins/payments/filter',      'PaymentsController@filtered');
     Route::patch(       'admins/payments/ajax/{id}',   'PaymentsController@ajaxPatch');
     // TODO: Make a command for this action
-    // TODO: using the full path /usr/local/bin/wkhtmltopdf works.
+    // TODO: using the full path [/usr/local/bin/wkhtmltopdf] works.
     // TODO: see if I can override the command set in phpwkhtmltopdf
     Route::get(         'admins/payments/invoice/{id}',         'PaymentsController@invoice');
     Route::resource(    'admins/payments',          'PaymentsController');

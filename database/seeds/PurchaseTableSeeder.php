@@ -162,47 +162,6 @@ class PurchaseTableSeeder extends Seeder {
                     'on_hand' => $prod->on_hand / 2,
                     'variance' => 'Medium',
                 ]);
-
-                Inventory::create([
-                    'item_id' => $item1->id,
-                    'quantity' => 53,
-                    'lot_code' => '15/13',
-                    'description' => 'on_hold'
-                ]);
-                Inventory::create([
-                    'item_id' => $item2->id,
-                    'quantity' => 25,
-                    'lot_code' => '15/13',
-                    'description' => 'on_hold'
-                ]);
-
-                Inventory::create([
-                    'item_id' => $item1->id,
-                    'quantity' => $item1->on_hand,
-                    'lot_code' => '10/14',
-                    'description' => 'available'
-                ]);
-                Inventory::create([
-                    'item_id' => $item2->id,
-                    'quantity' => $item2->on_hand,
-                    'lot_code' => '10/14',
-                    'description' => 'available'
-                ]);
-
-
-
-                Inventory::create([
-                    'item_id' => $item1->id,
-                    'quantity' => $item1->on_hand,
-                    'lot_code' => '10/15',
-                    'description' => 'available'
-                ]);
-                Inventory::create([
-                    'item_id' => $item2->id,
-                    'quantity' => $item2->on_hand,
-                    'lot_code' => '10/15',
-                    'description' => 'available'
-                ]);
             }
             else{
                 $item = Item::create([
@@ -212,19 +171,6 @@ class PurchaseTableSeeder extends Seeder {
                     'sku' => $prod->sku,
                     'price' => $prod->price,
                     'on_hand' => $prod->on_hand,
-                ]);
-                Inventory::create([
-                    'item_id' => $item->id,
-                    'quantity' => 52,
-                    'lot_code' => '15/13',
-                    'description' => 'on_hold'
-                ]);
-
-                Inventory::create([
-                    'item_id' => $item->id,
-                    'quantity' => $item->on_hand,
-                    'lot_code' => '10/15',
-                    'description' => 'available'
                 ]);
             }
         }
