@@ -25,7 +25,8 @@ class SendFeedbackRequest extends Request {
 			'name' => 'required',
 			'email' => 'required|email',
 			'phone' => 'required',
-			'retailer_text' => 'required',
+            'intent' => 'required',
+			// 'retailer_text' => 'required',
 			// 'lot_code' => '',
 			'issue_text' => 'required',
 		];

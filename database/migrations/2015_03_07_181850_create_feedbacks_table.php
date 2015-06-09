@@ -20,7 +20,7 @@ class CreateFeedbacksTable extends Migration {
             $table->string('phone');
 
             // has an address
-            $table->string('retailer_text');
+            $table->string('retailer_text')->nullable();
             $table->integer('retailer_id')->nullable();
             $table->string('retailer_reference')->nullable();
 
@@ -31,6 +31,8 @@ class CreateFeedbacksTable extends Migration {
             $table->string('issue_id')->nullable()->index();
 
             $table->string('hash')->nullable();
+
+            $table->string('intent');
 
             // Replaced by 'closed' field
             // $table->boolean('resolved')->default(false);

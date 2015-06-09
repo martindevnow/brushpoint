@@ -20,6 +20,7 @@ class Feedback extends CoreModel {
         'issue_id',
 
         'hash',
+        'intent',
 
         'bp_code',
         'ip_address',

@@ -57,6 +57,33 @@
               </td>
             </tr>
             <tr>
+              <td>Intent</td>
+              <td>
+                <table>
+                    <tr>
+                        <td>
+                            {!! Form::label('intent', 'Product:') !!}
+                            {!! Form::radio('intent', 'product', false, ['style' => 'height:24px;width:100%;']) !!}
+                        </td>
+                        <td>
+                            {!! Form::label('intent', 'Sales:') !!}
+                            {!! Form::radio('intent', 'sales', false, ['style' => 'height:24px;width:100%;']) !!}
+                        </td>
+                        <td>
+                            {!! Form::label('intent', 'General:') !!}
+                            {!! Form::radio('intent', 'general', false, ['style' => 'height:24px;width:100%;']) !!}
+                        </td>
+                        <td>
+                            {!! Form::label('intent', 'Other:') !!}
+                            {!! Form::radio('intent', 'other', false, ['style' => 'height:24px;width:100%;']) !!}
+                        </td>
+                    </tr>
+                </table>
+              </td>
+            </tr>
+
+
+            <tr>
               <td>Issue Description</td>
               <td><div class="form-group">
                   {!! Form::textarea('issue_text', null, ['class' => 'form-control']) !!}
@@ -67,12 +94,6 @@
               <td>BP Code</td>
               <td><div class="form-group">
                   {!! Form::text('bp_code', null, ['class' => 'form-control']) !!}
-              </div></td>
-            </tr>
-            <tr>
-              <td>Country</td>
-              <td><div class="form-group">
-                  {!! Form::text('country', null, ['class' => 'form-control']) !!}
               </div></td>
             </tr>
             <tr>

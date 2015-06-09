@@ -23,6 +23,7 @@ class FeedbackController extends Controller {
         return view('feedback.create');
     }
 
+
     /**
      * Submit the feedback to the server and save it
      *
@@ -31,18 +32,16 @@ class FeedbackController extends Controller {
      */
     public function send(SendFeedbackRequest $request)
     {
-        $data = $request->only('name', 'email', 'phone', 'retailer_text', 'lot_code', 'issue_text');
+        $data = $request->only('name', 'email', 'phone', 'issue_text', 'intent');
         $data['hash'] = bcrypt(time());
 
         $feedback = Feedback::create($data);
-        // $feedback->save();
 
         event(new CustomerFeedbackSubmitted($feedback));
 
         Flash::message('Your feedback has been received!');
 
         return redirect('feedback/thankyou');
-
     }
 
 
@@ -113,6 +112,8 @@ class FeedbackController extends Controller {
             ->with(compact('feedback'));
     }
 
+
+
     public function storeLotCodeAndAddress($id, $hash, GetAddressRequest $request)
     {
         $feedback = Feedback::find($id);
@@ -125,11 +126,12 @@ class FeedbackController extends Controller {
         $data['name'] = $feedback->name;
 
         $feedback->addresses()->create($data);
-        $feedback->lot_code = $request->lot_code;
 
+        $feedback->lot_code = $request->lot_code;
+        $feedback->lot_code = $request->retailer_text;
         $feedback->save();
 
-        Flash::message('Your message has been sent!');
+        Flash::message('Thank you for submitting your address!');
 
         // create event?
         // send email to the user?

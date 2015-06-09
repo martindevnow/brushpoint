@@ -25,13 +25,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/contact">
-                        Contact Us
-                    </a>
-                </li>
-                <li>
                     <a href="/feedback">
-                        Product Feedback
+                        Contact
                     </a>
                 </li>
             </ul>

@@ -8,8 +8,8 @@
 
     <?php
     $page['link'] = "/feedback";
-    $page['title'] = "Product Feedback";
-    $page['short_title'] = "Feedback";
+    $page['title'] = "Contact";
+    $page['short_title'] = "Contact";
     $page['short_description'] = "";
     ?>
     @include('zeina.top-title-wrapper', ['page' => $page])
@@ -81,7 +81,36 @@
                 </div>
 
 
+                <div class="col-md-12" style="padding-bottom: 5px;">
+                <h3>Nature of Inquiry: </h3>
+                    <!-- product Form Input -->
+                    <div class="col-md-3">
+                        {!! Form::label('intent', 'Product:') !!}
+                        {!! Form::radio('intent', 'product', false, ['style' => 'height:24px;width:100%;']) !!}
+                    </div>
+
+                    <!-- product Form Input -->
+                    <div class="col-md-3">
+                        {!! Form::label('intent', 'Sales:') !!}
+                        {!! Form::radio('intent', 'sales', false, ['style' => 'height:24px;width:100%;']) !!}
+                    </div>
+
+                    <!-- product Form Input -->
+                    <div class="col-md-3">
+                        {!! Form::label('intent', 'General:') !!}
+                        {!! Form::radio('intent', 'general', false, ['style' => 'height:24px;width:100%;']) !!}
+                    </div>
+
+                    <!-- product Form Input -->
+                    <div class="col-md-3">
+                        {!! Form::label('intent', 'Other:') !!}
+                        {!! Form::radio('intent', 'other', false, ['style' => 'height:24px;width:100%;']) !!}
+                    </div>
+
+                </div>
+
                 <!-- Retailer Form Input -->
+                <!--
                 <div class="col-md-6">
                     <div class="form-group clearfix">
                         {!! Form::label('retailer_text', 'Retailer', ['class' => 'control-label']) !!}
@@ -90,6 +119,7 @@
                         </div>
                     </div>
                 </div>
+                -->
 
                 <!-- Lot Code Form Input -->
                 <!--
@@ -115,10 +145,7 @@
 
                 {!! Form::submit('Send Feedback', ['class' => 'btn btn-primary', 'style' => 'float: right;']) !!}
 
-
             {!! Form::close() !!}
-
-
         </div>
         <div class="col-md-3 col-sm-3">
 
