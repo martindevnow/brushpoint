@@ -3,7 +3,7 @@
     <title>BrushPoint Invoice</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://bpl5.dev/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url('/') }}/css/bootstrap.min.css">
 
     <style>
     * {
