@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xs-8">
             <a href="/">
-                <img src="http://bpl5.dev/images/logo/bpi_longlogo.jpg" alt="Brushpoint Innovations" class="img-responsive"/>
+                <img src="{{ url('/') }}/images/logo/bpi_longlogo.jpg" alt="Brushpoint Innovations" class="img-responsive"/>
             </a>
         </div>
         <div class="col-xs-4">
