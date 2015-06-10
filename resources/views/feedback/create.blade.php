@@ -86,25 +86,25 @@
                     <!-- product Form Input -->
                     <div class="col-md-3">
                         {!! Form::label('intent', 'Product:') !!}
-                        {!! Form::radio('intent', 'product', false, ['style' => 'height:24px;width:100%;']) !!}
+                        {!! Form::radio('intent', 'product', false, ['style' => 'height:24px;width:24px;']) !!}
                     </div>
 
                     <!-- product Form Input -->
                     <div class="col-md-3">
                         {!! Form::label('intent', 'Sales:') !!}
-                        {!! Form::radio('intent', 'sales', false, ['style' => 'height:24px;width:100%;']) !!}
+                        {!! Form::radio('intent', 'sales', false, ['style' => 'height:24px;width:24px;']) !!}
                     </div>
 
                     <!-- product Form Input -->
                     <div class="col-md-3">
                         {!! Form::label('intent', 'General:') !!}
-                        {!! Form::radio('intent', 'general', false, ['style' => 'height:24px;width:100%;']) !!}
+                        {!! Form::radio('intent', 'general', false, ['style' => 'height:24px;width:24px;']) !!}
                     </div>
 
                     <!-- product Form Input -->
                     <div class="col-md-3">
                         {!! Form::label('intent', 'Other:') !!}
-                        {!! Form::radio('intent', 'other', false, ['style' => 'height:24px;width:100%;']) !!}
+                        {!! Form::radio('intent', 'other', false, ['style' => 'height:24px;width:24px;']) !!}
                     </div>
 
                 </div>

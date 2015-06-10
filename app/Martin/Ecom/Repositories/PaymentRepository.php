@@ -70,7 +70,9 @@ class PaymentRepository {
         $invoiceUrl = url('/') . "/admins/payments/invoice/html/". $paymentId;
         $pdfPath = $this->getInvoicePath($paymentId);
 
-        $stdOut = exec('wkhtmltopdf '. $invoiceUrl . ' ' . $pdfPath . ' 2>&1');
+        $execCommand = env('WKHTMLTOPDF_PATH_EXEC', 'wkhtmltopdf');
+
+        $stdOut = exec($execCommand. ' '. $invoiceUrl . ' ' . $pdfPath . ' 2>&1');
 
         Log::info($stdOut);
     }

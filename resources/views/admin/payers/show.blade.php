@@ -43,7 +43,7 @@
               <td>
                 {!! Form::open() !!}
                     <div class="form-group">
-                    {!! Form::checkbox('shipped', $payment->portfolio, $payment->portfolio) !!}
+                    {!! Form::checkbox('shipped', $payment->shipped, $payment->shipped) !!}
                     </div>
                 {!! Form::close() !!}
               </td>
