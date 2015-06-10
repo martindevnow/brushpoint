@@ -1,5 +1,6 @@
 <?php namespace Martin\Quality\Repositories;
 
+use DateTime;
 use Illuminate\Support\Facades\Mail;
 use Martin\Quality\Feedback;
 
