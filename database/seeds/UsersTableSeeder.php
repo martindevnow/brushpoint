@@ -13,14 +13,20 @@
             DB::table('users')->truncate();
 
             User::create([
-                'name' => 'Ben Martin',
+                'name' => 'Admin',
                 'email' => 'ben@me.com',
+                'password' => bcrypt('123456'),
+            ]);
+
+            User::create([
+                'name' => 'Ben Martin',
+                'email' => 'benjaminm@brushpoint.com',
                 'password' => bcrypt('123456'),
             ]);
 
 
             User::create([
-                'name' => 'Paul',
+                'name' => 'Paul Cira',
                 'email' => 'paulc@brushpoint.com',
                 'password' => bcrypt('123456'),
             ]);
