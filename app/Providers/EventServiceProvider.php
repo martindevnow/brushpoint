@@ -18,19 +18,17 @@ class EventServiceProvider extends ServiceProvider {
             'App\Handlers\Events\AdjustPurchasedInventory',
 		],
 
+
         'App\Events\PackageWasShipped' => [
             'App\Handlers\Events\EmailShippingConfirmation',
         ],
 
-        'App\Events\CustomerContactedUs' => [
-            'App\Handlers\Events\EmailInternalContactNotice',
-            'App\Handlers\Events\EmailCustomerContactNotice',
-        ],
 
         'App\Events\CustomerFeedbackSubmitted' => [
             'App\Handlers\Events\EmailInternalFeedbackNotice',
             'App\Handlers\Events\EmailCustomerFeedbackNotice',
         ],
+
 
         'App\Events\RequestForRetailerInfoIssued' => [
             'App\Handlers\Events\EmailRequestForLotCodeAndAddress',
