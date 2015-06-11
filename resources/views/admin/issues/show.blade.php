@@ -46,7 +46,6 @@
                   <th>Lot Code</th>
                   <th>Issue</th>
                   <th>Date</th>
-                  <th>Resolved</th>
                   <th>Closed</th>
                 </tr>
               </thead>
@@ -58,7 +57,6 @@
                   <!--  <td>{{ $feedback->email }}</td>
                         <td>{{ $feedback->phone }}</td> -->
                   <td>
-
                       @if (isset($feedback->retailer_id))
                           <a href="{{ url('admins/retailers/'. $feedback->retailer->id) }}"> {{ $feedback->retailer->name }}</a>
                       @else
@@ -69,14 +67,6 @@
                   <td>{{ $feedback->lot_code }}</td>
                   <td>{{ $feedback->issue_text }}</td>
                   <td>{{ $feedback->created_at->diffForHumans() }}</td>
-                  <td>
-                      <div class="form-group">
-                        {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=resolved']) !!}
-                        {!! Form::checkbox('resolved', $feedback->resolved, $feedback->resolved, ['data-click-submits-form']) !!}
-                        {!! Form::close() !!}
-                      </div>
-                  </td>
-
                   <td>
                       <div class="form-group">
                         {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=closed']) !!}
