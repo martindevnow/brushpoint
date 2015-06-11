@@ -79,6 +79,11 @@ class Feedback extends CoreModel {
         return $this->hasMany('Martin\Quality\Email');
     }
 
+    public function contacts()
+    {
+        return $this->hasMany('Martin\Quality\Contact');
+    }
+
 
 
 } 

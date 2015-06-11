@@ -5,14 +5,24 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model {
 
 	protected $fillable = [
-        'ip',
-        'name',
-        'email',
-        'message',
-        'hash',
+        'email_template',
+
+        'to_email',
+        'from_email',
+
+        'subject',
+        'body',
+
+        'feedback_id',
     ];
 
+    protected $table = 'contacts';
 
+
+    public function feedback()
+    {
+        return $this->belongsTo('Martin\Quality\Feedback');
+    }
 
 
 }

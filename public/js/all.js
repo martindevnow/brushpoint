@@ -41,7 +41,7 @@
                 $('#issueModal').modal('hide');
                 $('#featureModal').modal('hide');
                 $('#virtueModal').modal('hide');
-                $('#retailerModal').modal('hide');
+                $('#contactCustomerModal').modal('hide');
 
                 if (form.attr('id') == "virtue_ajax_form")
                 {

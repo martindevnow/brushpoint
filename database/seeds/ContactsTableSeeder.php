@@ -12,17 +12,6 @@ class ContactsTableSeeder extends Seeder {
     {
         DB::table('contacts')->truncate();
 
-        $faker = Faker::create();
-
-        foreach(range(1,5) as $index)
-        {
-            Contact::create([
-                'name' => $faker->name,
-                'email' => $faker->email,
-                'message' => ucfirst($faker->paragraph()),
-                'hash' => bcrypt(time() . $index),
-            ]);
-        }
     }
 
 }

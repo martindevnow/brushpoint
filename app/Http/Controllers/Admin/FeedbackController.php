@@ -1,13 +1,16 @@
 <?php namespace App\Http\Controllers\Admin;
 
+use App\Events\ContactCustomerIssued;
 use App\Events\RequestForRetailerInfoIssued;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Martin\Notifications\Flash;
+use Martin\Quality\Contact;
 use Martin\Quality\Feedback;
 use Martin\Quality\Issue;
+use Martin\Quality\Repositories\ContactRepository;
 use Martin\Quality\Retailer;
 
 class FeedbackController extends Controller {
@@ -182,4 +185,52 @@ class FeedbackController extends Controller {
         return 1;
     }
 
+    public function contactCustomer(Request $request, ContactRepository $contactRepository)
+    {
+        // get the request
+
+        // add the feedback hash to the request data
+        $feedback = Feedback::find($request->feedback_id);
+
+        // get the body of the email based on the request
+        $data['email_body'] = $contactRepository->getBody($request, $feedback);
+
+        // put the values into the form
+        $data['to_email'] = $contactRepository->getToEmail($feedback);
+
+        $data['subject'] = $contactRepository->getSubject($feedback);
+
+        $data['title'] = $contactRepository->getTitle();
+
+        $data['from_email'] = $contactRepository->getFromEmail();
+
+        $data['feedback_id'] = $feedback->id;
+
+
+        // display the form
+        return $this->layout->content = view('admin.feedback.prepareContact')->with($data);
+    }
+
+
+    public function sendContactCustomer(Request $request)
+    {
+        // get request
+        $data['to_email'] = $request->to_email;
+        $data['from_email'] = $request->from_email;
+        $data['subject'] = $request->subject;
+        $data['body'] = $request->email_body;
+        $data['feedback_id'] = $request->feedback_id;
+        $data['email_template'] = 'emails.customer.genericContact';
+
+        // build contact model
+        $contact = Contact::create($data);
+
+        // send model to email event
+        event(new ContactCustomerIssued($contact));
+
+        // TODO: build a listener for this and send off the email
+        Flash::message('Your email was sent successfully.');
+
+        return redirect('/admins/feedback/'. $request->feedback_id);
+    }
 }

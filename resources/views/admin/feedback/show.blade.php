@@ -9,7 +9,7 @@
         <table class="table form-table">
             <thead>
                 <tr>
-                  <th>Field</th>
+                  <th style="width: 25%;">Field</th>
                   <th>Content</th>
                 </tr>
               </thead>
@@ -48,7 +48,6 @@
                           </div>
                       {!! Form::close() !!}
                       @if(!$feedback->issue)
-                          @include('admin.feedback.partials._requestRetailInfo')
                       @endif
                     @endif
 
@@ -74,12 +73,16 @@
                 </tr>
               </tbody>
         </table>
+          @include('admin.feedback.partials._contactCustomer')
+
     </div>
+
+
     <div class="col-lg-4">
         <table class="table form-table">
             <thead>
                 <tr>
-                  <th>Field</th>
+                  <th style="width: 25%">Field</th>
                   <th>Content</th>
                 </tr>
               </thead>

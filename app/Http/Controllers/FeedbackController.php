@@ -33,7 +33,7 @@ class FeedbackController extends Controller {
     public function send(SendFeedbackRequest $request)
     {
         $data = $request->only('name', 'email', 'phone', 'issue_text', 'intent');
-        $data['hash'] = bcrypt(time());
+        $data['hash'] = str_replace('\\','',str_replace('/','',bcrypt(time())));
 
         $feedback = Feedback::create($data);
 

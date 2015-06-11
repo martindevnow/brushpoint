@@ -29,6 +29,15 @@ class EventServiceProvider extends ServiceProvider {
             'App\Handlers\Events\EmailCustomerFeedbackNotice',
         ],
 
+        'App\Events\ContactCustomerIssued' => [
+            'App\Handlers\Events\SendContactToCustomer'
+        ],
+
+
+
+
+
+
 
         'App\Events\RequestForRetailerInfoIssued' => [
             'App\Handlers\Events\EmailRequestForLotCodeAndAddress',

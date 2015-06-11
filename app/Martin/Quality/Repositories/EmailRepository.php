@@ -2,12 +2,30 @@
 
 use DateTime;
 use Illuminate\Support\Facades\Mail;
+use Martin\Quality\Contact;
 use Martin\Quality\Feedback;
 
 class EmailRepository {
 
     private $emailData;
     private $recipient;
+
+
+    public function emailCustomer(Feedback $feedback, Contact $contact)
+    {
+
+        Mail::send($contact->email_template, compact('feedback', 'contact'), function($message) use ($feedback, $contact) {
+
+            $from_email = $contact->from_email;
+            $to_email = $contact->to_email;
+
+            $message->to($to_email)
+                ->subject($contact->subject);
+            $message->from($from_email, "BrushPoint: Feedback");
+        });
+    }
+
+
 
     public function emailAddressRequest(Feedback $feedback, $brushType = 'battery')
     {

@@ -242,7 +242,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     /**
      * Feedback
      */
-    Route::post(         'admins/feedback/email/requestRetailerInfo', 'FeedbackController@emailRequestRetailerInfo');
+    Route::post(         'admins/feedback/contact/customer', 'FeedbackController@contactCustomer');
+    Route::post(         'admins/feedback/contact/send', 'FeedbackController@sendContactCustomer');
+    // Route::post(         'admins/feedback/email/requestRetailerInfo', 'FeedbackController@emailRequestRetailerInfo');
     Route::get(         'admins/feedback/filter',      'FeedbackController@filtered');
     Route::get(         'admins/feedback/{feedbackId}/retailer/remove', 'FeedbackController@removeRetailer');
     Route::get(         'admins/feedback/{feedbackId}/issue/remove',     'FeedbackController@removeIssue');
