@@ -9,6 +9,44 @@
  *         "About Us" in the sub menu. This is because the smaller menu that this template uses
  *         does not support clicking on any node that is a parent node to change the URL. only
  *         clicking on the final child would lead to a page.
+ *
+ * = TODO: Resize the banner at the top of the page. Only needs to be 272px tall
+ *          just keep the same ratio and it should scale just fine
+ *
+ * - TODO: Try to identify unused CSS / JS that can be removed from the project and not affect it.
+ *          ideally, we need to remove what we don't need and then we can use gulp to minify the
+ *          pages too. since it's all text, that should save on some load times
+ *
+ * - TODO: check the order of imports of files. make sure all CSS is loaded before JS
+ *          js can load after the page has been loaded, however, css should load first.
+ *
+ * - TODO: remove these debug routes from the routes file so they cannot be used after launch
+ *
+ *
+ * - TODO: test the purchasing a few more times to make sure it goes through properly.
+ *          refunds etc will have to be handled manually (can make a function for this if required.
+ *
+ * - TODO: INVENTORY - make it so lots/skus can be put "on hold" so that item won't ship
+ *
+ * - TODO: INVENTORY/PURCHASE - when an item is OOS, have it so that item is disabled on the site
+ *
+ * - TODO: PURCHASE/INVENTORY - when an item has say < 20 left in stock, have a post on the site
+ *          and don't allow people have more than that in their cart at one time
+ * - TODO: INVO/PURCH - allow users to be notified if an item is out of stock and when it comes back into stock
+ *
+ * - TODO: change the slideshows on the about page to not have a black background when the images are loading
+ *
+ * - TODO: get a file from Vivian that has all the retailers and issues she'd need for her QA stuff
+ *
+ * - TODO: Make sure the cart shipping calculation is working correctly
+ *          especially when changing quantity, adding items, deleting items etc..
+ *
+ * - TODO: Make sure duplicate payments will not be accepted. (ie if a user refreshes a page or reposts the same
+ *          data that paypal sent, then it won't issue the purchase on our site twice
+ *          This was disabled before, but it was turned off for testing.
+ *      FILE:    ProcessPaymentStatusCommandHandler.php
+ *
+ *
  */
 Route::get('addOneOfEach', function() {
     $cartRepo = new \Martin\Products\CartRepository();
@@ -35,14 +73,8 @@ Route::get('cartWeight', function()
 
 
 
-
-// TODO: Make the /cart calculate shipping cost everytime that page loads.
-// TODO: check to see if this was actually done
-
-
-
 // May 6th 2015
-// TODO: - RE-DISABLE duplication of 'Payments' in ProcessPaymentStatusCommandHandler.php
+// TODO: - RE-DISABLE duplication of 'Payments' in
 // TODO: - check the email that is generated and sent to the customer
 // TODO: - add the date to the invoice that is generated.
 

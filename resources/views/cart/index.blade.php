@@ -103,7 +103,7 @@
     @else
         <div class="jumbotron">
             <h1>Your cart is empty.</h1><br /><br/>
-            <h2><a href="http://bpl5.dev/purchase">Click here to view our products.</a></h2>
+            <h2><a href="{{ url('/') }}/purchase">Click here to view our products.</a></h2>
         </div>
     @endif
 </div>
