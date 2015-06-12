@@ -1,6 +1,50 @@
 <?php
 
 use Martin\Products\Item;
+use Martin\Quality\Contact;
+
+
+Route::get('testpath', function(){
+    $path = url('/');
+    dd($path);
+});
+
+Route::get('pathvars', function() {
+    echo "app path: " . app_path().
+        "\n base path: ". base_path() .
+        "\n public path: ". public_path().
+        "\n url(/) " . url('/');
+});
+
+
+Route::get('emailFeedback', function(){
+    $contact = Contact::find(1);
+
+    return view('emails.internal.contact')->with(compact('contact'));
+
+    event(new CustomerFeedbackSubmitted($feedback));
+
+    return 1;
+});
+
+
+
+
+Route::get('googletopdf', function(){
+
+    // You can pass a filename, a HTML string or an URL to the constructor
+    $pdf = new Pdf('http://www.google.com');
+
+    // On some systems you may have to set the binary path.
+    // $pdf->binary = 'C:\...';
+
+    if (!$pdf->saveAs('/home/martioo7/brushpoint/public/tmp/new.pdf')) {
+        // dd($pdf->getCommand()->getOutput());
+        throw new Exception('Could not create PDF: '.$pdf->getError());
+    }
+});
+
+
 
 
 /**
@@ -53,6 +97,12 @@ Route::get('showCookies', function()
 /**
  * Cart
  */
+
+Route::get('dumpCart', function(){
+    var_dump(session()->all());
+});
+
+
 Route::get('cartTest', function() {
     return View::make('pages.cartTest');
 });

@@ -1,96 +1,21 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-use App\Events\CustomerFeedbackSubmitted;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Request;
-use Martin\Ecom\Payment;
-use Martin\Products\Item;
-use Martin\Products\Virtue;
-use Martin\Products\Product;
-use Martin\Quality\Contact;
-use Martin\Quality\Feedback;
-use mikehaertl\wkhtmlto\Pdf;
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
-
-Route::get('testpath', function(){
-    $path = url('/');
-    dd($path);
-});
-
-Route::get('pathvars', function() {
-    echo "app path: " . app_path().
-        "\n base path: ". base_path() .
-        "\n public path: ". public_path().
-        "\n url(/) " . url('/');
-});
-
-
-Route::get('emailFeedback', function(){
-    $contact = Contact::find(1);
-
-    return view('emails.internal.contact')->with(compact('contact'));
-
-    event(new CustomerFeedbackSubmitted($feedback));
-
-    return 1;
-});
-
-
-Route::get('info', function() {
-    phpinfo();
-});
-
-
+/**
+ * June 11 2015
+ * - TODO: When resizing the page, I changed at what size the large nav bar becomes the small one.
+ *         I was able to make the long nav bar stay at smaller resolutions because the logo would
+ *         change to the small logo (no innovations) and be responsive.
+ *      However, some items in the nav bar change depending on the resolution of the screen. In
+ *         particular, the purchase will show an additional "toothbrushes" and AboutUs will show
+ *         "About Us" in the sub menu. This is because the smaller menu that this template uses
+ *         does not support clicking on any node that is a parent node to change the URL. only
+ *         clicking on the final child would lead to a page.
+ */
 Route::get('addOneOfEach', function() {
     $cartRepo = new \Martin\Products\CartRepository();
 
-    $items = Item::where('price', '>', 0)->get();
+    $items = \Martin\Products\Item::where('price', '>', 0)->get();
     foreach($items as $item)
-    {
         $cartRepo->addToCart($item, 1);
-    }
-});
-
-
-
-// TODO: Make the /cart calculate shipping cost everytime that page loads.
-
-
-
-
-Route::get('googletopdf', function(){
-
-    // You can pass a filename, a HTML string or an URL to the constructor
-        $pdf = new Pdf('http://www.google.com');
-
-    // On some systems you may have to set the binary path.
-    // $pdf->binary = 'C:\...';
-
-
-    if (!$pdf->saveAs('/home/martioo7/brushpoint/public/tmp/new.pdf')) {
-        // dd($pdf->getCommand()->getOutput());
-        throw new Exception('Could not create PDF: '.$pdf->getError());
-    }
-});
-
-
-Route::get('dumpCart', function(){
-    $cartRepo =  new \Martin\Products\CartRepository();
-    var_dump(session()->all());
 });
 
 
@@ -98,8 +23,21 @@ Route::get('destroyCart', function(){
     $cartRepo = new \Martin\Products\CartRepository();
     $cartRepo->clearCart();
 
-    return print_r(Session::all(), 1);
+    return print_r(session()->all(), 1);
 });
+
+
+Route::get('cartWeight', function()
+{
+    $cartRepo = new \Martin\Products\CartRepository();
+    $cartRepo->getTotalWeight();
+});
+
+
+
+
+// TODO: Make the /cart calculate shipping cost everytime that page loads.
+// TODO: check to see if this was actually done
 
 
 
@@ -130,6 +68,14 @@ Route::get('destroyCart', function(){
 // N//A: all pages -- consider removing the breadcrumb all together
 
 
+/**
+ * Authorization
+ */
+
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
 
 /**
  * Pages
@@ -357,26 +303,6 @@ Route::group(['namespace' => 'Admin'], function()
     Route::get('admins/payments/invoice/html/{id}', 'PaymentsController@invoiceHtml');
 });
 
-
-
-
-Route::get('destroyCart', function(){
-    $cartRepo = new \Martin\Products\CartRepository();
-    $cartRepo->clearCart();
-
-    return print_r(Session::all(), 1);
-});
-
-
-Route::get('cartWeight', function()
-{
-    $cartRepo = new \Martin\Products\CartRepository();
-    $cartRepo->getTotalWeight();
-});
-
-Route::get('sessionId', function() {
-    dd(session('unique_id'));
-});
 
 
 /**

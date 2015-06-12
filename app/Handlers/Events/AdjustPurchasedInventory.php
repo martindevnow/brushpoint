@@ -42,7 +42,7 @@ class AdjustPurchasedInventory {
             foreach($soldItems as $soldItem)
             {
 
-                $item = Item::find($soldItem->item->id);
+                $item = Item::findOrFail($soldItem->item->id);
                 $item->on_hand = $item->on_hand - $soldItem->quantity;
                 $item->save();
 
