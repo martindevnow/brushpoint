@@ -68,7 +68,7 @@ class ProductRepository {
 
     public function getPortfolioById($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         if ($product->portfolio && $product->active)
         {
             return $product;

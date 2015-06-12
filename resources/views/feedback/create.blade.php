@@ -34,20 +34,21 @@
 <div class="container">
    <div class="row">
         <div class="col-md-9 col-sm-9">
-            <h3 class="h3-body-title">
-                Leave A Message
-            </h3>
+            <div class="row">
+                <h3 class="h3-body-title">
+                    Leave A Message
+                </h3>
 
-            @include('errors.list')
+                @include('errors.list')
 
-            <p class="body_paragraph">
-                If you have any feedback for us, we'd love to hear it! Tell us about any issues you've had with
-                our products and we'll happily take care of it for you! Just fill out the forms below and we'll
-                be sure to respond to you as soon as possible! The more information you provide, the better we
-                can assist you!
-            </p>
-
-
+                <p class="body_paragraph">
+                    If you have any feedback for us, we'd love to hear it! Tell us about any issues you've had with
+                    our products and we'll happily take care of it for you! Just fill out the forms below and we'll
+                    be sure to respond to you as soon as possible! The more information you provide, the better we
+                    can assist you!
+                </p>
+            </div>
+            <div class="row">
 
             {!! Form::open(['method' => 'POST', 'url' => 'feedback/send', 'id' => 'bp-contact-form', 'class'=>'form-wrapper']) !!}
                 <!-- Name Form Input -->
@@ -79,36 +80,30 @@
                         </div>
                     </div>
                 </div>
-
-
+            </div>
+            <div class="row">
                 <div class="col-md-12" style="padding-bottom: 5px;">
                 <h3>Nature of Inquiry: </h3>
                     <!-- product Form Input -->
-                    <div class="col-md-3">
-                        {!! Form::label('intent', 'Product:') !!}
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        {!! Form::label('intent', 'Product Feedback:') !!}
                         {!! Form::radio('intent', 'product', false, ['style' => 'height:24px;width:24px;']) !!}
                     </div>
 
                     <!-- product Form Input -->
-                    <div class="col-md-3">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
                         {!! Form::label('intent', 'Sales:') !!}
                         {!! Form::radio('intent', 'sales', false, ['style' => 'height:24px;width:24px;']) !!}
                     </div>
 
                     <!-- product Form Input -->
-                    <div class="col-md-3">
-                        {!! Form::label('intent', 'General:') !!}
-                        {!! Form::radio('intent', 'general', false, ['style' => 'height:24px;width:24px;']) !!}
-                    </div>
-
-                    <!-- product Form Input -->
-                    <div class="col-md-3">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
                         {!! Form::label('intent', 'Other:') !!}
                         {!! Form::radio('intent', 'other', false, ['style' => 'height:24px;width:24px;']) !!}
                     </div>
 
                 </div>
-
+            </div>
                 <!-- Retailer Form Input -->
                 <!--
                 <div class="col-md-6">
@@ -132,19 +127,23 @@
                     </div>
                 </div> -->
 
-
+            <div class="row">
                 <!-- Issue Form Input -->
                 <div class="col-md-12">
                     <div class="form-group clearfix">
-                        {!! Form::label('issue_text', 'Issue *', ['class' => 'control-label']) !!}
-                        <div class="col-xs-10">
+                    <div class="col-xs-3">
+                                            {!! Form::label('issue_text', 'Issue *', ['class' => 'control-label']) !!}
+
+                    </div>
+                        <div class="col-xs-9">
                             {!! Form::textarea('issue_text', null, ['class' => 'form-control', 'title' => 'Describe the problem you have with the toothbrush']) !!}
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div class="row">
                 {!! Form::submit('Send Feedback', ['class' => 'btn btn-primary', 'style' => 'float: right;']) !!}
-
+            </div>
             {!! Form::close() !!}
         </div>
         <div class="col-md-3 col-sm-3">

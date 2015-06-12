@@ -1,6 +1,7 @@
 <?php namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Martin\Notifications\Flash;
 
@@ -46,6 +47,17 @@ class Handler extends ExceptionHandler {
 
             return redirect('/cart');
         }
+
+        if ($e instanceof ModelNotFoundException)
+        {
+            Flash::error('Not Found');
+            return redirect('/404'); // view('errors.404');
+        }
+
+
+
+
+
 		return parent::render($request, $e);
 	}
 
