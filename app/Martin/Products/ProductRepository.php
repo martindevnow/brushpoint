@@ -10,7 +10,7 @@ class ProductRepository {
     public function updateProduct($id, array $attributes)
     {
 
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         /*if (isset($attributes['features']))
         {
@@ -54,7 +54,7 @@ class ProductRepository {
 
     public function getPurchaseById($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         if ($product->purchase && $product->active)
         {
             return $product;

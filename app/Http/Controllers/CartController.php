@@ -54,7 +54,7 @@ class CartController extends Controller {
      */
     public function confirmAddToCart($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         $cart = $this->cartRepository->getCartByItemId($id);
 
 
@@ -78,7 +78,7 @@ class CartController extends Controller {
     {
         $fields = $request->only(['item_id', 'quantity']);
 
-        $item = Item::find($fields['item_id']);
+        $item = Item::findOrFail($fields['item_id']);
 
         $success = $this->cartRepository->addToCart($item, $fields['quantity']);
 

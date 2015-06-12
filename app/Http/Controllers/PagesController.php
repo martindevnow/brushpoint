@@ -58,9 +58,10 @@ class PagesController extends Controller {
      * @param Requests\SendContactRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function sendContact(Requests\SendContactRequest $request)
+    /*public function sendContact(Requests\SendContactRequest $request)
     {
         $data = $request->only('name', 'email', 'user_message');
+
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
         $data['message'] = $request->user_message;
         $data['hash'] = bcrypt(time());
@@ -73,7 +74,7 @@ class PagesController extends Controller {
         Flash::message('Your message has been delivered!');
 
         return redirect('contact/thankyou');
-    }
+    }*/
 
     /**
      * Show confirmation to the user that their message was sent
@@ -92,7 +93,7 @@ class PagesController extends Controller {
      */
     public function video()
     {
-        $vitalHealthDM = Product::find(1);
+        $vitalHealthDM = Product::findOrFail(1);
 
         return view('pages.video')->with(compact('vitalHealthDM'));
     }

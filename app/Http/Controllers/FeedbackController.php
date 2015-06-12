@@ -54,7 +54,7 @@ class FeedbackController extends Controller {
      */
     public function createAddress($id, $hash)
     {
-        $feedback = Feedback::find($id);
+        $feedback = Feedback::findOrFail($id);
 
         if ($hash == $feedback->hash)
             return view('feedback.address')->with(compact('feedback'));
@@ -71,7 +71,7 @@ class FeedbackController extends Controller {
      */
     public function storeAddress($id, $hash, GetAddressRequest $request)
     {
-        $feedback = Feedback::find($id);
+        $feedback = Feedback::findOrFail($id);
 
         if ($feedback->hash != $hash)
             return redirect('/');
@@ -104,7 +104,7 @@ class FeedbackController extends Controller {
 
     public function editLotCodeAndAddress($id, $hash)
     {
-        $feedback = Feedback::find($id);
+        $feedback = Feedback::findOrFail($id);
         if ($feedback->hash != $hash)
             return redirect('/');
 
@@ -116,7 +116,7 @@ class FeedbackController extends Controller {
 
     public function storeLotCodeAndAddress($id, $hash, GetAddressRequest $request)
     {
-        $feedback = Feedback::find($id);
+        $feedback = Feedback::findOrFail($id);
 
         if ($feedback->hash != $hash)
             return redirect('/');
