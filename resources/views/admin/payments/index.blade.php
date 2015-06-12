@@ -19,6 +19,7 @@
               <th>Total Amount</th>
               <th>Shipped</th>
               <th>Documents</th>
+              <th>More</th>
             </tr>
           </thead>
           <tbody>
@@ -41,10 +42,12 @@
                 @endif
               </td>
               <td><a href="/admins/payments/invoice/{{ $payment->id }}">Invoice</a></td>
+              <td><a href="/admins/payments/{{ $payment->id }}">Details</a></td>
             </tr>
             @endforeach
           </tbody>
     </table>
+
 </div>
 
 <div class="flash">

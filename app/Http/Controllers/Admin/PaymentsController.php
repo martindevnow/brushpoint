@@ -44,7 +44,9 @@ class PaymentsController extends Controller {
     {
         $payment = Payment::find($id);
 
-        $this->layout->conte = view('admin.payments.show')
+        // dd($payment->address);
+
+        $this->layout->content = view('admin.payments.show')
             ->with(compact('payment'));
 
     }

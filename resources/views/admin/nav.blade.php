@@ -255,6 +255,9 @@
                             <a href="/admins/payers"><i class="fa fa-table fa-fw"></i> Customers</a>
                         </li>
                         <li>
+                            <a href="/admins/inventory"><i class="fa fa-table fa-fw"></i> Inventory</a>
+                        </li>
+                        <li>
                             <a href="/admins/issues"><i class="fa fa-table fa-fw"></i> Issues</a>
                         </li>
                         <li>

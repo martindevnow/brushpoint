@@ -88,9 +88,17 @@ Route::get('googletopdf', function(){
 });
 
 
-Route::get('dumpcart', function(){
+Route::get('dumpCart', function(){
     $cartRepo =  new \Martin\Products\CartRepository();
     var_dump(session()->all());
+});
+
+
+Route::get('destroyCart', function(){
+    $cartRepo = new \Martin\Products\CartRepository();
+    $cartRepo->clearCart();
+
+    return print_r(Session::all(), 1);
 });
 
 
@@ -287,6 +295,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     /**
      * Inventory
      */
+    Route::get(         'admins/inventory/item/{id}',     'InventoryController@showItem');
+    Route::get(         'admins/inventory/lot/{id}',     'InventoryController@showLotActivity');
     Route::resource(    'admins/inventory',     'InventoryController');
 
 
