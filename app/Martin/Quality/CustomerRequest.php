@@ -1,8 +1,9 @@
-<?php namespace App;
+<?php namespace Martin\Quality;
 
 use Illuminate\Database\Eloquent\Model;
+use Martin\Core\CoreModel;
 
-class CustomerRequest extends Model {
+class CustomerRequest extends CoreModel {
 
 	public $fillable = [
         'feedback_id',

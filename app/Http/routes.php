@@ -1,4 +1,11 @@
 <?php
+
+Route::get('fileUplaod', function()
+{
+
+    return view('testing.fileUpload');
+
+});
 /**
  * June 11 2015
  * - TODO: When resizing the page, I changed at what size the large nav bar becomes the small one.

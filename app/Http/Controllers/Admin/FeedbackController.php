@@ -1,7 +1,6 @@
 <?php namespace App\Http\Controllers\Admin;
 
 
-use App\CustomerRequest;
 use App\Events\ContactCustomerIssued;
 use App\Events\RequestForRetailerInfoIssued;
 use App\Http\Requests;
@@ -10,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Martin\Notifications\Flash;
 use Martin\Quality\Contact;
+use Martin\Quality\CustomerRequest;
 use Martin\Quality\Feedback;
 use Martin\Quality\Issue;
 use Martin\Quality\Repositories\ContactRepository;
@@ -223,6 +223,7 @@ class FeedbackController extends Controller {
         ));
 
         $custRequest->hash = str_random(32);
+        $custRequest->sent_at = get_current_time();
         $custRequest->save();
 
 

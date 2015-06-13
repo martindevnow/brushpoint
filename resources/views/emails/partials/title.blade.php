@@ -20,9 +20,9 @@
         <tr>
             <td colspan="3" style="text-align:right;padding:7px 0 5px 0;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
                 <h2 style="font-size:20px;line-height:24px;margin:0;padding:0;font-weight:normal;color:rgb(0,0,0)!important">
-                    {!! $contact->subject !!}
+                    {!! $subtitle !!}
                 </h2>
-                {!! $contact->title !!}
+                {!! $title !!}
                 <br>
             </td>
         </tr>

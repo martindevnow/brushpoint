@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\GetAddressRequest;
 use App\Http\Requests\SendFeedbackRequest;
 use Illuminate\Http\Request;
+use Martin\Core\Image;
 use Martin\Notifications\Flash;
 use Martin\Quality\Feedback;
 
@@ -102,10 +103,12 @@ class FeedbackController extends Controller {
 
 
 
-    public function editCustomerFeedback($feedbackId, $customerRequestId, $customerRequestHash)
+    public function editCustomerRequest($feedbackId, $customerRequestId, $customerRequestHash)
     {
         $feedback = Feedback::findOrFail($feedbackId);
-        $customerRequest = $feedback->customerRequest->where('id', $customerRequestId);
+        // dd($customerRequestId);
+        $customerRequest = $feedback->customerRequests->where('id', (int) $customerRequestId)->first();
+        // dd($customerRequest->where('id', $customerRequestId));
 
         if ($customerRequest->hash != $customerRequestHash)
             return redirect('/');
@@ -115,24 +118,32 @@ class FeedbackController extends Controller {
     }
 
 
-
-    public function storeCustomerRequest($feedbackId, $customerRequestId, $customerRequestHash, GetAddressRequest $request)
+    /**
+     * @param $feedbackId
+     * @param $customerRequestId
+     * @param $customerRequestHash
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function storeCustomerRequest($feedbackId, $customerRequestId, $customerRequestHash, Request $request)
     {
+        // dd($request);
         $feedback = Feedback::findOrFail($feedbackId);
-        $customerRequest = $feedback->customerRequest->where('id', $customerRequestId);
+        $customerRequest = $feedback->customerRequests->where('id', (int) $customerRequestId)->first();
 
+        $file = $request->file('product_image');
+        // dd($file);
 
-        if ($feedback->hash != $customerRequestHash)
+        if ($customerRequest->hash != $customerRequestHash)
             return redirect('/');
 
         // Save the address (if requested)
-        if ($customerRequest->request_address || $request->request_return)
+        if ($customerRequest->request_address || $customerRequest->request_return)
         {
             $addressData = $request->only('street_1', 'street_2', 'city', 'province', 'postal_code', 'country');
             $addressData['name'] = $feedback->name;
             $feedback->addresses()->create($addressData);
         }
-
 
         // save the Lot code/retailer (if requested)
         $feedback->lot_code = $request->lot_code;
@@ -144,13 +155,28 @@ class FeedbackController extends Controller {
         if ($customerRequest->request_image)
         {
             // TODO: SAVE THE IMAGE AND ASSOCIATE IT TO THE FEEDBACK/CUSTOMER_REQUEST
+
+            /// dd($request);
+            $imageName = $customerRequest->id . '.' .
+                $request->file('product_image')->getClientOriginalExtension();
+
+            $shortPath = '/public/customerRequest/images/';
+            $fullPath = base_path() . $shortPath ;
+
+            $request->file('product_image')->move(
+                $fullPath, $imageName
+            );
+
+            $image = new Image();
+            $image->path = $shortPath . $imageName;
+            $image->save();
+
+            $customerRequest->images()->save($image);
         }
 
+        $customerRequest->received_at = get_current_time();
 
         Flash::message('Thank you for your submission!');
-
-
-
 
         // create event?
         // send email to the user?

@@ -33,25 +33,12 @@ $payment->created_at->timezone = 'America/Toronto';
                                     <td rowspan="2" style="width:115px;padding:20px 20px 0 0;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
                                         <a href="http://www.brushpoint.com" title="Visit www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                                             <img src="http://www.brushpoint.martindevnow.com/images/logo/brushpoint.jpg" height="75" width="165" />
-                                            <!-- <img alt="BrushPoint.com" src="https://ci6.googleusercontent.com/proxy/WhmqLoMir5UYEN_mqZBtoDGctziWnxcd16JUuejFgylJH9MjVIUKe8NP3fxPs7ww8j41WBvy-JQKspLrhrPKLmmCwBuHQcWhwm7oPls8g7VZtkb0JoBGh-TAQx2I=s0-d-e1-ft#http://g-ec2.images-amazon.com/images/G/15/x-locale/cs/te/a_ca_logo.png" style="border:0;width:115px"> -->
                                         </a>
                                     </td>
                                     <td style="text-align:right;padding:5px 0;border-bottom:1px solid rgb(204,204,204);white-space:nowrap;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif"> </td>
-                                    <td style="width:100%;padding:7px 5px 0;text-align:right;border-bottom:1px solid rgb(204,204,204);white-space:nowrap;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
-                                        <!-- <a href="http://www.brushpoint.com" style="border-right:0px solid rgb(204,204,204);margin-right:0px;padding-right:0px;text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
-                                            Your Orders
-                                        </a> -->
-                                    </td>
+                                    <td style="width:100%;padding:7px 5px 0;text-align:right;border-bottom:1px solid rgb(204,204,204);white-space:nowrap;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif"> </td>
                                     <td style="text-align:right;padding:5px 0;border-bottom:1px solid rgb(204,204,204);white-space:nowrap;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
-                                        <!-- <span style="text-decoration:none;color:rgb(204,204,204);font-size:15px;font-family:Arial,sans-serif">
-                                            &nbsp;|&nbsp;
-                                        </span>
-                                        <a href="http://www.brushpoint.com" style="border-right:0px solid rgb(204,204,204);margin-right:0px;padding-right:0px;text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
-                                            Your Account
-                                        </a>
-                                        <span style="text-decoration:none;color:rgb(204,204,204);font-size:15px;font-family:Arial,sans-serif">
-                                            &nbsp;|&nbsp;
-                                        </span> -->
+
                                         <a href="http://www.brushpoint.com" style="border:0;margin:0;padding:0;border-right:0px solid rgb(204,204,204);margin-right:0px;padding-right:0px;text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                                             BrushPoint.com
                                         </a>
@@ -85,21 +72,15 @@ $payment->created_at->timezone = 'America/Toronto';
                                             Hello {{ $payer->first_name }} {{ $payer->last_name }},
                                         </h3>
                                         <p style="margin:1px 0 8px 0;font:12px/16px Arial,sans-serif">
-                                            Thank you for shopping with us. We’ll send a confirmation once your item(s) have shipped. Your order details are indicated below. If you would like to view the status of your order or make any changes to it, please visit
+                                            Thank you for shopping with us. We’ll send a confirmation once your item(s) have shipped. Your order details are indicated below.
+                                            <!-- If you would like to view the status of your order or make any changes to it, please visit
                                             <a href="http://www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                                             Your Orders
                                             </a>
-                                            on BrushPoint.com.
+                                            on BrushPoint.com. -->
                                         </p>
                                     </td>
                                 </tr>
-                                <!-- <tr>
-                                    <td style="vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
-                                        <p style="margin:1px 0 8px 0;font:12px/16px Arial,sans-serif">
-                                            Your purchase has been divided into 2 orders.
-                                        </p>
-                                    </td>
-                                </tr> -->
                                 </tbody>
                                 </table>
                             </td>
@@ -120,9 +101,9 @@ $payment->created_at->timezone = 'America/Toronto';
                             <tr>
                                 <td style="vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
                                     Order #
-                                    <a href="http://www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                                    <!-- <a href="http://www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank"> -->
                                         {{ $payment->payment_id }}
-                                    </a>
+                                    <!-- </a> -->
                                     <br>
                                     <span style="font-size:12px;color:rgb(102,102,102)">
                                         Placed on {{ $payment->created_at->toDayDateTimeString()}} EST
@@ -197,7 +178,7 @@ $payment->created_at->timezone = 'America/Toronto';
                                 <tbody>
                                 <tr>
                                     <td style="width:150px;text-align:center;padding:16px 0 10px 0;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
-                                        <a href="http://www.brushpoint.com" title="B005FWS0ZU" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                                        <a href="http://www.brushpoint.com" title="{{ $soldItem->sku }}" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                                         <!-- PRODUCT IMAGE -->
                                             <img src="http://www.brushpoint.martindevnow.com/images/brushpoint/purchase/{{ $soldItem->item->sku }}-115.png" class="img-responsive" style="max-height: 35px; display: inline;"/>
                                             <!-- <img src="https://ci3.googleusercontent.com/proxy/s5qnvPL4BTDy60jHjxlmKEKp4MCauXDJcLY7c3s0DCt_C7Nm-9lbrmYA8Jy9evXE0cVYJb6qKvKg1DRmfJeJ3IwDuJnNkIUcHf5YeEtWsVxsuCIUzinUis2cZOXCKPBS7EBn4Z0=s0-d-e1-ft#http://ecx.images-amazon.com/images/I/41brDiU5u1L._SCLZZZZZZZ__SY115_SX115_.jpg" style="border:0"> -->
@@ -205,7 +186,7 @@ $payment->created_at->timezone = 'America/Toronto';
                                     </td>
                                     <td style="color:rgb(102,102,102);padding:10px 0 10px 10px;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
 
-                                        <a href="http://www.brushpoint.com/purchase" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                                        <a href="http://www.brushpoint.com/purchase/id-{{ $soldItem->item->product->id }}" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                                             {!! $soldItem->quantity ? "<b>". $soldItem->quantity . " x </b>" : "" !!}
                                             {{ $soldItem->item->name }}
                                         </a>

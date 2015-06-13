@@ -3,8 +3,8 @@
 namespace Martin\Quality\Repositories;
 
 
-use App\CustomerRequest;
 use Illuminate\Http\Request;
+use Martin\Quality\CustomerRequest;
 use Martin\Quality\Feedback;
 
 class ContactRepository {
@@ -66,9 +66,6 @@ class ContactRepository {
 
     public function requestLotCode($brush_type = "battery")
     {
-        return "REQUEST LOT_CODE
-        ";
-
         if ($brush_type == 'battery')
         {
             $body = <<<EOT
@@ -103,9 +100,6 @@ EOT;
 
     public function requestAddress($feedback)
     {
-        return "REQUEST ADDRESS
-        "        ;
-
         $body = <<<EOT
 <p>
 We would be happy to send you a replacement unit if you can provide us with a full mailing address.
@@ -122,10 +116,12 @@ EOT;
 
     public function requestReturn($feedback)
     {
-        return "REQUEST RETURN
-        ";
         $body = <<<EOT
-
+<p>
+In addition, we would like to request for the defective unit to be returned to our facility for further investigation.
+We will send you a prepaid envelope, along with your replacement unit.
+Please put the defective unit into the prepaid envelope and return it at a local post office destination (Canada - Canada Post; United States - Fedex).
+</p>
 
 EOT;
         return $body;
@@ -134,10 +130,10 @@ EOT;
 
     public function requestImage($feedback)
     {
-        return "REQUEST IMAGE
-        ";
         $body = <<<EOT
-
+<p>
+In order for us to understand the issue better, would you be able to send us a photo for evaluation please.
+</p>
 
 EOT;
         return $body;
@@ -146,10 +142,12 @@ EOT;
 
     public function explainReplacementHeadsUsage()
     {
-        return "EXPLAIN REPLACEMENT_HEADS_USAGE
-        ";
         $body = <<<EOT
-
+<p>
+To replace the replacement heads, simply hold the neck of the toothbrush in one hand, and the handle of the toothbrush in the other, and pull really hard in the two opposite directions.
+You will not break the toothbrush.
+Please let us know if these instructions helped.
+</p>
 
 EOT;
         return $body;
@@ -169,10 +167,12 @@ EOT;
 
     private function explainWhereToBuy()
     {
-        return "EXPLAIN WHERE_TO_BUY
-        ";
-        $body = <<<EOT
 
+        $body = <<<EOT
+<p>
+Replacement heads can only be purchased online at the moment through our website www.brushpoint.com.
+We are working hard to get these replacement heads available in store.
+</p>
 
 EOT;
         return $body;
@@ -180,10 +180,13 @@ EOT;
 
     private function explainInterdentalArm()
     {
-        return "EXPLAIN INTERDENTAL_ARM
-        ";
         $body = <<<EOT
-
+<p>
+To change interdental accessories, take the interdental arm off of the toothbrush.
+At the bottom of the interdental arm, there is a collar piece, pull this piece down (this is figure 6 on the back of the package).
+Change the accessories, and push the collar piece back up to lock it in place.
+Please let us know if these instructions were helpful.
+</p>
 
 EOT;
         return $body;
@@ -192,10 +195,13 @@ EOT;
 
     private function explainHowToChangeBatteries()
     {
-        return "EXPLAIN HOW_TO_CHANGE_BATTERIES
-        ";
         $body = <<<EOT
-
+<p>
+The battery compartment is located at the bottom of the toothbrush.
+Simply pull this battery cap off to replace the batteries.
+If this doesn't work, hold the toothbrush handle in one hand, and the battery compartment in the other, and bend the two pieces at a 45 degree angle downwards.
+The batteries should pop out. Please let us know if these instructions helped.
+</p>
 
 EOT;
         return $body;
@@ -235,7 +241,7 @@ EOT;
     {
         $body = <<<EOT
 <p>
-<a href="$this->url/feedback/edit/$feedback->id//$customerRequest->id/$customerRequest->hash">
+<a href="$this->url/feedback/edit/$feedback->id/$customerRequest->id/$customerRequest->hash">
         [Click Here to Provide the Requested Information]
 </a>
 </p>

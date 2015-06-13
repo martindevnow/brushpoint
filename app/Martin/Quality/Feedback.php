@@ -45,9 +45,8 @@ class Feedback extends CoreModel {
     {
         // $status = ($this->closed + 1) % 2;
         $this->closed = $status;
-        $dt = new DateTime;
         if ($status)
-            $this->closed_at = $dt->format('y-m-d H:i:s');
+            $this->closed_at = get_current_time();
         else
             $this->closed_at = 0;
         $this->save();
@@ -83,6 +82,14 @@ class Feedback extends CoreModel {
     {
         return $this->hasMany('Martin\Quality\Contact');
     }
+
+    public function customerRequests()
+    {
+        return $this->hasMany('Martin\Quality\CustomerRequest');
+    }
+
+
+
 
 
 
