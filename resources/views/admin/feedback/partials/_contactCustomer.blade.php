@@ -23,16 +23,25 @@
                 <br />
                 {!! Form::label('Battery') !!}
                 {!! Form::radio('brush_type', 'battery', false); !!}
-                <br />
-                {!! Form::label('N/A') !!}
-                {!! Form::radio('brush_type', 'none', true); !!}
             </div>
-
           </div>
+
           <!-- Request_address Form Input -->
           <div class="form-group">
               {!! Form::label('request_address', 'Request Address:') !!}
               {!! Form::checkbox('request_address', '1', false) !!}
+          </div>
+
+          <!-- Request_lot_code Form Input -->
+          <div class="form-group">
+              {!! Form::label('request_return', 'Request Return:') !!}
+              {!! Form::checkbox('request_return', '1', false) !!}
+          </div>
+
+          <!-- Request_image Form Input -->
+          <div class="form-group">
+              {!! Form::label('request_image', 'Request Image:') !!}
+              {!! Form::checkbox('request_image', '1', false) !!}
           </div>
 
           <!-- explain_replacement_head Form Input -->
@@ -41,6 +50,23 @@
                 {!! Form::checkbox('explain_replacement_heads_usage', '1', false) !!}
             </div>
 
+          <!-- explain_replacement_head Form Input -->
+            <div class="form-group">
+                {!! Form::label('explain_interdental_arm', 'Explain Interdental Arm:') !!}
+                {!! Form::checkbox('explain_interdental_arm', '1', false) !!}
+            </div>
+
+          <!-- explain_replacement_head Form Input -->
+            <div class="form-group">
+                {!! Form::label('explain_where_to_buy', 'Explain Where To Buy:') !!}
+                {!! Form::checkbox('explain_where_to_buy', '1', false) !!}
+            </div>
+
+          <!-- explain_replacement_head Form Input -->
+            <div class="form-group">
+                {!! Form::label('explain_how_to_change_batteries', 'Explain How To Change Batteries:') !!}
+                {!! Form::checkbox('explain_how_to_change_batteries', '1', false) !!}
+            </div>
       </div>
 
       {!! Form::hidden('feedback_id', $feedback->id) !!}

@@ -59,6 +59,7 @@
                 <td><!-- Title Form Input -->
                 <div class="form-group">
                     {!! Form::hidden('feedback_id', $feedback_id, ['class' => 'form-control']) !!}
+                    {!! Form::hidden('customer_request_id', $customer_request_id, ['class' => 'form-control']) !!}
                     {!! Form::submit('Send', ['class' => 'btn btn-primary']) !!}
                 </div>
                 </td>

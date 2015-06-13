@@ -127,8 +127,8 @@ Route::get('video.htm', 'PagesController@video');
 /**
  * Feedback
  */
-Route::get('feedback/edit/{id}/{hash}', 'FeedbackController@editLotCodeAndAddress');
-Route::post('feedback/edit/{id}/{hash}', 'FeedbackController@storeLotCodeAndAddress');
+Route::get('feedback/edit/{feedbackId}/{customerRequestId}/{customerRequestHash}', 'FeedbackController@editCustomerRequest');
+Route::post('feedback/edit/{feedbackId}/{customerRequestId}/{customerRequestHash}', 'FeedbackController@storeCustomerRequest');
 
 Route::get('feedback',          'FeedbackController@create');
 Route::post('feedback/send',    'FeedbackController@send');

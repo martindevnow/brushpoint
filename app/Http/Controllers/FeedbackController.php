@@ -102,36 +102,55 @@ class FeedbackController extends Controller {
 
 
 
-    public function editLotCodeAndAddress($id, $hash)
+    public function editCustomerFeedback($feedbackId, $customerRequestId, $customerRequestHash)
     {
-        $feedback = Feedback::findOrFail($id);
-        if ($feedback->hash != $hash)
+        $feedback = Feedback::findOrFail($feedbackId);
+        $customerRequest = $feedback->customerRequest->where('id', $customerRequestId);
+
+        if ($customerRequest->hash != $customerRequestHash)
             return redirect('/');
 
-        return view('feedback.editLotCodeAndAddress')
-            ->with(compact('feedback'));
+        return view('feedback.editCustomerRequest')
+            ->with(compact('feedback', 'customerRequest'));
     }
 
 
 
-    public function storeLotCodeAndAddress($id, $hash, GetAddressRequest $request)
+    public function storeCustomerRequest($feedbackId, $customerRequestId, $customerRequestHash, GetAddressRequest $request)
     {
-        $feedback = Feedback::findOrFail($id);
+        $feedback = Feedback::findOrFail($feedbackId);
+        $customerRequest = $feedback->customerRequest->where('id', $customerRequestId);
 
-        if ($feedback->hash != $hash)
+
+        if ($feedback->hash != $customerRequestHash)
             return redirect('/');
 
-        $data = $request->only('street_1', 'street_2', 'city', 'province', 'postal_code', 'country');
+        // Save the address (if requested)
+        if ($customerRequest->request_address || $request->request_return)
+        {
+            $addressData = $request->only('street_1', 'street_2', 'city', 'province', 'postal_code', 'country');
+            $addressData['name'] = $feedback->name;
+            $feedback->addresses()->create($addressData);
+        }
 
-        $data['name'] = $feedback->name;
 
-        $feedback->addresses()->create($data);
-
+        // save the Lot code/retailer (if requested)
         $feedback->lot_code = $request->lot_code;
-        $feedback->lot_code = $request->retailer_text;
+        $feedback->retailer_text = $request->retailer_text;
         $feedback->save();
 
-        Flash::message('Thank you for submitting your address!');
+
+        // TODO: get and save any image which might be attached.
+        if ($customerRequest->request_image)
+        {
+            // TODO: SAVE THE IMAGE AND ASSOCIATE IT TO THE FEEDBACK/CUSTOMER_REQUEST
+        }
+
+
+        Flash::message('Thank you for your submission!');
+
+
+
 
         // create event?
         // send email to the user?

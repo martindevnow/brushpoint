@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
+
+use App\CustomerRequest;
 use App\Events\ContactCustomerIssued;
 use App\Events\RequestForRetailerInfoIssued;
 use App\Http\Requests;
@@ -192,8 +194,6 @@ class FeedbackController extends Controller {
         // add the feedback hash to the request data
         $feedback = Feedback::find($request->feedback_id);
 
-        // get the body of the email based on the request
-        $data['email_body'] = $contactRepository->getBody($request, $feedback);
 
         // put the values into the form
         $data['to_email'] = $contactRepository->getToEmail($feedback);
@@ -205,6 +205,32 @@ class FeedbackController extends Controller {
         $data['from_email'] = $contactRepository->getFromEmail();
 
         $data['feedback_id'] = $feedback->id;
+
+
+        // Create a CustomerRequest object
+        /*dd($request->except(
+            'explain_interdental_arm',
+            'explain_replacement_heads_usage',
+            'explain_where_to_buy'
+            'explain_how_to_change_batteries'
+        ));*/
+
+        $custRequest = CustomerRequest::create($request->except(
+            'explain_interdental_arm',
+            'explain_replacement_heads_usage',
+            'explain_where_to_buy',
+            'explain_how_to_change_batteries'
+        ));
+
+        $custRequest->hash = str_random(32);
+        $custRequest->save();
+
+
+        $data['customer_request_id'] = $custRequest->id;
+
+
+        // get the body of the email based on the request
+        $data['email_body'] = $contactRepository->getBody($request, $feedback, $custRequest);
 
 
         // display the form
