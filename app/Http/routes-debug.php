@@ -4,6 +4,41 @@ use Martin\Products\Item;
 use Martin\Quality\Contact;
 
 
+Route::get('fileUpload', function()
+{
+    return view('testing.fileUpload');
+});
+
+
+
+Route::get('addOneOfEach', function() {
+    $cartRepo = new \Martin\Products\CartRepository();
+
+    $items = \Martin\Products\Item::where('price', '>', 0)->get();
+    foreach($items as $item)
+        $cartRepo->addToCart($item, 1);
+});
+
+
+Route::get('destroyCart', function(){
+    $cartRepo = new \Martin\Products\CartRepository();
+    $cartRepo->clearCart();
+
+    return print_r(session()->all(), 1);
+});
+
+
+Route::get('cartWeight', function()
+{
+    $cartRepo = new \Martin\Products\CartRepository();
+    $cartRepo->getTotalWeight();
+});
+
+
+
+
+
+
 Route::get('testpath', function(){
     $path = url('/');
     dd($path);

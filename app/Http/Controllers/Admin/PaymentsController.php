@@ -24,7 +24,7 @@ class PaymentsController extends Controller {
     function __construct(PaymentRepository $paymentRepository)
     {
         $this->middleware('auth', ['except' => 'invoiceHtml']);
-        // $this->middleware('guest', ['only' => 'invoiceHtml']);
+        $this->middleware('local', ['only' => 'invoiceHtml']);
 
         $this->paymentRepository = $paymentRepository;
     }
