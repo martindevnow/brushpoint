@@ -18,7 +18,7 @@ class ContactRepository {
     }
     // request_lot_code
     // request_address
-    // request_return
+    // request_field_sample
     // request_retailer
     // request_image
     // explain_replacement_heads_usage
@@ -35,8 +35,8 @@ class ContactRepository {
             $body .= $this->requestLotCode($request->brush_type);
         if ($request->request_address)
             $body.= $this->requestAddress($feedback);
-        if ($request->request_return)
-            $body .= $this->requestReturn($feedback);
+        if ($request->request_field_sample)
+            $body .= $this->requestFieldSample($feedback);
         if ($request->request_image)
             $body .= $this->requestImage($feedback);
         if ($request->explain_replacement_heads_usage)
@@ -54,7 +54,7 @@ class ContactRepository {
         if ($request->request_lot_code ||
             $request->request_address ||
             $request->request_image ||
-            $request->request_return
+            $request->request_field_sample
         )
             $body .= $this->requestFromCustomer($feedback, $customerRequest);
 
@@ -115,7 +115,7 @@ EOT;
 
 
 
-    public function requestReturn($feedback)
+    public function requestFieldSample($feedback)
     {
         $body = <<<EOT
 <p>

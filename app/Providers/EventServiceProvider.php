@@ -30,7 +30,8 @@ class EventServiceProvider extends ServiceProvider {
         ],
 
         'App\Events\ContactCustomerIssued' => [
-            'App\Handlers\Events\SendContactToCustomer'
+            'App\Handlers\Events\SendContactToCustomer',
+            'App\Handlers\Events\OpenComplaintInvestigation',
         ],
 
 

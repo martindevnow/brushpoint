@@ -17,6 +17,7 @@
               <th>ID</th>
               <th>Name</th>
               <th>Retailer</th>
+              <th>Retailer Code</th>
               <th>Lot Code</th>
               <th>Issue</th>
               <th>Intent</th>
@@ -34,6 +35,7 @@
               @else
                 <td>{{ $feedback->retailer_text }}</td>
               @endif
+              <td>{{ $feedback->retailer_reference }}</td>
               <td>{{ $feedback->lot_code }}</td>
               <td>{{ $feedback->issue_text }}</td>
               <td>{{ $feedback->intent }}</td>

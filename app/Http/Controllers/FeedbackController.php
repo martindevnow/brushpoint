@@ -138,7 +138,7 @@ class FeedbackController extends Controller {
             return redirect('/');
 
         // Save the address (if requested)
-        if ($customerRequest->request_address || $customerRequest->request_return)
+        if ($customerRequest->request_address || $customerRequest->request_field_sample)
         {
             $addressData = $request->only('street_1', 'street_2', 'city', 'province', 'postal_code', 'country');
             $addressData['name'] = $feedback->name;

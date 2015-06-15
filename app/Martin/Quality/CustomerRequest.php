@@ -15,7 +15,7 @@ class CustomerRequest extends CoreModel {
         'request_address',
         'request_retailer',
         'request_image',
-        'request_return',
+        'request_field_sample',
 
 
         'sent_at',

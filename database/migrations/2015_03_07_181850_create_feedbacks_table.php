@@ -25,7 +25,6 @@ class CreateFeedbacksTable extends Migration {
             $table->string('retailer_reference')->nullable();
 
             $table->string('lot_code')->nullable();
-            $table->timestamp('lot_code_requested_at');
 
             $table->text('issue_text');
             $table->string('issue_id')->nullable()->index();
@@ -42,17 +41,17 @@ class CreateFeedbacksTable extends Migration {
             $table->string('ip_address')->nullable();
             $table->string('country')->nullable();
 
-
-
             $table->integer('address_id')->nullable();
-            $table->timestamp('address_requested_at');
-
 
             $table->boolean('adverse_event')->default(false);
+            $table->string('adverse_event_level')->nullable();
+
             $table->boolean('health_canada_report')->default(false);
+
             $table->boolean('capa_required')->default(false);
             $table->string('capa_reason')->nullable();
 
+            $table->timestamp('product_requested_at');
 
             $table->boolean('closed')->default(false);
             $table->timestamp('closed_at');

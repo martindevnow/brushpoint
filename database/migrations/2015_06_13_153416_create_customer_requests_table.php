@@ -25,12 +25,12 @@ class CreateCustomerRequestsTable extends Migration {
 
             // request_lot_code
             // request_address
-            // request_return
+            // request_field_sample
             // request_image
 
             $table->boolean('request_lot_code');
             $table->boolean('request_address');
-            $table->boolean('request_return');
+            $table->boolean('request_field_sample');
             $table->boolean('request_image');
 
             $table->timestamp('sent_at');

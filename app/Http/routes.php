@@ -101,6 +101,7 @@ Route::get('contact', 'PagesController@contact');
 Route::post('contact', 'PagesController@sendContact');
 Route::get('contact/thankyou', 'PagesController@thankyouContact');
 Route::get('video', 'PagesController@video');
+
 // Backwards compatible with the QR code on packaged goods
 Route::get('video.htm', function(){
     return redirect('/video', 301);

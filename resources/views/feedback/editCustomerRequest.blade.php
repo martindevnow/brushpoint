@@ -61,7 +61,7 @@
                 {!! Form::file('product_image') !!}
             @endif
 
-            @if($customerRequest->request_address || $customerRequest->request_return)
+            @if($customerRequest->request_address || $customerRequest->request_field_sample)
                 @include('layouts.partials._address')
             @endif
 

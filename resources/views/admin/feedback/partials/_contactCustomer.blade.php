@@ -34,8 +34,9 @@
 
           <!-- Request_lot_code Form Input -->
           <div class="form-group">
-              {!! Form::label('request_return', 'Request Return:') !!}
-              {!! Form::checkbox('request_return', '1', false) !!}
+              {!! Form::label('request_field_sample', 'Request Field Sample:') !!}
+              <p><i>This will open an investigation!</i></p>
+              {!! Form::checkbox('request_field_sample', '1', false) !!}
           </div>
 
           <!-- Request_image Form Input -->

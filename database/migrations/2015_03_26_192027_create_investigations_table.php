@@ -16,7 +16,9 @@ class CreateInvestigationsTable extends Migration {
 		{
 			$table->increments('id');
             $table->integer('feedback_id');
+            $table->integer('user_id');
             $table->timestamp('field_sample_requested_at');
+            $table->boolean('field_sample_received')->default(false);
             $table->timestamp('field_sample_received_at');
 			$table->timestamps();
 		});

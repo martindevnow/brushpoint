@@ -150,15 +150,25 @@
                 @include('admin.feedback.partials._retailer')
             @endif
 
+            @include('admin.layouts.partials._note', ['model' => $feedback])
 
         </div>
-
     </div>
+
+
+    <div class="row" id="investigations_list">
+        @foreach($feedback->investigations as $investigation)
+            @include('admin.feedback.partials.investigation', ['investigation' => $investigation])
+        @endforeach
+    </div>
+
+
     <div class="row" id="contact_list">
         @foreach($feedback->contacts as $contact)
             @include('admin.layouts.partials.contact', ['contact' => $contact])
         @endforeach
     </div>
+
 
     <div class="row" id="customer_request_list">
         @foreach($feedback->customerRequests as $customerRequest)
@@ -171,7 +181,6 @@
 
 
     @include('admin.layouts.partials.notes', ['notes' => $feedback->notes])
-    @include('admin.layouts.partials._note', ['model' => $feedback])
 </div>
 
 <div class="flash">

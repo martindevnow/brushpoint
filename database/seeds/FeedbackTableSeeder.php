@@ -17,7 +17,7 @@ class FeedbackTableSeeder extends Seeder {
         {
             Feedback::create([
                 'name' => $faker->name,
-                'email' => "the.one.martin+" . $faker->word . "@gomail.com",
+                'email' => "the.one.martin+" . $faker->word . "@gmail.com",
                 'phone' => $faker->phoneNumber,
                 'retailer_text' => ucfirst($faker->word),
                 'lot_code' => $faker->word,

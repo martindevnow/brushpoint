@@ -41,6 +41,8 @@ class FeedbackController extends Controller {
         $retailers = Retailer::lists('name', 'id');
         $issues = Issue::lists('type', 'id');
 
+        array_unshift($issues, "Select");
+        array_unshift($retailers, "Select");
 
         return $this->layout->content = view('admin.feedback.create')
             ->with(compact('retailers', 'issues'));
@@ -181,11 +183,7 @@ class FeedbackController extends Controller {
 
     public function contactCustomer(Request $request, ContactRepository $contactRepository)
     {
-        // get the request
-
-        // add the feedback hash to the request data
         $feedback = Feedback::find($request->feedback_id);
-
 
         // put the values into the form
         $data['to_email'] = $contactRepository->getToEmail($feedback);
@@ -197,15 +195,6 @@ class FeedbackController extends Controller {
         $data['from_email'] = $contactRepository->getFromEmail();
 
         $data['feedback_id'] = $feedback->id;
-
-
-        // Create a CustomerRequest object
-        /*dd($request->except(
-            'explain_interdental_arm',
-            'explain_replacement_heads_usage',
-            'explain_where_to_buy'
-            'explain_how_to_change_batteries'
-        ));*/
 
         $custRequest = CustomerRequest::create($request->except(
             'explain_interdental_arm',
@@ -250,7 +239,7 @@ class FeedbackController extends Controller {
         $customerRequest->sent_at = get_current_time();
 
         // send model to email event
-        event(new ContactCustomerIssued($contact));
+        event(new ContactCustomerIssued($contact, $customerRequest));
 
         // TODO: build a listener for this and send off the email
         Flash::message('Your email was sent successfully.');

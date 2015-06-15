@@ -49,4 +49,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('Martin\Quality\CustomerRequest');
     }
 
+
+
+    public function investigations()
+    {
+        return $this->hasMany('Martin\Quality\Investigation');
+    }
+
+    public function investigationReports()
+    {
+        return $this->hasMany('Martin\Quality\InvestigationReport');
+    }
+
 }
