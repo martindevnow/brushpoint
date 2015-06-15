@@ -80,7 +80,8 @@ It may be a bit difficult to read but if you shine a light or use a magnifying g
 
 
 EOT;
-        } else // ($brush_type == 'rechargeable')
+        }
+        else // ($brush_type == 'rechargeable')
         {
             $body = <<<EOT
 <p>

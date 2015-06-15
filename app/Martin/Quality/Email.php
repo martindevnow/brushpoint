@@ -1,10 +1,11 @@
 <?php namespace Martin\Quality;
 
-use Illuminate\Database\Eloquent\Model;
+use Martin\Core\CoreModel;
 
 class Email extends CoreModel {
 
     protected $table = 'emails';
+
 	protected $fillable = [
         'body',
         'subject',

@@ -34,7 +34,7 @@ class FeedbackController extends Controller {
     public function send(SendFeedbackRequest $request)
     {
         $data = $request->only('name', 'email', 'phone', 'issue_text', 'intent');
-        $data['hash'] = str_replace('\\','',str_replace('/','',bcrypt(time())));
+        $data['hash'] = str_random(32);
 
         $feedback = Feedback::create($data);
 
@@ -175,6 +175,8 @@ class FeedbackController extends Controller {
         }
 
         $customerRequest->received_at = get_current_time();
+        $customerRequest->save();
+
 
         Flash::message('Thank you for your submission!');
 

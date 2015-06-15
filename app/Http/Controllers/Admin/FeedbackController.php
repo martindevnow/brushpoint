@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Martin\Notifications\Flash;
 use Martin\Quality\Contact;
 use Martin\Quality\CustomerRequest;
@@ -80,6 +81,8 @@ class FeedbackController extends Controller {
         $feedback = Feedback::find($feedbackId);
         $issues = Issue::lists('type', 'id');
         $retailers = Retailer::lists('name', 'id');
+
+//        dd($feedback->addresses->first()->toString());
 
         array_unshift($issues, "Select");
         array_unshift($retailers, "Select");
@@ -175,17 +178,6 @@ class FeedbackController extends Controller {
         return redirect('/admins/feedback/'. $feedbackId);
     }
 
-    public function emailRequestRetailerInfo(Request $request)
-    {
-        $feedback_id = $request->feedback_id;
-
-        $feedback = Feedback::findOrFail($feedback_id);
-        $brushType = $request->brush_type;
-
-        event(new RequestForRetailerInfoIssued($feedback, $brushType));
-
-        return 1;
-    }
 
     public function contactCustomer(Request $request, ContactRepository $contactRepository)
     {
@@ -226,6 +218,7 @@ class FeedbackController extends Controller {
         $custRequest->sent_at = get_current_time();
         $custRequest->save();
 
+        Auth::user()->customerRequests()->save($custRequest);
 
         $data['customer_request_id'] = $custRequest->id;
 
@@ -252,11 +245,18 @@ class FeedbackController extends Controller {
         // build contact model
         $contact = Contact::create($data);
 
+        // update the sent time for the customerRequest
+        $customerRequest = CustomerRequest::find($request->customer_request_id);
+        $customerRequest->sent_at = get_current_time();
+
         // send model to email event
         event(new ContactCustomerIssued($contact));
 
         // TODO: build a listener for this and send off the email
         Flash::message('Your email was sent successfully.');
+
+        // associate the admin user to the contact that was sent
+        Auth::user()->contacts()->save($contact);
 
         return redirect('/admins/feedback/'. $request->feedback_id);
     }

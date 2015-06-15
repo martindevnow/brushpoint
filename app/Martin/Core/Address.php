@@ -39,5 +39,23 @@ class Address extends Model {
         return $this->hasMany('Martin\Ecom\Payment');
     }
 
+    public function toString()
+    {
+
+        $output = $this->street_1 ."<br />";
+        if ($this->street_2)
+            $output .= $this->street_2 ."<br />";
+
+        $output .= <<<EOT
+$this->city <br />
+$this->province <br />
+$this->postal_code <br />
+$this->country <br />
+
+EOT;
+
+        return $output;
+
+    }
 
 } 

@@ -70,10 +70,6 @@
                             {!! Form::radio('intent', 'sales', false, ['style' => 'height:24px;width:100%;']) !!}
                         </td>
                         <td>
-                            {!! Form::label('intent', 'General:') !!}
-                            {!! Form::radio('intent', 'general', false, ['style' => 'height:24px;width:100%;']) !!}
-                        </td>
-                        <td>
                             {!! Form::label('intent', 'Other:') !!}
                             {!! Form::radio('intent', 'other', false, ['style' => 'height:24px;width:100%;']) !!}
                         </td>

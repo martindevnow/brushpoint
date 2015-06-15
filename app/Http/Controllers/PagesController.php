@@ -64,7 +64,7 @@ class PagesController extends Controller {
 
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
         $data['message'] = $request->user_message;
-        $data['hash'] = bcrypt(time());
+        $data['hash'] = str_random(32);
 
         $contact = Contact::create($data);
         $contact->save();

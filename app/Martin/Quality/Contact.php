@@ -13,6 +13,7 @@ class Contact extends Model {
         'subject',
         'body',
 
+        'user_id',
         'feedback_id',
     ];
 
@@ -22,6 +23,11 @@ class Contact extends Model {
     public function feedback()
     {
         return $this->belongsTo('Martin\Quality\Feedback');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('Martin\Users\User');
     }
 
 

@@ -24,6 +24,7 @@ class CreateContactsTable extends Migration {
             $table->string('subject');
             $table->text('body');
 
+            $table->integer('user_id');
             $table->integer('feedback_id');
 			$table->timestamps();
 		});
