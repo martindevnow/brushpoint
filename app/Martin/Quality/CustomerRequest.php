@@ -5,7 +5,7 @@ use Martin\Core\CoreModel;
 
 class CustomerRequest extends CoreModel {
 
-	public $fillable = [
+    protected $fillable = [
         'feedback_id',
         'contact_id',
         'user_id',
@@ -24,6 +24,11 @@ class CustomerRequest extends CoreModel {
         'received_at',
     ];
 
+
+    protected $dates = [
+        'sent_at',
+        'received_at',
+    ];
 
     public function user()
     {

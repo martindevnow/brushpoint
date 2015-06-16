@@ -40,6 +40,10 @@ class Feedback extends CoreModel {
         'closed_at',
     ];
 
+    protected $dates = [
+        'closed_at',
+    ];
+
 
     public function toggleClose($status)
     {
