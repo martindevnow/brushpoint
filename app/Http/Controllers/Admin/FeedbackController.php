@@ -207,7 +207,10 @@ class FeedbackController extends Controller {
         $custRequest->sent_at = get_current_time();
         $custRequest->save();
 
+
+        // Tie up relationships
         Auth::user()->customerRequests()->save($custRequest);
+
 
         $data['customer_request_id'] = $custRequest->id;
 
@@ -233,11 +236,17 @@ class FeedbackController extends Controller {
 
         // build contact model
         $contact = Contact::create($data);
-        Auth::user()->contacts()->save($contact);
+
 
         // update the sent time for the customerRequest
         $customerRequest = CustomerRequest::find($request->customer_request_id);
         $customerRequest->sent_at = get_current_time();
+
+
+        // tie the relationships
+        Auth::user()->contacts()->save($contact);
+        $contact->customerRequest()->save($customerRequest);
+
 
         // send model to email event
         event(new ContactCustomerIssued($contact, $customerRequest));

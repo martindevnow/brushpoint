@@ -30,5 +30,10 @@ class Contact extends Model {
         return $this->belongsTo('Martin\Users\User');
     }
 
+    public function customerRequest()
+    {
+        return $this->hasOne('Martin\Quality\CustomerRequest');
+    }
+
 
 }

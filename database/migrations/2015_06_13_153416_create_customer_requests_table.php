@@ -17,6 +17,7 @@ class CreateCustomerRequestsTable extends Migration {
 			$table->increments('id');
 
             $table->integer('feedback_id');
+            $table->integer('contact_id');
             $table->integer('user_id');
 
             $table->string('hash');

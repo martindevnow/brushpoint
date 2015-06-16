@@ -14,7 +14,6 @@ class ContactRepository {
 
     public function __constructor()
     {
-        $this->url = url('/');
     }
     // request_lot_code
     // request_address
@@ -26,10 +25,13 @@ class ContactRepository {
     /**
      * @param Request $request
      * @param Feedback $feedback
+     * @param CustomerRequest $customerRequest
      * @return string
      */
     public function getBody(Request $request, Feedback $feedback, CustomerRequest $customerRequest)
     {
+        $this->url = url('/');
+
         $body = "";
         if ($request->request_lot_code)
             $body .= $this->requestLotCode($request->brush_type);

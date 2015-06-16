@@ -138,9 +138,6 @@
             </table>
 
 
-
-
-
             @if(!$feedback->issue)
                 @include('admin.feedback.partials._issue')
             @endif
@@ -155,13 +152,7 @@
         </div>
     </div>
 
-
-    <div class="row" id="investigations_list">
-        @foreach($feedback->investigations as $investigation)
-            @include('admin.feedback.partials.investigation', ['investigation' => $investigation])
-        @endforeach
-    </div>
-
+<hr />
 
     <div class="row" id="contact_list">
         @foreach($feedback->contacts as $contact)
@@ -169,6 +160,11 @@
         @endforeach
     </div>
 
+    <div class="row" id="investigations_list">
+        @foreach($feedback->investigations as $investigation)
+            @include('admin.feedback.partials.investigation', ['investigation' => $investigation])
+        @endforeach
+    </div>
 
     <div class="row" id="customer_request_list">
         @foreach($feedback->customerRequests as $customerRequest)

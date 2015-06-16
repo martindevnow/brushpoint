@@ -7,7 +7,9 @@ class CustomerRequest extends CoreModel {
 
 	public $fillable = [
         'feedback_id',
+        'contact_id',
         'user_id',
+
         'hash',
         'brush_type',
 
@@ -32,5 +34,11 @@ class CustomerRequest extends CoreModel {
     public function feedback()
     {
         return $this->belongsTo('Martin\Quality\Feedback');
+    }
+
+
+    public function contact()
+    {
+        return $this->belongsTo('Martin\Quality\Contact');
     }
 }

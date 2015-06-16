@@ -51,8 +51,6 @@ class CreateFeedbacksTable extends Migration {
             $table->boolean('capa_required')->default(false);
             $table->string('capa_reason')->nullable();
 
-            $table->timestamp('product_requested_at');
-
             $table->boolean('closed')->default(false);
             $table->timestamp('closed_at');
 
