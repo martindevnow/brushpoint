@@ -131,7 +131,7 @@ class FeedbackController extends Controller {
         $feedback = Feedback::findOrFail($feedbackId);
         $customerRequest = $feedback->customerRequests->where('id', (int) $customerRequestId)->first();
 
-        $file = $request->file('product_image');
+        // $file = $request->file('product_image');
         // dd($file);
 
         if ($customerRequest->hash != $customerRequestHash)

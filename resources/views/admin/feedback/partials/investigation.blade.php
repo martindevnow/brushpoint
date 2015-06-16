@@ -10,7 +10,9 @@
                 <p>Field Sample Received At: {{ $investigation->field_sample_received_at }}</p>
                 <p>Issue was closed in {{ ($investigation->field_sample_requested_at->diffForHumans($investigation->field_sample_received_at)) }}</p>
             @else
-                {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/investigations/ajax/'. $investigation->id .'?field=field_sample_received' ]) !!}
+                {!! Form::open(['data-remote',
+                    'method' => 'patch',
+                    'url' => 'admins/investigations/ajax/'. $investigation->id .'?field=field_sample_received' ]) !!}
                 <div class="form-group">
                     {!! Form::label('field_sample_received', 'Field Sample Received:') !!}
                     {!! Form::checkbox('field_sample_received', $investigation->field_sample_received, $investigation->field_sample_received, ['data-click-submits-form']) !!}
@@ -18,6 +20,11 @@
                 {!! Form::close() !!}
             @endif
 
+
+            @include('admin.investigations.partials._uploadReport', compact('investigation'))
+            @foreach($investigation->investigationReports as $report)
+                [<a href="/admins/investigations/download/{{ $report->id }}"><p class="fa fa-file-pdf-o"> DL </p></a>]
+            @endforeach
         </div>
         <div class="panel-footer">
             Investigation Opened by {{ $investigation->user->name }}
