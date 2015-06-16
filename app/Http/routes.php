@@ -213,6 +213,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 
 
     /**
+     * Investigations
+     */
+    Route::patch(       'admins/investigations/ajax/{id}',   'InvestigationsController@ajaxPatch');
+
+
+
+    /**
      * Purchaseable Products Only
      */
     Route::get(         'admins/purchase/rearrange',            'ProductsController@rearrangePurchase');

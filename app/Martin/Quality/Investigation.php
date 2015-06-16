@@ -11,6 +11,20 @@ class Investigation extends CoreModel {
         'field_sample_received_at'
     ];
 
+
+    public function toggleFieldSampleReceived($status)
+    {
+        $this->field_sample_received = $status;
+        if ($status)
+            $this->field_sample_received_at = get_current_time();
+        else
+            $this->field_sample_received_at = 0;
+        $this->save();
+    }
+
+
+
+
     public function feedback()
     {
         return $this->belongsTo('Martin\Quality\Feedback');

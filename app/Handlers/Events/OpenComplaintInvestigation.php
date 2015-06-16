@@ -4,6 +4,8 @@ use App\Events\ContactCustomerIssued;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
+use Illuminate\Support\Facades\Auth;
+use Martin\Quality\Investigation;
 
 class OpenComplaintInvestigation {
 
@@ -28,11 +30,16 @@ class OpenComplaintInvestigation {
         // only open an investigation if 'request_field_sample'
 
         $customerRequest = $event->customerRequest;
-        if ($customerRequest->request_return)
+        if ($customerRequest->request_field_sample)
         {
             // open an investigation on the feedback
             $investigation = new Investigation();
-            $investigation->field_sample_request_at->
+            $investigation->field_sample_requested_at = get_current_time();
+            $investigation->save();
+
+            Auth::user()->investigations()->save($investigation);
+            $event->feedback->investigations()->save($investigation);
+
         }
 	}
 

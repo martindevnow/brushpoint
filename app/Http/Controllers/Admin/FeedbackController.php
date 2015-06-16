@@ -233,6 +233,7 @@ class FeedbackController extends Controller {
 
         // build contact model
         $contact = Contact::create($data);
+        Auth::user()->contacts()->save($contact);
 
         // update the sent time for the customerRequest
         $customerRequest = CustomerRequest::find($request->customer_request_id);
