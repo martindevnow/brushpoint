@@ -1,10 +1,8 @@
 @extends('layouts.admin')
 
-
 @section('content')
 
 <div class="container">
-
     <div class="row">
         <div class="col-lg-8">
             <table class="table form-table">

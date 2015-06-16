@@ -11,13 +11,13 @@
         <div class="col-xs-4">
             <div class="invoice-address">
                 <p class="address-name">
-                    {{ $data['payer']->first_name }} {{ $data['payer']->last_name }}
+                    {{ $payer->first_name }} {{ $payer->last_name }}
                 </p>
-                <p class="address-details"> {{ $data['address']->street_1 }}
-                    {{  ($data['address']->street_2)? "<br />" . $data['address']->street_2 :"No" }}
-                    <br />{{ $data['address']->city }}, {{ $data['address']->province }}
-                    <br />{{ $data['address']->postal_code }}
-                    <br />{{ $data['address']->country }}
+                <p class="address-details"> {{ $address->street_1 }}
+                    {{  ($address->street_2)? "<br />" . $address->street_2 :"No" }}
+                    <br />{{ $address->city }}, {{ $address->province }}
+                    <br />{{ $address->postal_code }}
+                    <br />{{ $address->country }}
                 </p>
             </div>
         </div>
@@ -25,14 +25,15 @@
     <div class="row">
         <div class="col-xs-1"></div>
         <div class="col-xs-10">
-            <h3>Dear {{ $data['payer']->first_name }} {{ $data['payer']->last_name }}</h3>
+            <h3>Dear {{ $payer->first_name }} {{ $payer->last_name }}</h3>
             <p>Thank you for choosing BrushPoint Innovations for your oral care needs.</p>
         </div>
         <div class="col-xs-1"></div>
 
     </div>
-    <?php $transaction = $data['transactions']; ?>
-    <div class="row" style="border: 1px solid darkblue; min-height: 500px;">
+    <?php $transaction = $transactions; ?>
+    <div class="row" style="border: 1px solid darkblue;
+        min-height: 500px;">
         <div class="col-xs-12">
              <table class="table">
                 <thead>
@@ -55,6 +56,15 @@
                   </tbody>
             </table>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+            <p>Order Number: {{ $payment->getInvoiceNumber() }} <br />
+               Order Placed at: {{ $transaction->created_at }} UTC <br />
+               PayPal ID: {{ $payment->payment_id }}</p>
+        </div>
+        <div class="col-xs-1"></div>
     </div>
     <div class="row">
         <div class="col-xs-7">    {{-- Spacer --}}    </div>
@@ -85,6 +95,8 @@
         <div class="col-xs-1">{{-- Spacer --}}</div>
     </div>
     <?php // end the if/else stuff ?>
+
+
     <div class="row">
         <div class="col-xs-1"></div>
         <div class="col-xs-10" style="border-top: 1px solid darkblue; height: 25px"></div>

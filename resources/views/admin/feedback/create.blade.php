@@ -105,6 +105,13 @@
                   {!! Form::checkbox('adverse_event', false) !!}
                 </div>
               </td>
+            </tr><tr>
+              <td>Adverse Event Level</td>
+              <td>
+                <div class="form-group">
+                  {!! Form::text('adverse_event_level', null, ['class' => 'form-control']) !!}
+                </div>
+              </td>
             </tr>
             <tr>
               <td>Health Canada Report</td>

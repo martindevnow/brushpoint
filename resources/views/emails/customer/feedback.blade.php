@@ -24,9 +24,14 @@ $titleData['subtitle'] = 'Feedback ID#: '. $feedback->id;
                             <h2>Thank you for your feedback!</h2>
                                 <p>
                                 This is a notification to let you know that we have received your product feedback.
+                                </p>
+                                <p>
                                 Thank you for contacting BrushPoint Innovations Inc.
+                                </p>
+                                <p>
                                 One of our representatives will be contacting you within several days.
-
+                                </p>
+                                <p>
                                 Thank you for your patience.
                                 </p>
                                 <table>
@@ -43,15 +48,11 @@ $titleData['subtitle'] = 'Feedback ID#: '. $feedback->id;
                                     <td>{{ $feedback->email }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Retailer: </td>
-                                    <td>{{ $feedback->retailer_text }}</td>
+                                    <td>Intent: </td>
+                                    <td>{{ $feedback->intent }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Lot Code: </td>
-                                    <td>{{ $feedback->lot_code }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Issue: </td>
+                                    <td>Message: </td>
                                     <td>{{ $feedback->issue_text }}</td>
                                 </tr>
                             </table>

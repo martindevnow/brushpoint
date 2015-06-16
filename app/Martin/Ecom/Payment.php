@@ -60,6 +60,12 @@ class Payment extends CoreModel {
 
 
 
+    public function getInvoiceNumber()
+    {
+        return sprintf('%07d', $this->id);
+    }
+
+
 
 
 
