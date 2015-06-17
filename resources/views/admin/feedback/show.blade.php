@@ -136,46 +136,50 @@
                   </tbody>
             </table>
 
-
+            {{--Adding New Buttons--}}
             @if(!$feedback->issue)
-                @include('admin.feedback.partials._issue')
+                @include('admin.feedback.modals._issue')
             @endif
-
 
             @if(!$feedback->retailer)
-                @include('admin.feedback.partials._retailer')
+                @include('admin.feedback.modals._retailer')
             @endif
 
-            @include('admin.layouts.partials._note', ['model' => $feedback])
+            @include('admin.layouts.modals._note', ['model' => $feedback])
+            @include('admin.layouts.modals._address', ['model' => $feedback])
 
         </div>
     </div>
 
-<hr />
+    <hr />
 
+    {{-- Adding the Lists of the Relationships --}}
     <div class="row" id="contact_list">
         @foreach($feedback->contacts as $contact)
-            @include('admin.layouts.partials.contact', ['contact' => $contact])
+            @include('admin.ajax.singles._contact', ['contact' => $contact])
         @endforeach
     </div>
 
     <div class="row" id="investigations_list">
         @foreach($feedback->investigations as $investigation)
-            @include('admin.feedback.partials.investigation', ['investigation' => $investigation])
+            @include('admin.ajax.singles._investigation', ['investigation' => $investigation])
         @endforeach
     </div>
 
     <div class="row" id="customer_request_list">
         @foreach($feedback->customerRequests as $customerRequest)
-            @include('admin.layouts.partials.customerRequest', [
+            @include('admin.ajax.singles._customerRequest', [
             'customerRequest' => $customerRequest,
             'feedback' => $feedback
            ])
         @endforeach
     </div>
 
-
-    @include('admin.layouts.partials.notes', ['notes' => $feedback->notes])
+    <div class="row" id="note_list">
+        @foreach($notes as $note)
+            @include('admin.ajax.singles._note', ['notes' => $feedback->notes])
+        @endforeach
+    </div>
 </div>
 
 <div class="flash">

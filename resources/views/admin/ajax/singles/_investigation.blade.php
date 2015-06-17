@@ -21,7 +21,7 @@
             @endif
 
 
-            @include('admin.investigations.partials._uploadReport', compact('investigation'))
+            @include('admin.investigations.modals._uploadReport', compact('investigation'))
             @foreach($investigation->investigationReports as $report)
                 [<a href="/admins/investigations/download/{{ $report->id }}"><p class="fa fa-file-pdf-o"> DL </p></a>]
             @endforeach

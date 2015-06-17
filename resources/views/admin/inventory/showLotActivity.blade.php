@@ -49,6 +49,6 @@
 
 
 
-    @include('admin/layouts/partials/_note', ['model' => $inventory])
+    @include('admin.layouts.modals._note', ['model' => $inventory])
 </div>
 @stop

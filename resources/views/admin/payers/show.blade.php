@@ -53,7 +53,13 @@
           </tbody>
     </table>
 
-    @include('admin.layouts.partials.notes', ['notes' => $payer->notes])
-    @include('admin/layouts/partials/_note', ['model' => $payer])
+    @include('admin.layouts.modals._note', ['model' => $payer])
+
+    <div class="row" id="note_list">
+        @foreach($notes as $note)
+            @include('admin.ajax.single._note', ['notes' => $feedback->notes])
+        @endforeach
+    </div>
+
 </div>
 @stop

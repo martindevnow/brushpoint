@@ -74,6 +74,11 @@ class Feedback extends CoreModel {
         return $this->belongsTo('Martin\Quality\Retailer');
     }
 
+    public function address()
+    {
+        return $this->hasOne('Martin\Core\Address');
+    }
+
 
 
 

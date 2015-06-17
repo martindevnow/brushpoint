@@ -183,6 +183,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::get(         'admins', 'AdminController@index');
 
 
+
+
     /**
      * Products
      */
@@ -210,6 +212,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::get(         'admins/feedback/{feedbackId}/issue/remove',     'FeedbackController@removeIssue');
     Route::patch(       'admins/feedback/ajax/{id}',   'FeedbackController@ajaxPatch');
     Route::resource(    'admins/feedback',             'FeedbackController');
+
 
 
     /**
@@ -251,6 +254,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      * Notes
      */
     Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
+
+
+    /**
+     * Addresses
+     */
+    Route::post(        'admins/addresses/store',       'AddressesController@ajaxStore');
 
 
     /**

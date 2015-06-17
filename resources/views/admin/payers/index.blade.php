@@ -11,25 +11,25 @@
         </div>
     </div>
     <table class="table">
-                    <thead>
-                        <tr>
-                          <th>Payer ID</th>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Num of Payments</th>
-                         </tr>
-                      </thead>
-                      <tbody>
-                        @foreach($payers as $payer)
-                        <tr>
-                          <td><a href="{{ url('/') }}/admins/payers/{{ $payer->id }}">{{ $payer->payer_id }}</a></td>
-                          <td>{{ $payer->first_name . " " . $payer->last_name }}</td>
-                          <td>{{ $payer->email }}</td>
-                          <td>{{ $payer->payments->count() }}</td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                </table>
+        <thead>
+            <tr>
+              <th>Payer ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Num of Payments</th>
+             </tr>
+          </thead>
+          <tbody>
+            @foreach($payers as $payer)
+            <tr>
+              <td><a href="{{ url('/') }}/admins/payers/{{ $payer->id }}">{{ $payer->payer_id }}</a></td>
+              <td>{{ $payer->first_name . " " . $payer->last_name }}</td>
+              <td>{{ $payer->email }}</td>
+              <td>{{ $payer->payments->count() }}</td>
+            </tr>
+            @endforeach
+          </tbody>
+    </table>
 </div>
 
 <div class="flash">

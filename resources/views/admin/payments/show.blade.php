@@ -56,6 +56,6 @@
         </table>
     @endforeach
 
-    @include('admin/layouts/partials/_note', ['model' => $payment])
+    @include('admin.layouts.modals._note', ['model' => $payment])
 </div>
 @stop

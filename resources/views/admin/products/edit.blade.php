@@ -138,7 +138,7 @@
             </div>
 
             <div>
-            @include('admin.products.partials._virtues')
+            @include('admin.products.modals._virtues')
 
             </div>
 

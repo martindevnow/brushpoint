@@ -27,7 +27,7 @@ class VirtuesController extends Controller {
 
         $product->virtues()->save($virtue);
 
-        return view('admin.ajax.virtues._single')->with(compact('virtue'));
+        return view('admin.ajax.singles.virtue')->with(compact('virtue'));
     }
 
     public function ajaxDelete(Request $request)

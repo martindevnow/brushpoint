@@ -76,7 +76,7 @@ class PaymentsController extends Controller {
         $data = $this->paymentRepository->generateInvoiceData($id);
         // dd($data['transactions']);
 
-        $view =  view('admin.invoices.csspayment')->with($data);
+        $view =  view('admin.invoices.html_v1')->with($data);
         return $view;
     }
 

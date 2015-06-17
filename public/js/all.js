@@ -42,6 +42,7 @@
                 $('#featureModal').modal('hide');
                 $('#virtueModal').modal('hide');
                 $('#contactCustomerModal').modal('hide');
+                $('#addressModal').modal('hide');
 
                 if (form.attr('id') == "virtue_ajax_form")
                 {
@@ -55,6 +56,18 @@
                     // alert(list_type);
                     $('#'+ list_type + '_list').append(message);
                     form.find("input[type=text], textarea").val("");
+                }
+                else if (form.attr('id') == "address_ajax_form")
+                {
+                    var list_type = "address"
+                    // alert(list_type);
+                    $('#'+ list_type + '_list').append(message);
+                    form.find("input[type=text], street_1").val("");
+                    form.find("input[type=text], street_2").val("");
+                    form.find("input[type=text], city").val("");
+                    form.find("input[type=text], province").val("");
+                    form.find("input[type=text], postal_code").val("");
+                    form.find("input[type=text], country").val("");
                 }
                 else if (form.attr('id') == "requestRetailerInfo_ajax_form")
                 {

@@ -20,7 +20,7 @@ class NotesController extends Controller {
             'user_id' => \Auth::user()->id
         ]);
 
-        return view('admin.ajax.notes._single')->with(compact('note'));
+        return view('admin.ajax.singles._note')->with(compact('note'));
     }
 
 }
