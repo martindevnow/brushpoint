@@ -63,6 +63,10 @@
 
             @if($customerRequest->request_address || $customerRequest->request_field_sample)
                 @include('layouts.partials._address')
+                <div class="form-group">
+                     {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+                 </div>
+
             @endif
 
             {!! Form::hidden('hash', $customerRequest->hash) !!}

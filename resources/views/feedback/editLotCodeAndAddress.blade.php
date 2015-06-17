@@ -47,6 +47,9 @@
             </div>
 
             @include('layouts.partials._address')
+            <div class="form-group">
+                 {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+             </div>
 
             {!! Form::hidden('hash', $feedback->hash) !!}
 

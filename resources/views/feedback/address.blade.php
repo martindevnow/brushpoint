@@ -38,6 +38,9 @@
 
         {!! Form::open(['method' => 'post', 'url' => 'feedback/address/'.$feedback->id .'/'. $feedback->hash]) !!}
             @include('layouts.partials._address')
+             <div class="form-group">
+                 {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+             </div>
         {!! Form::close() !!}
 
         </div>

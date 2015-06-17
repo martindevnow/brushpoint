@@ -56,8 +56,8 @@
     @include('admin.layouts.modals._note', ['model' => $payer])
 
     <div class="row" id="note_list">
-        @foreach($notes as $note)
-            @include('admin.ajax.single._note', ['notes' => $feedback->notes])
+        @foreach($payer->notes as $note)
+            @include('admin.ajax.single._note', ['note' => $note])
         @endforeach
     </div>
 

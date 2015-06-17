@@ -38,7 +38,7 @@
               ?>
                 <tr>
                   <td>
-                    <a href="cart/remove/{{ $item['id'] }}"><button type="button" class="btn btn-danger btn-xs">X</button></a>
+                    <a href="/cart/remove/{{ $item['id'] }}"><button type="button" class="btn btn-danger btn-xs">X</button></a>
                     <img src="/images/brushpoint/purchase/{{ $item['sku'] }}-115.png" class="img-responsive" style="max-height: 35px; display: inline;"/>
                     <a href="/purchase/id-{{ $item['product_id'] }}">{{ $item['name'] }} {!! $item->variance ? "<i>". $item->variance . "</i>" : ""  !!} </a></td>
                   <td>{{ asMoney($item->price) }}</td>

@@ -37,8 +37,8 @@
                 $.publish('form.submitted', form);
 
                 $('#noteModal').modal('hide');
-                $('#requestRetailerInfoModal').modal('hide');
                 $('#issueModal').modal('hide');
+                $('#retailerModal').modal('hide');
                 $('#featureModal').modal('hide');
                 $('#virtueModal').modal('hide');
                 $('#contactCustomerModal').modal('hide');
@@ -128,9 +128,11 @@
     });
 })();
 
-
-
-
+(function() {
+    $('.delete_entity').click(function(){
+        return confirm("Are you sure you want to delete? (Cannot be undone)");
+    })
+})();
 
 
 

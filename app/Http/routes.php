@@ -260,6 +260,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      * Addresses
      */
     Route::post(        'admins/addresses/store',       'AddressesController@ajaxStore');
+    Route::get(         'admins/addresses/remove/{id}',       'AddressesController@delete');
 
 
     /**

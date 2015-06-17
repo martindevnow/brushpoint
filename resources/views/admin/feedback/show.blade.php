@@ -72,7 +72,7 @@
                     </tr>
                   </tbody>
             </table>
-              @include('admin.feedback.partials._contactCustomer')
+              @include('admin.feedback.modals._contactCustomer')
         </div>
 
 
@@ -176,8 +176,14 @@
     </div>
 
     <div class="row" id="note_list">
-        @foreach($notes as $note)
-            @include('admin.ajax.singles._note', ['notes' => $feedback->notes])
+        @foreach($feedback->notes as $note)
+            @include('admin.ajax.singles._note', ['note' => $note])
+        @endforeach
+    </div>
+
+    <div class="row" id="address_list">
+        @foreach($feedback->addresses as $address)
+            @include('admin.ajax.singles._address', ['address' => $address])
         @endforeach
     </div>
 </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Martin\Core\Address;
+use Martin\Notifications\Flash;
 
 class AddressesController extends Controller {
 
@@ -30,5 +31,15 @@ class AddressesController extends Controller {
 
         return view('admin.ajax.singles._address')->with(compact('address'));
     }
+
+    public function delete($address_id)
+    {
+        $address = Address::find($address_id);
+        $address->delete($address_id);
+
+        Flash::message('That address has been deleted.');
+        return redirect()->back();
+    }
+
 
 }
