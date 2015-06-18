@@ -135,6 +135,12 @@
 })();
 
 
+(function() {
+    $( "#datepicker" ).datepicker();
+})();
+
+
+
 
 var adjustment;
 

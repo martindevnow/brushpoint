@@ -10,8 +10,8 @@
       {!! Form::open(['data-remote', 'method' => 'post', 'url' => ['admins/notes/store'], 'id'=>'note_ajax_form']) !!}
       <div class="modal-body">
           <div class="form-group">
-              {!! Form::label('content', 'Content:') !!}
-              {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+              {!! Form::label('body', 'Content:') !!}
+              {!! Form::textarea('body', null, ['class' => 'form-control']) !!}
           </div>
       </div>
       {!! Form::hidden('class', get_class($model)) !!}

@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @include('layouts.partials._errors')
     </div>
-
     <div class="row">
         <div class="col-s-12">
             {!! Form::open(['method' => 'post', 'url' => ['admins/inventory'], 'id'=>'inventory_form']) !!}
@@ -19,7 +19,7 @@
               </div>
               <div class="form-group">
                   {!! Form::label('expiry_date', 'Expiry Date:') !!}
-                  {!! Form::text('expiry_date', null, ['class' => 'form-control']) !!}
+                  {!! Form::text('expiry_date', null, ['class' => 'form-control', 'id' => 'datepicker']) !!}
               </div>
               <div class="form-group">
                   {!! Form::label('quantity', 'Quantity:') !!}

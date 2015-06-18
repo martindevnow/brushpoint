@@ -3,7 +3,9 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\ReceiveNewInventoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Martin\Ecom\SoldItem;
 use Martin\Notifications\Flash;
 use Martin\Products\Inventory;
@@ -35,19 +37,38 @@ class InventoryController extends Controller {
 	 */
 	public function create()
 	{
+
         $itemListByIdName = Item::lists('sku', 'id');
 
         return view('admin.inventory.create')
             ->with(compact('itemListByIdName'));
     }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return Response
+     */
+	public function store(ReceiveNewInventoryRequest $request)
 	{
+        Validator::extend('sanitiseDate', function($attribute, $value, $parameters)
+        {
+            return sanitiseDate($value);
+        });
+
+        $validator = Validator::make($request->all(), [
+            'expiry_date' => 'sanitiseDate'
+        ], ['sanitise_date' => 'Please enter using format: mm/dd/yyyy']);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors()->all());
+        }
+
+
+        // Save
+        //dd($request);
         $item = Item::findOrFail($request->item_id);
 
 

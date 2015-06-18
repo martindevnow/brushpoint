@@ -16,7 +16,7 @@ class NotesController extends Controller {
         $model = $model::find($request->noteable_id);
 
         $note = $model->notes()->create([
-            'content' => $request->content,
+            'content' => $request->body,
             'user_id' => \Auth::user()->id
         ]);
 
