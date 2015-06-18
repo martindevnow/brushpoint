@@ -8,7 +8,7 @@
 		"laravel/framework": "5.0.*",
         "illuminate/html": "~5.0",
 		"laracasts/generators": "~1.1",
-        "paypal/rest-api-sdk-php" : "*",
+        "paypal/rest-api-sdk-php" : "~1.4",
 		"mikehaertl/phpwkhtmltopdf": "~2.0",
         "guzzlehttp/guzzle": "~4.0"
 	},
@@ -19,7 +19,8 @@
         "codeception/codeception": "~2.0",
         "laracasts/testdummy": "~2.0",
         "fzaninotto/faker": "1.4.*",
-		"laracasts/integrated": "^0.15.4"
+		"laracasts/integrated": "^0.15.4",
+		"illuminate/workbench": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

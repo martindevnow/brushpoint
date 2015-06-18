@@ -33,8 +33,11 @@
             @endforeach
           </tbody>
     </table>
-
     {!!  $inventories->render() !!}
+
+    <a href="/admins/inventory/create"><button class="btn btn-primary">Add New Inventory</button></a>
+    {{--@include('admin.inventory.modals._inventory', ['itemListByIdName' => $itemListByIdName])--}}
+
 </div>
 <div class="flash">
     Updated...

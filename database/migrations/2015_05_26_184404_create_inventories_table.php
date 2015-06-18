@@ -25,6 +25,8 @@ class CreateInventoriesTable extends Migration {
             $table->integer('original_quantity')->nullable();
 
             $table->string('description')->default('sale');
+            $table->string('status')->default('available');
+
 			$table->timestamps();
 		});
 	}

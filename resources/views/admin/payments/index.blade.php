@@ -41,7 +41,13 @@
                   [[ {{ $payment->shipped_at }} ]]
                 @endif
               </td>
-              <td><a href="/admins/payments/invoice/{{ $payment->id }}">Invoice</a></td>
+              <td>
+              @if(file_exists($payment->getFullInvoicePath()))
+                  <a href="/admins/payments/invoice/{{ $payment->id }}">Download Invoice</a>
+              @else
+                  <a href="/admins/payments/invoice/{{ $payment->id }}">Generate Invoice</a>
+              @endif
+              </td>
               <td><a href="/admins/payments/{{ $payment->id }}">Details</a></td>
             </tr>
             @endforeach

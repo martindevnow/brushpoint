@@ -142,6 +142,8 @@ return [
         'Illuminate\Html\HtmlServiceProvider',
         'Martin\Notifications\FlashServiceProvider',
         'Laracasts\Generators\GeneratorsServiceProvider',
+        'Illuminate\Workbench\WorkbenchServiceProvider',
+
 
 
 		/*
@@ -206,7 +208,7 @@ return [
          */
         'Form'  => 'Illuminate\Html\FormFacade',
         'HTML'  => 'Illuminate\Html\HtmlFacade',
-        'Flash'             => 'Martin\Notifications\Flash',
+        'Flash' => 'Martin\Notifications\Flash',
 
 	],
 

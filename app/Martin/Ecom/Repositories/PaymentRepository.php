@@ -52,7 +52,7 @@ class PaymentRepository {
 
     public function getInvoicePath($paymentId)
     {
-        return public_path(). '/tmp/BP-inv-'. $paymentId .'.pdf';
+        return Payment::getFunnInvoicePath($paymentId);
     }
 
     public function getSentCount()

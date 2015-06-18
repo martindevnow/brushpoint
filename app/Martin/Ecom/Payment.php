@@ -38,8 +38,6 @@ class Payment extends CoreModel {
 
     public function toggleShipped($status)
     {
-        // $status = ($this->closed + 1) % 2;
-
         $this->shipped = $status;
         $dt = new DateTime;
         if ($status)
@@ -48,12 +46,11 @@ class Payment extends CoreModel {
             // create an event
             Log::info('payment updated: shipped = true');
             // EVENT WAS MOVED TO THE CONTROLLER
-            // event(new PackageWasShipped($this));
+            event(new PackageWasShipped($this));
             // add an event listener to this event so i can hook in and send a shipment confirmation
         }
         else
             $this->shipped_at = 0;
-
 
         $this->save();
     }
@@ -66,7 +63,17 @@ class Payment extends CoreModel {
     }
 
 
+    public function getFullInvoicePath($paymentId = null)
+    {
+        if ($paymentId)
+            $payment = Payment::find($paymentId);
+        else
+            $payment = $this;
 
+
+        return storage_path(). '/tmp/BrushPoint_Invoice_'. $payment->getInvoiceNumber() .'.pdf';
+
+    }
 
 
 

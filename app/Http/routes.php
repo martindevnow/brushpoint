@@ -205,7 +205,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      */
     Route::post(        'admins/feedback/contact/customer', 'FeedbackController@contactCustomer');
     Route::post(        'admins/feedback/contact/send', 'FeedbackController@sendContactCustomer');
-
     // Route::post(         'admins/feedback/email/requestRetailerInfo', 'FeedbackController@emailRequestRetailerInfo');
     Route::get(         'admins/feedback/filter',      'FeedbackController@filtered');
     Route::get(         'admins/feedback/{feedbackId}/retailer/remove', 'FeedbackController@removeRetailer');
@@ -268,7 +267,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      */
     Route::get(         'admins/inventory/item/{id}',     'InventoryController@showItem');
     Route::get(         'admins/inventory/lot/{id}',     'InventoryController@showLotActivity');
-    Route::resource(    'admins/inventory',     'InventoryController');
+    Route::resource(    'admins/inventory',             'InventoryController');
 
 
     /**

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Martin\Ecom\Checkout;
 use Martin\Ecom\PaymentLog;
+use Martin\Notifications\Flash;
 use Martin\Products\CartRepository;
 use PayPal\Api\Payment;
 
@@ -27,6 +28,13 @@ class CheckoutController extends Controller {
 
     public function expressCheckout()
     {
+        if (!session('country'))
+        {
+            Flash::error('You must select your coutry to proceed.');
+            return redirect()->back();
+        }
+
+
         $checkout = new \Martin\Ecom\Checkout();
 
         $checkout->newPayment($this->cartRepository);
@@ -36,56 +44,6 @@ class CheckoutController extends Controller {
 
 
 
-    public function getPaymentStatus(Request $request)
-    {
-        dd('This function should not be called anymore. Once confirmed, delete this function.');
-
-
-        // get the payment ID before session clear
-        $payment_id = session()->get('paypal_payment_id');
-
-        //clear session ID
-        session()->forget('paypal_payment_id');
-
-        if (! $request->get('PayerID') || !$request->get('token'))
-        {
-            return redirect()->route('original.route')
-                ->with('error', 'Payment Failed');
-        }
-
-        $payment = Payment::get($payment_id, $this->_api_context);
-
-        $execution = new PaymentExecution();
-        $execution->setPayerId($request->get('PayerID'));
-
-        $result = $payment->execute($execution, $this->_api_context);
-
-
-        DB::table('dump')->insert([
-                'dumped_text' => serialize($result)
-            ]
-        );
-
-
-        if ($result->getState() == 'approved') {
-
-            // do the logging of the payment
-            // create invoice
-            // add to the database // or log it as paid
-            // look up code for integrating php paypal rest api with mysql, mvc, or objects
-            // there must be someone who wanted to track it by buyer, or transaction, or somehting
-            // i might have to really read the documentation
-            // hopefully it is broken up by "object" in some sence. liek the variables are dependant on each criteria.
-            Flash::message("Thank you for your purchase!");
-            return redirect()->route('payment_status')
-                ->with('success', 'Payment success');
-        }
-
-        Flash::error('Unknown Error Occurred');
-
-        return redirect()->route('payment_status')
-            ->with('error', 'Payment Failed');
-    }
 
 
     public function status(Request $request, Checkout $checkout)
@@ -102,19 +60,9 @@ class CheckoutController extends Controller {
         session(['payment' => $payment]);
 
         return redirect('checkout/thankyou/'. $payment->id);
-
-        // return true;
-        // $paymentId = $request->get('paymentId');
-        // $checkout = new Checkout();
-        // $payment = $checkout->getPayment($paymentId);
-        // dd($payment);
-
-
-
-        // TODO: Show the thank you page with invoice number etc..
-        // TODO: Make an email template to send to the customer to complete the transaction
-        // TODO: Fire off an email to the user
     }
+
+
 
     public function thankyou($invoiceId, Checkout $checkout)
     {
@@ -126,7 +74,6 @@ class CheckoutController extends Controller {
 
         return view('checkout.thankyou')->withPayment($payment);
     }
-
 }
 
 

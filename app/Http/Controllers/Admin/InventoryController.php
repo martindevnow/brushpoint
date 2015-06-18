@@ -5,7 +5,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Martin\Ecom\SoldItem;
+use Martin\Notifications\Flash;
 use Martin\Products\Inventory;
+use Martin\Products\Item;
 
 class InventoryController extends Controller {
 
@@ -19,8 +21,11 @@ class InventoryController extends Controller {
         // display overview of inventory
         $inventories = Inventory::orderBy('item_id')->paginate(25);
 
+        $itemListByIdName = Item::lists('sku', 'id');
+
         // current levels of all
-        return view('admin.inventory.index')->with(compact('inventories'));
+        return view('admin.inventory.index')
+            ->with(compact('inventories', 'itemListByIdName'));
 	}
 
 	/**
@@ -30,17 +35,37 @@ class InventoryController extends Controller {
 	 */
 	public function create()
 	{
-		//
-	}
+        $itemListByIdName = Item::lists('sku', 'id');
+
+        return view('admin.inventory.create')
+            ->with(compact('itemListByIdName'));
+    }
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+        $item = Item::findOrFail($request->item_id);
+
+
+        $inventory = Inventory::create([
+            'lot_code' => $request->lot_code,
+            'expiry_date' => $request->expiry_date,
+            'quantity' => $request->quantity,
+            'original_quantity' => $request->quantity,
+            'description' => $request->description,
+            'status' => $request->status,
+        ]);
+
+        $item->inventories()->save($inventory);
+
+        Flash::message("New Inventory added for SKU: " . $item->sku);
+
+        return redirect('admins/inventory');
+
 	}
 
 	/**
