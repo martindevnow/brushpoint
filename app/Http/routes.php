@@ -267,6 +267,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      */
     Route::get(         'admins/inventory/item/{id}',     'InventoryController@showItem');
     Route::get(         'admins/inventory/lot/{id}',     'InventoryController@showLotActivity');
+    Route::get(         'admins/inventory/hold/{id}',     'InventoryController@putOnHold');
+    Route::get(         'admins/inventory/activate/{id}',     'InventoryController@activate');
     Route::resource(    'admins/inventory',             'InventoryController');
 
 

@@ -18,7 +18,8 @@
               <th>Lot Code</th>
               <th>Original</th>
               <th>Remaining</th>
-              <th>Desc</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -28,7 +29,23 @@
               <td>{{ $inventory->lot_code }}</td>
               <td>{{ $inventory->original_quantity }}</td>
               <td>{{ $inventory->quantity }}</td>
-              <td>{{ $inventory->description }}</td>
+              <td>{{ $inventory->status }}</td>
+              <td>
+                {{--{{ dd($inventory) }}--}}
+                @if ($inventory->isOnHold())
+                <a href="/admins/inventory/activate/{{ $inventory->id }}">
+                    <button type="button" class="btn btn-primary btn-xs confirm_action" style="float: right;">
+                        Activate
+                    </button>
+                </a>
+                @else
+                <a href="/admins/inventory/hold/{{ $inventory->id }}">
+                    <button type="button" class="btn btn-danger btn-xs confirm_action" style="float: right;">
+                        Put On Hold
+                    </button>
+                </a>
+                @endif
+              </td>
             </tr>
             @endforeach
           </tbody>

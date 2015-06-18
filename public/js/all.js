@@ -130,7 +130,13 @@
 
 (function() {
     $('.delete_entity').click(function(){
-        return confirm("Are you sure you want to delete? (Cannot be undone)");
+        return confirm("**This action cannot be undone** Do you wish to proceed?");
+    })
+})();
+
+(function() {
+    $('.confirm_action').click(function(){
+        return confirm("Are you sure you meant to do that?");
     })
 })();
 

@@ -15,7 +15,7 @@ function get_current_time()
 function sanitiseDate ($stringDate) {
 
     $dt = DateTime::createFromFormat("m/d/Y", $stringDate);
-    dd($dt);
+    // dd($dt);
 
     return $dt !== false && !array_sum($dt->getLastErrors());
 

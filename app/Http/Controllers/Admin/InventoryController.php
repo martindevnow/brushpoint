@@ -69,6 +69,7 @@ class InventoryController extends Controller {
 
         // Save
         //dd($request);
+        //dd($request);
         $item = Item::findOrFail($request->item_id);
 
 
@@ -133,6 +134,44 @@ class InventoryController extends Controller {
             ->with(compact('inventory', 'soldItems'));
 	}
 
+
+    /**
+     * Place a lot of inventory on hold
+     *
+     * @param $intentoryId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function putOnHold($intentoryId)
+    {
+        $inventory = Inventory::find($intentoryId);
+
+        $inventory->putInventoryOnHold();
+
+        $inventory->save();
+
+        Flash::message('That lot for that item is now "oh hold"');
+
+        return redirect()->back();
+    }
+
+    /**
+     * Place a lot of inventory on hold
+     *
+     * @param $intentoryId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function activate($intentoryId)
+    {
+        $inventory = Inventory::find($intentoryId);
+
+        $inventory->takeInventoryOffHold();
+
+        $inventory->save();
+
+        Flash::message('That lot for that item is no longer "on hold".');
+
+        return redirect()->back();
+    }
 	/**
 	 * Show the form for editing the specified resource.
 	 *
