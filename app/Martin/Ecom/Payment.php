@@ -78,6 +78,11 @@ class Payment extends CoreModel {
 
 
 
+    public function buildTransaction(array $itemData)
+    {
+        dd($itemData);
+    }
+
 
 
 

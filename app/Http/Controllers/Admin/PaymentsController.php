@@ -7,9 +7,12 @@ use \App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Martin\Core\Address;
+use Martin\Ecom\Payer;
 use Martin\Ecom\Payment;
 use Martin\Ecom\Repositories\PaymentRepository;
 use Martin\Notifications\Flash;
+use Martin\Products\Item;
 use Martin\Products\Product;
 use Martin\Products\ProductRepository;
 use mikehaertl\wkhtmlto\Pdf;
@@ -121,4 +124,57 @@ class PaymentsController extends Controller {
         return $this->layout->content = view('admin.payments.index')->with(compact('payments'));
 
     }
+
+
+
+    public function create()
+    {
+        // show the form to add a new payment
+
+        return view('admin.payments.create');
+    }
+
+    public function createCart(Request $request)
+    {
+        $addressData = $request->only([
+            'street_1',
+            'street_2',
+            'city',
+            'province',
+            'postal_code',
+            'country',
+        ]);
+        $addressData['name'] = $request->first_name . " " . $request->last_name;
+        $address = Address::create($addressData);
+
+        $payer = Payer::create($request->only([
+            'first_name',
+            'last_name',
+            'email',
+        ]));
+
+
+        $payment = new Payment();
+        $payment->save();
+        $payment->address()->associate($address);
+        $payment->payer()->associate($payer);
+
+
+        session('admin.payment_id', $payment->id);
+
+        $items = Item::all();
+
+        return view('admin.payments.cart')->with(compact('items'));
+    }
+
+    public function processOrder(Request $request)
+    {
+        $payment = Payment::findOrFail(session('admin.payment_id'));
+
+        $transaction = $payment->buildTransaction($request->all());
+
+
+    }
+
+
 } 

@@ -234,6 +234,9 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     /**
      * Payments
      */
+    Route::get(         'admins/payments/create',      'PaymentsController@create');
+    Route::post(         'admins/payments/createCart',      'PaymentsController@createCart');
+    Route::post(         'admins/payments/processOrder',      'PaymentsController@processOrder');
     Route::get(         'admins/payments/filter',      'PaymentsController@filtered');
     Route::patch(       'admins/payments/ajax/{id}',   'PaymentsController@ajaxPatch');
     // TODO: Make a command for this action
