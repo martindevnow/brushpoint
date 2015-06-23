@@ -1,5 +1,12 @@
 @if($product->items()->count() > 1)
-    {!! Form::select('item_id', $product->items()->lists('variance', 'id'), null, ['class' => 'addToCart-form']) !!}
+    <select class="addToCart-form" name="item_id">
+        @foreach($items as $item)
+            <option value="{{ $item->id }}" {{ $item->on_hand ? "" : "disabled" }}>{{ $item->variance }}{{ $item->on_hand ? "" : " [Sold Out]" }}</option>
+        @endforeach
+    </select>
+
+
+    {{--{!! Form::select('item_id', $product->items()->lists('variance', 'id'), null, ['class' => 'addToCart-form']) !!}--}}
 @else
     {!! Form::hidden('item_id', $product->items[0]->id) !!}
 @endif

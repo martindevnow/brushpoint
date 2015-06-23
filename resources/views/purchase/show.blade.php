@@ -39,13 +39,15 @@
             </div>
             <div class="space-sep20"></div>
 
+            @if($product->getProductInventory())
             {!! Form::open(['method'=>'post', 'action' => 'CartController@addToCartConfirmed']) !!}
-                    <div class="col-sm-6 col-md-8">
-                        <div class="row">
-                            @include('purchase.partials.addToCart', ['product' => $product])
-                        </div>
-                    </div>
-                    {!! Form::close() !!}
+            <div class="col-sm-6 col-md-8">
+                <div class="row">
+                    @include('purchase.partials.addToCart', ['product' => $product])
+                </div>
+            </div>
+            {!! Form::close() !!}
+            @endif
 
             <!-- <p><a href="/cart/add/{{ $product->id }}" class="btn btn-sale" style="background-color: yellow; border: 1px solid black;" role="button">Add to Cart</a></p> -->
         </div>

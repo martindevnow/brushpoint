@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
+use App\Events\InventoryIncreased;
+use App\Events\InventoryPlacedOnHold;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -84,6 +86,9 @@ class InventoryController extends Controller {
 
         $item->inventories()->save($inventory);
 
+        if ($request->status != "on_hold")
+            event(new InventoryIncreased($inventory));
+
         Flash::message("New Inventory added for SKU: " . $item->sku);
 
         return redirect('admins/inventory');
@@ -146,8 +151,9 @@ class InventoryController extends Controller {
         $inventory = Inventory::find($intentoryId);
 
         $inventory->putInventoryOnHold();
-
         $inventory->save();
+
+        event(new InventoryPlacedOnHold($inventory));
 
         Flash::message('That lot for that item is now "oh hold"');
 
@@ -165,8 +171,9 @@ class InventoryController extends Controller {
         $inventory = Inventory::find($intentoryId);
 
         $inventory->takeInventoryOffHold();
-
         $inventory->save();
+
+        event(new InventoryIncreased($inventory));
 
         Flash::message('That lot for that item is no longer "on hold".');
 

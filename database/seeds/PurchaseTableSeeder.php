@@ -100,7 +100,7 @@ class PurchaseTableSeeder extends Seeder {
                 'description' => $rh['description'],
                 'sku' => $rh['sku'],
                 'price' =>  $rh['price'],
-                'on_hand' => 500,
+                'on_hand' => 250,
                 'active' => 1,
                 'portfolio' => 0,
                 'purchase' => 1,

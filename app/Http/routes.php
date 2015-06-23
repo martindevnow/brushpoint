@@ -1,6 +1,14 @@
 <?php
 
 
+/**
+ * June 23 2015
+ * - TODO: make a nightly cron that will deactivate any dead Purchase SKUs
+ *
+ * - TODO: make a weekly cron to run some quick statistics on the DB
+ *
+ * - TODO: 
+ */
 
 
 /**
@@ -32,10 +40,13 @@
  *
  * - TODO: INVENTORY - make it so lots/skus can be put "on hold" so that item won't ship
  *
+ *
  * - TODO: INVENTORY/PURCHASE - when an item is OOS, have it so that item is disabled on the site
+ *
  *
  * - TODO: PURCHASE/INVENTORY - when an item has say < 20 left in stock, have a post on the site
  *          and don't allow people have more than that in their cart at one time
+ *
  * - TODO: INVO/PURCH - allow users to be notified if an item is out of stock and when it comes back into stock
  *
  * - TODO: change the slideshows on the about page to not have a black background when the images are loading
@@ -52,6 +63,15 @@
  *
  *
  */
+
+use Martin\Products\Product;
+
+Route::get('invo', function()
+{
+    $product = Product::find(17);
+    dd($product->getProductInventory());
+});
+
 
 
 // May 6th 2015

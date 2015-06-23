@@ -40,7 +40,7 @@ class InventoriesTableSeeder extends Seeder {
             'expiry_date' => $dt->format('y-m-d H:i:s'),
             'quantity' => '0',
             'original_quantity' => '100',
-            'description' => 'restock',
+            'description' => 'available',
         ]);
 
 
@@ -52,7 +52,7 @@ class InventoriesTableSeeder extends Seeder {
             'expiry_date' => $dt->format('y-m-d H:i:s'),
             'quantity' => '20',
             'original_quantity' => '100',
-            'description' => 'restock',
+            'description' => 'available',
         ]);
 
 
@@ -69,7 +69,7 @@ class InventoriesTableSeeder extends Seeder {
             'expiry_date' => $dt->format('y-m-d H:i:s'),
             'quantity' => '0',
             'original_quantity' => '100',
-            'description' => 'restock',
+            'description' => 'available',
         ]);
 
 
@@ -86,7 +86,7 @@ class InventoriesTableSeeder extends Seeder {
             'expiry_date' => $dt->format('y-m-d H:i:s'),
             'quantity' => '0',
             'original_quantity' => '100',
-            'description' => 'restock',
+            'description' => 'available',
         ]);
 
 
@@ -101,9 +101,9 @@ class InventoriesTableSeeder extends Seeder {
                     'item_id' => $item->id,
                     'lot_code' => '10/14_THIS_STOCK_SHIPS',
                     'expiry_date' => $dt->format('y-m-d H:i:s'),
-                    'quantity' => '100',
-                    'original_quantity' => '100',
-                    'description' => 'restock',
+                    'quantity' => '125',
+                    'original_quantity' => '125',
+                    'status' => 'available',
                 ]);
             }
         }

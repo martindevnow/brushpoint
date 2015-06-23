@@ -41,8 +41,11 @@ class PurchaseController extends Controller {
     public function show($id)
     {
         $product = $this->productsRepository->getPurchaseById($id);
+        $items = $product->items->all(['id', 'variance', 'on_hand']);
+        // dd($items);
+
         // dd($product->images->where('width', 115));
-        return view('purchase.show')->with(['product'=> $product]);
+        return view('purchase.show')->with(['product'=> $product, 'items' => $items]);
     }
 
 }

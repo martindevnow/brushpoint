@@ -51,7 +51,6 @@ class Item extends CoreModel {
 
 
 
-
     public function product()
     {
         return $this->belongsTo('Martin\Products\Product');

@@ -40,6 +40,13 @@ class Product extends CoreModel {
         return '/products/id-'. $this->id;
     }
 
+    public function getProductInventory()
+    {
+        $query = $this->items
+            ->sum('on_hand');
+        return $query;
+    }
+
 
 
     public function getBenefits()

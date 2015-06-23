@@ -18,7 +18,7 @@
               <th>Lot Code</th>
               <th>Original</th>
               <th>Remaining</th>
-              <th>Desc</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -28,7 +28,7 @@
               <td><a href="/admins/inventory/lot/{{ $inventory->id }}">{{ $inventory->lot_code }}</a></td>
               <td>{{ $inventory->original_quantity }}</td>
               <td>{{ $inventory->quantity }}</td>
-              <td>{{ $inventory->description }}</td>
+              <td>{{ $inventory->status }}</td>
             </tr>
             @endforeach
           </tbody>

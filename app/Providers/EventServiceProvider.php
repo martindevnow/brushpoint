@@ -36,8 +36,14 @@ class EventServiceProvider extends ServiceProvider {
 
 
 
+        'App\Events\InventoryPlacedOnHold' => [
+            'App\Handlers\Events\RemoveInventoryFromOnHandOfItem',
+        ],
 
 
+        'App\Events\InventoryIncreased' => [
+            'App\Handlers\Events\AddInventoryToOnHandOfItem',
+        ],
 
 
         'App\Events\RequestForRetailerInfoIssued' => [

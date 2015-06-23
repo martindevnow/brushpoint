@@ -28,6 +28,7 @@ class Inventory extends Model {
     {
         return $this->belongsTo('Martin\Products\Item');
     }
+
     public function putInventoryOnHold()
     {
         $this->status = "on_hold";

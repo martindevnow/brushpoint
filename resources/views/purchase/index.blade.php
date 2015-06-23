@@ -28,10 +28,17 @@
                 <div class="caption">
                     <h3 class="purchase-name">{{ $product->name }}</h3>
                     <span class="purchase-pack">{{ $product->pack_description }}</span>
-                    <h4 class="purchase-price">USD ${{ number_format($product->price, 2) }}</h4>
+                    <h4 class="purchase-price">
+                        USD ${{ number_format($product->price, 2) }}
+                        {{ $product->getProductInventory() == 0 ? "[SOLD OUT]":"" }}
+                    </h4>
                     <p>{{ $product->description }}</p>
-                    <p><a href="/purchase/id-{{ $product->id }}" class="btn btn-primary" role="button">View Details</a>
-                     <a href="/cart/add/{{ $product->id }}" class="btn btn-sale" role="button">Add to Cart</a></p>
+                    <p>
+                      <a href="/purchase/id-{{ $product->id }}" class="btn btn-primary" role="button">View Details</a>
+                      @if($product->getProductInventory() > 0)
+                      <a href="/cart/add/{{ $product->id }}" class="btn btn-sale" role="button">Add to Cart</a>
+                      @endif
+                    </p>
                 </div>
             </div>
         </div>
