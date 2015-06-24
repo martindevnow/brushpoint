@@ -10,7 +10,7 @@
               <th>Lot Code</th>
               <th>Original</th>
               <th>Remaining</th>
-              <th>Desc</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -19,13 +19,13 @@
               <td>{{ $inventory->lot_code }}</td>
               <td>{{ $inventory->original_quantity }}</td>
               <td>{{ $inventory->quantity }}</td>
-              <td>{{ $inventory->description }}</td>
+              <td>{{ $inventory->status }}</td>
             </tr>
           </tbody>
     </table>
 
 
- <table class="table">
+ <table class="table  form-table">
     <thead>
     <th>Item</th>
     <th>Lot Code</th>
@@ -45,8 +45,6 @@
         @endforeach
     </tbody>
     </table>
-
-
 
 
     @include('admin.layouts.modals._note', ['model' => $inventory])

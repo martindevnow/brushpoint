@@ -1,5 +1,9 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Your Shopping Cart | Confirm Add to Cart";
+$headMetaDescription = "Are you sure you want to add this to your cart? How many packs of replacement toothbrush heads
+do you wish to purchase? Please select how many toothbrush heads you would like and click add to cart.";
+?>
 @section('header_bottom')
     <?php
     $page['link'] = "/cart";

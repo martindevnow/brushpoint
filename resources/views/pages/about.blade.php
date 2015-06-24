@@ -1,11 +1,15 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "About Us";
+$headMetaDescription = "Learn about BrushPoint Innovations and our wide selection of toothbrushes.
+We offer state of the art power toothbrushes. Both battery and manual toothbrushes.
+We also have rechargeable toothbrushes.";
+?>
 @section('header_inside')
     @include('zeina.js.fadeslider')
 @stop
 
 @section('header_bottom')
-
     <?php
     $page['link'] = "/about";
     $page['title'] = "About Us";

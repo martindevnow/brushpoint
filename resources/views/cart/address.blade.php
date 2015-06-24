@@ -1,5 +1,10 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Your Shopping Cart | Address Entry";
+$headMetaDescription = "Please enter your address for shipping purposes. Where would you like your package of
+replacement toothbrush heads shipped to? Please enter your name and address in the form below. Your shipment will be sent
+shortly.";
+?>
 @section('header_bottom')
     <?php
     $page['link'] = "/cart";

@@ -10,7 +10,7 @@
     <head>
         <meta charset="utf-8">
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-        <title>BrushPoint Innovations</title>
+        <title>BrushPoint Innovations{{ $headTitleSubheading? " | ". $headTitleSubheading :""}}</title>
 
         <!--[if lt IE 9]>
         <script type="text/javascript" src="/js/ie-fixes.js"></script>
@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="/css/ie-fixes.css">
         <![endif]-->
 
-        <meta name="description" content="Brushpoint Innovations">
+        <meta name="description" content="BrushPoint Innovations{{ $headMetaDescription? " " . $headMetaDescription:"" }}">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
