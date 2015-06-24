@@ -1,6 +1,9 @@
-
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "More Details";
+$headMetaDescription = "Unfortunately, we require additional details to properly address your concerms.
+Please fill in the fields below and we will get back to you shortly.";
+?>
 @section('header_inside')
 @stop
 

@@ -1,6 +1,10 @@
-
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Contact";
+$headMetaDescription = "Please feel free to contact us if you have any questions, comments, or concerns!
+We're always happy to hear from our customers. If you have sales related questions, or if you wish to leave
+product feedback, just fill in the form below.";
+?>
 @section('header_inside')
 @stop
 

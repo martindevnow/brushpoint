@@ -1,10 +1,13 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Products | ". $product->name;
+$headMetaDescription = "Here you can see just some of the products we offer. Most of our products
+are available as private label. Please contact us if you have any further inquiries.";
+?>
 @section('header_bottom')
 
     <?php
     $page['link'] = "/products";
-
     $page['title'] = "Products";
     $page['short_title'] = "Products";
     $page['short_description'] = "Our Lineup!";
@@ -17,10 +20,7 @@
         $page['short_title'] = $shortTitle;
     }
 
-
-
     $sep = false;
-
     ?>
     @include('zeina.top-title-wrapper', ['page' => $page])
 

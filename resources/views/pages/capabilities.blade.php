@@ -1,6 +1,10 @@
 @extends('layouts.zeina')
-
-
+<?php
+$headTitleSubheading = "Capabilities";
+$headMetaDescription = "BrushPoint Innovations is an industry leader producing the highest quality manual, and electric toothbrushes.
+Our portfolio was crafted by award-winning engineers and are made of the finest materials.
+See for yourself what sets BrushPoint apart from the competition.";
+?>
 @section('header_inside')
 @stop
 

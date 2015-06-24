@@ -1,5 +1,10 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Purchase";
+$headMetaDescription = "Not all of our products are available direct through our website.
+However, we always ensure that we have the replacement heads in-stock for our customers.
+If you wish to purchase our toothbrushes, you can find links to them on the retailers page.";
+?>
 @section('header_inside')
 
 @stop

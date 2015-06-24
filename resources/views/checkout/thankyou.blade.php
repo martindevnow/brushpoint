@@ -1,5 +1,9 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Thank You";
+$headMetaDescription = "Thank you for your purchase on BrushPoint.com. Your order of replacement toothbrush heads
+will be shipped out shortly. Thank you for choosing BrushPoint Innovations for your oral care needs.";
+?>
 @section('header_bottom')
     <?php
     $page['link'] = "/cart";

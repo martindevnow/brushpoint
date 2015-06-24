@@ -1,6 +1,11 @@
 @extends('layouts.zeina')
-
-
+<?php
+$headTitleSubheading = "Video";
+$headMetaDescription = "Please view the video to see what makes BrushPoint Innovations special.
+Also, you can learn how to properly swap out components for different parts that will allow you to
+take care of your gums, and floss between teeth.
+Oral hygiene has never been easier!";
+?>
 @section('header_inside')
 @stop
 

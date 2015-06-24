@@ -1,5 +1,9 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Duplicate";
+$headMetaDescription = "This payment has already been processed. Please do not refresh the page.
+You can check your email for a confirmation notification. Thank you.";
+?>
 @section('header_inside')
     @include('zeina.js.fadeslider')
 @stop

@@ -1,5 +1,9 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "404";
+$headMetaDescription = "Unfortunately the page you are looking for doesn't seem to exist.
+Please try your request again. If it fails, please contact the website administrator.";
+?>
 @section('header_bottom')
     <?php
     $page['link'] = "/";

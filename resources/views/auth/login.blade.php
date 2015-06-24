@@ -1,5 +1,8 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Login";
+$headMetaDescription = "Login to the admin section of BrushPoint.com.";
+?>
 @section('content')
 <div class="container-fluid">
 	<div class="row">

@@ -1,19 +1,22 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Purchase | ". $product->name;
+$headMetaDescription = "Not all of our products are available direct through our website.
+However, we always ensure that we have the replacement heads in-stock for our customers.
+If you wish to purchase our toothbrushes, you can find links to them on the retailers page.";
+?>
 @section('header_inside')
 @stop
 
 @section('header_bottom')
-
     <?php
     $page['link'] = "/purchase";
-
     $page['title'] = "Purchase";
     $page['short_title'] = ["Purchase" => '/purchase', $product->sku => "#"];
     $page['short_description'] = "Details";
 
-     $showCart = true;
-     $hideBreadcrumb = true;
+    $showCart = true;
+    $hideBreadcrumb = true;
     ?>
     @include('zeina.top-title-wrapper', ['page' => $page])
 

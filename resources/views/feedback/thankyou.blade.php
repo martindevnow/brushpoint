@@ -1,6 +1,9 @@
-
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Thank You";
+$headMetaDescription = "Thank you for contacting us. We will review your message and have one of our team
+contact you within several business days.";
+?>
 @section('header_inside')
 @stop
 

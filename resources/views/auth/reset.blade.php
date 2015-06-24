@@ -1,5 +1,8 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Reset Password";
+$headMetaDescription = "Please set a new password for your account on BrushPoint.com.";
+?>
 @section('content')
 <div class="container-fluid">
 	<div class="row">

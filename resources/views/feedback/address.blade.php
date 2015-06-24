@@ -1,6 +1,8 @@
-
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Address";
+$headMetaDescription = "Please confirm your address for us so that we can send you a replacement toothbrush.";
+?>
 @section('header_inside')
 @stop
 

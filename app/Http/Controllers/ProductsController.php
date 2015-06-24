@@ -15,7 +15,6 @@ class ProductsController extends Controller {
     function __construct(ProductRepository $productRepository)
     {
         $this->productRepository = $productRepository;
-        $this->middleware('auth', ['only' => 'create']);
     }
 
 
@@ -49,14 +48,6 @@ class ProductsController extends Controller {
             'products' => $products,
             'product' => $product
         ]);
-    }
-
-    /**
-     * Display the form for adding a new product
-     */
-    public function create()
-    {
-        return view('products.create');
     }
 
     public function store(Requests\CreateProductRequest $request)

@@ -19,7 +19,7 @@ class PagesController extends Controller {
      */
     public function index()
     {
-        return view('pages.index2');
+        return view('pages.index');
     }
 
     /**
@@ -52,41 +52,7 @@ class PagesController extends Controller {
         return view('pages.contact');
     }
 
-    /**
-     * Process the sending of the message from the user
-     *
-     * @param Requests\SendContactRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    /*public function sendContact(Requests\SendContactRequest $request)
-    {
-        $data = $request->only('name', 'email', 'user_message');
-
-        $data['ip'] = $_SERVER['REMOTE_ADDR'];
-        $data['message'] = $request->user_message;
-        $data['hash'] = str_random(32);
-
-        $contact = Contact::create($data);
-        $contact->save();
-
-        event(new CustomerContactedUs($contact));
-
-        Flash::message('Your message has been delivered!');
-
-        return redirect('contact/thankyou');
-    }*/
-
-    /**
-     * Show confirmation to the user that their message was sent
-     *
-     * @return \Illuminate\View\View
-     */
-    public function thankyouContact()
-    {
-        return view('pages.contact_thankyou');
-    }
-
-    /**
+       /**
      * Include the video of the vital health system and how to use it
      *
      * @return $this

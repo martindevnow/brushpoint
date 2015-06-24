@@ -1,5 +1,8 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Password";
+$headMetaDescription = "Submit a request to have your password reset.";
+?>
 @section('content')
 <div class="container-fluid">
 	<div class="row">

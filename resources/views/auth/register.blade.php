@@ -1,5 +1,8 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Register";
+$headMetaDescription = "Register for an account at BrushPoint.com.";
+?>
 @section('content')
 <div class="container-fluid">
 	<div class="row">

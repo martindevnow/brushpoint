@@ -1,5 +1,9 @@
 @extends('layouts.zeina')
-
+<?php
+$headTitleSubheading = "Products";
+$headMetaDescription = "Here you can see just some of the products we offer. Most of our products
+are available as private label. Please contact us if you have any further inquiries.";
+?>
 @section('header_bottom')
 
     <?php
