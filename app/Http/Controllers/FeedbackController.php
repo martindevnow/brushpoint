@@ -106,9 +106,8 @@ class FeedbackController extends Controller {
     public function editCustomerRequest($feedbackId, $customerRequestId, $customerRequestHash)
     {
         $feedback = Feedback::findOrFail($feedbackId);
-        // dd($customerRequestId);
+
         $customerRequest = $feedback->customerRequests->where('id', (int) $customerRequestId)->first();
-        // dd($customerRequest->where('id', $customerRequestId));
 
         if ($customerRequest->hash != $customerRequestHash)
             return redirect('/');
@@ -127,15 +126,15 @@ class FeedbackController extends Controller {
      */
     public function storeCustomerRequest($feedbackId, $customerRequestId, $customerRequestHash, Request $request)
     {
-        // dd($request);
         $feedback = Feedback::findOrFail($feedbackId);
-        $customerRequest = $feedback->customerRequests->where('id', (int) $customerRequestId)->first();
 
-        // $file = $request->file('product_image');
-        // dd($file);
+        $customerRequest = $feedback->customerRequests->where('id', (int) $customerRequestId)->first();
 
         if ($customerRequest->hash != $customerRequestHash)
             return redirect('/');
+
+        $validationRules = $customerRequest->getValidationRules();
+        $this->validate($request,$validationRules);
 
         // Save the address (if requested)
         if ($customerRequest->request_address || $customerRequest->request_field_sample)
@@ -151,16 +150,12 @@ class FeedbackController extends Controller {
         $feedback->save();
 
 
-        // TODO: get and save any image which might be attached.
         if ($customerRequest->request_image)
         {
-            // TODO: SAVE THE IMAGE AND ASSOCIATE IT TO THE FEEDBACK/CUSTOMER_REQUEST
-
-            /// dd($request);
             $imageName = $customerRequest->id . '.' .
                 $request->file('product_image')->getClientOriginalExtension();
 
-            $shortPath = '/public/customerRequest/images/';
+            $shortPath = config('brushpoint.customer_submitted_images_storage_path');
             $fullPath = base_path() . $shortPath ;
 
             $request->file('product_image')->move(
@@ -168,6 +163,8 @@ class FeedbackController extends Controller {
             );
 
             $image = new Image();
+            $image->file_name = $request->file('product_image')->getClientOriginalName();
+            $image->file_path = $shortPath . $imageName;
             $image->path = $shortPath . $imageName;
             $image->save();
 
@@ -177,11 +174,8 @@ class FeedbackController extends Controller {
         $customerRequest->received_at = get_current_time();
         $customerRequest->save();
 
-
         Flash::message('Thank you for your submission!');
 
-        // create event?
-        // send email to the user?
         return redirect('feedback/thankyou');
 
     }

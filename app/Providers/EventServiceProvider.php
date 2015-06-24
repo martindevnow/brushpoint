@@ -11,6 +11,9 @@ class EventServiceProvider extends ServiceProvider {
 	 * @var array
 	 */
 	protected $listen = [
+        /**
+         * Payment and PayPal related
+         */
 		'App\Events\ProductWasPurchased' => [
 			'App\Handlers\Events\EmailPurchaseConfirmation',
             'App\Handlers\Events\GenerateInvoicePdf',
@@ -23,6 +26,9 @@ class EventServiceProvider extends ServiceProvider {
             'App\Handlers\Events\EmailShippingConfirmation',
         ],
 
+        /**
+         * Customer Feedback and Contacting Customers
+         */
 
         'App\Events\CustomerFeedbackSubmitted' => [
             'App\Handlers\Events\EmailInternalFeedbackNotice',
@@ -34,21 +40,24 @@ class EventServiceProvider extends ServiceProvider {
             'App\Handlers\Events\OpenComplaintInvestigation',
         ],
 
+        'App\Events\RequestForRetailerInfoIssued' => [
+            'App\Handlers\Events\EmailRequestForLotCodeAndAddress',
+        ],
 
 
+        /**
+         * Inventory Stuff
+         */
         'App\Events\InventoryPlacedOnHold' => [
             'App\Handlers\Events\RemoveInventoryFromOnHandOfItem',
         ],
-
 
         'App\Events\InventoryIncreased' => [
             'App\Handlers\Events\AddInventoryToOnHandOfItem',
         ],
 
 
-        'App\Events\RequestForRetailerInfoIssued' => [
-            'App\Handlers\Events\EmailRequestForLotCodeAndAddress',
-        ],
+
 
 	];
 

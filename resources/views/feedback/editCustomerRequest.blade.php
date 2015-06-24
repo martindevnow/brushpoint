@@ -31,14 +31,14 @@
 
             <p class="body_paragraph">
                 Thank you for submitting your feedback.
-                </p>
-                <p>
+            </p>
+            <p>
                 In order for us to make further progress on your claim, we require additional information.
-                </p>
-                <p>
+            </p>
+            <p>
                 Please fill out the form to the best of your ability.
-                </p>
-                <p>
+            </p>
+            <p>
                 Thank you!
             </p>
 
@@ -63,11 +63,11 @@
 
             @if($customerRequest->request_address || $customerRequest->request_field_sample)
                 @include('layouts.partials._address')
-                <div class="form-group">
-                     {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
-                 </div>
-
             @endif
+
+            <div class="form-group">
+                {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
+            </div>
 
             {!! Form::hidden('hash', $customerRequest->hash) !!}
 

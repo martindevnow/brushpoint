@@ -32,6 +32,7 @@ class InventoryAdjustmentTest extends TestCase {
         // oldest available SKU should be "10/14"
         $oldestInventory = $item->getOldestActiveInventory();
 
+        dd($oldestInventory->lot_code);
         $this->assertTrue($oldestInventory->lot_code == '10/14');
 
         // $this->makeNewPayment($item);
@@ -90,9 +91,11 @@ class InventoryAdjustmentTest extends TestCase {
         $payment = $this->setUpPaymentTransaction($item);
 
 
-
-
         $this->seeInDatabase('payments', ['unique_id' => 'UNIQUE_ID_THIS_IS_IT']);
+
+
+        $payer = $payment->payer;
+
         $this->assertEquals($payment, $payer->payments->first());
 
         $this->assertEquals($payment->address_id, $address->id);

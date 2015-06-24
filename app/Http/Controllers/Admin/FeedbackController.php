@@ -201,13 +201,9 @@ class FeedbackController extends Controller {
 
         // put the values into the form
         $data['to_email'] = $contactRepository->getToEmail($feedback);
-
         $data['subject'] = $contactRepository->getSubject($feedback);
-
         $data['title'] = $contactRepository->getTitle();
-
         $data['from_email'] = $contactRepository->getFromEmail();
-
         $data['feedback_id'] = $feedback->id;
 
         $custRequest = CustomerRequest::create($request->except(
@@ -251,16 +247,13 @@ class FeedbackController extends Controller {
         // build contact model
         $contact = Contact::create($data);
 
-
         // update the sent time for the customerRequest
         $customerRequest = CustomerRequest::find($request->customer_request_id);
         $customerRequest->sent_at = get_current_time();
 
-
         // tie the relationships
         Auth::user()->contacts()->save($contact);
         $contact->customerRequest()->save($customerRequest);
-
 
         // send model to email event
         event(new ContactCustomerIssued($contact, $customerRequest));

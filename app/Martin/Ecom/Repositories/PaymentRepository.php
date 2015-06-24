@@ -52,7 +52,7 @@ class PaymentRepository {
 
     public function getInvoicePath($paymentId)
     {
-        return Payment::getFunnInvoicePath($paymentId);
+        return Payment::find($paymentId)->getFullInvoicePath();
     }
 
     public function getSentCount()

@@ -239,7 +239,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      */
     Route::patch(       'admins/investigations/ajax/{id}',   'InvestigationsController@ajaxPatch');
     Route::post(        'admins/investigations/report/store',   'InvestigationsController@reportStore');
-    Route::post(        'admins/investigations/download/{id}',   'InvestigationsController@reportDownload');
+    Route::get(        'admins/investigations/download/{id}',   'InvestigationsController@reportDownload');
 
 
 

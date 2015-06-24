@@ -21,6 +21,8 @@ class CreateImagesTable extends Migration {
             $table->smallInteger('width');
 
             $table->string('path');
+            $table->string('file_name');
+            $table->string('file_path');
 
             $table->boolean('thumbnail');
 

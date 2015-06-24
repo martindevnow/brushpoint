@@ -34,6 +34,8 @@ class OpenComplaintInvestigation {
         {
             // open an investigation on the feedback
             $investigation = new Investigation();
+            // dd(get_current_time());
+
             $investigation->field_sample_requested_at = get_current_time();
             $investigation->save();
 

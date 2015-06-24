@@ -19,7 +19,6 @@ class CustomerRequest extends CoreModel {
         'request_image',
         'request_field_sample',
 
-
         'sent_at',
         'received_at',
     ];
@@ -29,6 +28,29 @@ class CustomerRequest extends CoreModel {
         'sent_at',
         'received_at',
     ];
+
+
+
+    public function getValidationRules()
+    {
+        $validationRules = array();
+        if ($this->request_lotcode)
+            $validationRules['lot_code'] = "required";
+        if ($this->request_retailer)
+            $validationRules['retailer_text'] = "required";
+        if ($this->request_image)
+            $validationRules['product_image'] = "required";
+        if ($this->request_field_sample || $this->request_address)
+        {
+            $validationRules['street_1'] = "required";
+            $validationRules['city'] = "required";
+            $validationRules['province'] = "required";
+            $validationRules['postal_code'] = "required";
+            $validationRules['country'] = "required";
+        }
+        return $validationRules;
+
+    }
 
     public function user()
     {

@@ -66,12 +66,11 @@ class Payment extends CoreModel {
     public function getFullInvoicePath($paymentId = null)
     {
         if ($paymentId)
-            $payment = Payment::find($paymentId);
+            $payment = Payment::findOrFail($paymentId);
         else
             $payment = $this;
 
-
-        return storage_path(). '/tmp/BrushPoint_Invoice_'. $payment->getInvoiceNumber() .'.pdf';
+        return base_path(). '/storage/invoices/BrushPoint_Invoice_'. $payment->getInvoiceNumber() .'.pdf';
 
     }
 
