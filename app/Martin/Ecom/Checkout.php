@@ -25,8 +25,12 @@ class Checkout {
 
     protected $ecomPayment;
 
+    protected $cartRepository;
+
     public function __construct()
     {
+        $this->cartRepository = new CartRepository();
+
         $this->api = new \PayPal\Rest\ApiContext(
             new \PayPal\Auth\OAuthTokenCredential(
                 env('PAYPAL_CLIENT_ID'),
@@ -49,6 +53,21 @@ class Checkout {
         return $this->api;
     }
 
+
+
+    public function cartHasItemOutOfStock()
+    {
+        $cartItems = $this->cartRepository->getCartData();
+
+        foreach($cartItems as $item)
+        {
+            $DBItem = \Martin\Products\Item::find($item['id']);
+
+            if ($DBItem->on_hand == 0)
+                return $item;
+        }
+        return false;
+    }
 
     /**
      * Build the Payment for PayPal and store all relevant information to the DB

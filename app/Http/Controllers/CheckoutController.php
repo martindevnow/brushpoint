@@ -34,8 +34,13 @@ class CheckoutController extends Controller {
             return redirect()->back();
         }
 
-
         $checkout = new \Martin\Ecom\Checkout();
+
+        if ( $outOfStockItem = $checkout->cartHasItemOutOfStock())
+        {
+            Flash::error($outOfStockItem->name . ' isout of stock. Please remove it from your cart.');
+            return redirect()->back();
+        }
 
         $checkout->newPayment($this->cartRepository);
 

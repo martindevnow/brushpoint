@@ -34,6 +34,9 @@ class PaymentLog {
     public function fetchPaymentFromPayPal($paymentId)
     {
         $this->payPalPayment = \PayPal\Api\Payment::get($paymentId, $this->api);
+
+        Log::info(print_r($this->payPalPayment, true));
+
         return $this->fetchFromDbByPayPalPayment();
 
     }

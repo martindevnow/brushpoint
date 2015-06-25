@@ -1,6 +1,6 @@
 @if($product->items()->count() > 1)
     <select class="addToCart-form" name="item_id">
-        @foreach($items as $item)
+        @foreach($product->items as $item)
             <option value="{{ $item->id }}" {{ $item->on_hand ? "" : "disabled" }}>{{ $item->variance }}{{ $item->on_hand ? "" : " [Sold Out]" }}</option>
         @endforeach
     </select>

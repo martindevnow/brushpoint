@@ -38,10 +38,10 @@
  * - TODO: test the purchasing a few more times to make sure it goes through properly.
  *          refunds etc will have to be handled manually (can make a function for this if required.
  *
- * - TODO: INVENTORY - make it so lots/skus can be put "on hold" so that item won't ship
+ * - DONE: INVENTORY - make it so lots/skus can be put "on hold" so that item won't ship
  *
  *
- * - TODO: INVENTORY/PURCHASE - when an item is OOS, have it so that item is disabled on the site
+ * - DONE: INVENTORY/PURCHASE - when an item is OOS, have it so that item is disabled on the site
  *
  *
  * - TODO: PURCHASE/INVENTORY - when an item has say < 20 left in stock, have a post on the site
