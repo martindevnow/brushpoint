@@ -35,7 +35,10 @@ are available as private label. Please contact us if you have any further inquir
                                                        data-delay="0.4s">
                 @if(isset($product))
                 <div class="left-image-container center-text">
-                    <img class="img-responsive inline-block" src="/images/brushpoint/products/{{ $product->sku }}-full.jpg" style="padding: 1% 0px 3% 1%; height: auto; width: 350px;" />
+                    <img class="img-responsive inline-block"
+                        src="/images/brushpoint/products/{{ $product->sku }}-full.jpg"
+                        alt="BrushPoint Innovations' {{ $product->name }}"
+                        style="padding: 1% 0px 3% 1%; height: auto; width: 350px;" />
                 </div>
                 @endif
             </div>

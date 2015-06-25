@@ -61,8 +61,12 @@ If you wish to purchase our toothbrushes, you can find links to them on the reta
              data-speed="1s"
              data-delay="0.4s">
             <div class="right-image-container center-text">
-                <img src='/images/brushpoint/purchase/{{  $product->sku }}-555.png' alt="product NAME" class="img-responsive inline-block" height="360" width="665"
-                id="product-show-image"/>
+                <img src='/images/brushpoint/purchase/{{  $product->sku }}-555.png'
+                    alt="BrushPoint's {{ $product->name }} for our battery and rechargeable toothbrushes."
+                    class="img-responsive inline-block"
+                    height="360"
+                    width="665"
+                    id="product-show-image"/>
             </div>
 
             @include('zeina.flickr-images', ['images'=> $product->images])

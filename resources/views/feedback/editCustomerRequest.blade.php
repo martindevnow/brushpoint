@@ -50,13 +50,13 @@ Please fill in the fields below and we will get back to you shortly.";
             @if($customerRequest->request_lot_code)
                 <div class="form-group">
                     {!! Form::label('lot_code', 'Lot Code') !!}
-                    {!! Form::text('lot_code', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('lot_code', null, ['class' => 'form-control', 'required']) !!}
                 </div>
             @endif
 
             <div class="form-group">
                 {!! Form::label('retailer_text', 'Retailer') !!}
-                {!! Form::text('retailer_text', $feedback->retailer_text, ['class' => 'form-control']) !!}
+                {!! Form::text('retailer_text', $feedback->retailer_text, ['class' => 'form-control', 'required', 'title' => 'Where did you purchase your toothbrush?']) !!}
             </div>
 
             @if($customerRequest->request_image)

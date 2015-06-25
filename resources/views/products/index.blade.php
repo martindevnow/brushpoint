@@ -37,10 +37,15 @@ are available as private label. Please contact us if you have any further inquir
             <div class="small-container">
                 <div class="thumbnail">
                     <div class="product-details">
-                        <p><a href="/products/id-{{ $product->id }}" class="btn btn-primary product-detail-btn" role="button" style="float: right;">Details</a>
+                        <p><a href="{{ $product->urlToProductPage() }}" class="btn btn-primary product-detail-btn" role="button" style="float: right;">Details</a>
                     </div>
                     <div class="product-thumbnail">
-                        <a href="/products/id-{{ $product->id }}"><img src="/images/brushpoint/products/{{ $product->sku }}-full.jpg" alt="{{ $product->name }}" class="img-responsive" style="max-height: 150px;"></a>
+                        <a href="{{ $product->urlToProductPage() }}">
+                        <img src="/images/brushpoint/products/{{ $product->sku }}-full.jpg"
+                            alt="BrushPoint presents {{ $product->name }}"
+                            class="img-responsive"
+                            style="max-height: 150px;">
+                        </a>
                     </div>
                     <div class="product-caption">
                         <h3>{{ $product->name }}</h3>

@@ -48,7 +48,7 @@ function fadeSlideShow(settingarg){
 	jQuery(document).ready(function($){ //fire on DOM ready
 		var setting=slideshow.setting
 		var fullhtml=fadeSlideShow.routines.getFullHTML(setting.imagearray) //get full HTML of entire slideshow
-		setting.$wrapperdiv=$('#'+setting.wrapperid).css({position:'relative', visibility:'visible', background:'black', overflow:'hidden', width:setting.dimensions[0], height:setting.dimensions[1]}).empty() //main slideshow DIV
+		setting.$wrapperdiv=$('#'+setting.wrapperid).css({position:'relative', visibility:'visible', background:'white', overflow:'hidden', width:setting.dimensions[0], height:setting.dimensions[1]}).empty() //main slideshow DIV
 		setting.dimensions = [ // get dimensions of slideshow in pixels
 			setting.$wrapperdiv.outerWidth(),
 			setting.$wrapperdiv.outerHeight()
@@ -58,7 +58,7 @@ function fadeSlideShow(settingarg){
 			return
 		}
 		setting.$gallerylayers=$('<div class="gallerylayer"></div><div class="gallerylayer"></div>') //two stacked DIVs to display the actual slide 
-			.css({position:'absolute', left:0, top:0, width:'100%', height:'100%', background:'black'})
+			.css({position:'absolute', left:0, top:0, width:'100%', height:'100%', background:'white'})
 			.appendTo(setting.$wrapperdiv)
 		var $loadingimg=$('<img src="'+fadeSlideShow_descpanel.controls[2][0]+'" style="position:absolute;width:'+fadeSlideShow_descpanel.controls[2][1]+';height:'+fadeSlideShow_descpanel.controls[2][2]+'" />')
 			.css({left:setting.dimensions[0]/2-fadeSlideShow_descpanel.controls[2][1]/2, top:setting.dimensions[1]/2-fadeSlideShow_descpanel.controls[2][2]}) //center loading gif
@@ -303,7 +303,7 @@ fadeSlideShow.routines={
 			.appendTo(setting.$wrapperdiv)
 		$('<div class="descpanelbg"></div><div class="descpanelfg"></div><div class="descpanelhidden"></div>') //create inner nav panel DIVs
 			.css({position:'absolute', left:0, top:0, width:setting.$descpanel.width()-8, padding:'4px'})
-			.eq(0).css({background:'black', opacity:0.7}).end() //"descpanelbg" div
+			.eq(0).css({background:'white', opacity:0.7}).end() //"descpanelbg" div
 			.eq(1).css({color:'white'}).html(setting.closebutton + setting.longestdesc).end() //"descpanelfg" div
 			.eq(2).css({visibility: 'hidden', zIndex: -1}).html(setting.closebutton + setting.longestdesc).end() //"descpanelhidden" hidden div to re-get height of panel after populating it with text
 			.appendTo(setting.$descpanel)

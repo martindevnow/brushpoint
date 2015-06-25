@@ -29,7 +29,10 @@ If you wish to purchase our toothbrushes, you can find links to them on the reta
         <div class="col-sm-4 col-md-4">
             <div class="thumbnail">
                 <div class="purchase-price"></div>
-                <a href="/purchase/id-{{ $product->id }}"><img src="/images/brushpoint/purchase/{{ $product->sku }}-240.png" alt="{{ $product->name }}"></a>
+                <a href="{{ $product->urlToPurchasePage() }}">
+                    <img src="/images/brushpoint/purchase/{{ $product->sku }}-240.png"
+                        alt="BrushPoint {{ $product->name }}">
+                </a>
                 <div class="caption">
                     <h3 class="purchase-name">{{ $product->name }}</h3>
                     <span class="purchase-pack">{{ $product->pack_description }}</span>
@@ -39,7 +42,7 @@ If you wish to purchase our toothbrushes, you can find links to them on the reta
                     </h4>
                     <p>{{ $product->description }}</p>
                     <p>
-                      <a href="/purchase/id-{{ $product->id }}" class="btn btn-primary" role="button">View Details</a>
+                      <a href="{{ $product->urlToPurchasePage() }}" class="btn btn-primary" role="button">View Details</a>
                       @if($product->getProductInventory() > 0)
                       <a href="/cart/add/{{ $product->id }}" class="btn btn-sale" role="button">Add to Cart</a>
                       @endif

@@ -37,7 +37,12 @@ class Product extends CoreModel {
 
     public function urlToProductPage()
     {
-        return '/products/id-'. $this->id;
+        return '/products/id-'. $this->id . "/". $this->urlSafeName();
+    }
+
+    public function urlToPurchasePage()
+    {
+        return '/purchase/id-'. $this->id . "/". $this->urlSafeName();
     }
 
     public function getProductInventory()
@@ -119,5 +124,10 @@ class Product extends CoreModel {
     public function virtues()
     {
         return $this->hasMany('Martin\Products\Virtue');
+    }
+
+    public function urlSafeName()
+    {
+        return sanitizeForUrl($this->name);
     }
 } 

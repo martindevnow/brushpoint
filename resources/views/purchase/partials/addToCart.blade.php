@@ -10,5 +10,5 @@
 @else
     {!! Form::hidden('item_id', $product->items[0]->id) !!}
 @endif
-    {!! Form::selectRange('quantity', 1, 10, null, ['class' => 'addToCart-form']) !!}
+    {!! Form::selectRange('quantity', 1, 10, null, ['class' => 'addToCart-form', 'required', 'title' => 'How many would you like?']) !!}
     {!! Form::submit('Add to Cart', ['class'=> 'btn btn-sale', 'style' => 'margin-top: 6px;']) !!}

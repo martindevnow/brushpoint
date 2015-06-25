@@ -91,7 +91,7 @@ product feedback, just fill in the form below.";
                     <!-- product Form Input -->
                     <div class="col-md-4 col-sm-4 col-xs-4">
                         {!! Form::label('intent', 'Product Feedback:') !!}
-                        {!! Form::radio('intent', 'product', false, ['style' => 'height:24px;width:24px;']) !!}
+                        {!! Form::radio('intent', 'product', false, ['style' => 'height:24px;width:24px;', 'required']) !!}
                     </div>
 
                     <!-- product Form Input -->
@@ -108,28 +108,6 @@ product feedback, just fill in the form below.";
 
                 </div>
             </div>
-                <!-- Retailer Form Input -->
-                <!--
-                <div class="col-md-6">
-                    <div class="form-group clearfix">
-                        {!! Form::label('retailer_text', 'Retailer', ['class' => 'control-label']) !!}
-                        <div class="col-xs-8">
-                            {!! Form::text('retailer_text', null, ['class' => 'form-control', 'title' => 'The store it was purchased from.']) !!}
-                        </div>
-                    </div>
-                </div>
-                -->
-
-                <!-- Lot Code Form Input -->
-                <!--
-                <div class="col-md-6">
-                    <div class="form-group clearfix">
-                        {!! Form::label('lot_code', 'Lot Code', ['class' => 'control-label']) !!}
-                        <div class="col-xs-8">
-                            {!! Form::text('lot_code', null, ['class' => 'form-control', 'title' => 'Found on the bottom of the toothbrush']) !!}
-                        </div>
-                    </div>
-                </div> -->
 
             <div class="row">
                 <!-- Issue Form Input -->
@@ -140,7 +118,7 @@ product feedback, just fill in the form below.";
 
                     </div>
                         <div class="col-xs-9">
-                            {!! Form::textarea('issue_text', null, ['class' => 'form-control', 'title' => 'Describe the problem you have with the toothbrush']) !!}
+                            {!! Form::textarea('issue_text', null, ['class' => 'form-control', 'required', 'title' => 'Leave a message for us. Please include any relevant details.']) !!}
                         </div>
                     </div>
                 </div>

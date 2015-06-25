@@ -4,35 +4,15 @@
 namespace Martin\Products;
 
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 class ProductRepository {
 
 
     public function updateProduct($id, array $attributes)
     {
-
         $product = Product::findOrFail($id);
-
-        /*if (isset($attributes['features']))
-        {
-            $virtues['feature'] = $attributes['features'];
-            unset($attributes['features']);
-        }
-
-        if (isset($attributes['benefits']))
-        {
-            $virtues['benefit'] = $attributes['benefits'];
-            unset($attributes['benefits']);
-        }
-
-
-        if (isset($attributes['other_list']))
-        {
-            $virtues['other'] = $attributes['other_list'];
-            unset($attributes['other_list']);
-        }*/
-
         $product->update($attributes);
-
     }
 
 
@@ -56,27 +36,15 @@ class ProductRepository {
     {
         $product = Product::findOrFail($id);
         if ($product->purchase && $product->active)
-        {
             return $product;
-        }
-        else
-        {
-            // TODO: Add an error because the product is not active or not purchase-able
-            return false;
-        }
+        throw new NotFoundHttpException;
     }
 
     public function getPortfolioById($id)
     {
         $product = Product::findOrFail($id);
         if ($product->portfolio && $product->active)
-        {
             return $product;
-        }
-        else
-        {
-            // TODO: Add an error because the product is not active or not purchase-able
-            return false;
-        }
+        throw new NotFoundHttpException;
     }
 }
