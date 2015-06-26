@@ -39,7 +39,7 @@ class CustomerRequest extends CoreModel {
         if ($this->request_retailer)
             $validationRules['retailer_text'] = "required";
         if ($this->request_image)
-            $validationRules['product_image'] = "required";
+            $validationRules['product_image'] = "requiredimage";
         if ($this->request_field_sample || $this->request_address)
         {
             $validationRules['street_1'] = "required";

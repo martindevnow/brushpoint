@@ -134,7 +134,7 @@ class FeedbackController extends Controller {
             return redirect('/');
 
         $validationRules = $customerRequest->getValidationRules();
-        $this->validate($request,$validationRules);
+        $this->validate($request, $validationRules);
 
         // Save the address (if requested)
         if ($customerRequest->request_address || $customerRequest->request_field_sample)
