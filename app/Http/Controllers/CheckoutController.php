@@ -71,11 +71,14 @@ class CheckoutController extends Controller {
 
     public function thankyou($invoiceId, Checkout $checkout)
     {
-        $payment = \Martin\Ecom\Payment::find($invoiceId);
+        $payment = \Martin\Ecom\Payment::findOrFail($invoiceId);
 
         $paymentLog = new PaymentLog($checkout->getApi());
 
         $payment = $paymentLog->fetchPaymentFromPayPal($payment->payment_id);
+
+        if ( ! $payment )
+            return redirect('/');
 
         return view('checkout.thankyou')->withPayment($payment);
     }
