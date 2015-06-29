@@ -10,3 +10,4 @@ Stack trace:
 #4 /home/martioo7/brushpoint/composer.phar(24): require('phar:///home/ma...')
 #5 {main}
   thrown in phar:///home/martioo7/brushpoint/composer.phar/vendor/symfony/console/Symfony/Component/Console/Input/ArgvInput.php on line 57
+[25-Jun-2015 20:18:14 UTC] PHP Fatal error:  Class 'Illuminate\Workbench\WorkbenchServiceProvider' not found in /home/martioo7/brushpoint/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 150
