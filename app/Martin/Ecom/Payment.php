@@ -71,9 +71,7 @@ class Payment extends CoreModel {
             $payment = $this;
 
         return base_path(). '/storage/invoices/BrushPoint_Invoice_'. $payment->getInvoiceNumber() .'.pdf';
-
     }
-
 
 
 
@@ -83,15 +81,9 @@ class Payment extends CoreModel {
     }
 
 
-
-
-
-
-
     /**
      * Relationships
      */
-
     public function payer()
     {
         return $this->belongsTo('Martin\Ecom\Payer');

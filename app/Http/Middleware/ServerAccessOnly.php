@@ -17,7 +17,7 @@ class ServerAccessOnly {
         // Log::info(print_r($_SERVER, 1));
         Log::info("Client IP: ". $request->getClientIp() );
 
-        if ($request->getClientIp() == "127.0.0.1")
+        if ($request->getClientIp() == "127.0.0.1" || $request->getClientIp() == "162.144.107.232")
         {
             return $next($request);
         }
