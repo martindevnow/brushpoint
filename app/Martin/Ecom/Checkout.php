@@ -40,7 +40,7 @@ class Checkout {
         );
 
         $this->api->setConfig([
-            'mode' => 'sandbox',
+            'mode' => env('PAYPAL_ENV'),
             'http.ConnectionTimeOut'    => 30,
             'log.LogEnabled'            => true,
             'log.FileName'              => storage_path() . '/logs/paypal.log',
