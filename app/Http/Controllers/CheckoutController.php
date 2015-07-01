@@ -82,6 +82,11 @@ class CheckoutController extends Controller {
 
         return view('checkout.thankyou')->withPayment($payment);
     }
+
+    public function error()
+    {
+        return view('errors.paypal');
+    }
 }
 
 
