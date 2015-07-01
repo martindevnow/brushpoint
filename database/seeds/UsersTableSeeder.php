@@ -15,27 +15,27 @@
             User::create([
                 'name' => 'Admin',
                 'email' => 'ben@me.com',
-                'password' => bcrypt('123456'),
+                'password' => bcrypt(env('ADMIN_PASS')),
             ]);
 
             User::create([
                 'name' => 'Ben Martin',
                 'email' => 'benjaminm@brushpoint.com',
-                'password' => bcrypt('123456'),
+                'password' => bcrypt(env('BEN_PASS')),
             ]);
 
 
             User::create([
                 'name' => 'Paul Cira',
                 'email' => 'paulc@brushpoint.com',
-                'password' => bcrypt('123456'),
+                'password' => bcrypt(env('PAUL_PASS')),
             ]);
 
 
             User::create([
                 'name' => 'Vivian Wong',
                 'email' => 'vivianw@brushpoint.com',
-                'password' => bcrypt('123456'),
+                'password' => bcrypt(env('VIVIAN_PASS')),
             ]);
         }
     }
