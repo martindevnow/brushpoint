@@ -9,7 +9,7 @@
                     <i class="icon-phone"></i> (+1) 866 40 BRUSH
                 </div>
                 <div class="sidebar-icon-item">
-                    <i class="icon-envelope-alt"></i> <a href="/contact">info@brushpoint.com</a>
+                    <i class="icon-envelope-alt"></i> <a href="/feedback">info@brushpoint.com</a>
                 </div><div class="sidebar-icon-item">
                     <i class="icon-envelope-alt"></i> <a href="mailto:sales@brushpoint.com">sales@brushpoint.com</a>
                 </div>
