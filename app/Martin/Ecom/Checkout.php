@@ -4,6 +4,7 @@
 namespace Martin\Ecom;
 
 
+use Martin\Notifications\Flash;
 use Martin\Products\CartRepository;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
@@ -151,7 +152,7 @@ class Checkout {
 
         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
             $err_data = json_decode($ex->getData(), true);
-            echo "Exception: " . $ex->getMessage() . PHP_EOL . print_r($err_data, true);
+            Flash::message("Exception: " . $ex->getMessage() . PHP_EOL . print_r($err_data, true));
             header('Location: '. url('/') .'/checkout/error');
             exit;
         }
