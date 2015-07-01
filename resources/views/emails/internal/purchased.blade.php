@@ -5,7 +5,7 @@
             body,td,div,p,a,input {font-family: arial, sans-serif;}
         </style>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>BrushPoint.com Feedback - {{ time() }}</title>
+        <title>Your BrushPoint.com order - {{ time() }}</title>
         <style type="text/css">
             body, td {font-size:13px} a:link, a:active {color:#1155CC; text-decoration:none} a:hover {text-decoration:underline; cursor: pointer} a:visited{color:##6611CC} img{border:0px} pre { white-space: pre; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; white-space: pre-wrap; word-wrap: break-word; max-width: 800px; overflow: auto;}
         </style>
@@ -42,9 +42,9 @@
                                 <tr>
                                     <td colspan="3" style="text-align:right;padding:7px 0 5px 0;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
                                         <h2 style="font-size:20px;line-height:24px;margin:0;padding:0;font-weight:normal;color:rgb(0,0,0)!important">
-                                            New Feedback Received
+                                            New Order Received
                                         </h2>
-                                        Feedback ID#: <a href="{{ url('/') }}/admins/feedback/{{ $feedback->id }}">{{ $feedback->id }} [VIEW]</a>
+                                        Order ID#: <a href="{{ url('/') }}/admins/payments/{{ $payment->id }}">{{ $payment->id }} [VIEW]</a>
                                         <br>
                                     </td>
                                 </tr>
@@ -57,36 +57,24 @@
                         <tr>
                             <td style="vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
 
-                                <h2>Feedback From: {{ $feedback->name }}</h2>
+                                <h2>Order From: {{ $payer->first_name }} {{ $payer->last_name }}</h2>
 
                                 <p>
-                                    <a href="{{ url('/') }}/admins/feedback/{{ $feedback->id }}">View it here.</a>
+                                    <a href="{{ url('/') }}/admins/payments/{{ $payment->id }}">View it here.</a>
                                 </p>
 
                                 <table>
                                 <tr>
                                     <td>Name: </td>
-                                    <td>{{ $feedback->name }}</td>
+                                    <td>{{ $payer->name }}</td>
                                 </tr>
                                 <tr>
                                     <td>Date: </td>
-                                    <td>{{ $feedback->created_at }}</td>
+                                    <td>{{ $payment->created_at }}</td>
                                 </tr>
                                 <tr>
                                     <td>Email: </td>
-                                    <td>{{ $feedback->email }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Retailer: </td>
-                                    <td>{{ $feedback->retailer_text }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Lot Code: </td>
-                                    <td>{{ $feedback->lot_code }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Issue: </td>
-                                    <td>{{ $feedback->issue_text }}</td>
+                                    <td>{{ $payer->email }}</td>
                                 </tr>
                             </table>
                         </td>

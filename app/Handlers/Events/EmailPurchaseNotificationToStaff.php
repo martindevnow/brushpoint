@@ -4,17 +4,14 @@ use App\Events\ProductWasPurchased;
 
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use Martin\Ecom\Payment;
 
-class EmailPurchaseConfirmation {
+class EmailPurchaseNotificationToStaff {
 
-    /**
-     * Create the event handler.
-     *
-     * @return \App\Handlers\Events\EmailPurchaseConfirmation
-     */
+	/**
+	 * Create the event handler.
+	 *
+	 * @return void
+	 */
 	public function __construct()
 	{
 		//
@@ -36,9 +33,9 @@ class EmailPurchaseConfirmation {
         $data = compact('payment', 'payer', 'address', 'transactions');
         /// Log::info(print_r($event->payment->payer->addresses,1));
 
-		Mail::send('emails.customer.invoice', $data, function($message) use ($event) {
-            $message->to($event->payment->payer->email)
-                ->subject("BrushPoint: Purchase Receipt");
+        Mail::send('emails.internal.invoice', $data, function($message) use ($event) {
+            $message->to('benjaminm@brushpoint.com')
+                ->subject("BrushPoint: Order Received" . $event->payment->id);
             $message->from('orders@brushpoint.com', 'BrushPoint Orders');
         });
 	}

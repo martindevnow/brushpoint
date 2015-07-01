@@ -16,6 +16,7 @@ class EventServiceProvider extends ServiceProvider {
          */
 		'App\Events\ProductWasPurchased' => [
 			'App\Handlers\Events\EmailPurchaseConfirmation',
+            'App\Handlers\Events\EmailPurchaseNotificationToStaff',
             'App\Handlers\Events\GenerateInvoicePdf',
             'App\Handlers\Events\ClearCurrentCart',
             'App\Handlers\Events\AdjustPurchasedInventory',

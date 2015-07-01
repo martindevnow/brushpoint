@@ -32,7 +32,7 @@ $payment->created_at->timezone = 'America/Toronto';
                                 <tr>
                                     <td rowspan="2" style="width:115px;padding:20px 20px 0 0;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
                                         <a href="http://www.brushpoint.com" title="Visit www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
-                                            <img src="http://www.brushpoint.martindevnow.com/images/logo/brushpoint.jpg" height="75" width="165" />
+                                            <img src="http://www.brushpoint.com/images/logo/brushpoint.jpg" height="75" width="165" />
                                         </a>
                                     </td>
                                     <td style="text-align:right;padding:5px 0;border-bottom:1px solid rgb(204,204,204);white-space:nowrap;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif"> </td>
