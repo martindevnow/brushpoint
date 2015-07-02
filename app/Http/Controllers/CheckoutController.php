@@ -69,7 +69,7 @@ class CheckoutController extends Controller {
         $execution->setPayerId($request->PayerID);
         $result = $PPPayment->execute($execution, $paymentLog->api);
 
-        Log::message("Payment Executed: " . print_r($result, true));
+        Log::info("Payment Executed: " . print_r($result, true));
 
         $response = Event::fire(new ProductWasPurchased($DBPayment));
 
