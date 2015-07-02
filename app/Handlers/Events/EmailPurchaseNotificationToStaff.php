@@ -34,7 +34,7 @@ class EmailPurchaseNotificationToStaff {
         $data = compact('payment', 'payer', 'address', 'transactions');
         /// Log::info(print_r($event->payment->payer->addresses,1));
 
-        Mail::send('emails.internal.invoice', $data, function($message) use ($event) {
+        Mail::send('emails.internal.purchased', $data, function($message) use ($event) {
             $message->to('benjaminm@brushpoint.com')
                 ->subject("BrushPoint: Order Received" . $event->payment->id);
             $message->from('orders@brushpoint.com', 'BrushPoint Orders');
