@@ -180,7 +180,7 @@ $payment->created_at->timezone = 'America/Toronto';
                                     <td style="width:150px;text-align:center;padding:16px 0 10px 0;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
                                         <a href="http://www.brushpoint.com" title="{{ $soldItem->sku }}" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                                         <!-- PRODUCT IMAGE -->
-                                            <img src="http://www.brushpoint.martindevnow.com/images/brushpoint/purchase/{{ $soldItem->item->sku }}-115.png" class="img-responsive" style="max-height: 35px; display: inline;"/>
+                                            <img src="http://www.brushpoint.com/images/brushpoint/purchase/{{ $soldItem->item->sku }}-115.png" class="img-responsive" style="max-height: 35px; display: inline;"/>
                                             <!-- <img src="https://ci3.googleusercontent.com/proxy/s5qnvPL4BTDy60jHjxlmKEKp4MCauXDJcLY7c3s0DCt_C7Nm-9lbrmYA8Jy9evXE0cVYJb6qKvKg1DRmfJeJ3IwDuJnNkIUcHf5YeEtWsVxsuCIUzinUis2cZOXCKPBS7EBn4Z0=s0-d-e1-ft#http://ecx.images-amazon.com/images/I/41brDiU5u1L._SCLZZZZZZZ__SY115_SX115_.jpg" style="border:0"> -->
                                         </a>
                                     </td>
