@@ -47,7 +47,7 @@
                   <tbody>
                     @foreach($transaction->soldItems as $item)
                         <tr>
-                          <td>{{ $item->name }}</td>
+                          <td>{{ $item->name }} [<i>{{ $item->variance }}</i>]</td>
                           <td>${{ number_format($item->price, 2) }}</td>
                           <td>{{ $item->quantity }}</td>
                           <td>${{ number_format($item->price * $item->quantity, 2) }}</td>

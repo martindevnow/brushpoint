@@ -188,7 +188,7 @@ $payment->created_at->timezone = 'America/Toronto';
 
                                         <a href="http://www.brushpoint.com/purchase/id-{{ $soldItem->item->product->id }}" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                                             {!! $soldItem->quantity ? "<b>". $soldItem->quantity . " x </b>" : "" !!}
-                                            {{ $soldItem->item->name }}
+                                            {{ $soldItem->item->name }} [<i>{{ $soldItem->item->variance }}</i>]
                                         </a>
                                         <br>
                                         {{ $soldItem->item->product->pack_description }}
