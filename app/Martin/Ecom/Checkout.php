@@ -132,35 +132,24 @@ class Checkout {
         try
         {
             $this->payment->create($this->api);
-
-            session()->put('paypal_payment_id', $this->payment->getId());
-
-            $hash = md5($this->payment->getId());
-            session()->put('paypal.hash', $hash);
-
-            $this->ecomPayment->payment_id = $this->payment->getId();
-            $this->ecomPayment->hash = $hash;
-
-            $this->ecomPayment->save();
-
-
-
-
-
-
-
-
-        } catch (\PayPal\Exception\PayPalConnectionException $ex) {
+        }
+        catch (\PayPal\Exception\PayPalConnectionException $ex)
+        {
             $err_data = json_decode($ex->getData(), true);
             Flash::message("Exception: " . $ex->getMessage() . PHP_EOL . print_r($err_data, true));
             header('Location: '. url('/') .'/checkout/error');
             exit;
         }
 
+        session()->put('paypal_payment_id', $this->payment->getId());
 
+        $hash = md5($this->payment->getId());
+        session()->put('paypal.hash', $hash);
 
+        $this->ecomPayment->payment_id = $this->payment->getId();
+        $this->ecomPayment->hash = $hash;
+        $this->ecomPayment->save();
         // return $this->savePaymentToDB();
-
     }
 
 

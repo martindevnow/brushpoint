@@ -10,18 +10,18 @@ use PayPal\Api\ShippingAddress;
 
 class PaymentLog {
 
-    protected $paymentRepo;
-    protected $payerRepo;
+    public $paymentRepo;
+    public $payerRepo;
 
-    protected $dbPayment;
-    protected $dbPayer;
-    protected $dbAddress;
-    protected $dbTransactions;
+    public $dbPayment;
+    public $dbPayer;
+    public $dbAddress;
+    public $dbTransactions;
 
-    protected $payPalPayment;
-    protected $payPalAddress;
+    public $payPalPayment;
+    public $payPalAddress;
 
-    protected $api;
+    public $api;
 
     function __construct($api)
     {
