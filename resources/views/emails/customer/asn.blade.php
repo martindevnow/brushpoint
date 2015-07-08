@@ -291,7 +291,7 @@ $payment->created_at->timezone = 'America/Toronto';
                         Ordering from BrushPoint.com
                         </a>.
                         <br> -->
-                        If you want more information or need more assistance, please don't hesitate to <a href="{{ url() }}/contact" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
+                        If you want more information or need more assistance, please don't hesitate to <a href="{{ url() }}/feedback" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
                         contact us
                         </a>.
                         </p>
