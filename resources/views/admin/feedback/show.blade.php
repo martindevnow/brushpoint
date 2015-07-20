@@ -59,7 +59,7 @@
                     <tr>
                       <td>Issue <br />
                             @if (isset($feedback->issue_id))
-                                <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a> <a href="/admins/feedback/{{ $feedback->issue->id }}/issue/remove/">[Remove]</a>
+                                <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a> <a href="/admins/feedback/{{ $feedback->id }}/issue/remove/">[Remove]</a>
                             @else
                               {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=issue_id' ]) !!}
                                   <div class="form-group">

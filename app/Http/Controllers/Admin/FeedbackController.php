@@ -141,7 +141,7 @@ class FeedbackController extends Controller {
     public function ajaxPatch($feedbackId, Request $request)
     {
         $field = $request->get('field');
-        $value = $request->has($field);
+        $value = $request->get($field);
 
         $feedback = Feedback::find($feedbackId);
 
