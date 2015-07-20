@@ -178,7 +178,8 @@ Route::get('purchase/id-{id}/{name}', 'PurchaseController@show');
  */
 Route::get('cart', 'CartController@index');
 Route::get('cart/add/{id}', 'CartController@confirmAddToCart');
-Route::post('cart/add/confirm', 'CartController@addToCartConfirmed');
+// Route::post('cart/add/confirm', 'CartController@addToCartConfirmed'); depreciated
+Route::post('cart/confirm/add', 'CartController@addToCartConfirmed');
 Route::get('cart/remove/{id}', 'CartController@remove');
 Route::post('cart/update', 'CartController@update');
 Route::post('cart/shipping/country', 'CartController@shippingToCountry');

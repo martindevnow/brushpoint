@@ -46,7 +46,7 @@
                     {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
                     {!! Form::close() !!}
                   </div>
-                  @if($feedback->closed_at != "0000-00-00 00:00:00")
+                  @if($feedback->closed_at != "0000-00-00 00:00:00" && $feedback->closed_at != "-0001-11-30 00:00:00")
                     [[ {{ $feedback->closed_at }} ]]
                   @endif
               </td>
