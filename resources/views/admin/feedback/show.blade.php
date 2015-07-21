@@ -146,6 +146,7 @@
             @endif
 
             @include('admin.layouts.modals._note', ['model' => $feedback])
+            @include('admin.layouts.modals._attachment', ['model' => $feedback])
             @include('admin.layouts.modals._address', ['model' => $feedback])
 
         </div>
@@ -186,6 +187,12 @@
             @include('admin.ajax.singles._address', ['address' => $address])
         @endforeach
     </div>
+
+    <div class="row" id="attachment_list">
+            @foreach($feedback->attachments as $attachment)
+                @include('admin.ajax.singles._attachment', ['attachment' => $attachment])
+            @endforeach
+        </div>
 </div>
 
 <div class="flash">

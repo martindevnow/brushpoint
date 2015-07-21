@@ -17,9 +17,11 @@ class CreateInvestigationReportsTable extends Migration {
 			$table->increments('id');
 			$table->integer('investigation_id');
 			$table->integer('user_id');
+
 			$table->string('file_name');
 			$table->string('file_path');
 			$table->string('file_extension');
+
 			$table->string('short_description');
 			$table->timestamps();
 		});

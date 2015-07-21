@@ -37,6 +37,7 @@
                 $.publish('form.submitted', form);
 
                 $('#noteModal').modal('hide');
+                $('#attachmentModal').modal('hide');
                 $('#issueModal').modal('hide');
                 $('#retailerModal').modal('hide');
                 $('#featureModal').modal('hide');

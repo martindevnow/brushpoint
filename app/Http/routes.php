@@ -291,6 +291,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      */
     Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
 
+   /**
+     * Attachments
+     */
+    Route::post(        'admins/attachments/store',       'AttachmentsController@attachmentStore');
+    Route::get(        'admins/attachments/download/{id}',   'AttachmentsController@attachmentDownload');
+
+
 
     /**
      * Addresses

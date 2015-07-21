@@ -25,4 +25,10 @@ class CoreModel extends Model{
     {
         return $this->morphMany('Martin\Core\Image', 'imageable');
     }
+
+    public function attachments()
+    {
+        return $this->morphMany('Martin\Core\Attachment', 'attachmentable');
+    }
+
 }
