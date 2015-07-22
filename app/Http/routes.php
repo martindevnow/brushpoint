@@ -244,6 +244,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::get(         'admins/feedback/{feedbackId}/retailer/remove', 'FeedbackController@removeRetailer');
     Route::get(         'admins/feedback/{feedbackId}/issue/remove',     'FeedbackController@removeIssue');
     Route::patch(       'admins/feedback/ajax/{id}',   'FeedbackController@ajaxPatch');
+    Route::patch(       'admins/feedback/ajaxToggle/{id}',   'FeedbackController@ajaxToggle');
     Route::resource(    'admins/feedback',             'FeedbackController');
 
 

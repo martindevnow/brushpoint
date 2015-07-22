@@ -90,7 +90,7 @@
                       Adverse Event
                       </td>
                       <td>
-                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=adverse_event' ]) !!}
+                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=adverse_event' ]) !!}
                           <div class="form-group">
                           {!! Form::checkbox('adverse_event', $feedback->adverse_event, $feedback->adverse_event, ['data-click-submits-form']) !!}
                           </div>
@@ -102,7 +102,7 @@
                       Health Canada Report
                       </td>
                       <td>
-                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=health_canada_report' ]) !!}
+                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=health_canada_report' ]) !!}
                           <div class="form-group">
                           {!! Form::checkbox('health_canada_report', $feedback->health_canada_report, $feedback->health_canada_report, ['data-click-submits-form']) !!}
                           </div>
@@ -114,7 +114,7 @@
                       CAPA Required
                       </td>
                       <td>
-                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=capa_required' ]) !!}
+                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=capa_required' ]) !!}
                           <div class="form-group">
                           {!! Form::checkbox('capa_required', $feedback->capa_required, $feedback->capa_required, ['data-click-submits-form']) !!}
                           </div>
@@ -126,7 +126,7 @@
                       Closed
                       </td>
                       <td>
-                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=closed' ]) !!}
+                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=closed' ]) !!}
                           <div class="form-group">
                           {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
                           </div>

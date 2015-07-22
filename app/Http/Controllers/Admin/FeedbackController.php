@@ -138,8 +138,13 @@ class FeedbackController extends Controller {
     }
 
 
-
-
+    /**
+     * Designed for string or integer, NOT checkboxes (use ajaxToggle for that)
+     *
+     * @param $feedbackId
+     * @param Request $request
+     * @return string
+     */
     public function ajaxPatch($feedbackId, Request $request)
     {
         $field = $request->get('field');
@@ -155,6 +160,27 @@ class FeedbackController extends Controller {
         return "Passed";
     }
 
+    /**
+     * Designed for Checkboxes (Boolean toggling)
+     *
+     * @param $feedbackId
+     * @param Request $request
+     * @return string
+     */
+    public function ajaxToggle($feedbackId, Request $request)
+    {
+        $field = $request->get('field');
+        $value = $request->has($field);
+
+        $feedback = Feedback::find($feedbackId);
+
+        if ($field == "closed")
+            $feedback->toggleClose($value);
+        else
+            $feedback->$field = $value;
+        $feedback->save();
+        return "Passed";
+    }
 
 
     /**
@@ -183,7 +209,6 @@ class FeedbackController extends Controller {
         $feedback = Feedback::findOrFail($feedbackId);
         $feedback->retailer_id = null;
         $feedback->save();
-        // $retailer->feedbacks()->detach($feedbackId);
         return redirect('/admins/feedback/'. $feedbackId);
     }
 
