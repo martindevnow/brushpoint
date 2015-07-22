@@ -148,7 +148,7 @@ class FeedbackController extends Controller {
         $feedback = Feedback::find($feedbackId);
 
         if ($field == "closed")
-            $feedback->toggleClose($value);
+            $feedback->toggleClose($request->has($field));
         else
             $feedback->$field = $value;
         $feedback->save();
