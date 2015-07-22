@@ -1,8 +1,11 @@
 <?php namespace Martin\Quality;
 
 use Illuminate\Database\Eloquent\Model;
+use Martin\Core\Traits\RecordsActivity;
 
 class Contact extends Model {
+
+    use RecordsActivity;
 
 	protected $fillable = [
         'email_template',

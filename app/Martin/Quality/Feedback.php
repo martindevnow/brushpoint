@@ -1,10 +1,12 @@
 <?php namespace Martin\Quality;
 
-
 use DateTime;
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class Feedback extends CoreModel {
+
+    use RecordsActivity;
 
     protected $table = 'feedbacks';
 

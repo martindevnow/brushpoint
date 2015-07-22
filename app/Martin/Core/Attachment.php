@@ -1,8 +1,11 @@
 <?php namespace Martin\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use Martin\Core\Traits\RecordsActivity;
 
 class Attachment extends Model {
+
+    use RecordsActivity;
 
 	protected $table = 'attachments';
 

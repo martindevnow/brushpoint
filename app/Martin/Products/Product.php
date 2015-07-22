@@ -4,8 +4,11 @@ namespace Martin\Products;
 
 
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class Product extends CoreModel {
+
+    use RecordsActivity;
 
     protected $table = 'products';
 

@@ -1,8 +1,11 @@
 <?php namespace Martin\Products;
 
 use Illuminate\Database\Eloquent\Model;
+use Martin\Core\Traits\RecordsActivity;
 
 class Inventory extends Model {
+
+    use RecordsActivity;
 
 	protected $fillable = [
         'transaction_id',

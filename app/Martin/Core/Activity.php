@@ -1,19 +1,16 @@
 <?php namespace Martin\Core;
 
 use Illuminate\Database\Eloquent\Model;
-use Martin\Core\Traits\RecordsActivity;
 
-class Note extends Model {
+class Activity extends Model {
 
-    use RecordsActivity;
-
-    protected static $recordEvents = ['created'];
-
-    protected $table = 'notes';
+    protected $table = 'activities';
 
     protected $fillable = [
         'user_id',
-        'content'
+        'subject_id',
+        'subject_type',
+        'name'
     ];
 
     protected $hidden = [];
@@ -27,6 +24,5 @@ class Note extends Model {
     {
         return $this->belongsTo('Martin\Users\User');
     }
-
 
 } 

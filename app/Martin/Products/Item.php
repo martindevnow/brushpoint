@@ -1,13 +1,15 @@
 <?php
 
-
 namespace Martin\Products;
-
 
 use Illuminate\Support\Facades\DB;
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class Item extends CoreModel {
+
+    use RecordsActivity;
+
     protected $table = 'items';
 
     protected $fillable = [

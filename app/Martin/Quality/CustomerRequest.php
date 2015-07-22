@@ -2,8 +2,11 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class CustomerRequest extends CoreModel {
+
+    use RecordsActivity;
 
     protected $fillable = [
         'feedback_id',

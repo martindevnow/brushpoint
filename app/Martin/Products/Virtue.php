@@ -1,10 +1,13 @@
 <?php namespace Martin\Products;
 
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class Virtue extends CoreModel {
 
-    protected $table = 'virtues';
+    use RecordsActivity;
+
+        protected $table = 'virtues';
 
     protected $fillable = [
         'body',

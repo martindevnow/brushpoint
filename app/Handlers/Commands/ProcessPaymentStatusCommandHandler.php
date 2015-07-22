@@ -10,11 +10,19 @@ use Martin\Ecom\PaymentLog;
 
 class ProcessPaymentStatusCommandHandler {
 
+    /**
+     * @var \Martin\Ecom\Repositories\PaymentRepository
+     */
     protected $paymentRepo;
+
     /**
      * @var Checkout
      */
     private $checkout;
+
+    /**
+     * @var \PayPal\Rest\ApiContext
+     */
     private $api;
 
     /**

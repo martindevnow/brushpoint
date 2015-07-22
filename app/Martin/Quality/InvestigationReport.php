@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Response;
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class InvestigationReport extends CoreModel {
 
-	protected $fillable = [
+    use RecordsActivity;
+
+    protected $fillable = [
         'investigation_id',
         'user_id',
         'file_name',
