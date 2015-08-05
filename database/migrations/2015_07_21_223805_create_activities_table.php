@@ -20,7 +20,7 @@ class CreateActivitiesTable extends Migration {
             $table->integer('subject_id')->index();
             $table->string('subject_type')->index();
             $table->string('name');
-            
+
             $table->integer('user_id')->nullable();
             $table->string('ip_address', 32);
 

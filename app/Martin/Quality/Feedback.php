@@ -61,6 +61,25 @@ class Feedback extends CoreModel {
 
 
 
+    public function setRetailerIdAttribute($id)
+    {
+        if ($id == 0)
+            $this->attributes['retailer_id'] = null;
+        else
+            $this->attributes['retailer_id'] = $id;
+    }
+
+    public function setIssueIdAttribute($id)
+    {
+        if ($id == 0)
+            $this->attributes['issue_id'] = null;
+        else
+            $this->attributes['issue_id'] = $id;
+    }
+
+
+
+
     public function issue()
     {
         return $this->belongsTo('Martin\Quality\Issue');
@@ -80,8 +99,6 @@ class Feedback extends CoreModel {
     {
         return $this->hasOne('Martin\Core\Address');
     }
-
-
 
 
     public function emails()
