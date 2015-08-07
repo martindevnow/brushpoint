@@ -1,26 +1,11 @@
 <?php
 
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Martin\Products\Product;
 
-Route::get('invo', function()
-{
-    $product = Product::find(17);
-    dd($product->getProductInventory());
-});
 
-
-Route::get('emailLog', function(){
-
-    Mail::send('emails.internal.log', [], function($message) {
-        $file = storage_path() . '/logs/laravel-2015-06-25.log';
-        $message->attach($file);
-        $message->to('the.one.martin@gmail.com')
-            ->subject('Nightly Log - 2015-06-25');
-    });
-    return "Sent";
-});
 
 /**
  * June 23 2015
@@ -216,6 +201,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      */
     Route::get(         'admins', 'AdminController@index');
 
+
+    /**
+     * Reports
+     */
+    Route::get(         'admins/reports', 'ReportsController@index');
+    Route::get(         'admins/reports/generate/payments', 'ReportsController@generatePayments');
 
 
 
