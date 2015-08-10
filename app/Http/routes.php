@@ -3,8 +3,32 @@
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Martin\Ecom\Transaction;
 use Martin\Products\Product;
 
+
+
+Route::get('findalldeadtransactions', function()
+{
+    $bad_ones = "";
+    $transactions = Transaction::all();
+    foreach ($transactions as $transaction)
+    {
+        $bad_ones .= "Transaction {$transaction->id}: ";
+
+        if (! $transaction->payments)
+        {
+            $bad_ones .= "Has a bad payents relationship.<br />";
+        }
+        else{
+            foreach ($transaction->payments as $payment)
+            {
+                $bad_ones .= "Payment {$payment->id} is associated. Payment: {$payment->state}<br />";
+            }
+        }
+    }
+    return $bad_ones;
+});
 
 
 /**
@@ -207,6 +231,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      */
     Route::get(         'admins/reports', 'ReportsController@index');
     Route::get(         'admins/reports/generate/payments', 'ReportsController@generatePayments');
+    Route::get(         'admins/reports/generate/soldItems', 'ReportsController@generateSoldItems');
 
 
 
