@@ -52,9 +52,10 @@ product feedback, just fill in the form below.";
                     can assist you!
                 </p>
             </div>
+            {!! Form::open(['method' => 'POST', 'url' => 'feedback/send', 'id' => 'bp-contact-form', 'class'=>'form-wrapper']) !!}
+
             <div class="row">
 
-            {!! Form::open(['method' => 'POST', 'url' => 'feedback/send', 'id' => 'bp-contact-form', 'class'=>'form-wrapper']) !!}
                 <!-- Name Form Input -->
                 <div class="col-md-6">
                     <div class="form-group clearfix">

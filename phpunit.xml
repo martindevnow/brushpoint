@@ -19,6 +19,9 @@
         <testsuite name="contact">
             <file>./tests/functional/ContactCustomerTest.php</file>
         </testsuite>
+        <testsuite name="attention">
+            <file>./tests/functional/AttentionModelTest.php</file>
+        </testsuite>
     </testsuites>
     <php>
         <env name="APP_ENV" value="testing"/>

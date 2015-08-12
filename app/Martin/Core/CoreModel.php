@@ -11,6 +11,11 @@ class CoreModel extends Model{
         return $this->morphMany('Martin\Core\Note', 'noteable');
     }
 
+    public function attentions()
+    {
+        return $this->morphMany('Martin\Core\Attention', 'attentionable');
+    }
+
     public function addresses()
     {
         return $this->morphMany('Martin\Core\Address', 'addressable');
@@ -30,5 +35,4 @@ class CoreModel extends Model{
     {
         return $this->morphMany('Martin\Core\Attachment', 'attachmentable');
     }
-
 }
