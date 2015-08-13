@@ -2,11 +2,15 @@
 
 use DateTime;
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\DrawsAttention;
 use Martin\Core\Traits\RecordsActivity;
 
 class Feedback extends CoreModel {
 
     use RecordsActivity;
+
+    // use DrawsAttention;
+    protected $drawAttentionEvents = ['created', 'updated'];
 
     protected $table = 'feedbacks';
 
@@ -78,6 +82,18 @@ class Feedback extends CoreModel {
     }
 
 
+    public function isUnseen()
+    {
+        if ($this->attentions)
+        {
+            dd($this->attentions);
+        }
+    }
+
+
+
+
+
 
 
     public function issue()
@@ -99,7 +115,6 @@ class Feedback extends CoreModel {
     {
         return $this->hasOne('Martin\Core\Address');
     }
-
 
     public function emails()
     {

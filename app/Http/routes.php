@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Attention;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Martin\Ecom\Transaction;
@@ -30,6 +31,11 @@ Route::get('findalldeadtransactions', function()
     return $bad_ones;
 });
 
+
+Route::get('attentions', function() {
+    $attentions = Attention::unseen()->get();
+    dd($attentions);
+});
 
 /**
  * June 23 2015

@@ -1,13 +1,13 @@
 <?php
 
+
 namespace Martin\Core\Traits;
 
-use Martin\Core\Attention;
-use Martin\Core\Activity;
+use App\Attention;
 use ReflectionClass;
 
-trait RecordsActivity
-{
+trait DrawsAttention {
+
     protected static function boot()
     {
         parent::boot();
@@ -16,13 +16,6 @@ trait RecordsActivity
         {
             static::$event(function($model) use ($event) {
                 $model->addActivity($event);
-            });
-        }
-
-        foreach(static::getDrawAttentionEvents() as $event)
-        {
-            static::$event(function($model) use ($event) {
-                $model->drawAttention($event);
             });
         }
     }
@@ -44,27 +37,7 @@ trait RecordsActivity
         ];
     }
 
-    public static function getDrawAttentionEvents()
-    {
-        if (isset(static::$drawAttentionEvents))
-            return static::$drawAttentionEvents;
-
-        return [
-            'created'
-        ];
-    }
-
-    protected function addActivity($event)
-    {
-        Activity::create([
-            'subject_id' => $this->id,
-            'subject_type' => get_class($this),
-            'name' => $this->getActivityName($this, $event),
-            'user_id' => \Auth::id()
-        ]);
-    }
-
-    protected function drawAttention($event)
+    protected function addAttention($event)
     {
         Attention::create([
             'attentionable_id' => $this->id,
@@ -73,12 +46,4 @@ trait RecordsActivity
             'global' => true,
         ]);
     }
-
-    protected function addAttention($event)
-    {
-
-    }
-
-}
-
- 
+} 

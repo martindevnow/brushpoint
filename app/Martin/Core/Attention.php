@@ -1,10 +1,10 @@
-<?php namespace App;
+<?php namespace Martin\Core;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Attention extends Model {
 
-	protected $table = "attentiones";
+	protected $table = "attentions";
 
     protected $fillable = [
         'global',
@@ -19,14 +19,29 @@ class Attention extends Model {
 
 
 
+
+
+    public function scopeUnseen($query)
+    {
+        return $query->where('seen', '=', false);
+    }
+
+
+
+
     public function attentionable()
     {
         return $this->morphTo();
     }
 
-    public function user()
+    public function receiver()
     {
         return $this->belongsTo('Martin\Users\User', 'receiver_id');
+    }
+
+    public function viewer()
+    {
+        return $this->belongsTo('Martin\Users\User', 'seen_by');
     }
 
 }

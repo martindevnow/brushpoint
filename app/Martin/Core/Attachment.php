@@ -25,7 +25,6 @@ class Attachment extends Model {
         return $this->belongsTo('Martin\Users\User');
     }
 
-
     public function download()
     {
         return response()->download(base_path(). $this->file_path, $this->file_name);

@@ -1,4 +1,13 @@
 <?php
+$factory('Martin\Core\Activity', [
+    'user_id' => 'factory:Martin\Users\User',
+    'name' => $faker->name,
+
+    'subject_id' => '',
+    'subject_type' => '',
+    'ip_address' => $faker->ipv4,
+]);
+
 $factory('Martin\Core\Address', [
     'description' => $faker->sentence,
     'name' => $faker->word,
@@ -16,6 +25,32 @@ $factory('Martin\Core\Address', [
     'default_address' => '',
     'addressable_type' => '',
 ]);
+
+
+
+$factory('Martin\Core\Attachment', [
+    'user_id' => 'factory:Martin\Users\User',
+    'content' => $faker->sentence(),
+
+    'file_path' => $faker->url,
+    'file_name' => $faker->word,
+    'file_extension' => $faker->wordd,
+
+    'attachmentable_id' => '',
+    'attachmentable_type' => '',
+]);
+
+
+$factory('Martin\Core\Attention', [
+    'global' => true,
+    'receiver_id' => 'factory:Martin\Users\User',
+
+    'action' => 'create',
+
+    'attentionable_id' => '',
+    'attentionable_type' => '',
+]);
+
 
 $factory('Martin\Core\Image', [
     'user_id' => 'factory:Martin\Users\User',
@@ -148,6 +183,7 @@ $factory('Martin\Quality\Contact', [
     'ip' => $faker->ipv4,
     'hash' => bcrypt(time()),
 ]);
+
 // FEEDBACK
 $factory('Martin\Quality\Feedback', [
     'name' => $faker->name,
@@ -171,17 +207,21 @@ $factory('Martin\Quality\Feedback', [
     'closed' => 0,
     'closed_at' => '',
 ]);
+
+
 // INVESTIGATION
 $factory('Martin\Quality\Investigation', [
     'feedback_id' => 'factory:Martin\Quality\Feedback',
     'field_sample_requested_at' => '',
     'field_sample_received_at' => '',
 ]);
+
 // ISSUE
 $factory('Martin\Quality\Issue', [
     'type' => $faker->word,
     'complaint' => $faker->boolean(),
 ]);
+
 // RETAILER
 $factory('Martin\Quality\Retailer', [
     'name' => $faker->name,
@@ -208,7 +248,10 @@ $factory('Martin\Users\User', [
 
 
 /*
+Martin\Core\Activity            ADDED
 Martin\Core\Address             ADDED
+Martin\Core\Attachment          ADDED
+Martin\Core\Attention           ADDED
 Martin\Core\CoreModel           NA
 Martin\Core\Image               ADDED
 Martin\Core\Note                ADDED
@@ -228,8 +271,11 @@ Martin\Products\Product         ADDED
 Martin\Products\Virtue          ADDED
 
 Martin\Quality\Contact          ADDED
+Martin\Quality\CustomerRequest  [[[NEED TO ADD]]]
+Martin\Quality\Email            [[[NEED TO ADD]]]
 Martin\Quality\Feedback         ADDED
 Martin\Quality\Investigation    ADDED
+Martin\Quality\InvestigationReport  [[[NEED TO ADD]]]
 Martin\Quality\Issue            ADDED
 Martin\Quality\Retailer         ADDED
 

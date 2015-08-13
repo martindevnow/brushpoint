@@ -27,6 +27,7 @@ class CreateAttentionsTable extends Migration {
 
             $table->boolean('seen')->default(false);
             $table->timestamp('seen_at');
+            $table->integer('seen_by')->nullable();
 
 			$table->timestamps();
 		});
