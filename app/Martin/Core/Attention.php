@@ -1,5 +1,6 @@
 <?php namespace Martin\Core;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use ReflectionClass;
 
@@ -36,6 +37,15 @@ Feedback		fa-comment
             return $this->type;
 
         return $this->type = (new ReflectionClass($this->attentionable))->getShortName();
+    }
+
+
+
+    public function see()
+    {
+        $this->seen = true;
+        $this->seen_at = Carbon::now();
+        $this->seen_by = \Auth::id();
     }
 
 

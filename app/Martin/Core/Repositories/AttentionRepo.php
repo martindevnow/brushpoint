@@ -10,7 +10,6 @@ class AttentionRepo {
 
 
 
-
     public function getLatestUnseen()
     {
         return Attention::unseen()->latest()->get();
