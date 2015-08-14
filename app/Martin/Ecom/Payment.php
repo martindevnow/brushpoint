@@ -6,8 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\Log;
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class Payment extends CoreModel {
+
+    use RecordsActivity;
+
+    protected $recordEvents = [
+
+    ];
+
+    protected $drawAttentionEvents = [
+        'created', 'updated'
+    ];
 
 	protected $table = "payments";
 
@@ -21,7 +32,6 @@ class Payment extends CoreModel {
         'address_id',
         'unique_id',
         'hash',
-
     ];
 
 

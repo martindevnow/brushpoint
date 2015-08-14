@@ -4,6 +4,7 @@ use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
+use Martin\Core\Repositories\AttentionRepo;
 use Martin\Products\CartRepository;
 
 abstract class Controller extends BaseController {
@@ -88,5 +89,8 @@ abstract class Controller extends BaseController {
         view()->share('cartData', $cartRepo->getCartData());
 
         // View::share('cartNumItems', $cartRepo->getCartNumItems($userCart));
+
+        $attentionRepo = new AttentionRepo();
+        view()->share('attentionRepo', $attentionRepo);
     }
 }

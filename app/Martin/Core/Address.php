@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Martin\Core\Traits\RecordsActivity;
+use ReflectionClass;
 
 class Address extends Model {
 
@@ -41,6 +42,25 @@ class Address extends Model {
     {
         return $this->hasMany('Martin\Ecom\Payment');
     }
+
+    protected $type;
+
+    protected function getAddressableType()
+    {
+        if ($this->type)
+            return $this->type;
+
+        return $this->type = strtolower((new ReflectionClass($this->addressable))->getShortName());
+    }
+
+    public function getUrlToAddressable()
+    {
+        $model = $this->addressable;
+        $type = $this->getAddressableType();
+
+        return "/admins/{$type}/{$model->id}";
+    }
+
 
     public function toString()
     {

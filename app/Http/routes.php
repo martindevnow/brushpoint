@@ -1,13 +1,39 @@
 <?php
 
 
-use App\Attention;
+use Martin\Core\Address;
+use Martin\Core\Attention;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Martin\Ecom\Payer;
+use Martin\Ecom\Payment;
 use Martin\Ecom\Transaction;
 use Martin\Products\Product;
+use Martin\Quality\Contact;
+use Martin\Quality\CustomerRequest;
+use Martin\Quality\Feedback;
+
+Route::get('classtest', function()
+{
+    $add['address'] = Address::latest()->first();
+    $add['payer'] = Payer::latest()->first();
+    $add['payment'] = Payment::latest()->first();
+    $add['contact'] = Contact::latest()->first();
+    $add['customerRequest'] = CustomerRequest::latest()->first();
+    $add['feedback'] = Feedback::latest()->first();
 
 
+    foreach ($add as $name => $model)
+    {
+        $attention = new Attention([
+            'global' => true,
+            'action' => "created_{$name}",
+            'attentionable_id' => $model->id,
+            'attentionable_type' => get_class($model)
+        ]);
+        $attention->save();
+    }
+});
 
 Route::get('findalldeadtransactions', function()
 {
