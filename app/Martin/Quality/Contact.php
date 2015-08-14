@@ -7,6 +7,9 @@ class Contact extends Model {
 
     use RecordsActivity;
 
+    protected $recordEvents = [];
+    protected $drawAttentionEvents = ['created', 'updated'];
+
 	protected $fillable = [
         'email_template',
 

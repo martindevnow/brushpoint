@@ -8,6 +8,9 @@ class CustomerRequest extends CoreModel {
 
     use RecordsActivity;
 
+    protected $recordEvents = [];
+    protected $drawAttentionEvents = ['updated'];
+
     protected $fillable = [
         'feedback_id',
         'contact_id',

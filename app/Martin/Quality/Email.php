@@ -5,8 +5,6 @@ use Martin\Core\Traits\RecordsActivity;
 
 class Email extends CoreModel {
 
-    use RecordsActivity;
-    
     protected $table = 'emails';
 
 	protected $fillable = [

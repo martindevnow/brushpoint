@@ -26,7 +26,8 @@ Payment			fa-bank
 Contact			fa-phone
 CustomerRequest	fa-envelope-o
 Feedback		fa-comment
-*/
+    */
+
     protected $type;
 
     public function getType()
@@ -94,7 +95,7 @@ Feedback		fa-comment
                 $icon = "fa-female ";
                 break;
             case "Payment":
-                $icon = "fa-bank ";
+                $icon = "fa-money ";
                 break;
             case "Contact":
                 $icon = "fa-phone ";

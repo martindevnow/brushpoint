@@ -8,6 +8,8 @@ class Address extends Model {
 
     use RecordsActivity;
 
+    protected $drawAttentionEvents = ['created', 'updated'];
+
     protected $table = 'addresses';
 
     protected $fillable = [
@@ -58,6 +60,14 @@ class Address extends Model {
         $model = $this->addressable;
         $type = $this->getAddressableType();
 
+        switch ($type) {
+            case "payer":
+            case "payment":
+                $type .= "s";
+                break;
+            default:
+                break;
+        }
         return "/admins/{$type}/{$model->id}";
     }
 

@@ -3,8 +3,14 @@
 use Illuminate\Database\Eloquent\Model;
 
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class Payer extends CoreModel {
+
+    use RecordsActivity;
+
+    protected $recordEvents = [];
+    protected $drawAttentionEvents = ['created', 'updated'];
 
     protected $table = 'payers';
 

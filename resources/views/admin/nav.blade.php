@@ -122,9 +122,7 @@
                         <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
-                    <?php $attentions = $attentionRepo->getLatestUnseen();
-                    //dd($attentions);
-                    ?>
+                    <?php $attentions = $attentionRepo->getLatestUnseen();  ?>
                         @foreach ($attentions as $attention)
                         <li>
                             <a href="{{ $attention->getUrl() }}">

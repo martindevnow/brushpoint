@@ -9,7 +9,7 @@ class Feedback extends CoreModel {
 
     use RecordsActivity;
 
-    // use DrawsAttention;
+    protected $recordEvents = ['created', 'updated'];
     protected $drawAttentionEvents = ['created', 'updated'];
 
     protected $table = 'feedbacks';
