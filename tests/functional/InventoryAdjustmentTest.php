@@ -26,14 +26,15 @@ class InventoryAdjustmentTest extends TestCase {
 
         $activeInventory = $item->getActiveInventory();
 
+        // dd ($activeInventory);
         // should be 500 units of active inventory
-        $this->assertTrue(( $activeInventory->total == 500));
+        $this->assertTrue(( $activeInventory->total == 223));
 
         // oldest available SKU should be "10/14"
         $oldestInventory = $item->getOldestActiveInventory();
 
-        dd($oldestInventory->lot_code);
-        $this->assertTrue($oldestInventory->lot_code == '10/14');
+        // dd($oldestInventory->lot_code);
+        $this->assertTrue($oldestInventory->lot_code == '34/14');
 
         // $this->makeNewPayment($item);
     }
@@ -57,7 +58,7 @@ class InventoryAdjustmentTest extends TestCase {
             $soldItems = $transaction->soldItems;
             foreach($soldItems as $soldItem)
             {
-                dd($soldItem);
+                // dd($soldItem);
             }
         }
 
@@ -89,22 +90,17 @@ class InventoryAdjustmentTest extends TestCase {
         $item = Item::where('sku', '=', 'RH-DZ-MED')->first();
 
         $payment = $this->setUpPaymentTransaction($item);
-
-
+        dd($payment);
         $this->seeInDatabase('payments', ['unique_id' => 'UNIQUE_ID_THIS_IS_IT']);
 
-
         $payer = $payment->payer;
-
         $this->assertEquals($payment, $payer->payments->first());
-
         $this->assertEquals($payment->address_id, $address->id);
-
 
         $invo = $item->getActiveInventory();
         $activeInvo = $invo->total;
 
-        dd($activeInvo);
+        // dd($activeInvo);
 
 
         /**

@@ -18,9 +18,6 @@ class PaymentProcessTest extends TestCase {
 
         $this->updateCartShippingCountry()
             ->see($productCost);
-
-
-
 	}
 
     /** @test */

@@ -66,7 +66,7 @@ class AttentionModelTest extends TestCase {
     }
 
     /** @test */
-    public function it_checks_unsees_status()
+    public function it_checks_unsee_status()
     {
         $person = $this->getFeedbackData();
 

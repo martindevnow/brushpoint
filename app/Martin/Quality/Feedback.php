@@ -84,10 +84,11 @@ class Feedback extends CoreModel {
 
     public function isUnseen()
     {
-        if ($this->attentions)
-        {
-            dd($this->attentions);
-        }
+        if (! $this->attentions->isEmpty())
+            foreach($this->attentions as $attention)
+                if ($attention->seen)
+                    return true;
+        return false;
     }
 
 
