@@ -14,9 +14,13 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
+
+        $testing = env('TESTING', false);
+
+
         $env = env('APP_ENV');
 
-        if ($env == "local")
+        if ($env == "local" && ! $testing )
         {
             $this->call('UsersTableSeeder');
             $this->call('ProductsTableSeeder');
@@ -36,7 +40,5 @@ class DatabaseSeeder extends Seeder {
             $this->call('ProductsTableSeeder');
             $this->call('PurchaseTableSeeder');
         }
-
-
 	}
 }

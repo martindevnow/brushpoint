@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Martin\Ecom\Payment;
 use Martin\Ecom\Transaction;
+use Martin\Quality\Feedback;
 
 class ReportsController extends Controller {
 
@@ -135,68 +136,97 @@ class ReportsController extends Controller {
         return response()->download($file);
     }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+    public function generateFeedback()
+    {
+        $feedbacks = Feedback::with('issue', 'retailer', 'address', 'investigations', 'emails', 'contacts')
+            ->where('created_at', '>', (new Carbon('first day of July 2015')))
+            ->where('created_at', '<', (new Carbon('first day of August 2015')));
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+        $list = array();
+        $list[] = array(
+            'feedback.id',
+            'feedback.created_at',
+            'feedback.name',
+            'feedback.address.toString',
+            'feedback.bp_code',
+            'feedback.retailer.name',
+            'QUANTITY',
+            'feedback.lot_code',
+            'feedback.issue.type',
+            'feedback.adverse_event',
+            'feedback.RESOLUTION',
+            'feedback.health_canada_report',
+            'feedback.capa_required',
+            'feedback.capa_reaspn',
+            'feedback.colosed',
+            'feedback.closed_at',
+            'number_of_days',
+            'on_time_closing',
+        );
+
+
+        $file = storage_path() . '/feedback_2015-07.csv';
+
+        foreach($feedbacks->get() as $feedback)
+        {
+
+            $address = $feedback->addresses->last();
+            if ($address)
+                $addressString = $address->street_1 . ", "
+                    . ($address->street_2 ? $address->street_2 . ", " : "") .
+                    $address->city . ", " . $address->province . ", " . $address->postal_code . ", " .
+                    $address->country;
+            else
+                $addressString = "N/A";
+
+
+            if ($feedback->closed)
+                $number_of_days = $feedback->closed_at->diffInDays($feedback->created_at);
+            else
+                $number_of_days = "N/A";
+
+
+            if ($feedback->retailer)
+                $retailerName = $feedback->retailer->name;
+            else
+                $retailerName = $feedback->retailer_text;
+
+
+            if ($feedback->issue)
+                $issueType = $feedback->issue->type;
+            else
+                $issueType = $feedback->issue;
+
+
+
+            $on_time_closing = "IDONTKNOW";
+
+            $list[] = array (
+                // payment fields
+                $feedback->id, $feedback->created_at, $feedback->name, $addressString,
+
+                $feedback->bp_code, $retailerName, "QUANTITY", $feedback->lot_code,
+                $issueType,
+
+                $feedback->adverse_event, "RESOLUTION", $feedback->health_canada_report,
+
+                $feedback->capa_required, $feedback->capa_reason,
+                $feedback->closed, $feedback->closed_at, $number_of_days, $on_time_closing
+            );
+        }
+
+        $fp = fopen($file, 'w');
+        foreach ($list as $fields) {
+            fputcsv($fp, $fields);
+        }
+        fclose($fp);
+
+        return response()->download($file);
+    }
+
 
 }

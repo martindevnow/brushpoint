@@ -19,14 +19,19 @@ class InventoryAdjustmentTest extends TestCase {
     /** @test */
     public function it_purchases_a_product()
     {
-        $item = $this->getItemBySku('RH-DM-SOFT');
+        $item = $this->createNewItem([
+            'product_id' => 1,
+            'name' => "toothbrush",
+            'description' => 'a great toothbrush',
+            'sku' => 'RH-DM-SOFT',
+            'price' => 5.5,
+            'on_hand' => 475
+        ]);
 
-        // it doesn't seem that this is persisting to the database...
-        // $this->createDummyInventoryData($item);
+        $this->createDummyInventoryData($item);
 
         $activeInventory = $item->getActiveInventory();
 
-        // dd ($activeInventory);
         // should be 500 units of active inventory
         $this->assertTrue(( $activeInventory->total == 223));
 
@@ -90,7 +95,7 @@ class InventoryAdjustmentTest extends TestCase {
         $item = Item::where('sku', '=', 'RH-DZ-MED')->first();
 
         $payment = $this->setUpPaymentTransaction($item);
-        dd($payment);
+        // dd($payment);
         $this->seeInDatabase('payments', ['unique_id' => 'UNIQUE_ID_THIS_IS_IT']);
 
         $payer = $payment->payer;
@@ -128,9 +133,6 @@ class InventoryAdjustmentTest extends TestCase {
                 $inventory->save();
             }
         }
-
-
-
     }
 
 
@@ -150,7 +152,7 @@ class InventoryAdjustmentTest extends TestCase {
             'lot_code' => '34/09',
             'expiry_date' => '2013',
             'item_id' => $item->id,
-        ]);
+        ])->save();
         Inventory::create([
             'description' => 'available',
             'quantity' => '200',
@@ -168,6 +170,14 @@ class InventoryAdjustmentTest extends TestCase {
     }
 
 
+
+
+    public function createNewItem($data)
+    {
+        $item = Item::create($data);
+        $item->save();
+        return $item;
+    }
 
 
 

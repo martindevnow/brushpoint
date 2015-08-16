@@ -22,7 +22,9 @@ class ContactCustomerTest extends TestCase {
         $this->visit('/admins/feedback')
             ->type('ben@me.com', 'email')
             ->type('123456', 'password')
-            ->press('Login')
+            ->press('Login');
+
+        $this->visit('/admins/feedback')
             ->see('New Feedback')
             ->onPage('/admins/feedback');
 

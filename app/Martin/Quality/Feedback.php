@@ -19,7 +19,10 @@ class Feedback extends CoreModel {
         'email',
         'phone',
 
-        'retailer',
+        'retailer_text',
+        'retailer_id',
+        'retailer_reference',
+
         'lot_code',
 
         'issue_text',
@@ -32,12 +35,10 @@ class Feedback extends CoreModel {
         'ip_address',
         'country',
 
-        'retailer_text',
-        'retailer_id',
-        'retailer_reference',
-
         'address_id',
+
         'adverse_event',
+
         'health_canada_report',
         'capa_required',
         'capa_reason',
@@ -114,7 +115,7 @@ class Feedback extends CoreModel {
 
     public function address()
     {
-        return $this->hasOne('Martin\Core\Address');
+        return $this->hasOne('Martin\Core\Address', 'id', 'address_id');
     }
 
     public function emails()
@@ -131,10 +132,4 @@ class Feedback extends CoreModel {
     {
         return $this->hasMany('Martin\Quality\CustomerRequest');
     }
-
-
-
-
-
-
-} 
+}
