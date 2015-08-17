@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Martin\Core\Traits\RecordsActivity;
+use Martin\Reports\Reporter;
 use ReflectionClass;
 
 class Address extends Model {
@@ -9,6 +10,9 @@ class Address extends Model {
     use RecordsActivity;
 
     protected $drawAttentionEvents = ['created', 'updated'];
+
+
+    use Reporter;
 
     protected $table = 'addresses';
 
@@ -89,6 +93,20 @@ EOT;
 
         return $output;
 
+    }
+
+
+
+    public function generateString()
+    {
+        $output = $this->street_1 .", ";
+        if ($this->street_2)
+            $output .= $this->street_2 .", ";
+
+        $output .= $this->city  . ", " . $this->province
+            . ", " . $this->postal_code  . ", " . $this->country;
+
+        return $output;
     }
 
 } 

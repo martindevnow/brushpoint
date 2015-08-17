@@ -1,8 +1,12 @@
 <?php namespace Martin\Ecom;
 
 use Illuminate\Database\Eloquent\Model;
+use Martin\Reports\Reporter;
 
 class SoldItem extends Model {
+
+    use Reporter;
+
 
     protected $fillable = [
         'sku',

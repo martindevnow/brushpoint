@@ -4,6 +4,7 @@ use DateTime;
 use Martin\Core\CoreModel;
 use Martin\Core\Traits\DrawsAttention;
 use Martin\Core\Traits\RecordsActivity;
+use Martin\Reports\Reporter;
 
 class Feedback extends CoreModel {
 
@@ -11,6 +12,9 @@ class Feedback extends CoreModel {
 
     protected $recordEvents = ['created', 'updated'];
     protected $drawAttentionEvents = ['created', 'updated'];
+
+
+    use Reporter;
 
     protected $table = 'feedbacks';
 
@@ -63,8 +67,53 @@ class Feedback extends CoreModel {
         $this->save();
     }
 
+    /**
+     * Return the name of the issue
+     *
+     * @return mixed
+     */
+    public function getIssueTypeAttribute()
+    {
+        if ($this->issue_id)
+        {
+            $issue = Issue::find($this->issue_id);
+            return $issue->type;
+        }
+        return $this->issue_text;
+    }
 
 
+    public function getRetailerNameAttribute()
+    {
+        if ($this->retailer_id)
+        {
+            $retailer = Retailer::find($this->retailer_id);
+            return $retailer->name;
+        }
+        return $this->retailer_text;
+}
+
+
+
+    public function getNumberOfDaysOpenAttribute()
+    {
+        if (! $this->closed)
+            return "OPEN";
+
+        $laterDate = $this->closed_at;
+        $earlierDate = $this->created_at;
+        if ($laterDate)
+            return $earlierDate->diffInDays($laterDate);
+        else
+            return "N/A";
+    }
+
+
+    // TODO: Must add in this functionality
+    public function getOnTimeClosingAttribute()
+    {
+        return "IDONTKNOW";
+    }
 
     public function setRetailerIdAttribute($id)
     {

@@ -5,6 +5,7 @@ use Martin\Core\Address;
 use Martin\Core\Attention;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Martin\Core\Note;
 use Martin\Ecom\Payer;
 use Martin\Ecom\Payment;
 use Martin\Ecom\Transaction;
@@ -12,6 +13,16 @@ use Martin\Products\Product;
 use Martin\Quality\Contact;
 use Martin\Quality\CustomerRequest;
 use Martin\Quality\Feedback;
+
+
+
+Route::get('testCarbon', function() {
+    $feedback = Feedback::find(4);
+    dd(get_class($feedback->created_at));
+    $relation = $feedback->notable();
+    dd($relation);
+
+});
 
 Route::get('classtest', function()
 {

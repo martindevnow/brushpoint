@@ -7,20 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Martin\Core\CoreModel;
 use Martin\Core\Traits\RecordsActivity;
+use Martin\Reports\Reporter;
 
 class Payment extends CoreModel {
 
     use RecordsActivity;
 
     protected $recordEvents = [
-
     ];
 
     protected $drawAttentionEvents = [
         'created', 'updated'
     ];
 
-	protected $table = "payments";
+    use Reporter;
+
+
+    protected $table = "payments";
 
     protected $fillable = [
         'shipped',
@@ -63,6 +66,13 @@ class Payment extends CoreModel {
             $this->shipped_at = 0;
 
         $this->save();
+    }
+
+
+
+    public function getPayerNameAttribute()
+    {
+        return $this->payer->first_name . " " . $this->payer->last_name;
     }
 
 
