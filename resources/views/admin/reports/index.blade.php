@@ -7,11 +7,56 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
+
 <div class="row">
     <div class="col-lg-6">
-        <h1>Payments</h1>
-        <a href="/admins/reports/generate/payments">Payments</a>
-    </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bell fa-fw"></i> Payment - Reports
+            </div>
+            <!-- /.panel-heading -->
 
+
+            <div class="panel-body">
+                <a href="/admins/reports/generate/payments" class="list-group-item">
+                    Payments - All
+                    <span class="pull-right text-muted small">
+                        <em>Run</em></span>
+                </a>
+                <a href="/admins/reports/generate/soldItems" class="list-group-item">
+                    Payments - SoldItems
+                    <span class="pull-right text-muted small">
+                        <em>Run</em></span>
+                </a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+
+
+
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bell fa-fw"></i> Feedback - Reports
+            </div>
+            <!-- /.panel-heading -->
+
+
+            <div class="panel-body">
+                <a href="/admins/reports/generate/feedback" class="list-group-item">
+                    Feedback - All
+                    <span class="pull-right text-muted small">
+                        <em>Run</em></span>
+                </a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
 </div>
+
+
+
+
+
 @stop
