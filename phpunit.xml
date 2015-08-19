@@ -16,18 +16,22 @@
         <testsuite name="default">
             <directory>./tests/</directory>
         </testsuite>
-        <testsuite name="inventory">
-            <file>./tests/functional/Products/InventoriesTest.php</file>
-            <file>./tests/functional/Ecom/PaymentsTest.php</file>
+
+        <testsuite name="Core">
+            <directory>./tests/unit/Core/</directory>
         </testsuite>
-        <testsuite name="contact">
-            <file>./tests/functional/ContactCustomerTest.php</file>
+        <testsuite name="Ecom">
+            <directory>./tests/unit/Ecom/</directory>
         </testsuite>
-        <testsuite name="attention">
-            <file>./tests/functional/AttentionModelTest.php</file>
+        <testsuite name="Products">
+            <directory>./tests/unit/Products/</directory>
         </testsuite>
+        <testsuite name="Quality">
+            <directory>./tests/unit/Quality/</directory>
+        </testsuite>
+
         <testsuite name="other">
-            <file>./tests/functional/Products/InventoryAdjustmentTest.php</file>
+            <file>./tests/unit/Products/InventoryAdjustmentTest.php</file>
         </testsuite>
     </testsuites>
     <php>
