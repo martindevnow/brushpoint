@@ -18,7 +18,17 @@ class Inventory extends Model {
 
         'quantity',
         'original_quantity',
+        'status'
     ];
+
+
+    public function isActive()
+    {
+        if ($this->status != "on_hold")
+            return true;
+    }
+
+
 
 
 

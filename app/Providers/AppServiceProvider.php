@@ -1,6 +1,8 @@
 <?php namespace App\Providers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+use Martin\Products\Inventory;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -11,7 +13,15 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+        Inventory::saved(function ($inventory)
+        {
+            if (isset($inventory->item_id))
+            {
+                $item = $inventory->item;
+                $item->refreshOnHand();
+                return $inventory;
+            }
+        });
 	}
 
 	/**

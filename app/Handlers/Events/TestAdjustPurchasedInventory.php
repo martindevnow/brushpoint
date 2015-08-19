@@ -1,30 +1,31 @@
 <?php namespace App\Handlers\Events;
 
-use App\Events\ProductWasPurchased;
+use App\Events\TestProductWasPurchased;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 use Martin\Products\Item;
 
-class AdjustPurchasedInventory {
+class TestAdjustPurchasedInventory {
+
 
     /**
      * Create the event handler.
      *
-     * @return \App\Handlers\Events\AdjustPurchasedInventory
+     * @return \App\Handlers\Events\TestAdjustPurchasedInventory
      */
-	public function __construct()
-	{
-		//
+    public function __construct()
+    {
+        //
     }
 
     /**
      * Handle the event.
      *
-     * @param  ProductWasPurchased  $event
+     * @param  TestProductWasPurchased  $event
      *
      * @return void
      */
-    public function handle(ProductWasPurchased $event)
+    public function handle(TestProductWasPurchased $event)
     {
         $transactions = $event->payment->transactions;
 

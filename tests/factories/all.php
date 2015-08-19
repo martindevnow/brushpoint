@@ -34,7 +34,7 @@ $factory('Martin\Core\Attachment', [
 
     'file_path' => $faker->url,
     'file_name' => $faker->word,
-    'file_extension' => $faker->wordd,
+    'file_extension' => $faker->word,
 
     'attachmentable_id' => '',
     'attachmentable_type' => '',
@@ -79,7 +79,7 @@ $factory('Martin\Core\Note', [
 $factory('Martin\Ecom\Payer', [
     'payer_id' => $faker->name,
     'status' => 'completed',
-    'email' => $faker->email,
+    'email' => "the.one.martin@gmail.com",
     'first_name' => ($faker->word),
     'last_name' => ($faker->word),
 ]);
@@ -178,7 +178,7 @@ $factory('Martin\Products\Virtue', [
 
 $factory('Martin\Quality\Contact', [
     'name' => $faker->name,
-    'email' => $faker->email,
+    'email' => "the.one.martin@gmail.com",
     'message' => $faker->paragraph(),
     'ip' => $faker->ipv4,
     'hash' => bcrypt(time()),
@@ -187,7 +187,7 @@ $factory('Martin\Quality\Contact', [
 // FEEDBACK
 $factory('Martin\Quality\Feedback', [
     'name' => $faker->name,
-    'email' => $faker->email,
+    'email' => "the.one.martin@gmail.com",
     'phone' => $faker->phoneNumber,
     'retailer_text' => $faker->word,
     'retailer_id' => 'factory:Martin\Quality\Retailer',
@@ -239,7 +239,7 @@ $factory('Martin\Quality\Retailer', [
 // USER
 $factory('Martin\Users\User', [
     'name' => $faker->name,
-    'email' => $faker->email,
+    'email' => "the.one.martin@gmail.com",
     'password' => bcrypt(12345),
 ]);
 

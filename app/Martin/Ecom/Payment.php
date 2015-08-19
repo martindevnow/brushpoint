@@ -56,11 +56,8 @@ class Payment extends CoreModel {
         if ($status)
         {
             $this->shipped_at = $dt->format('y-m-d H:i:s');
-            // create an event
             Log::info('payment updated: shipped = true');
             // EVENT WAS MOVED TO THE CONTROLLER
-            event(new PackageWasShipped($this));
-            // add an event listener to this event so i can hook in and send a shipment confirmation
         }
         else
             $this->shipped_at = 0;

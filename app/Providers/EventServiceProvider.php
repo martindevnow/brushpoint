@@ -22,6 +22,10 @@ class EventServiceProvider extends ServiceProvider {
             'App\Handlers\Events\AdjustPurchasedInventory',
 		],
 
+        'App\Events\TestProductWasPurchased' => [
+            'App\Handlers\Events\TestAdjustPurchasedInventory',
+
+        ],
 
         'App\Events\PackageWasShipped' => [
             'App\Handlers\Events\EmailShippingConfirmation',
