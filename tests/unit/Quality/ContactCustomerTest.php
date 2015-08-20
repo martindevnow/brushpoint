@@ -19,6 +19,8 @@ class ContactCustomerTest extends TestCase {
     /** @test */
     public function it_contacts_the_customer()
     {
+        $this->createAdmin();
+
         $this->visit('/admins/feedback')
             ->type('ben@me.com', 'email')
             ->type('123456', 'password')
@@ -29,9 +31,11 @@ class ContactCustomerTest extends TestCase {
             ->onPage('/admins/feedback');
 
 
-        $this->visit('/admins/feedback/1')
+        $feedback = \Laracasts\TestDummy\Factory::times(1)->create(\Martin\Quality\Feedback::class);
+
+        $this->visit('/admins/feedback/'. $feedback->id)
             ->see('Contact the Customer')
-            ->onPage('/admins/feedback/1')
+            ->onPage('/admins/feedback/'. $feedback->id)
             // ->press('Contact the Customer');
             ->see('Request Lot Code:')
             ->tick('request_lot_code')

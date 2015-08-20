@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Artisan;
 use Laracasts\Integrated\Extensions\Laravel as IntegrationTest;
 use Martin\Products\Item;
+use Martin\Users\User;
 
 
 class TestCase extends IntegrationTest {
@@ -38,6 +39,26 @@ class TestCase extends IntegrationTest {
     }
 
 
+    /*
+     * NOT TESTS
+     * -- INVENTORY HELPER FUNCTIONS
+     */
+
+    public function createSpecificItem()
+    {
+        $item = $this->createItem([
+            'name' => 'Toothbrush',
+            'description' => 'This toothbrush is awesome.',
+            'sku' => 'TB-BEST-SOFT',
+            'price' => '5.50',
+            'on_hand' => '0',
+            'variance' => 'Soft'
+        ]);
+
+        return $item;
+    }
+
+
     /**
      * @param array $data
      * @return \Martin\Products\Item
@@ -56,7 +77,7 @@ class TestCase extends IntegrationTest {
      * @param string $status
      * @return \Martin\Products\Inventory
      */
-    public function createInventory(Item $item, $quantity, $lot_code, $status = 'available')
+    public function createInventory(Item $item, $quantity = 10, $lot_code = "10/15", $status = 'available')
     {
         $inventory = $item->addInventory([
             'lot_code' => $lot_code,
@@ -75,6 +96,20 @@ class TestCase extends IntegrationTest {
     public function refreshItem(Item $item)
     {
         return $item->find($item->id);
+    }
+
+
+
+    public function createAdmin($email = 'ben@me.com', $password = "123456", $name = "ben")
+    {
+        $user = new User([
+            'name' => $name,
+            'email' => $email,
+            'password' => bcrypt($password)
+
+        ]);
+        $user->save();
+        return $user;
     }
 
 

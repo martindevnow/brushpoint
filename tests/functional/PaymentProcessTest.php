@@ -13,18 +13,16 @@ class PaymentProcessTest extends TestCase {
     /** @test */
 	public function it_updates_country()
 	{
-        $productToPurchase = "Dual Zone Replacement Heads";
-        $productCost = "($5.00)";
-
-        $this->updateCartShippingCountry()
-            ->see($productCost);
+        $this->updateCartShippingCountry();
 	}
 
     /** @test */
     public function it_updates_cart_quantity()
     {
-        $this->addItemToCart()
-            ->submitForm('Update Quantities', ['15-quantity' => '2'])
+        $item = $this->createSpecificItem();
+
+        $this->addItemToCart($item)
+            ->submitForm('Update Quantities', [$item->id.'-quantity' => '2'])
             ->onPage('cart')
             ->see("Quantities have been updated");
     }
@@ -43,22 +41,25 @@ class PaymentProcessTest extends TestCase {
 
 
 
-    public function addItemToCart()
+    public function addItemToCart($item)
     {
-        $productToPurchase = "Dual Zone Replacement Heads";
+        $inventory = $this->createInventory($item);
+
         return $this->visit('/purchase')
             ->see('Cart ($0.00')
-            ->see($productToPurchase)
+            ->see($item->name)
             ->click('View Details')
 
-            ->onPage('purchase/id-17')
-            ->see($productToPurchase)
+            ->onPage('purchase/id-'.$item->id)
+            ->see($item->name)
             ->press('Add to Cart');
     }
 
     public function updateCartShippingCountry()
     {
-        return $this->addItemToCart()
+        $item = $this->createSpecificItem();
+
+        return $this->addItemToCart($item)
             ->onPage('cart')
             // ->see($productCost)
 

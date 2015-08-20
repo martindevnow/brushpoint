@@ -25,9 +25,22 @@ class PagesTest extends TestCase {
         $this->visit('/capabilities')
             ->andSee('Our Capabilities');
 
+
+    }
+
+
+    public function it_visits_feedback_pages()
+    {
         $this->visit('/contact')
             ->andSee('Leave A Message');
 
+        $this->visit('/feedback')
+            ->andSee('Leave A Message');
+    }
+
+    /** @test */
+    public function it_visits_video_pages()
+    {
         $this->visit('/video')
             ->andSee('Two Videos are available to watch, if watching from a mobile device your standard data plan rates would apply');
 

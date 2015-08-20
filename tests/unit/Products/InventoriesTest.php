@@ -178,24 +178,7 @@ class InventoriesTest extends TestCase {
 
 
 
-    /*
-     * NOT TESTS
-     * -- INVENTORY HELPER FUNCTIONS
-     */
 
-    public function createSpecificItem()
-    {
-        $item = $this->createItem([
-            'name' => 'Toothbrush',
-            'description' => 'This toothbrush is awesome.',
-            'sku' => 'TB-BEST-SOFT',
-            'price' => '5.50',
-            'on_hand' => '0',
-            'variance' => 'Soft'
-        ]);
-
-        return $item;
-    }
 
 
 
