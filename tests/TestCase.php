@@ -47,6 +47,23 @@ class TestCase extends IntegrationTest {
      * -- INVENTORY HELPER FUNCTIONS
      */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function createSpecificItem()
     {
         $item = $this->createItem([
@@ -85,24 +102,6 @@ class TestCase extends IntegrationTest {
     }
 
     /**
-     * @param Item $item
-     * @param $quantity
-     * @param $lot_code
-     * @param string $status
-     * @return \Martin\Products\Inventory
-     */
-    public function createInventory(Item $item, $quantity = 10, $lot_code = "10/15", $status = 'available')
-    {
-        $inventory = $item->addInventory([
-            'lot_code' => $lot_code,
-            'quantity' => $quantity,
-            'original_quantity' => $quantity,
-            'status' => $status
-        ]);
-        return $inventory;
-    }
-
-    /**
      *
      * @param Item $item
      * @return \Illuminate\Support\Collection|null|static
@@ -111,6 +110,76 @@ class TestCase extends IntegrationTest {
     {
         return $item->find($item->id);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function createProductFromItem(Item $item)
+    {
+        $itemData = $item->toArray();
+        return $this->createProduct($itemData);
+    }
+
+
+
+    public function createSpecificProduct()
+    {
+        $item = $this->createProduct([
+            'name' => 'Toothbrush',
+            'description' => 'This toothbrush is awesome.',
+            'sku' => 'TB-BEST-SOFT',
+            'price' => '5.50',
+            'on_hand' => '0',
+        ]);
+
+        return $item;
+    }
+
+
+    /**
+     * @param array $data
+     * @return \Martin\Products\Item
+     */
+    public function createProduct(array $data)
+    {
+        $item = Product::create($data);
+        $item->save();
+        return $item;
+    }
+
+    /**
+     *
+     * @param Item $item
+     * @return \Illuminate\Support\Collection|null|static
+     */
+    public function refreshProduct(Product $item)
+    {
+        return $item->find($item->id);
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -128,6 +197,7 @@ class TestCase extends IntegrationTest {
 
 
 
+<<<<<<< HEAD
     public function createPayment(array $data = [])
     {
         $payment = \Laracasts\TestDummy\Factory::times(1)->create(Payment::class);
@@ -179,6 +249,52 @@ class TestCase extends IntegrationTest {
 
         $item->soldItems()->save($soldItem);
         return $soldItem;
+=======
+
+
+
+
+
+
+
+    /**
+     * @param Item $item
+     * @param $quantity
+     * @param $lot_code
+     * @param string $status
+     * @return \Martin\Products\Inventory
+     */
+    public function createInventory(Item $item, $quantity = 10, $lot_code = "10/15", $status = 'available')
+    {
+        $inventory = $item->addInventory([
+            'lot_code' => $lot_code,
+            'quantity' => $quantity,
+            'original_quantity' => $quantity,
+            'status' => $status
+        ]);
+        return $inventory;
+    }
+
+
+
+
+
+
+    /*
+     * Integrated Testing Helper Functions
+     */
+
+    public function loginUser(User $user, $password = '123456')
+    {
+        $userData = $user->toArray();
+
+        $this->visit('/admins')
+            ->type($userData['email'], 'email')
+            ->type($password, 'password')
+            ->press('Login')
+            ->andSee('BrushPoint Administration')
+            ->onPage('/admins');
+>>>>>>> 64a7ca229845303a602ca69c963472fc1e7a8456
     }
 
 }

@@ -17,6 +17,20 @@
             <directory>./tests/</directory>
         </testsuite>
 
+
+
+        <testsuite name="unit">
+            <directory>./tests/unit/</directory>
+        </testsuite>
+        <testsuite name="functional">
+            <directory>./tests/functional/</directory>
+        </testsuite>
+        <testsuite name="integrated">
+            <directory>./tests/integrated/</directory>
+        </testsuite>
+
+
+
         <testsuite name="Core">
             <directory>./tests/unit/Core/</directory>
         </testsuite>
