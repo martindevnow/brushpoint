@@ -68,12 +68,7 @@ class InventoryController extends Controller {
             return redirect()->back()->withErrors($validator->errors()->all());
         }
 
-
-        // Save
-        //dd($request);
-        //dd($request);
         $item = Item::findOrFail($request->item_id);
-
 
         $inventory = Inventory::create([
             'lot_code' => $request->lot_code,
@@ -86,13 +81,9 @@ class InventoryController extends Controller {
 
         $item->inventories()->save($inventory);
 
-        if ($request->status != "on_hold")
-            event(new InventoryIncreased($inventory));
-
         Flash::message("New Inventory added for SKU: " . $item->sku);
 
         return redirect('admins/inventory');
-
 	}
 
 	/**
@@ -114,10 +105,11 @@ class InventoryController extends Controller {
 	 */
 	public function showItem($id)
 	{
+        $item = Item::find($id);
         $inventories = Inventory::where('item_id', '=', $id)->paginate(25);
 
         return view('admin.inventory.showItem')
-            ->with(compact('inventories'));
+            ->with(compact('inventories', 'item'));
 	}
 
 

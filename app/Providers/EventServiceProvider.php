@@ -49,21 +49,6 @@ class EventServiceProvider extends ServiceProvider {
             'App\Handlers\Events\EmailRequestForLotCodeAndAddress',
         ],
 
-
-        /**
-         * Inventory Stuff
-         */
-        'App\Events\InventoryPlacedOnHold' => [
-            'App\Handlers\Events\RemoveInventoryFromOnHandOfItem',
-        ],
-
-        'App\Events\InventoryIncreased' => [
-            'App\Handlers\Events\AddInventoryToOnHandOfItem',
-        ],
-
-
-
-
 	];
 
 	/**

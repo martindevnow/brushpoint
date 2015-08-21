@@ -199,7 +199,7 @@ $factory('Martin\Quality\Feedback', [
     'bp_code' => '',
     'ip_address' => $faker->ipv4,
     'country' => $faker->country,
-    'address_id' => 'factory:Martin\Code\Address',
+    'address_id' => 'factory:Martin\Core\Address',
     'adverse_event' => $faker->boolean(),
     'health_canada_report' => $faker->boolean(),
     'capa_required' => $faker->boolean(),

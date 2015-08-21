@@ -179,56 +179,8 @@ class PaymentsTest extends TestCase {
      * -- PURCHASE/PAYMENT RELATED
      */
 
-    public function createPayment(array $data = [])
-    {
-        $payment = \Laracasts\TestDummy\Factory::times(1)->create(Payment::class);
-        $payment->address->addressable_type = get_class($payment->payer);
-        $payment->address->addressable_id = $payment->payer->id;
-        $payment->address->save();
-        $payment->save();
-        return $payment;
-    }
 
-    public function purchaseItem(Payment $payment, Item $item, $quantity = 1)
-    {
-        $transaction = $this->createTransaction($item, $quantity);
-        $transaction->save();
 
-        $soldItem = $this->createSoldItem($item, $quantity);
-        $transaction->soldItems()->save($soldItem);
-
-        $payment->transactions()->attach($transaction);
-        $payment->save();
-        return $payment;
-    }
-
-    public function createTransaction($item, $quantity)
-    {
-        $transaction = new Transaction([
-            'amount_subtotal' => $item->price * $quantity,
-            'amount_shipping' => 5,
-            'amount_total' => $item->price* $quantity + 5,
-            'amount_currency' => 'USD',
-            'description' => "Your BrushPoint Purchase",
-        ]);
-        $transaction->save();
-        return $transaction;
-    }
-
-    public function createSoldItem(Item $item, $quantity)
-    {
-        $soldItem = new \Martin\Ecom\SoldItem([
-            'name' => $item->name,
-            'price' => $item->price,
-            'currency' => "USD",
-            'quantity' => $quantity,
-            'sku' => $item->sku,
-            'intent' => 'sale',
-        ]);
-
-        $item->soldItems()->save($soldItem);
-        return $soldItem;
-    }
 
 
 }

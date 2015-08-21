@@ -2,7 +2,9 @@
 
 use DateTime;
 use Illuminate\Support\Facades\Mail;
+use Martin\Ecom\Payment;
 use Martin\Quality\Contact;
+use Martin\Quality\Email;
 use Martin\Quality\Feedback;
 
 class EmailRepository {
@@ -10,6 +12,13 @@ class EmailRepository {
     private $emailData;
     private $recipient;
 
+
+
+    public function getRecipientsByType($type)
+    {
+        $emails = Email::where('email_type', '=', $type)->first();
+        return $emails->recipient_list;
+    }
 
     public function emailCustomer(Feedback $feedback, Contact $contact)
     {
@@ -52,13 +61,15 @@ class EmailRepository {
     
 
 
-    public function emailInternalFeedbackNotice(Feedback $feedback)
+    public function emailInternalFeedbackNotice(Feedback $feedback, $type)
     {
-        Mail::send('emails.internal.feedback', compact('feedback'), function($message) use ($feedback) {
-            $recipient = 'info@brushpoint.com';
+        $emails = Email::where('email_type', '=', $type)->first();
+
+        Mail::send('emails.internal.feedback', compact('feedback'), function($message) use ($feedback, $emails) {
+            $recipient = ($emails ? $emails->recipient_list : "info@brushpoint.com");
 
             $message->to($recipient)
-                ->subject("BrushPoint: Feedback Received: ID: " . $feedback->id);
+                ->subject("Feedback Received: ID: " . $feedback->id);
             $message->from($feedback->email, "BrushPoint: Feedback");
         });
     }
@@ -72,9 +83,44 @@ class EmailRepository {
 
 
             $message->to($feedback->email)
-                ->subject("BrushPoint: Feedback Received: ID: " . $feedback->id);
+                ->subject("BrushPoint: Thank you for your feedback (ID-" . $feedback->id .')');
             $message->from($sender, "BrushPoint: Feedback");
         });
     }
 
+
+
+    public function emailInternalPurchaseNotice(Payment $payment, $type)
+    {
+        $emails = $this->getRecipientsByType($type);
+
+        $payer = $payment->payer;
+        $address = $payment->address; // can have different recipient
+        $transactions = $payment->transactions->all(); // array of transactions
+
+        $data = compact('payment', 'payer', 'address', 'transactions');
+
+        Mail::send('emails.internal.purchased', $data, function($message) use ($payment, $emails) {
+            $message->to($emails)
+                ->subject("BrushPoint: Order Received" . $payment->id);
+            $message->from('orders@brushpoint.com', 'BrushPoint Orders');
+        });
+    }
+
+
+
+    public function emailCustomerPurchaseNotice(Payment $payment)
+    {
+        $payer = $payment->payer;
+        $address = $payment->address; // can have different recipient
+        $transactions = $payment->transactions->all(); // array of transactions
+
+        $data = compact('payment', 'payer', 'address', 'transactions');
+
+        Mail::send('emails.customer.invoice', $data, function($message) use ($payment) {
+            $message->to($payment->payer->email)
+                ->subject("BrushPoint: Purchase Receipt");
+            $message->from('orders@brushpoint.com', 'BrushPoint Orders');
+        });
+    }
 }

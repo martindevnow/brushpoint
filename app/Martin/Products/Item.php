@@ -135,13 +135,10 @@ class Item extends CoreModel {
 
 
         $remainingToDeduct = $quantity;
-        Log::alert("purchase made of {$soldItem->sku} for {$remainingToDeduct} eaches.");
         foreach ($inventories as $inventory)
         {
             if ($remainingToDeduct == 0)
-            {
                 break;
-            }
 
 
 
@@ -151,9 +148,6 @@ class Item extends CoreModel {
                 $inventory->save();
 
                 $soldItem->lot_code .= $inventory->lot_code;
-                Log::alert("this lot finished the order. Lot:: {$inventory->lot_code}"
-                    // . print_r($inventory, true)
-                );
                 break;
             }
 
@@ -165,7 +159,6 @@ class Item extends CoreModel {
                 $inventory->save();
 
                 $soldItem->lot_code .= $inventory->lot_code;
-                Log::alert("this sku is depleted. Lot:: {$inventory->lot_code}");
 
             }
         }

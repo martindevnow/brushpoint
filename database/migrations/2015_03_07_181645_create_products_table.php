@@ -25,26 +25,17 @@ class CreateProductsTable extends Migration {
             $table->double('price', 6, 2);
             $table->integer('on_hand');
 
-            // $table->string('img')->nullable();
-
             $table->string('heading')->nullable();
 
             $table->string('video_name')->nullable();
             $table->string('video_link')->nullable();
-
-            // $table->text('benefits')->nullable();
-            // $table->text('features')->nullable();
 
             $table->text('claim')->nullable();
 
             $table->string('patent_name')->nullable();
             $table->string('patent_link')->nullable();
 
-            // $table->boolean('map')->nullable();
-            // $table->text('map_info')->nullable();
-
             $table->text('other')->nullable();
-            //$table->text('other_list')->nullable();
 
             $table->boolean('link_to_video')->nullable();
 

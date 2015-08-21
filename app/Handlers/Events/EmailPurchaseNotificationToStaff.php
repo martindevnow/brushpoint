@@ -5,18 +5,26 @@ use App\Events\ProductWasPurchased;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 use Illuminate\Support\Facades\Mail;
+use Martin\Quality\Repositories\EmailRepository;
 
 class EmailPurchaseNotificationToStaff {
 
-	/**
-	 * Create the event handler.
-	 *
-	 * @return void
-	 */
-	public function __construct()
+    /**
+     * @var EmailRepository
+     */
+    private $emailRepository;
+
+    /**
+     * Create the event handler.
+     *
+     * @param EmailRepository $emailRepository
+     * @return \App\Handlers\Events\EmailPurchaseNotificationToStaff
+     */
+	public function __construct(EmailRepository $emailRepository)
 	{
 		//
-	}
+        $this->emailRepository = $emailRepository;
+    }
 
 	/**
 	 * Handle the event.
@@ -26,19 +34,9 @@ class EmailPurchaseNotificationToStaff {
 	 */
 	public function handle(ProductWasPurchased $event)
 	{
+        $type = get_class($event);
         $payment = $event->payment;
-        $payer = $payment->payer;
-        $address = $payment->address; // can have different recipient
-        $transactions = $payment->transactions->all(); // array of transactions
 
-        $data = compact('payment', 'payer', 'address', 'transactions');
-        /// Log::info(print_r($event->payment->payer->addresses,1));
-
-        Mail::send('emails.internal.purchased', $data, function($message) use ($event) {
-            $message->to('benjaminm@brushpoint.com')
-                ->subject("BrushPoint: Order Received" . $event->payment->id);
-            $message->from('orders@brushpoint.com', 'BrushPoint Orders');
-        });
+        $this->emailRepository->emailInternalPurchaseNotice($payment, $type);
 	}
-
 }

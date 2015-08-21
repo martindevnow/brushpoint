@@ -5,6 +5,9 @@
     <div class="row">
         <div class="col-lg-9">
             <h1 class="page-header">Inventory</h1>
+
+            <p>Current "OnHand": {{$item->on_hand}}</p>
+
             <a href="/admins/inventory/create" class="btn btn-primary" style="float: right;">New Inventory</a>
         </div>
         <div class="col-lg-3" style="margin-top: 10px;">
