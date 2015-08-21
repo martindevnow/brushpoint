@@ -10,7 +10,7 @@
     <head>
         <meta charset="utf-8">
         <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-        <title>BrushPoint Innovations | 404</title>
+        <title>BrushPoint Innovations | Login</title>
 
         <!--[if lt IE 9]>
         <script type="text/javascript" src="/js/ie-fixes.js"></script>
@@ -18,8 +18,7 @@
         <link rel="stylesheet" href="/css/ie-fixes.css">
         <![endif]-->
 
-        <meta name="description" content="BrushPoint Innovations Unfortunately the page you are looking for doesn&#039;t seem to exist.
-Please try your request again. If it fails, please contact the website administrator.">
+        <meta name="description" content="BrushPoint Innovations Login to the admin section of BrushPoint.com.">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -422,57 +421,59 @@ Please try your request again. If it fails, please contact the website administr
 
 <!-- <div class="content-wrapper hide-until-loading"> -->
 <div class="content-wrapper">
-        
-    <div class="top-title-wrapper bp-header" style="overflow: visible;" >
-    <div class="container" style="overflow: visible;">
-        <div class="row" style="overflow: visible">
-            <div class="col-md-12 col-sm-12 page-info" style="overflow: visible; padding-bottom: 0px;">
-                <h1 class="h1-page-title">
-                                        <a href="/">
-                    404
-                    </a>
-                                    </h1>
-
-                
-
-
-                                <!-- BreadCrumb -->
-                <div class="bp-breadcrumb breadcrumb-container">
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="/">
-                                <i class="icon-home"></i>
-                                Home
-                            </a>
-                        </li>
-                                                    <li>404</li>
-                                            </ol>
-                </div>
-                <!-- BreadCrumb -->
-                
-
-
-
-                            </div>
-        </div>
-    </div>
-</div>    <div class="body-wrapper" style="padding-top: 30px; padding-bottom: 30px; ">
+        <div class="body-wrapper" style="padding-top: 30px; padding-bottom: 30px; ">
         <div class="container">
             <div class="row">
-                <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                <h4 style="margin-bottom: 0px;">Not Found</h4>
-            </div>
-                        </div>
+                            </div>
         </div>
-        <div class="container">
-    <div class="jumbotron">
-        <h1>Not Found</h1><br /><br/>
-        <p>
-            Unfortunately, the page you have landed on does not exist!
-            Please try your request again!
-        </p>
-    </div>
+        <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading">Login</div>
+				<div class="panel-body">
+					
+					<form class="form-horizontal" role="form" method="POST" action="/auth/login">
+						<input type="hidden" name="_token" value="Z3AhzKIPVIxcPAA0aIWIhaGXkA9EJYv3DU2Fo8Mc">
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">E-Mail Address</label>
+							<div class="col-md-6">
+								<input type="email" class="form-control" name="email" value="">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Password</label>
+							<div class="col-md-6">
+								<input type="password" class="form-control" name="password">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="remember"> Remember Me
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-6 col-md-offset-4">
+								<button type="submit" class="btn btn-primary" style="margin-right: 15px;">
+									Login
+								</button>
+
+								<a href="/password/email">Forgot Your Password?</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
     </div>  <!-- END div  body-wrapper -->
 </div><!--.content-wrapper end -->

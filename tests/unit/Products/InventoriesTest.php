@@ -154,7 +154,7 @@ class InventoriesTest extends TestCase {
 
 
 
-    /**  */
+    /** @test */
     public function it_purchases_a_product()
     {
         $quantity = 10;
@@ -166,8 +166,6 @@ class InventoriesTest extends TestCase {
             $item, 2
         ]);
         $this->fireEvent((new ProductWasPurchased($payment)));
-
-
     }
 
 
@@ -189,7 +187,7 @@ class InventoriesTest extends TestCase {
 
     public function createPayment(array $data)
     {
-        \Laracasts\TestDummy\Factory::times(1)->create(Payment::class,[
+        return \Laracasts\TestDummy\Factory::times(1)->create(Payment::class,[
 
         ]);
     }
