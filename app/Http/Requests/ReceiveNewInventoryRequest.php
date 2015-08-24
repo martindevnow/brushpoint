@@ -26,7 +26,6 @@ class ReceiveNewInventoryRequest extends Request {
             'lot_code'      => 'required',
             'expiry_date'   => 'required',
             'quantity'      => 'required|integer',
-            'description'   => 'required',
             'status'        => 'required',
 
 		];

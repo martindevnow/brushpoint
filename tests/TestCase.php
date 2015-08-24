@@ -11,22 +11,24 @@ use Martin\Users\User;
 
 class TestCase extends IntegrationTest {
 
-	/**
-	 * Creates the application.
-	 *
-	 * @return \Illuminate\Foundation\Application
-	 */
-	public function createApplication()
-	{
+    use \Laracasts\Integrated\Services\Laravel\DatabaseTransactions;
+
+    /**
+     * Creates the application.
+     *
+     * @return \Illuminate\Foundation\Application
+     */
+    public function createApplication()
+    {
         putenv('DB_DEFAULT=mysql_test');
         putenv('TESTING=true');
 
-		$app = require __DIR__.'/../bootstrap/app.php';
+        $app = require __DIR__ . '/../bootstrap/app.php';
 
-		$app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
+        $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
-		return $app;
-	}
+        return $app;
+    }
 
     public function setUp()
     {
@@ -50,33 +52,15 @@ class TestCase extends IntegrationTest {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function createSpecificItem()
+    public function createProductItemInventory()
     {
-        $item = $this->createItem([
-            'name' => 'Toothbrush',
-            'description' => 'This toothbrush is awesome.',
-            'sku' => 'TB-BEST-SOFT',
-            'price' => '5.50',
-            'on_hand' => '0',
-            'variance' => 'Soft'
-        ]);
+        $item = $this->createSpecificItem();
+        $product = $this->createProductFromItem($item);
+        $inventory = $this->createInventory($item);
 
-        return $item;
+        return compact('product', 'item', 'inventory');
     }
+
 
 
     /**
@@ -85,19 +69,22 @@ class TestCase extends IntegrationTest {
      */
     public function createItem(array $data)
     {
-        $product = Product::create([
-            'name' => $data['name'],
-            'description' => $data['description'],
+        $item = Item::create($data);
+        $item->save();
+        return $item;
+    }
 
-            'sku' => $data['sku'],
-            'price' => $data['price'],
-            'purchase' => 1,
-            'active' => 1
+    public function createSpecificItem()
+    {
+        $item = $this->createItem([
+            'name'        => 'Toothbrush',
+            'description' => 'This toothbrush is awesome.',
+            'sku'         => 'TB-BEST-SOFT',
+            'price'       => '5.50',
+            'on_hand'     => '0',
+            'variance'    => 'Soft'
         ]);
 
-
-        $item = Item::create($data);
-        $product->items()->save($item);
         return $item;
     }
 
@@ -112,149 +99,16 @@ class TestCase extends IntegrationTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function createProductFromItem(Item $item)
-    {
-        $itemData = $item->toArray();
-        return $this->createProduct($itemData);
-    }
-
-
-
-    public function createSpecificProduct()
-    {
-        $item = $this->createProduct([
-            'name' => 'Toothbrush',
-            'description' => 'This toothbrush is awesome.',
-            'sku' => 'TB-BEST-SOFT',
-            'price' => '5.50',
-            'on_hand' => '0',
-        ]);
-
-        return $item;
-    }
-
-
     /**
      * @param array $data
      * @return \Martin\Products\Item
      */
-    public function createProduct(array $data)
+    public function createItemForProduct(array $data, Product $product)
     {
-        $item = Product::create($data);
-        $item->save();
+        $item = Item::create($data);
+        $product->items()->save($item);
         return $item;
     }
-
-    /**
-     *
-     * @param Item $item
-     * @return \Illuminate\Support\Collection|null|static
-     */
-    public function refreshProduct(Product $item)
-    {
-        return $item->find($item->id);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function createAdmin($email = 'ben@me.com', $password = "123456", $name = "ben")
-    {
-        $user = new User([
-            'name' => $name,
-            'email' => $email,
-            'password' => bcrypt($password)
-
-        ]);
-        $user->save();
-        return $user;
-    }
-
-
-
-<<<<<<< HEAD
-    public function createPayment(array $data = [])
-    {
-        $payment = \Laracasts\TestDummy\Factory::times(1)->create(Payment::class);
-        $payment->address->addressable_type = get_class($payment->payer);
-        $payment->address->addressable_id = $payment->payer->id;
-        $payment->address->save();
-        $payment->save();
-        return $payment;
-    }
-
-
-
-    public function purchaseItem(Payment $payment, Item $item, $quantity = 1)
-    {
-        $transaction = $this->createTransaction($item, $quantity);
-        $transaction->save();
-
-        $soldItem = $this->createSoldItem($item, $quantity);
-        $transaction->soldItems()->save($soldItem);
-
-        $payment->transactions()->attach($transaction);
-        $payment->save();
-        return $payment;
-    }
-
-    public function createTransaction($item, $quantity)
-    {
-        $transaction = new Transaction([
-            'amount_subtotal' => $item->price * $quantity,
-            'amount_shipping' => 5,
-            'amount_total' => $item->price* $quantity + 5,
-            'amount_currency' => 'USD',
-            'description' => "Your BrushPoint Purchase",
-        ]);
-        $transaction->save();
-        return $transaction;
-    }
-
-    public function createSoldItem(Item $item, $quantity)
-    {
-        $soldItem = new \Martin\Ecom\SoldItem([
-            'name' => $item->name,
-            'price' => $item->price,
-            'currency' => "USD",
-            'quantity' => $quantity,
-            'sku' => $item->sku,
-            'intent' => 'sale',
-        ]);
-
-        $item->soldItems()->save($soldItem);
-        return $soldItem;
-=======
-
-
-
-
-
 
 
     /**
@@ -280,6 +134,137 @@ class TestCase extends IntegrationTest {
 
 
 
+
+    /**
+     * @param array $data
+     * @return \Martin\Products\Item
+     */
+    public function createProduct(array $data)
+    {
+        $item = Product::create($data);
+        $item->save();
+
+        return $item;
+    }
+
+
+    public function createSpecificProduct()
+    {
+        $item = $this->createProduct([
+            'name'        => 'Toothbrush',
+            'description' => 'This toothbrush is awesome.',
+            'sku'         => 'TB-BEST-SOFT',
+            'price'       => '5.50',
+            'on_hand'     => '0',
+        ]);
+
+        return $item;
+    }
+
+    /**
+     *
+     * @param Product $product
+     * @return \Illuminate\Support\Collection|null|static
+     */
+    public function refreshProduct(Product $product)
+    {
+        return $product->find($product->id);
+    }
+
+
+    public function createProductFromItem(Item $item)
+    {
+        $itemData = $item->toArray();
+        $product = $this->createProduct($itemData);
+        $product->items()->save($item);
+        return $product;
+    }
+
+
+
+    public function createAdmin($email = 'ben@me.com', $password = "123456", $name = "ben")
+    {
+        $user = new User([
+            'name'     => $name,
+            'email'    => $email,
+            'password' => bcrypt($password)
+
+        ]);
+        $user->save();
+        return $user;
+    }
+
+
+    public function createPayment(array $data = [])
+    {
+        $payment = \Laracasts\TestDummy\Factory::times(1)->create(Payment::class);
+        $payment->address->addressable_type = get_class($payment->payer);
+        $payment->address->addressable_id = $payment->payer->id;
+        $payment->address->save();
+        $payment->save();
+
+        return $payment;
+    }
+
+
+
+    public function createTransaction($item, $quantity)
+    {
+        $transaction = new Transaction([
+            'amount_subtotal' => $item->price * $quantity,
+            'amount_shipping' => 5,
+            'amount_total'    => $item->price * $quantity + 5,
+            'amount_currency' => 'USD',
+            'description'     => "Your BrushPoint Purchase",
+        ]);
+        $transaction->save();
+
+        return $transaction;
+    }
+
+    public function createSoldItem(Item $item, $quantity)
+    {
+        $soldItem = new \Martin\Ecom\SoldItem([
+            'name'     => $item->name,
+            'price'    => $item->price,
+            'currency' => "USD",
+            'quantity' => $quantity,
+            'sku'      => $item->sku,
+            'intent'   => 'sale',
+        ]);
+
+        $item->soldItems()->save($soldItem);
+
+        return $soldItem;
+    }
+
+
+
+
+
+
+
+    public function purchaseItem(Payment $payment, Item $item, $quantity = 1)
+    {
+        $transaction = $this->createTransaction($item, $quantity);
+        $transaction->save();
+
+        $soldItem = $this->createSoldItem($item, $quantity);
+        $transaction->soldItems()->save($soldItem);
+
+        $payment->transactions()->attach($transaction);
+        $payment->save();
+
+        return $payment;
+    }
+
+
+
+
+
+
+
+
     /*
      * Integrated Testing Helper Functions
      */
@@ -294,7 +279,5 @@ class TestCase extends IntegrationTest {
             ->press('Login')
             ->andSee('BrushPoint Administration')
             ->onPage('/admins');
->>>>>>> 64a7ca229845303a602ca69c963472fc1e7a8456
     }
-
 }

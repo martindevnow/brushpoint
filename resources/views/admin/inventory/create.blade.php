@@ -25,10 +25,10 @@
                   {!! Form::label('quantity', 'Quantity:') !!}
                   {!! Form::text('quantity', null, ['class' => 'form-control']) !!}
               </div>
-              <div class="form-group">
-                  {!! Form::label('description', 'Description:') !!}
-                  {!! Form::text('description', 'available', ['class' => 'form-control']) !!}
-              </div>
+              {{--<div class="form-group">--}}
+                  {{--{!! Form::label('description', 'Description:') !!}--}}
+                  {{--{!! Form::text('description', 'available', ['class' => 'form-control']) !!}--}}
+              {{--</div>--}}
               <div class="form-group">
                   {!! Form::label('status', 'Status:') !!}
                   {!! Form::text('status', 'available', ['class' => 'form-control']) !!}

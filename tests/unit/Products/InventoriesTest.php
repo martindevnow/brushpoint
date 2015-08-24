@@ -171,25 +171,4 @@ class InventoriesTest extends TestCase {
 
 
 
-
-
-
-
-
-
-
-
-
-    /*
-     * HELPER FUNCTIONS
-     * -- PURCHASE/PAYMENT RELATED
-     */
-
-    public function createPayment(array $data)
-    {
-        return \Laracasts\TestDummy\Factory::times(1)->create(Payment::class,[
-
-        ]);
-    }
-
 }

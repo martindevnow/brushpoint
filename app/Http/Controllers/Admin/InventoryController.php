@@ -75,7 +75,6 @@ class InventoryController extends Controller {
             'expiry_date' => $request->expiry_date,
             'quantity' => $request->quantity,
             'original_quantity' => $request->quantity,
-            'description' => $request->description,
             'status' => $request->status,
         ]);
 
@@ -86,16 +85,6 @@ class InventoryController extends Controller {
         return redirect('admins/inventory');
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-
-	}
 
     /**
 	 * Display the specified resource.
@@ -190,17 +179,6 @@ class InventoryController extends Controller {
 	 * @return Response
 	 */
 	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
 	{
 		//
 	}
