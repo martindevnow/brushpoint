@@ -3,6 +3,7 @@
 namespace Martin\Products;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Martin\Core\CoreModel;
@@ -12,9 +13,9 @@ use Martin\Ecom\SoldItem;
 class Item extends CoreModel {
 
     use RecordsActivity;
+    use SoftDeletes;
 
     protected $table = 'items';
-
 
     protected $fillable = [
         'product_id',
@@ -26,7 +27,7 @@ class Item extends CoreModel {
         'variance',
     ];
 
-
+    protected $dates = ['deleted_at'];
 
     public function addInventory(array $data)
     {

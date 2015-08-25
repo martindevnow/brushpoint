@@ -53,7 +53,8 @@ class InventoryTest extends TestCase {
         $newInvoData = [
             'item_id' => $item->id,
             'lot_code'
-        ]
+        ];
+
         $this->click('New Inventory')
             ->see('Item / SKU:')
             ->type('15/15', 'lot_code')
