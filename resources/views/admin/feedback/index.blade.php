@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 Feedback
                 <a href="/admins/feedback/create" style="float: right;">

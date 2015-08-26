@@ -110,6 +110,11 @@
         background-color: #cd3297;
         border-color: #a31d69;
     }
+    
+    .page-header {
+        margin-top: 15px;
+
+    }
     </style>
 
 @yield('admin_head')

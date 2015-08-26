@@ -123,16 +123,25 @@
             </a>
             <ul class="dropdown-menu dropdown-alerts">
             <?php $attentions = $attentionRepo->getLatestUnseen();  ?>
-                @foreach ($attentions as $attention)
+
+                @if (!$attentions->isEmpty())
+                    @foreach ($attentions as $attention)
+                    <li>
+                        <a href="{{ $attention->getUrl() }}">
+                            <div>
+                                {!! $attention->getITag() !!}
+                                <span class="pull-right text-muted small">{{ $attention->created_at->diffForHumans() }}</span>
+                            </div>
+                        </a>
+                    </li>
+                    @endforeach
+                @else
                 <li>
-                    <a href="{{ $attention->getUrl() }}">
-                        <div>
-                            {!! $attention->getITag() !!}
-                            <span class="pull-right text-muted small">{{ $attention->created_at->diffForHumans() }}</span>
-                        </div>
-                    </a>
+                    <div>
+                        <i>None</i>
+                    </div>
                 </li>
-                @endforeach
+                @endif
             </ul>
             <!-- /.dropdown-alerts -->
         </li>
