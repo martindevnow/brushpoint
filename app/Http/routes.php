@@ -58,7 +58,8 @@ Route::get('findalldeadtransactions', function()
         {
             $bad_ones .= "Has a bad payents relationship.<br />";
         }
-        else{
+        else
+        {
             foreach ($transaction->payments as $payment)
             {
                 $bad_ones .= "Payment {$payment->id} is associated. Payment: {$payment->state}<br />";
@@ -73,6 +74,10 @@ Route::get('attentions', function() {
     $attentions = Attention::unseen()->get();
     dd($attentions);
 });
+
+
+
+
 
 /**
  * June 23 2015
@@ -262,40 +267,57 @@ Route::get('checkout/cancel', 'CheckoutController@cancel');
  */
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 {
+
+
+    /**
+     * Attachments
+     */
+    Route::post(        'admins/attachments/store',       'AttachmentsController@attachmentStore');
+    Route::get(        'admins/attachments/download/{id}',   'AttachmentsController@attachmentDownload');
+
+
+
+    /**
+     * Addresses
+     */
+    Route::post(        'admins/addresses/store',       'AddressesController@ajaxStore');
+    Route::get(         'admins/addresses/remove/{id}',       'AddressesController@delete');
+
+
+
+    /**
+     * Attentions
+     */
+    Route::get(         'admins/attentions/clearAll', 'AttentionsController@clearAll');
+    Route::get(         'admins/attentions/remove/{id}', 'AttentionsController@destroy');
+    Route::resource(         'admins/attentions', 'AttentionsController',
+        ['only' => ['index', 'show']]);
+
+
+
+
+    /**
+     * Contacts
+     */
+    Route::resource('admins/contacts', 'ContactsController');
+
+
+
+
     /**
      * Dashboard
      */
     Route::get(         'admins', 'AdminController@index');
 
 
-    Route::get(         'admins/attentions/clearAll', 'AttentionsController@clearAll');
-    Route::get(         'admins/attentions/remove/{id}', 'AttentionsController@destroy');
-    Route::resource(         'admins/attentions', 'AttentionsController',
-        ['only' => ['index', 'show']]);
 
     /**
-     * Reports
+     * Emails
+     * - view the email templates that are sent to different people.
      */
-    Route::get(         'admins/reports', 'ReportsController@index');
-    Route::get(         'admins/reports/generate/payments', 'ReportsController@generatePayments');
-    Route::get(         'admins/reports/generate/soldItems', 'ReportsController@generateSoldItems');
-    Route::get(         'admins/reports/generate/feedback', 'ReportsController@generateFeedback');
+    Route::get('admins/emails', 'EmailsController@index');
+    Route::get('admins/emails/{emailScope}/{emailType}', 'EmailsController@show');
 
-
-
-    /**
-     * Products
-     */
-    // Route::get(      'admins/products/create',               'ProductsController@create');
-    // Route::post(     'admins/products/create',               'ProductsController@store');
-    Route::patch(       'admins/products/ajax/{id}',            'ProductsController@ajaxPatch');
-    Route::patch(       'admins/products/active/{id}',          'ProductsController@ajaxActive');
-    Route::patch(       'admins/products/portfolio/{id}',       'ProductsController@ajaxPortfolio');
-    Route::patch(       'admins/products/purchase/{id}',        'ProductsController@ajaxPurchase');
-    Route::get(         'admins/products/virtues/saveOrder',    'ProductsController@ajaxSaveListOrder');
-    Route::get(         'admins/products/rearrange',            'ProductsController@rearrange');
-    Route::get(         'admins/products/rearrange/saveOrder',  'ProductsController@ajaxSaveProductOrder');
-    Route::resource(    'admins/products',                      'ProductsController');
 
 
     /**
@@ -313,12 +335,41 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 
 
 
+
+    /**
+     * Inventory
+     */
+    Route::get(         'admins/inventory/item/{id}/create',     'InventoryController@createForItem');
+    Route::get(         'admins/inventory/item/{id}',     'InventoryController@showItem');
+    Route::get(         'admins/inventory/lot/{id}',     'InventoryController@showLotActivity');
+    Route::get(         'admins/inventory/hold/{id}',     'InventoryController@putOnHold');
+    Route::get(         'admins/inventory/activate/{id}',     'InventoryController@activate');
+    Route::resource(    'admins/inventory',             'InventoryController');
+
+
+    /**
+     * Issues
+     */
+    Route::post(        'admins/issues/store',      'IssuesController@ajaxStore');
+    Route::patch(       'admins/issues/ajax/{id}',  'IssuesController@ajaxPatch');
+    Route::resource(    'admins/issues',            'IssuesController');
+
+
     /**
      * Investigations
      */
     Route::patch(       'admins/investigations/ajax/{id}',   'InvestigationsController@ajaxPatch');
     Route::post(        'admins/investigations/report/store',   'InvestigationsController@reportStore');
     Route::get(        'admins/investigations/download/{id}',   'InvestigationsController@reportDownload');
+
+
+
+
+    /**
+     * Notes
+     */
+    Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
+
 
 
 
@@ -346,47 +397,46 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 
 
     /**
-     * Users
+     * Payers
      */
-    Route::resource(    'admins/users',          'UsersController');
+    Route::resource('admins/payers', 'PayersController');
 
-
-    /**
-     * Notes
-     */
-    Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
-
-   /**
-     * Attachments
-     */
-    Route::post(        'admins/attachments/store',       'AttachmentsController@attachmentStore');
-    Route::get(        'admins/attachments/download/{id}',   'AttachmentsController@attachmentDownload');
 
 
 
     /**
-     * Addresses
+     * Products
      */
-    Route::post(        'admins/addresses/store',       'AddressesController@ajaxStore');
-    Route::get(         'admins/addresses/remove/{id}',       'AddressesController@delete');
+    // Route::get(      'admins/products/create',               'ProductsController@create');
+    // Route::post(     'admins/products/create',               'ProductsController@store');
+    Route::patch(       'admins/products/ajax/{id}',            'ProductsController@ajaxPatch');
+    Route::patch(       'admins/products/active/{id}',          'ProductsController@ajaxActive');
+    Route::patch(       'admins/products/portfolio/{id}',       'ProductsController@ajaxPortfolio');
+    Route::patch(       'admins/products/purchase/{id}',        'ProductsController@ajaxPurchase');
+    Route::get(         'admins/products/virtues/saveOrder',    'ProductsController@ajaxSaveListOrder');
+    Route::get(         'admins/products/rearrange',            'ProductsController@rearrange');
+    Route::get(         'admins/products/rearrange/saveOrder',  'ProductsController@ajaxSaveProductOrder');
+    Route::resource(    'admins/products',                      'ProductsController');
+
+    /**
+     * Reports
+     */
+    Route::get(         'admins/reports', 'ReportsController@index');
+    Route::get(         'admins/reports/generate/payments', 'ReportsController@generatePayments');
+    Route::get(         'admins/reports/generate/soldItems', 'ReportsController@generateSoldItems');
+    Route::get(         'admins/reports/generate/feedback', 'ReportsController@generateFeedback');
+
+
 
 
     /**
-     * Inventory
+     * Retailers
      */
-    Route::get(         'admins/inventory/item/{id}',     'InventoryController@showItem');
-    Route::get(         'admins/inventory/lot/{id}',     'InventoryController@showLotActivity');
-    Route::get(         'admins/inventory/hold/{id}',     'InventoryController@putOnHold');
-    Route::get(         'admins/inventory/activate/{id}',     'InventoryController@activate');
-    Route::resource(    'admins/inventory',             'InventoryController');
+    Route::post(        'admins/retailers/store',      'RetailersController@ajaxStore');
+    Route::patch(       'admins/retailers/ajax/{id}',  'RetailersController@ajaxPatch');
+    Route::resource(    'admins/retailers',             'RetailersController');
 
 
-    /**
-     * Issues
-     */
-    Route::post(        'admins/issues/store',      'IssuesController@ajaxStore');
-    Route::patch(       'admins/issues/ajax/{id}',  'IssuesController@ajaxPatch');
-    Route::resource(    'admins/issues',            'IssuesController');
 
 
     /**
@@ -397,32 +447,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     // Route::resource(    'admins/virtues',            'VirtuesController');
 
 
-    /**
-     * Retailers
-     */
-    Route::post(        'admins/retailers/store',      'RetailersController@ajaxStore');
-    Route::patch(       'admins/retailers/ajax/{id}',  'RetailersController@ajaxPatch');
-    Route::resource(    'admins/retailers',         'RetailersController');
 
 
     /**
-     * Payers
+     * Users
      */
-    Route::resource('admins/payers', 'PayersController');
+    Route::resource(    'admins/users',          'UsersController');
 
-
-    /**
-     * Contacts
-     */
-    Route::resource('admins/contacts', 'ContactsController');
-
-
-    /**
-     * Emails
-     * - view the email templates that are sent to different people.
-     */
-    Route::get('admins/emails', 'EmailsController@index');
-    Route::get('admins/emails/{emailScope}/{emailType}', 'EmailsController@show');
 
 });
 

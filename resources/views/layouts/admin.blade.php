@@ -115,6 +115,47 @@
         margin-top: 15px;
 
     }
+
+    .btn-unchecked {
+        color: #fff;
+        background-color: #cd3297;
+        border-color: #a31d69;
+    }
+
+    .btn-checked {
+        color: #000;
+        background-color: #8bf292;
+        border-color: #3aa333;
+    }
+
+    .btn-close {
+        content: "Close";
+    }
+
+    .btn-closed {
+        content: "Closed";
+    }
+
+    .btn-unchecked:hover .fa-times:before {
+        content:"\f00c";
+    }
+
+    .btn-checked:hover .fa-check:before {
+        content:"\f00d";
+    }
+
+    .btn-checked:hover {
+        color: #fff;
+        background-color: #cd3297;
+        border-color: #a31d69;
+    }
+
+    .btn-unchecked:hover {
+        color: #000;
+        background-color: #8bf292;
+        border-color: #3aa333;
+    }
+
     </style>
 
 @yield('admin_head')
@@ -164,7 +205,27 @@
       var recipient = button.data('whatever') // Extract info from data-* attributes
       // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
       // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    </script>
+    <script>
+    $(".btn-unchecked").hover(
+      function () {
+        $(this).addClass("btn-checked");
+      },
+      function () {
+        $(this).removeClass("btn-checked");
+      }
+    );
 
+    $(".btn-checked").hover(
+      function () {
+        //$(this).addClass("btn-unchecked");
+        // $(this).removeClass("btn-checked");
+      },
+      function () {
+        //$(this).removeClass("btn-unchecked");
+        // $(this).addClass("btn-checked");
+      }
+    );
     </script>
 </body>
 

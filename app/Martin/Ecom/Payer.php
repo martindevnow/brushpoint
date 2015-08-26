@@ -31,6 +31,11 @@ class Payer extends CoreModel {
 
     protected $hidden = [];
 
+    public function getName()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
+
     public function payments()
     {
         return $this->hasMany('Martin\Ecom\Payment');

@@ -47,6 +47,22 @@ class InventoryController extends Controller {
     }
 
     /**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function createForItem($itemId)
+	{
+
+        $itemListByIdName = Item::lists('sku', 'id');
+
+        $item = Item::find($itemId);
+
+        return view('admin.inventory.create')
+            ->with(compact('itemListByIdName', 'item'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
