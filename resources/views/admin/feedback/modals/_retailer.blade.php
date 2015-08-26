@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary {{ ($class ? $class : "" ) }}" data-toggle="modal" data-target="#retailerModal">New Retailer</button>
+<button type="button" class="btn btn-primary {{ (isset($class) ? $class : "" ) }}" data-toggle="modal" data-target="#retailerModal">New Retailer</button>
 
 <div class="modal fade" id="retailerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -15,9 +15,6 @@
               @if($feedback)
                 {!! Form::hidden('feedback_id', $feedback->id) !!}
               @endif
-
-
-
           </div>
       </div>
       <div class="modal-footer">

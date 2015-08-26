@@ -4,11 +4,60 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-9">
+            <h1 class="page-header">Feedback: {{ $feedback->id }}  Received: {{ $feedback->created_at->diffForHumans() }}</h1>
+        </div>
+        <div class="col-lg-3" style="margin-top: 10px;">
+        </div>
+    </div>
+
+    <div class="row">
+
+
+
+
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-cog fa-fw"></i> Actions
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="list-group">
+                            @include('admin.feedback.modals._contactCustomer')
+
+                            {{--Adding New Buttons--}}
+                            @if(!$feedback->issue)
+                                @include('admin.feedback.modals._issue')
+                            @endif
+
+                            @if(!$feedback->retailer)
+                                @include('admin.feedback.modals._retailer')
+                            @endif
+
+                            @include('admin.layouts.modals._note', ['model' => $feedback])
+                            @include('admin.layouts.modals._attachment', ['model' => $feedback])
+                            @include('admin.layouts.modals._address', ['model' => $feedback])
+                        {{--<a href="#" class="list-group-item">--}}
+                            {{--<i class="fa fa-comment fa-fw"></i> New Comment--}}
+                            {{--<span class="pull-right text-muted small"><em>4 minutes ago</em>--}}
+                            {{--</span>--}}
+                        {{--</a>--}}
+                    </div>
+                    <!-- /.list-group -->
+                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+
+
+        <div class="col-md-6">
             <table class="table form-table">
                 <thead>
                     <tr>
-                      <th style="width: 25%;">Field</th>
+                      <th>Field</th>
                       <th>Content</th>
                     </tr>
                   </thead>
@@ -49,7 +98,6 @@
                           @if(!$feedback->issue)
                           @endif
                         @endif
-
                       </td>
                     </tr>
                     <tr>
@@ -58,29 +106,31 @@
                     </tr>
                     <tr>
                       <td>Issue <br />
-                            @if (isset($feedback->issue_id))
-                                <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a> <a href="/admins/feedback/{{ $feedback->id }}/issue/remove/">[Remove]</a>
-                            @else
-                              {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=issue_id' ]) !!}
-                                  <div class="form-group">
-                                  {!! Form::select('issue_id', $issues, null, ['data-click-submits-form']) !!}
-                                  </div>
-                              {!! Form::close() !!}
-                            @endif
+
                        </td>
-                      <td>{{ $feedback->issue_text }}</td>
+                      <td>
+                          @if (isset($feedback->issue_id))
+                              <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a> <a href="/admins/feedback/{{ $feedback->id }}/issue/remove/">[Remove]</a>
+                          @else
+                            {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=issue_id' ]) !!}
+                                <div class="form-group">
+                                {!! Form::select('issue_id', $issues, null, ['data-click-submits-form']) !!}
+                                </div>
+                            {!! Form::close() !!}
+                          @endif
+                        {{ $feedback->issue_text }}
+                      </td>
                     </tr>
                   </tbody>
             </table>
-              @include('admin.feedback.modals._contactCustomer')
         </div>
 
 
-        <div class="col-lg-4">
+        <div class="col-md-3">
             <table class="table form-table">
                 <thead>
                     <tr>
-                      <th style="width: 25%">Field</th>
+                      <th>Field</th>
                       <th>Content</th>
                     </tr>
                   </thead>
@@ -136,18 +186,7 @@
                   </tbody>
             </table>
 
-            {{--Adding New Buttons--}}
-            @if(!$feedback->issue)
-                @include('admin.feedback.modals._issue')
-            @endif
 
-            @if(!$feedback->retailer)
-                @include('admin.feedback.modals._retailer')
-            @endif
-
-            @include('admin.layouts.modals._note', ['model' => $feedback])
-            @include('admin.layouts.modals._attachment', ['model' => $feedback])
-            @include('admin.layouts.modals._address', ['model' => $feedback])
 
         </div>
     </div>
@@ -189,10 +228,10 @@
     </div>
 
     <div class="row" id="attachment_list">
-            @foreach($feedback->attachments as $attachment)
-                @include('admin.ajax.singles._attachment', ['attachment' => $attachment])
-            @endforeach
-        </div>
+        @foreach($feedback->attachments as $attachment)
+            @include('admin.ajax.singles._attachment', ['attachment' => $attachment])
+        @endforeach
+    </div>
 </div>
 
 <div class="flash">

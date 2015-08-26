@@ -180,10 +180,10 @@
                 </li>
 
                 <li>
-                    <a href="/admins/products"><i class="fa fa-table fa-fw"></i> Products</a>
+                    <a href="/admins/products"><i class="fa fa-tags fa-fw"></i> Products</a>
                 </li>
                 <li>
-                    <a href=""><i class="fa fa-table fa-fw"></i> Feedback <span class="fa arrow"></span></a>
+                    <a href=""><i class="fa fa-comments fa-fw"></i> Feedback <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="/admins/feedback">All</a>
@@ -197,7 +197,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href=""><i class="fa fa-table fa-fw"></i> Payments <span class="fa arrow"></span></a>
+                    <a href=""><i class="fa fa-money fa-fw"></i> Payments <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="/admins/payments">All</a>
@@ -211,22 +211,22 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="/admins/payers"><i class="fa fa-table fa-fw"></i> Customers</a>
+                    <a href="/admins/payers"><i class="fa fa-group fa-fw"></i> Customers</a>
                 </li>
                 <li>
-                    <a href="/admins/inventory"><i class="fa fa-table fa-fw"></i> Inventory</a>
+                    <a href="/admins/inventory"><i class="fa  fa-barcode fa-fw"></i> Inventory</a>
                 </li>
                 <li>
-                    <a href="/admins/issues"><i class="fa fa-table fa-fw"></i> Issues</a>
+                    <a href="/admins/issues"><i class="fa fa-info-circle fa-fw"></i> Issues</a>
                 </li>
                 <li>
-                    <a href="/admins/retailers"><i class="fa fa-table fa-fw"></i> Retailers</a>
+                    <a href="/admins/retailers"><i class="fa fa-shopping-cart fa-fw"></i> Retailers</a>
                 </li>
                 <li>
-                    <a href="/admins/reports"><i class="fa fa-table fa-fw"></i> Reports</a>
+                    <a href="/admins/reports"><i class="fa fa-bar-chart-o fa-fw"></i> Reports</a>
                 </li>
                 <li>
-                    <a href="/admins/emails"><i class="fa fa-table fa-fw"></i> Email Templates</a>
+                    <a href="/admins/emails"><i class="fa fa-envelope fa-fw"></i> Email Templates</a>
                 </li>
             </ul>
         </div>
