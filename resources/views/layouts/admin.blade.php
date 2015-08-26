@@ -38,11 +38,22 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+    <!-- DataTables CSS -->
+    <link href="/admin/sb-admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="/admin/sb-admin/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/admin/sb-admin/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <style>
     .flash {
@@ -79,6 +90,25 @@
     .del_button {
         display: inline;
         float: right;
+    }
+
+    .btn-clear-all {
+        color: #fff;
+        background-color: #F04E4E;
+        border-color: #D81818;
+        margin-top: -3px;
+        padding: 2px 10px;
+    }
+
+    .btn-panel-heading {
+        margin-top: -3px;
+        padding: 2px 10px;
+    }
+
+    .btn-focus {
+        color: #fff;
+        background-color: #cd3297;
+        border-color: #a31d69;
     }
     </style>
 

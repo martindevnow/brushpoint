@@ -46,6 +46,7 @@ Feedback		fa-comment
         $this->seen = true;
         $this->seen_at = Carbon::now();
         $this->seen_by = \Auth::id();
+        return $this;
     }
 
 

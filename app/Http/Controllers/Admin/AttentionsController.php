@@ -16,7 +16,6 @@ class AttentionsController extends Controller {
 	 */
 	public function index()
 	{
-		// show all attentions
         $attentions = Attention::all();
         return view('admins.attentions.index')
             ->with(compact('attentions'));
@@ -43,11 +42,23 @@ class AttentionsController extends Controller {
 	public function destroy($id)
 	{
 		$attention = Attention::find($id);
-        $attention->see();
-        $attention->save();
+        $attention->see()->save();
 
         Flash::success('Notification removed.');
         return redirect()->back();
 	}
+
+
+
+    public function clearAll()
+    {
+        $attentions = Attention::unseen()->get();
+        foreach ($attentions as $attention)
+            $attention->see()->save();
+
+        Flash::success('All notifications have been cleared');
+        return redirect()->back();;
+
+    }
 
 }

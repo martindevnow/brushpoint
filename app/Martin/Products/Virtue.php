@@ -7,7 +7,7 @@ class Virtue extends CoreModel {
 
     use RecordsActivity;
 
-        protected $table = 'virtues';
+    protected $table = 'virtues';
 
     protected $fillable = [
         'body',

@@ -268,6 +268,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::get(         'admins', 'AdminController@index');
 
 
+    Route::get(         'admins/attentions/clearAll', 'AttentionsController@clearAll');
     Route::get(         'admins/attentions/remove/{id}', 'AttentionsController@destroy');
     Route::resource(         'admins/attentions', 'AttentionsController',
         ['only' => ['index', 'show']]);
