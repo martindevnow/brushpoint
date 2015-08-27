@@ -19,12 +19,9 @@ class ContactCustomerTest extends TestCase {
     /** @test */
     public function it_contacts_the_customer()
     {
-        $this->createAdmin();
+        $user = $this->createAdmin();
+        $this->loginUser($user);
 
-        $this->visit('/admins/feedback')
-            ->type('ben@me.com', 'email')
-            ->type('123456', 'password')
-            ->press('Login');
 
         $this->visit('/admins/feedback')
             ->see('Create')
