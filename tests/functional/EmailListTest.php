@@ -96,7 +96,7 @@ class EmailListTest extends TestCase {
         $amountToBuy = 2;
         $payment = $this->purchaseItem($payment, $item, $amountToBuy);
 
-        Event::fire(new ProductWasPurchased($payment));
+        event(new ProductWasPurchased($payment));
     }
 
 

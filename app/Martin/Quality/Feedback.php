@@ -1,14 +1,18 @@
 <?php namespace Martin\Quality;
 
 use DateTime;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\CoreModel;
 use Martin\Core\Traits\DrawsAttention;
 use Martin\Core\Traits\RecordsActivity;
 use Martin\Reports\Reporter;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Feedback extends CoreModel {
 
     use RecordsActivity;
+    use SoftDeletes;
+    use SearchableTrait;
 
     protected $recordEvents = ['created', 'updated'];
     protected $drawAttentionEvents = ['created', 'updated'];
@@ -55,6 +59,24 @@ class Feedback extends CoreModel {
         'closed_at',
     ];
 
+
+    protected $searchable = [
+        'columns' => [
+            'phone' => 50,
+            'name' => 50,
+            'email' => 50,
+            'issue_text' => 50,
+            'lot_code' => 50,
+            'bp_code' => 50,
+            'issues.type' => 50,
+            'retailer_text' => 50,
+            //'retailers.name' => 50,
+        ],
+        'joins' => [
+            'issues' => ['feedbacks.issue_id', 'issues.id'],
+           // 'retailers' => ['feedbacks.retailer_id', 'retailers.id'],
+        ],
+    ];
 
     public function toggleClose($status)
     {

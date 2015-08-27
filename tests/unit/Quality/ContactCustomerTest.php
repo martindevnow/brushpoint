@@ -27,14 +27,14 @@ class ContactCustomerTest extends TestCase {
             ->press('Login');
 
         $this->visit('/admins/feedback')
-            ->see('New Feedback')
+            ->see('Create')
             ->onPage('/admins/feedback');
 
 
         $feedback = \Laracasts\TestDummy\Factory::times(1)->create(\Martin\Quality\Feedback::class);
 
         $this->visit('/admins/feedback/'. $feedback->id)
-            ->see('Contact the Customer')
+            ->see('Contact Customer')
             ->onPage('/admins/feedback/'. $feedback->id)
             // ->press('Contact the Customer');
             ->see('Request Lot Code:')

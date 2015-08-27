@@ -4,12 +4,15 @@ use App\Events\PackageWasShipped;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Martin\Core\CoreModel;
 use Martin\Core\Traits\RecordsActivity;
 use Martin\Reports\Reporter;
 
 class Payment extends CoreModel {
+
+    use SoftDeletes;
 
     use RecordsActivity;
 

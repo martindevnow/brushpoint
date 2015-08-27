@@ -437,7 +437,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::resource(    'admins/retailers',             'RetailersController');
 
 
+    /**
+     * Search
+     */
 
+    Route::get(         'admins/search', 'SearchController@index');
+    Route::post(         'admins/search', 'SearchController@show');
 
     /**
      * Virtues

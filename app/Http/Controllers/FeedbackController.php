@@ -179,4 +179,5 @@ class FeedbackController extends Controller {
         return redirect('feedback/thankyou');
 
     }
+
 }

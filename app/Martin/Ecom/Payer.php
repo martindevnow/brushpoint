@@ -2,11 +2,13 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\CoreModel;
 use Martin\Core\Traits\RecordsActivity;
 
 class Payer extends CoreModel {
 
+    use SoftDeletes;
     use RecordsActivity;
 
     protected $recordEvents = [];

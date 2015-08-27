@@ -43,7 +43,6 @@
                                   </a>
                               </td>
                               <td>
-
                                   <a href="/admins/users/{{ $user->id }}">
                                     <button class="btn btn-primary">
                                     <i class="fa fa-edit "></i> Edit</button>

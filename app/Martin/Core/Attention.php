@@ -2,9 +2,12 @@
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use ReflectionClass;
 
 class Attention extends Model {
+
+    use SoftDeletes;
 
 	protected $table = "attentions";
 

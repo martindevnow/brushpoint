@@ -293,4 +293,15 @@ class FeedbackController extends Controller {
 
         return redirect('/admins/feedback/'. $request->feedback_id);
     }
+
+
+
+    public function destroy($id)
+    {
+        $feedback = Feedback::find($id);
+        $feedback->delete();
+        Flash::message('That feedback was deleted.');
+
+        return redirect('admins/feedback/');
+    }
 }

@@ -1,12 +1,14 @@
 <?php namespace Martin\Ecom;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Reports\Reporter;
 
 class SoldItem extends Model {
 
-    use Reporter;
+    use SoftDeletes;
 
+    use Reporter;
 
     protected $fillable = [
         'sku',

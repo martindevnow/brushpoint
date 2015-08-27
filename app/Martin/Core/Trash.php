@@ -22,8 +22,6 @@ class Trash extends Model {
         $this->trashable->delete();
     }
 
-
-
     public function trashable()
     {
         return $this->morphTo();

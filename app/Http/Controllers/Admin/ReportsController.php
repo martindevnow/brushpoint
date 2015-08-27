@@ -125,7 +125,7 @@ class ReportsController extends Controller {
 
     public function generateFeedback()
     {
-        $file = storage_path() . "/feedback_2015-07.csv";
+        $file = storage_path() . "/feedback_2015-08.csv";
 
         $feedback = new Feedback();
 
@@ -138,8 +138,8 @@ class ReportsController extends Controller {
 
         $data = $feedback->generateReport(
             $fields,
-            'first day of July 2015',
-            'first day of August 2015');
+            'first day of August 2015',
+            'first day of September 2015');
 
         $fp = fopen($file, 'w');
         foreach ($data as $fields) {

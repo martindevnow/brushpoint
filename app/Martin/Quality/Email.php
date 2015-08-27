@@ -1,9 +1,11 @@
 <?php namespace Martin\Quality;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\CoreModel;
 use Martin\Core\Traits\RecordsActivity;
 
 class Email extends CoreModel {
+    use SoftDeletes;
 
     protected $table = 'emails';
 

@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary {{ ( isset($class) ? $class : "" ) }}" data-toggle="modal" data-target="#contactCustomerModal">Contact Customer</button>
+<button type="button" class="btn btn-primary {{ ( isset($class) ? $class : "" ) }}" data-toggle="modal" data-target="#contactCustomerModal"><i class="fa fa-envelope"></i></button>
 
 <div class="modal fade" id="contactCustomerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

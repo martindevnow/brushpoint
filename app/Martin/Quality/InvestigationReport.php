@@ -1,5 +1,6 @@
 <?php namespace Martin\Quality;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Response;
 use Martin\Core\CoreModel;
 use Martin\Core\Traits\RecordsActivity;
@@ -7,6 +8,7 @@ use Martin\Core\Traits\RecordsActivity;
 class InvestigationReport extends CoreModel {
 
     use RecordsActivity;
+    use SoftDeletes;
 
     protected $fillable = [
         'investigation_id',

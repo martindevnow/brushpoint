@@ -1,11 +1,14 @@
 <?php namespace Martin\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\Traits\RecordsActivity;
 use Martin\Reports\Reporter;
 use ReflectionClass;
 
 class Address extends Model {
+
+    use SoftDeletes;
 
     use RecordsActivity;
 

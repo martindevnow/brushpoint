@@ -1,10 +1,12 @@
 <?php namespace Martin\Products;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\Traits\RecordsActivity;
 
 class Inventory extends Model {
 
+    use SoftDeletes;
     use RecordsActivity;
 
 	protected $fillable = [

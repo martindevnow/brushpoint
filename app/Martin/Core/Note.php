@@ -1,9 +1,12 @@
 <?php namespace Martin\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\Traits\RecordsActivity;
 
 class Note extends Model {
+
+    use SoftDeletes;
 
     use RecordsActivity;
 

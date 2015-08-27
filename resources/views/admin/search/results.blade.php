@@ -6,20 +6,16 @@
     <div class="row">
         <div class="col-lg-9">
             <h1 class="page-header">
-            Feedback
+            Results
             </h1>
         </div>
         <div class="col-lg-3" style="margin-top: 10px;">
-             {!!  $feedbacks->render() !!}
         </div>
     </div>
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                {{--Feedback--}} &nbsp;
-                <a href="/admins/feedback/create" style="float: right;">
-                    <button class="btn btn-primary btn-panel-heading btn-primary">Create</button>
-                </a>
+            Feedback
             </div>
             <div class="panel-body">
                 <div class="table-responsive">

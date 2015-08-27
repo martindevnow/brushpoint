@@ -13,28 +13,28 @@
 
     {{--Start Row--}}
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-cog fa-fw"></i> Actions
+                    <i class="fa fa-cog fa-fw"></i>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="list-group">
-                            @include('admin.feedback.modals._contactCustomer', ['class' => 'btn-block'])
+                            @include('admin.feedback.modals._contactCustomer')
 
                             {{--Adding New Buttons--}}
                             @if(!$feedback->issue)
-                                @include('admin.feedback.modals._issue', ['class' => 'btn-block'])
+                                @include('admin.feedback.modals._issue')
                             @endif
 
                             @if(!$feedback->retailer)
-                                @include('admin.feedback.modals._retailer', ['class' => 'btn-block'])
+                                @include('admin.feedback.modals._retailer')
                             @endif
 
-                            @include('admin.layouts.modals._note', ['model' => $feedback, 'class' => 'btn-block'])
-                            @include('admin.layouts.modals._attachment', ['model' => $feedback, 'class' => 'btn-block'])
-                            @include('admin.layouts.modals._address', ['model' => $feedback, 'class' => 'btn-block'])
+                            @include('admin.layouts.modals._note', ['model' => $feedback])
+                            @include('admin.layouts.modals._attachment', ['model' => $feedback])
+                            @include('admin.layouts.modals._address', ['model' => $feedback])
 
                         <a href="#close">
                         <button class="btn btn-unchecked btn-close">
@@ -56,8 +56,8 @@
             </div>
             <!-- /.panel -->
 
-
-
+        </div>
+        <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Other
@@ -129,7 +129,7 @@
         <!-- /.col-md-3 -->
 
 
-        <div class="col-md-9">
+        <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Feedback

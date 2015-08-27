@@ -165,7 +165,7 @@ class InventoriesTest extends TestCase {
         $payment = $this->createPayment([
             $item, 2
         ]);
-        $this->fireEvent((new ProductWasPurchased($payment)));
+        event(new ProductWasPurchased($payment));
     }
 
 

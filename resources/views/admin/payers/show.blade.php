@@ -8,8 +8,6 @@
         </div>
     </div>
 
-
-
     <div class="row">
         <div class="col-md-4">
             @include('admin.layouts.panels._payer', ['payer' => $payer])
@@ -19,7 +17,7 @@
                 <div class="panel-heading">
                     Payments by this Customer
                     <span style="float: right;">
-                        @include('admin.layouts.modals._note', ['model' => $payment, 'class' => 'btn-panel-heading'])
+                        @include('admin.layouts.modals._note', ['model' => $payer, 'class' => 'btn-panel-heading'])
                     </span>
                 </div>
                 <div class="panel-body">

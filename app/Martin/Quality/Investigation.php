@@ -1,11 +1,13 @@
 <?php namespace Martin\Quality;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\CoreModel;
 use Martin\Core\Traits\RecordsActivity;
 
 class Investigation extends CoreModel {
 
     use RecordsActivity;
+    use SoftDeletes;
 
     protected $fillable = [
         'feedback_id',
