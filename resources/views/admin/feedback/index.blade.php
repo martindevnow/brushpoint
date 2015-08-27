@@ -1,4 +1,11 @@
 @extends('layouts.admin')
+@section('admin_head')
+<style>
+
+</style>
+
+
+@stop
 
 
 @section('content')

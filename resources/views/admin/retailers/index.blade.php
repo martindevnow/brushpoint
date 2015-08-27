@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container">
+<div class="container">
     <div class="row">
         <div class="col-lg-9">
             <h1 class="page-header">Retailers</h1>
@@ -61,12 +61,8 @@
         </div>
         <div class="col-md-3">
         </div>
-
     </div>
-
-
-
-    </div>
+</div>
 <div class="flash">
     Updated...
 </div>

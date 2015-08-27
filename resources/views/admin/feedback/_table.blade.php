@@ -31,9 +31,11 @@
               @if($feedback->closed_at != "0000-00-00 00:00:00" && $feedback->closed_at != "-0001-11-30 00:00:00")
                 {{ $feedback->closed_at }}
               @else
-                  <div class="form-group">
+                  <div>
                     {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id . '?field=closed']) !!}
-                    {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
+                    {{--{!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form', 'class' => 'toggle']) !!}--}}
+                    <input name="closed" data-click-submits-form class="toggle" id="closed-{{ $feedback->id }}" type="checkbox" value="0">
+                    <label for="closed-{{ $feedback->id }}">Closed</label>
                     {!! Form::close() !!}
                   </div>
               @endif

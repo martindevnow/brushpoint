@@ -156,6 +156,34 @@
         border-color: #3aa333;
     }
 
+    /*input.toggle[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+    }
+
+    input.toggle[type="checkbox"]:checked + label {
+            background-color: #DDE3ED;
+            color:  #333;
+    }
+
+    input.toggle[type="checkbox"]:hover, :focus, :active + label {
+        background-color: #eee;
+        background-color: #DDE3ED;
+        color:  #333;
+    }
+
+    input.toggle[type="checkbox"] + label {
+        display: block;
+        padding: .4em .8em;
+        color: #fff;
+        background-color: #444;
+    }
+
+    input.toggle[type="checkbox"] :hover, :focus, :active + label {
+        background-color: #DDE3ED;
+        color:  #333;
+    }*/
+
     </style>
 
 @yield('admin_head')
