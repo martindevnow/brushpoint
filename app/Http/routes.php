@@ -332,6 +332,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::patch(       'admins/feedback/ajax/{id}',   'FeedbackController@ajaxPatch');
     Route::patch(       'admins/feedback/ajaxToggle/{id}',   'FeedbackController@ajaxToggle');
     Route::resource(    'admins/feedback',             'FeedbackController');
+    Route::patch(    'admins/feedback/{id}',             'FeedbackController@update');
 
 
 

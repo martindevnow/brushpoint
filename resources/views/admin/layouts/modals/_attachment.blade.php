@@ -1,4 +1,8 @@
-<button type="button" class="btn btn-primary {{ ( isset($class) ? $class : "" ) }}" data-toggle="modal" data-target="#attachmentModal"><i class="fa fa-upload"></i> </button>
+<button type="button" class="btn btn-primary btn-101 {{ ( isset($class) ? $class : "" ) }}"
+data-toggle="modal" data-target="#attachmentModal">
+<i class="fa fa-upload"></i>
+&nbsp; Upload
+</button>
 
 <div class="modal fade" id="attachmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

@@ -149,7 +149,7 @@
                 <div class="panel-body">
 
 
-
+                    {!! Form::open(['method' => 'patch', 'url' => '/admins/feedback/'. $feedback->id]) !!}
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
@@ -201,7 +201,10 @@
                                         </tr>
                                         <tr>
                                           <td>Lot Code</td>
-                                          <td>{{ $feedback->lot_code }}</td>
+                                          <td>
+                                          {!! Form::text('lot_code', $feedback->lot_code) !!}
+
+                                          {{ $feedback->lot_code }}</td>
                                         </tr>
                                         <tr>
                                           <td>Issue</td>
@@ -223,6 +226,8 @@
                             </div>
                         </div>
                     </div>
+                    {!! Form::submit('Save') !!}
+                    {!! Form::close() !!}
 
 
 

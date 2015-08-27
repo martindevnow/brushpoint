@@ -119,7 +119,14 @@ class FeedbackController extends Controller {
     public function edit($feedbackId)
     {
         $feedback = Feedback::find($feedbackId);
-        return $this->layout->content = view('admin.feedback.edit')->with(compact('feedback'));
+        $issues = Issue::lists('type', 'id');
+        $retailers = Retailer::lists('name', 'id');
+
+        array_unshift($issues, "Select");
+        array_unshift($retailers, "Select");
+
+        return $this->layout->content = view('admin.feedback.edit')
+            ->with(compact('feedback', 'issues', 'retailers'));
     }
 
 
@@ -130,10 +137,12 @@ class FeedbackController extends Controller {
      * @param Requests\CreateProductRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update($feedbackId, Requests\CreateProductRequest $request)
+    public function update($feedbackId, Request $request)
     {
+        // dd('running');
+
         Feedback::findOrFail($feedbackId)->update($request->all());
-        Flash::message('The product has been listed successfully');
+        Flash::message('The feedback has been updated.');
         return redirect("admins/feedback/{$feedbackId}");
     }
 

@@ -184,6 +184,11 @@
         color:  #333;
     }*/
 
+    .btn-101 {
+        max-width: 101px;
+        width: 101px;
+        text-align: left;
+    }
     </style>
 
 @yield('admin_head')

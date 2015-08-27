@@ -1,4 +1,8 @@
-<button type="button" class="btn btn-primary {{ ( isset($class) ? $class : "" ) }}" data-toggle="modal" data-target="#addressModal"><i class="fa-home fa"></i> </button>
+<button type="button" class="btn btn-primary btn-101 {{ ( isset($class) ? $class : "" ) }}"
+data-toggle="modal" data-target="#addressModal">
+<i class="fa-home fa"></i>
+&nbsp; Address
+</button>
 
 <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
   <div class="modal-dialog">
