@@ -10,11 +10,44 @@
 
 <div class="row">
     <div class="col-lg-6">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            Run Reports
+            </div>
+
+            <div class="panel-body">
+
+                <form method="post" action="/admins/reports/run">
+                    {!! Form::selectMonth('month', date('n')) !!}
+                    {!! Form::selectRange('year', 2015, 2016) !!}
+                    {!! Form::select('report', $viableReports) !!}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    {!! Form::submit('Run') !!}
+                </form>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-bell fa-fw"></i> Payment - Reports
             </div>
             <!-- /.panel-heading -->
+
 
 
             <div class="panel-body">

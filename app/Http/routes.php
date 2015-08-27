@@ -422,6 +422,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      * Reports
      */
     Route::get(         'admins/reports', 'ReportsController@index');
+    Route::post(         'admins/reports/run', 'ReportsController@run');
     Route::get(         'admins/reports/generate/payments', 'ReportsController@generatePayments');
     Route::get(         'admins/reports/generate/soldItems', 'ReportsController@generateSoldItems');
     Route::get(         'admins/reports/generate/feedback', 'ReportsController@generateFeedback');

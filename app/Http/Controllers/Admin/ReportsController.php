@@ -4,15 +4,20 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Martin\Ecom\Payment;
 use Martin\Ecom\SoldItem;
 use Martin\Ecom\Transaction;
+use Martin\Notifications\Flash;
 use Martin\Quality\Feedback;
 
 class ReportsController extends Controller {
 
-	/**
+
+    protected $viableReports = ['SoldItems', 'Payments', 'Feedback'];
+
+    /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
@@ -20,69 +25,81 @@ class ReportsController extends Controller {
 	public function index()
 	{
 		// Show all available reports
-        return view('admin.reports.index');
+        return view('admin.reports.index')->with(['viableReports' => $this->viableReports]);
 	}
 
-
-    public function generateSoldItems2()
+    public function run(Request $request)
     {
-        $transactions = Transaction::with('payments', 'soldItems')
-            ->where('created_at', '>', (new Carbon('first day of July 2015')))
-            ->where('created_at', '<', (new Carbon('first day of August 2015')));
-
-        $list = array();
-        $list[] = array(
-            // transaction fields
-            'id',
-
-            // payment fields
-            'payment_id', 'state', 'intent', 'date',
-
-            // item fields
-            'sku',
-
-            // sold item fields
-            'lot_code', 'name', 'price', 'quantity',
-        );
-
-        $file = storage_path() . '/payments_solditems_2015-07.csv';
-
-        foreach($transactions->get() as $transaction)
+        if ($request->report >= count($this->viableReports) || $request->report < 0)
         {
-            foreach($transaction->soldItems as $soldItem)
-            {
-                $payment = $transaction->payments->first();
-                // dd($payment);
-                $list[] = array (
-                    // transaction fields
-                    $transaction->id,
-
-                    // payment fields
-                    $payment->payment_id, $payment->intent, $payment->shipped, $payment->created_at,
-
-                    // item fields
-                    $soldItem->item->sku,
-
-                    // Sold item fields
-                    $soldItem->lot_code, $soldItem->name, $soldItem->price, $soldItem->quantity,
-                );
-            }
+            Flash::error('That report could not be run');
+            return redirect()->back();
         }
 
-
-        $fp = fopen($file, 'w');
-        foreach ($list as $fields) {
-            fputcsv($fp, $fields);
-        }
-        fclose($fp);
-
-        return response()->download($file);
+        $reportToRun = "generate" . $this->viableReports[$request->report];
+        return $this->$reportToRun($request->month);
     }
 
-    public function generateSoldItems()
+
+//    public function generateSoldItems2()
+//    {
+//        $transactions = Transaction::with('payments', 'soldItems')
+//            ->where('created_at', '>', (new Carbon('first day of July 2015')))
+//            ->where('created_at', '<', (new Carbon('first day of August 2015')));
+//
+//        $list = array();
+//        $list[] = array(
+//            // transaction fields
+//            'id',
+//
+//            // payment fields
+//            'payment_id', 'state', 'intent', 'date',
+//
+//            // item fields
+//            'sku',
+//
+//            // sold item fields
+//            'lot_code', 'name', 'price', 'quantity',
+//        );
+//
+//        $file = storage_path() . '/payments_solditems_2015-07.csv';
+//
+//        foreach($transactions->get() as $transaction)
+//        {
+//            foreach($transaction->soldItems as $soldItem)
+//            {
+//                $payment = $transaction->payments->first();
+//                // dd($payment);
+//                $list[] = array (
+//                    // transaction fields
+//                    $transaction->id,
+//
+//                    // payment fields
+//                    $payment->payment_id, $payment->intent, $payment->shipped, $payment->created_at,
+//
+//                    // item fields
+//                    $soldItem->item->sku,
+//
+//                    // Sold item fields
+//                    $soldItem->lot_code, $soldItem->name, $soldItem->price, $soldItem->quantity,
+//                );
+//            }
+//        }
+//
+//
+//        $fp = fopen($file, 'w');
+//        foreach ($list as $fields) {
+//            fputcsv($fp, $fields);
+//        }
+//        fclose($fp);
+//
+//        return response()->download($file);
+//    }
+
+    public function generateSoldItems($monthNumber = 7, $year = 2015)
     {
 
-        $file = storage_path() . '/payments_solditems_2015-07.csv';
+        $file = storage_path() . '/payments_solditems_2015-' . $monthNumber . '.csv';
 
         $soldItem = new SoldItem();
 
@@ -107,10 +124,8 @@ class ReportsController extends Controller {
             'lot_code', 'name', 'price', 'quantity',
         );
 
-        $data = $soldItem->generateReport(
-            $fields,
-            'first day of July 2015',
-            'first day of August 2015');
+        $data = $this->generateReport($soldItem, $fields, $monthNumber, $year);
+
 
         $fp = fopen($file, 'w');
         foreach ($data as $fields) {
@@ -123,9 +138,9 @@ class ReportsController extends Controller {
 
 
 
-    public function generateFeedback()
+    public function generateFeedback($monthNumber = 7, $year = 2015)
     {
-        $file = storage_path() . "/feedback_2015-08.csv";
+        $file = storage_path() . "/feedback_2015-' . $monthNumber . '.csv";
 
         $feedback = new Feedback();
 
@@ -136,10 +151,8 @@ class ReportsController extends Controller {
             'capa_required',        'capa_reaspn',      'closed',               'closed_at',
             'number_of_days_open',  'on_time_closing');
 
-        $data = $feedback->generateReport(
-            $fields,
-            'first day of August 2015',
-            'first day of September 2015');
+        $data = $this->generateReport($feedback, $fields, $monthNumber, $year);
+
 
         $fp = fopen($file, 'w');
         foreach ($data as $fields) {
@@ -151,9 +164,9 @@ class ReportsController extends Controller {
     }
 
 
-    public function generatePayments()
+    public function generatePayments($monthNumber = 7, $year = 2015)
     {
-        $file = storage_path() . '/payments_2015-07.csv';
+        $file = storage_path() . '/payments_2015-' . $monthNumber . '.csv';
 
         $payment = new Payment();
 
@@ -169,11 +182,7 @@ class ReportsController extends Controller {
             'transactions.firstRecord.amount_total', 'transactions.firstRecord.amount_subtotal', 'transactions.firstRecord.amount_shipping'
         );
 
-        $data = $payment->generateReport(
-            $fields,
-            'first day of July 2015',
-            'first day of August 2015');
-
+        $data = $this->generateReport($payment, $fields, $monthNumber, $year);
 
         $fp = fopen($file, 'w');
         foreach ($data as $fields) {
@@ -182,6 +191,42 @@ class ReportsController extends Controller {
         fclose($fp);
 
         return response()->download($file);
+    }
+
+
+    protected function getMonthName($monthNumber)
+    {
+        $dateObj   = DateTime::createFromFormat('!m', $monthNumber);
+        $monthName = $dateObj->format('F'); // March
+        return $monthName;
+    }
+
+    protected function generateReport ($model, $fields, $monthNumber, $year)
+    {
+        $thisMonth = $this->getMonthName($monthNumber);
+        $thisYear = $year;
+        $nextMonth = $this->getMonthName($monthNumber % 12 + 1);
+        if ($monthNumber == 12)
+            $nextYear = $year ++;
+        else
+            $nextYear = $year;
+
+        $data = $model->generateReport(
+            $fields,
+            'first day of '. $thisMonth. ' '. $thisYear,
+            'first day of '. $nextMonth. ' '. $nextYear);
+
+        return $data;
+    }
+
+    protected function generateFileName($reportName, $month, $year)
+    {
+        return strtolower($reportName) . '_'. $year .'-'. $this->zerofill($month, 2) .'.csv';
+    }
+
+    protected function zerofill ($num, $zerofill = 5)
+    {
+        return str_pad($num, $zerofill, '0', STR_PAD_LEFT);
     }
 
 }

@@ -13,6 +13,7 @@
         </div>
     </div>
     <div class="row">
+        @if($feedbacks->count())
         <div class="panel panel-default">
             <div class="panel-heading">
             Feedback
@@ -23,6 +24,14 @@
                 </div>
             </div>
         </div>
+        @else
+        <div class="panel panel-default">
+            <div class="panel-heading">Feedback</div>
+            <div class="panel-body">No Search Results</div>
+        </div>
+        @endif
+
+
     </div>
     {!!  $feedbacks->render() !!}
 </div>
