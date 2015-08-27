@@ -164,9 +164,38 @@ class Feedback extends CoreModel {
     }
 
 
+    /**
+     * Trash this entry and delete the Attentions related to this model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany|void
+     */
+    public function trash()
+    {
+        // Attentions
+        $attentions = $this->attentions;
+        foreach($attentions as $attention)
+            $attention->trash();
 
+        // Investigations
+        $investigations = $this->investigations;
+        foreach($investigations as $investigation)
+            $investigation->trash();
 
+        // Emails
+        $emails = $this->emails;
+        foreach($emails as $email)
+            $email->trash();
 
+        // Contacts
+        $contacts = $this->contacts;
+        foreach($contacts as $contact)
+            $contact->trash();
+
+        // CustomerRequests
+        $customerRequests = $this->customerRequests;
+        foreach($customerRequests as $customerRequest)
+            $customerRequest->trash();
+    }
 
 
     public function issue()

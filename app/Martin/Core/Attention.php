@@ -144,6 +144,12 @@ Feedback		fa-comment
     }
 
 
+    public function trash()
+    {
+        $this->delete();
+        return true;
+    }
+
     /*
      * Relationships
      */

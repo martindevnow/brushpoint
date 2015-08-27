@@ -39,6 +39,19 @@ class Investigation extends CoreModel {
 
 
     /**
+     * Trash this Investigation and take all Reports with it!
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany|void
+     */
+    public function trash()
+    {
+        $reports = $this->investigationReports;
+        foreach($reports as $report)
+            $report->trash();
+        return true;
+    }
+
+    /**
      * This Investigation belongs to a single feedback
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

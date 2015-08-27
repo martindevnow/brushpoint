@@ -31,7 +31,11 @@ class CustomerRequest extends CoreModel {
         'received_at',
     ];
 
-
+    /**
+     * Other dates stored on this table
+     *
+     * @var array
+     */
     protected $dates = [
         'sent_at',
         'received_at',
@@ -60,18 +64,48 @@ class CustomerRequest extends CoreModel {
 
     }
 
+
+    /**
+     * Trash this instance of the CustomerRequest model
+     *
+     * @return bool|\Illuminate\Database\Eloquent\Relations\MorphMany|null
+     * @throws \Exception
+     */
+    public function trash()
+    {
+        return $this->delete();
+        return true;
+    }
+
+    /*
+     * Relationships ===
+     */
+
+    /**
+     * This CustomerRequest is opened by a user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo('Martin\Users\User');
     }
 
-
+    /**
+     * This customerRequest is tied toa feedback
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function feedback()
     {
         return $this->belongsTo('Martin\Quality\Feedback');
     }
 
-
+    /**
+     * This CustomerRequest is owned by a Contact
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function contact()
     {
         return $this->belongsTo('Martin\Quality\Contact');

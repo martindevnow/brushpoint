@@ -15,6 +15,19 @@ class Email extends CoreModel {
     ];
 
 
+    /**
+     * Trash this Email model
+     *
+     * @return bool|\Illuminate\Database\Eloquent\Relations\MorphMany
+     * @throws \Exception
+     */
+    public function trash()
+    {
+        $this->delete();
+        return true;
+    }
+
+
     public function setRecipientListAttribute($value)
     {
         $this->attributes['recipient_list'] = serialize($value);

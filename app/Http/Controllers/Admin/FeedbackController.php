@@ -299,7 +299,7 @@ class FeedbackController extends Controller {
     public function destroy($id)
     {
         $feedback = Feedback::find($id);
-        $feedback->delete();
+        $feedback->trash();
         Flash::message('That feedback was deleted.');
 
         return redirect('admins/feedback/');
