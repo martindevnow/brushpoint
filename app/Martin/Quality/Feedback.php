@@ -10,18 +10,50 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Feedback extends CoreModel {
 
+    /**
+     * Keep track of activity happening to this model
+     */
     use RecordsActivity;
-    use SoftDeletes;
-    use SearchableTrait;
 
-    protected $recordEvents = ['created', 'updated'];
+    /**
+     * Make new Attentions when ...
+     * Feedback is created, updated or deleted.
+     *
+     * @var array
+     */
     protected $drawAttentionEvents = ['created', 'updated'];
 
+    /**
+     * Make a new Activity when ...
+     * Feedback is created/updated/deleted
+     *
+     * @var array
+     */
+    protected $recordEvents = ['created', 'updated', 'deleted'];
 
+    /**
+     * Don't delete anything permanently
+     */
+    use SoftDeletes;
+
+    /**
+     * Make this class reportable
+     */
     use Reporter;
 
+
+    /**
+     * Database table name
+     *
+     * @var string
+     */
     protected $table = 'feedbacks';
 
+    /**
+     * Fields which may be mass-assigned
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'email',
@@ -55,11 +87,25 @@ class Feedback extends CoreModel {
         'closed_at',
     ];
 
+    /**
+     * Other dates stored on this table
+     *
+     * @var array
+     */
     protected $dates = [
         'closed_at',
     ];
 
+    /**
+     * Make this class searchable
+     */
+    use SearchableTrait;
 
+    /**
+     * Weights for searching this table
+     *
+     * @var array
+     */
     protected $searchable = [
         'columns' => [
             'phone' => 50,
@@ -78,6 +124,11 @@ class Feedback extends CoreModel {
         ],
     ];
 
+    /**
+     * Toggle the close/open status
+     *
+     * @param $status
+     */
     public function toggleClose($status)
     {
         // $status = ($this->closed + 1) % 2;
@@ -105,6 +156,11 @@ class Feedback extends CoreModel {
     }
 
 
+    /**
+     * Return the retailer name for this feedback
+     *
+     * @return mixed
+     */
     public function getRetailerNameAttribute()
     {
         if ($this->retailer_id)
@@ -116,7 +172,11 @@ class Feedback extends CoreModel {
 }
 
 
-
+    /**
+     * Return the number of days open
+     *
+     * @return string
+     */
     public function getNumberOfDaysOpenAttribute()
     {
         if (! $this->closed)
@@ -137,6 +197,12 @@ class Feedback extends CoreModel {
         return "IDONTKNOW";
     }
 
+    /**
+     * Attribute Mutator
+     * to prevent 0 being assigned to the retailer_id field
+     *
+     * @param $id
+     */
     public function setRetailerIdAttribute($id)
     {
         if ($id == 0)
@@ -145,6 +211,12 @@ class Feedback extends CoreModel {
             $this->attributes['retailer_id'] = $id;
     }
 
+    /**
+     * Attribute Mutator
+     * to prevent 0 being assigned as the issue_id
+     *
+     * @param $id
+     */
     public function setIssueIdAttribute($id)
     {
         if ($id == 0)
@@ -153,7 +225,11 @@ class Feedback extends CoreModel {
             $this->attributes['issue_id'] = $id;
     }
 
-
+    /**
+     * Is this feedback unseen
+     *
+     * @return bool
+     */
     public function isUnseen()
     {
         if (! $this->attentions->isEmpty())
@@ -198,36 +274,74 @@ class Feedback extends CoreModel {
     }
 
 
+    /*
+     * Relationships
+     */
+
+    /**
+     * This feedback has one issue
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function issue()
     {
         return $this->belongsTo('Martin\Quality\Issue');
     }
 
+    /**
+     * This Feedback can have more than 1 investigation
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function investigations()
     {
         return $this->hasMany('Martin\Quality\Investigation');
     }
 
+    /**
+     * This Feedback is related to one retailer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function retailer()
     {
         return $this->belongsTo('Martin\Quality\Retailer');
     }
 
+    /**
+     * This Feedback has one address tied to it.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function address()
     {
         return $this->hasOne('Martin\Core\Address', 'id', 'address_id');
     }
 
+    /**
+     * This Feedback can have several emails tied to it
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function emails()
     {
         return $this->hasMany('Martin\Quality\Email');
     }
 
+    /**
+     * This Feedback has many contacts
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function contacts()
     {
         return $this->hasMany('Martin\Quality\Contact');
     }
 
+    /**
+     * This Feedback has many customer Requests
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function customerRequests()
     {
         return $this->hasMany('Martin\Quality\CustomerRequest');

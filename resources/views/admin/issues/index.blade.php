@@ -38,6 +38,7 @@
                                   <th>Type</th>
                                   <!--  <th>Email</th>
                                         <th>Phone</th> -->
+                                  <th>#</th>
                                   <th>Complaint</th>
                                 </tr>
                               </thead>
@@ -51,6 +52,7 @@
                                     </a>
                                   </td>
                                   <td>{{ $issue->type }}</td>
+                                  <td>{{ $issue->feedbacks->count() }}</td>
                                   <td>
                                       <div class="form-group">
                                         {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/issues/ajax/'. $issue->id. '?field=complaint']) !!}

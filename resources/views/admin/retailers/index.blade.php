@@ -36,14 +36,20 @@
                                 <tr>
                                   <th>ID</th>
                                   <th>Name</th>
+                                  <th>#</th>
                                   <th>Active</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 @foreach($retailers as $retailer)
                                 <tr>
-                                  <td><a href="/admins/retailers/{{ $retailer->id }}">{{ $retailer->id }}</a></td>
+                                  <td><a href="/admins/retailers/{{ $retailer->id }}">
+                                      <button class="btn btn-primary">
+                                      <i class="fa fa-search "></i></button>
+                                      </a>
+                                  </td>
                                   <td>{{ $retailer->name }}</td>
+                                  <td>{{ $retailer->feedbacks->count() }}</td>
                                   <td>
                                       <div class="form-group">
                                         {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/retailers/ajax/'. $retailer->id. '?field=active']) !!}

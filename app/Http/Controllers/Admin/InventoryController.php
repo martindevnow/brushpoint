@@ -188,15 +188,22 @@ class InventoryController extends Controller {
 
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @param Request $request
+     * @return Response
+     */
+	public function update($id, Request $request)
 	{
-		//
+        $inventory = Inventory::find($id);
+
+        $inventory->updateField($request->field, $request->value);
+
+        Flash::message('Inventory Updated');
+
+        return $inventory;;
 	}
 
 }

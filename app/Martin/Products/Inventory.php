@@ -32,6 +32,12 @@ class Inventory extends Model {
 
 
 
+    public function updateField($field, $value)
+    {
+        $this->$field = $value;
+        $this->save();
+        return $this;
+    }
 
 
     public function scopeActive($query)

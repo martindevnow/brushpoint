@@ -29,6 +29,7 @@
                               <th>Original</th>
                               <th>Remaining</th>
                               <th>Status</th>
+                              <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +40,10 @@
                               <td>{{ $inventory->original_quantity }}</td>
                               <td>{{ $inventory->quantity }}</td>
                               <td>{{ $inventory->status }}</td>
+                              <td>
+                                @include('admin/inventory/modals/_quantity', compact('inventory'))
+                                @include('admin/inventory/modals/_hold', compact('inventory'))
+                              </td>
                             </tr>
                             @endforeach
                         </tbody>

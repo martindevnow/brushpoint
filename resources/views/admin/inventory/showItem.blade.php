@@ -13,10 +13,6 @@
 
 
     <div class="row">
-
-
-
-
         <div class="panel panel-default">
             <div class="panel-heading">
                 Inventory for {{ $item->sku }}
@@ -43,23 +39,12 @@
                               <td><a href="/admins/inventory/item/{{ $inventory->item_id }}">{{ $inventory->item->sku }}</a></td>
                               <td>{{ $inventory->lot_code }}</td>
                               <td>{{ $inventory->original_quantity }}</td>
-                              <td>{{ $inventory->quantity }}</td>
+                              <td>{{ $inventory->quantity }}
+                              </td>
                               <td>{{ $inventory->status }}</td>
                               <td>
-                                {{--{{ dd($inventory) }}--}}
-                                @if ($inventory->isOnHold())
-                                <a href="/admins/inventory/activate/{{ $inventory->id }}">
-                                    <button type="button" class="btn btn-primary btn-xs confirm_action" style="float: right;">
-                                        Activate
-                                    </button>
-                                </a>
-                                @else
-                                <a href="/admins/inventory/hold/{{ $inventory->id }}">
-                                    <button type="button" class="btn btn-danger btn-xs confirm_action" style="float: right;">
-                                        Put On Hold
-                                    </button>
-                                </a>
-                                @endif
+                                @include('admin/inventory/modals/_quantity', compact('inventory'))
+                                @include('admin/inventory/modals/_hold', compact('inventory'))
                               </td>
                             </tr>
                             @endforeach

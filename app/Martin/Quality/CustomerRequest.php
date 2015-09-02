@@ -4,15 +4,47 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\CoreModel;
 use Martin\Core\Traits\RecordsActivity;
+use Martin\Reports\Reporter;
 
 class CustomerRequest extends CoreModel {
 
+    /**
+     * Keep track of activity happening to this model
+     */
     use RecordsActivity;
-    use SoftDeletes;
 
-    protected $recordEvents = [];
+
+    /**
+     * Make a new Activity when ...
+     * CustomerRequest is [created, updated, or deleted]
+     *
+     * @var array
+     */
+    protected $recordEvents = ['created', 'updated', 'deleted'];
+
+    /**
+     * Make new Attentions when ...
+     * Feedback is updated.
+     *
+     * @var array
+     */
     protected $drawAttentionEvents = ['updated'];
 
+    /**
+     * Don't delete anything permanently
+     */
+    use SoftDeletes;
+
+    /**
+     * Make this class reportable
+     */
+    use Reporter;
+
+    /**
+     * Fields which may be mass-assigned
+     *
+     * @var array
+     */
     protected $fillable = [
         'feedback_id',
         'contact_id',
@@ -42,7 +74,12 @@ class CustomerRequest extends CoreModel {
     ];
 
 
-
+    /**
+     * Return the array of validation rules
+     * based on what info is requested.
+     *
+     * @return array
+     */
     public function getValidationRules()
     {
         $validationRules = array();
@@ -73,7 +110,7 @@ class CustomerRequest extends CoreModel {
      */
     public function trash()
     {
-        return $this->delete();
+        $this->delete();
         return true;
     }
 
