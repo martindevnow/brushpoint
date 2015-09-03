@@ -6,8 +6,11 @@ use App\Events\RequestForRetailerInfoIssued;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\CreateNewFeedbackRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Martin\Notifications\Flash;
 use Martin\Quality\Contact;
 use Martin\Quality\CustomerRequest;
@@ -30,6 +33,17 @@ class FeedbackController extends Controller {
         return $this->layout->content = view('admin.feedback.index')->with(compact('feedbacks'));
     }
 
+
+    public function close($id)
+    {
+        $feedback = Feedback::find($id);
+
+        $feedback->toggleClose();
+
+        Flash::message('The feedback has been closed.');
+
+        return redirect()->back();
+    }
 
     /**
      * Show the form for creating a new Feedback entry.
@@ -55,13 +69,31 @@ class FeedbackController extends Controller {
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateNewFeedbackRequest $request)
     {
-        $data = $request->except('_token'// , 'issue_id', 'retailer_id'
+        Validator::extend('sanitiseDate', function($attribute, $value, $parameters)
+        {
+            return sanitiseDate($value);
+        });
+
+        $validator = Validator::make($request->all(), [
+            'received_at' => 'sanitiseDate'
+        ], ['sanitise_date' => 'Please enter using format: mm/dd/yyyy']);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors()->all());
+        }
+
+
+        $data = $request->except('_token', 'received_at' // , 'issue_id', 'retailer_id'
             );
         $data['hash'] = str_random(32);
 
+
         $feedback = Feedback::create($data);
+        $feedback->save();
+        $feedback->created_at = Carbon::createFromFormat('m/d/Y', $request->received_at);
         $feedback->save();
 
         // store the feedback to the session

@@ -12,10 +12,13 @@
     </div>
 
     <div class="row">
+        @if (isset($item))
+            <div class="col-md-4">
+                @include('admin.layouts.panels._item', ['item' => $item])
+            </div>
+        @endif
+
         <div class="col-md-4">
-            @include('admin.layouts.panels._item', ['item' => $item])
-        </div>
-        <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">New Inventory</div>
                 <div class="panel-body">
@@ -40,10 +43,6 @@
                           {!! Form::label('quantity', 'Quantity:') !!}
                           {!! Form::text('quantity', null, ['class' => 'form-control']) !!}
                       </div>
-                      {{--<div class="form-group">--}}
-                          {{--{!! Form::label('description', 'Description:') !!}--}}
-                          {{--{!! Form::text('description', 'available', ['class' => 'form-control']) !!}--}}
-                      {{--</div>--}}
                       <div class="form-group">
                           {!! Form::label('status', 'Status:') !!}
                           {!! Form::text('status', 'available', ['class' => 'form-control']) !!}

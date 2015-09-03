@@ -7,13 +7,12 @@
         <div class="col-lg-9">
             <h1 class="page-header">Feedback: {{ $feedback->id }}  Received: {{ $feedback->created_at->diffForHumans() }}</h1>
         </div>
-        {{--<div class="col-lg-3" style="margin-top: 10px;">--}}
-        {{--</div>--}}
     </div>
+
 
     {{--Start Row--}}
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-cog fa-fw"></i>
@@ -43,18 +42,24 @@
                             @include('admin.layouts.modals._attachment', ['model' => $feedback])
                             @include('admin.layouts.modals._address', ['model' => $feedback])
 
-                        <a href="#close">
-                        <button class="btn btn-unchecked btn-close">
-                            <i class="fa fa-times"></i> Close
-                        </button>
-                        </a>
 
 
-                        <a href="#close">
-                        <button class="btn btn-checked btn-closed">
-                            <i class="fa fa-check"></i> Closed
-                        </button>
-                        </a>
+                        {{--<a href="#close">--}}
+                        {{--<button class="btn btn-unchecked btn-close">--}}
+                            {{--<i class="fa fa-times"></i> Close--}}
+                        {{--</button>--}}
+                        {{--</a>--}}
+
+
+                        {{--<a href="#close">--}}
+                        {{--<button class="btn btn-checked btn-closed">--}}
+                            {{--<i class="fa fa-check"></i> Closed--}}
+                        {{--</button>--}}
+                        {{--</a>--}}
+
+
+
+
                     </div>
                     <!-- /.list-group -->
                     {{--<a href="#" class="btn btn-default btn-block">View All Alerts</a>--}}
@@ -62,94 +67,26 @@
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
-
-
-
-
-
-
-
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Other
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table class="table form-table">
-                            <thead>
-                                <tr>
-                                  <th>Field</th>
-                                  <th>Content</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>
-                                  Adverse Event
-                                  </td>
-                                  <td>
-                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=adverse_event' ]) !!}
-                                      <div class="form-group">
-                                      {!! Form::checkbox('adverse_event', $feedback->adverse_event, $feedback->adverse_event, ['data-click-submits-form']) !!}
-                                      </div>
-                                  {!! Form::close() !!}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                  Health Canada Report
-                                  </td>
-                                  <td>
-                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=health_canada_report' ]) !!}
-                                      <div class="form-group">
-                                      {!! Form::checkbox('health_canada_report', $feedback->health_canada_report, $feedback->health_canada_report, ['data-click-submits-form']) !!}
-                                      </div>
-                                  {!! Form::close() !!}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                  CAPA Required
-                                  </td>
-                                  <td>
-                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=capa_required' ]) !!}
-                                      <div class="form-group">
-                                      {!! Form::checkbox('capa_required', $feedback->capa_required, $feedback->capa_required, ['data-click-submits-form']) !!}
-                                      </div>
-                                  {!! Form::close() !!}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>
-                                  Closed
-                                  </td>
-                                  <td>
-                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=closed' ]) !!}
-                                      <div class="form-group">
-                                      {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
-                                      </div>
-                                  {!! Form::close() !!}
-                                  </td>
-                                </tr>
-                              </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
-        <!-- /.col-md-3 -->
+        <!-- /.col-md-2 -->
 
 
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Feedback
+                    @if (! $feedback->closed)
+                    <a href="/admins/feedback/{{ $feedback->id }}/close" style="float: right;">
+                        <button class="btn btn-primary btn-panel-heading btn-danger">Close</button>
+                    </a>
+                    @else
+                    <a href="/admins/feedback/{{ $feedback->id }}/close" style="float: right;">
+                        <button class="btn btn-primary btn-panel-heading btn-success">Open</button>
+                    </a>
+
+                    @endif
                 </div>
                 <div class="panel-body">
-
-
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
@@ -231,10 +168,78 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
 
 
 
-
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Other
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table form-table">
+                            <thead>
+                                <tr>
+                                  <th>Field</th>
+                                  <th>Content</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                  Adverse Event
+                                  </td>
+                                  <td>
+                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=adverse_event' ]) !!}
+                                      <div class="form-group">
+                                      {!! Form::checkbox('adverse_event', $feedback->adverse_event, $feedback->adverse_event, ['data-click-submits-form']) !!}
+                                      </div>
+                                  {!! Form::close() !!}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                  Health Canada Report
+                                  </td>
+                                  <td>
+                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=health_canada_report' ]) !!}
+                                      <div class="form-group">
+                                      {!! Form::checkbox('health_canada_report', $feedback->health_canada_report, $feedback->health_canada_report, ['data-click-submits-form']) !!}
+                                      </div>
+                                  {!! Form::close() !!}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                  CAPA Required
+                                  </td>
+                                  <td>
+                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=capa_required' ]) !!}
+                                      <div class="form-group">
+                                      {!! Form::checkbox('capa_required', $feedback->capa_required, $feedback->capa_required, ['data-click-submits-form']) !!}
+                                      </div>
+                                  {!! Form::close() !!}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                  Closed
+                                  </td>
+                                  <td>
+                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=closed' ]) !!}
+                                      <div class="form-group">
+                                      {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
+                                      </div>
+                                  {!! Form::close() !!}
+                                  </td>
+                                </tr>
+                              </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

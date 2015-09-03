@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class ReceiveNewInventoryRequest extends Request {
+class CreateNewFeedbackRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -22,11 +22,7 @@ class ReceiveNewInventoryRequest extends Request {
 	public function rules()
 	{
 		return [
-            'item_id'       => 'required|integer',
-            'lot_code'      => 'required',
-            'expiry_date'   => 'required',
-            'quantity'      => 'required|integer',
-            'status'        => 'required',
+			//
 		];
 	}
 

@@ -129,9 +129,11 @@ class Feedback extends CoreModel {
      *
      * @param $status
      */
-    public function toggleClose($status)
+    public function toggleClose($status = 2)
     {
-        // $status = ($this->closed + 1) % 2;
+        if ($status == 2)
+            $status = ($this->closed + 1) % 2;
+
         $this->closed = $status;
         if ($status)
             $this->closed_at = get_current_time();
