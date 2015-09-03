@@ -18,9 +18,7 @@ class RetailersController extends Controller {
     public function show($retailerId)
     {
         $retailer = Retailer::find($retailerId);
-
         return view('admin.retailers.show')->withRetailer($retailer);
-
     }
 
     /**
@@ -29,7 +27,6 @@ class RetailersController extends Controller {
      */
     public function ajaxStore(Request $request)
     {
-
         // WILL allow overwriting a feedback's Retailer
 
         $name = $request->name;

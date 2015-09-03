@@ -12,20 +12,6 @@ use Martin\Reports\Reporter;
 
 class Payment extends CoreModel {
 
-    use SoftDeletes;
-
-    use RecordsActivity;
-
-    protected $recordEvents = [
-    ];
-
-    protected $drawAttentionEvents = [
-        'created', 'updated'
-    ];
-
-    use Reporter;
-
-
     protected $table = "payments";
 
     protected $fillable = [
@@ -40,6 +26,29 @@ class Payment extends CoreModel {
         'hash',
     ];
 
+    use SoftDeletes;
+
+    use RecordsActivity;
+
+    protected $recordEvents = [
+    ];
+
+    protected $drawAttentionEvents = [
+        'created', 'updated'
+    ];
+
+    use Reporter;
+
+    public $reporterFields = array(
+        // payment fields
+        'id',            'payment_id',            'intent',            'shipped',            'created_at',
+        // payer fields
+        'payer.payer_id',       'payer_name',       'payer.email',
+        // address fields
+        'address.name',         'address.country',  'address.province',
+        // transaction fields
+        'transactions.firstRecord.amount_total', 'transactions.firstRecord.amount_subtotal', 'transactions.firstRecord.amount_shipping'
+    );
 
     public function setUniqueId()
     {

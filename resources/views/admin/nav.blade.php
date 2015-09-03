@@ -206,6 +206,9 @@
                         <li>
                             <a href="/admins/feedback/filter?closed=1">Closed ({{ $feedbackRepository->getClosedCount() }})</a>
                         </li>
+                        <li>
+                            <a href="/admins/feedback/create">New</a>
+                        </li>
                     </ul>
                 </li>
                 <li>

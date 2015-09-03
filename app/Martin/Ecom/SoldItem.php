@@ -23,6 +23,30 @@ class SoldItem extends Model {
 
     ];
 
+
+
+
+    public $reporterFields = array(
+        'id',
+        // transaction fields
+        'transaction.id',
+
+        // payment fields
+        'transaction.payments.firstRecord.payment_id',
+        'transaction.payments.firstRecord.state',
+        'transaction.payments.firstRecord.intent',
+        'transaction.payments.firstRecord.created_at',
+        'transaction.payments.firstRecord.shipped',
+        'transaction.payments.firstRecord.shipped_at',
+
+        // item fields
+        'item.sku',
+
+        // sold item fields
+        'lot_code', 'name', 'price', 'quantity',
+    );
+
+
     public function transaction()
     {
         return $this->belongsTo('Martin\Ecom\Transaction');

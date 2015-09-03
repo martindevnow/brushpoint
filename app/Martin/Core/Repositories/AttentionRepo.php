@@ -10,9 +10,9 @@ class AttentionRepo {
 
 
 
-    public function getLatestUnseen()
+    public function getLatestUnseen($howMany = 10)
     {
-        return Attention::unseen()->latest()->get();
+        return Attention::unseen()->latest()->paginate($howMany);
     }
 
 } 

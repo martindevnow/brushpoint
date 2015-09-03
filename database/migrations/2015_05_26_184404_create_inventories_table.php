@@ -24,10 +24,12 @@ class CreateInventoriesTable extends Migration {
             $table->integer('quantity')->nullable();
             $table->integer('original_quantity')->nullable();
 
-            $table->string('description')->nullable();
+            // Deprecated in v1.1
+            // $table->string('description')->nullable();
             $table->string('status')->default('available');
 
-            $table->boolean('counted')->default(false);
+            // Added in Migration for upgrade to 1.1
+            // $table->boolean('counted')->default(false);
 			$table->timestamps();
 		});
 	}

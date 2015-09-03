@@ -158,10 +158,10 @@ class FeedbackController extends Controller {
      */
     public function update($feedbackId, Request $request)
     {
-        // dd('running');
-
         Feedback::findOrFail($feedbackId)->update($request->all());
+
         Flash::message('The feedback has been updated.');
+
         return redirect("admins/feedback/{$feedbackId}");
     }
 

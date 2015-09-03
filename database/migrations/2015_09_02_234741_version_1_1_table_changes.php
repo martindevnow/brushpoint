@@ -12,9 +12,27 @@ class Version11TableChanges extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('feedbacks', function($table) {
-            $table->date('received_at');
+        Schema::table('inventories', function(Blueprint $table) {
+            $table->boolean('counted')->default(false);
         });
+
+        Schema::table('emails', function(Blueprint $table) {
+            $table->dropColumn('subject');
+            $table->dropColumn('body');
+            $table->dropColumn('template');
+            $table->dropColumn('recipient_email');
+            $table->dropColumn('feedback_id');
+
+
+            $table->string('email_type');
+            $table->text('recipient_list');
+        });
+
+        Schema::table('feedbacks', function($table) {
+            $table->timestamp('closed_at')->nullable()->change();
+        });
+
+
 	}
 
 	/**
@@ -24,8 +42,23 @@ class Version11TableChanges extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('feedbacks', function($table) {
+		Schema::table('feedbacks', function(Blueprint $table) {
             $table->dropColumn('received_at');
+        });
+
+        Schema::table('inventories', function(Blueprint $table) {
+            $table->dropColumn('counted');
+        });
+
+        Schema::table('emails', function(Blueprint $table) {
+            $table->string('subject');
+            $table->text('body');
+            $table->string('template');
+            $table->string('recipient_email');
+            $table->integer('feedback_id');
+
+            $table->dropColumn('email_type');
+            $table->dropColumn('recipient_list');
         });
 	}
 }

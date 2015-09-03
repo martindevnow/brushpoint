@@ -8,7 +8,7 @@
     <!-- /.panel-heading -->
     <div class="panel-body">
         <div class="list-group">
-            <?php $attentions = $attentionRepo->getLatestUnseen();
+            <?php $attentions = $attentionRepo->getLatestUnseen(15);
             ?>
             @foreach ($attentions as $attention)
             <span class="pull-left">

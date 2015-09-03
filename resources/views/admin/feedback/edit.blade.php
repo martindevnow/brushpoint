@@ -7,69 +7,148 @@
         <div class="col-lg-9">
             <h1 class="page-header">Feedback: {{ $feedback->id }}  Received: {{ $feedback->created_at->diffForHumans() }}</h1>
         </div>
-        {{--<div class="col-lg-3" style="margin-top: 10px;">--}}
-        {{--</div>--}}
     </div>
 
+
+{!! Form::open(['method' => 'patch', 'url' => '/admins/feedback/'. $feedback->id]) !!}
     {{--Start Row--}}
     <div class="row">
-        <div class="col-md-4">
+
+
+
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-cog fa-fw"></i>
+                    Feedback
+
+                    {!! Form::submit('Save', [
+                        'class' => 'btn btn-primary btn-panel-heading',
+                        'style' => 'float: right;',
+                    ]) !!}
+
                 </div>
-                <!-- /.panel-heading -->
                 <div class="panel-body">
-                    <div class="list-group">
-                            <a href="/admins/feedback/{{ $feedback->id }}/edit">
-                                <button class="btn btn-101 btn-primary">
-                                    <i class="fa fa-pencil"></i>
-                                    &nbsp; Edit
-                                </button>
-                            </a>
-
-                            @include('admin.feedback.modals._contactCustomer')
-
-                            {{--Adding New Buttons--}}
-                            @if(!$feedback->issue)
-                                @include('admin.feedback.modals._issue')
-                            @endif
-
-                            @if(!$feedback->retailer)
-                                @include('admin.feedback.modals._retailer')
-                            @endif
-
-                            @include('admin.layouts.modals._note', ['model' => $feedback])
-                            @include('admin.layouts.modals._attachment', ['model' => $feedback])
-                            @include('admin.layouts.modals._address', ['model' => $feedback])
-
-                        <a href="#close">
-                        <button class="btn btn-unchecked btn-close">
-                            <i class="fa fa-times"></i> Close
-                        </button>
-                        </a>
 
 
-                        <a href="#close">
-                        <button class="btn btn-checked btn-closed">
-                            <i class="fa fa-check"></i> Closed
-                        </button>
-                        </a>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                          <th>Field</th>
+                                          <th>Content</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>ID</td>
+                                          <td>{{ $feedback->id }}</td>
+                                        </tr>
+                                        <tr>
+                                          <td>Received Date</td>
+                                          <td>
+                                            {!! Form::text('created_at', $feedback->created_at, ['class' => 'form-control', 'id' => 'datepicker']) !!}
+                                          </td>
+                                        </tr>
+                                        {{--<tr>--}}
+                                          {{--<td>Closed Date</td>--}}
+                                          {{--<td>--}}
+                                            {{--{!! Form::text('closed_at', $feedback->closed_at, ['class' => 'form-control', 'id' => 'datepicker']) !!}--}}
+                                          {{--</td>--}}
+                                        {{--</tr>--}}
+                                        <tr>
+                                          <td>Name</td>
+                                          <td>
+                                            {!! Form::text('name', $feedback->name) !!}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>Email</td>
+                                          <td>
+                                            {!! Form::text('email', $feedback->email) !!}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>Phone</td>
+                                          <td>
+                                            {!! Form::text('phone', $feedback->phone) !!}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>BP Code</td>
+                                          <td>
+                                            {!! Form::text('phone', $feedback->phone) !!}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                           <td>Intent</td>
+                                           <td>
+                                             <table>
+                                                 <tr>
+                                                     <td>
+                                                         {!! Form::label('intent', 'Product:') !!}
+                                                         {!! Form::radio('intent', 'product', ($feedback->intent=='product'?true:false), ['style' => 'height:24px;width:100%;']) !!}
+                                                     </td>
+                                                     <td>
+                                                         {!! Form::label('intent', 'Sales:') !!}
+                                                         {!! Form::radio('intent', 'sales', ($feedback->intent=='sales'?true:false), ['style' => 'height:24px;width:100%;']) !!}
+                                                     </td>
+                                                     <td>
+                                                         {!! Form::label('intent', 'Other:') !!}
+                                                         {!! Form::radio('intent', 'other', ($feedback->intent=='other'?true:false), ['style' => 'height:24px;width:100%;']) !!}
+                                                     </td>
+                                                 </tr>
+                                             </table>
+                                           </td>
+                                         </tr>
+
+
+                                        <tr>
+                                          <td>Retailer</td>
+                                          <td>
+
+                                            {{ $feedback->retailer_text }}
+
+                                              <div class="form-group">
+                                              {!! Form::select('retailer_id', $retailers, $feedback->retailer_id) !!}
+                                              </div>
+
+                                          </td>
+                                        </tr>
+
+
+                                        <tr>
+                                          <td>Lot Code</td>
+                                          <td>
+                                          {!! Form::text('lot_code', $feedback->lot_code) !!}
+                                          {{ $feedback->lot_code }}</td>
+                                        </tr>
+
+                                        <tr>
+                                          <td>Issue</td>
+                                          <td>
+
+                                            <div class="form-group">
+                                            {!! Form::select('issue_id', $issues, $feedback->issue_id) !!}
+                                            </div>
+                                            {{ $feedback->issue_text }}
+                                          </td>
+                                        </tr>
+
+
+                                      </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <!-- /.list-group -->
-                    {{--<a href="#" class="btn btn-default btn-block">View All Alerts</a>--}}
                 </div>
-                <!-- /.panel-body -->
             </div>
-            <!-- /.panel -->
+        </div>
 
 
 
-
-
-
-
-
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Other
@@ -97,6 +176,12 @@
                                   </td>
                                 </tr>
                                 <tr>
+                                  <td>Adverse Event Level</td>
+                                  <td>
+                                    {!! Form::text('adverse_event_level', null, ['class' => 'form-control']) !!}
+                                  </td>
+                                </tr>
+                                <tr>
                                   <td>
                                   Health Canada Report
                                   </td>
@@ -121,6 +206,12 @@
                                   </td>
                                 </tr>
                                 <tr>
+                                  <td>CAPA Reason</td>
+                                  <td>
+                                    {!! Form::text('capa_reason', null, ['class' => 'form-control']) !!}
+                                  </td>
+                                </tr>
+                                <tr>
                                   <td>
                                   Closed
                                   </td>
@@ -138,104 +229,10 @@
                 </div>
             </div>
         </div>
-        <!-- /.col-md-3 -->
-
-
-        <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Feedback
-                </div>
-                <div class="panel-body">
-
-
-                    {!! Form::open(['method' => 'patch', 'url' => '/admins/feedback/'. $feedback->id]) !!}
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                          <th>Field</th>
-                                          <th>Content</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <td>ID</td>
-                                          <td>{{ $feedback->id }}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Date</td>
-                                          <td>{{ $feedback->created_at }}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Name</td>
-                                          <td>{{ $feedback->name }} </td>
-                                        </tr>
-                                        <tr>
-                                          <td>Email</td>
-                                          <td>{{ $feedback->email }}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Phone</td>
-                                          <td>{{ $feedback->phone }}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Retailer</td>
-                                          <td>
-
-                                            @if (isset($feedback->retailer_id))
-                                                <a href="{{ url('admins/retailers/'. $feedback->retailer->id) }}"> {{ $feedback->retailer->name }}</a> <a href="/admins/feedback/{{ $feedback->id }}/retailer/remove">[Remove]</a>
-                                            @else
-                                                {{ $feedback->retailer_text }}
-                                              {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=retailer_id' ]) !!}
-                                                  <div class="form-group">
-                                                  {!! Form::select('retailer_id', $retailers, null, ['data-click-submits-form']) !!}
-                                                  </div>
-                                              {!! Form::close() !!}
-                                              @if(!$feedback->issue)
-                                              @endif
-                                            @endif
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td>Lot Code</td>
-                                          <td>
-                                          {!! Form::text('lot_code', $feedback->lot_code) !!}
-
-                                          {{ $feedback->lot_code }}</td>
-                                        </tr>
-                                        <tr>
-                                          <td>Issue</td>
-                                          <td>
-                                              @if (isset($feedback->issue_id))
-                                                  <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a> <a href="/admins/feedback/{{ $feedback->id }}/issue/remove/">[Remove]</a>
-                                              @else
-                                                {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=issue_id' ]) !!}
-                                                    <div class="form-group">
-                                                    {!! Form::select('issue_id', $issues, null, ['data-click-submits-form']) !!}
-                                                    </div>
-                                                {!! Form::close() !!}
-                                              @endif
-                                            {{ $feedback->issue_text }}
-                                          </td>
-                                        </tr>
-                                      </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    {!! Form::submit('Save') !!}
-                    {!! Form::close() !!}
-
-
-
-
-                </div>
-            </div>
-        </div>
     </div>
+    <div class="row">
+    </div>
+{!! Form::close() !!}
 
     <hr />
 

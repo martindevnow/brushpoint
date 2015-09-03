@@ -41,6 +41,26 @@ class Feedback extends CoreModel {
      */
     use Reporter;
 
+    public $reporterFields = array(
+        'id',
+        'created_at',
+        'name',
+        'addresses.firstRecord',
+        'phone',
+        'bp_code',
+        'retailer_name',
+        'intent',
+        'lot_code',
+        'issue_type',
+        'adverse_event',
+        'RESOLUTION',
+        'health_canada_report',
+        'capa_required',
+        'capa_reaspn',
+        'closed',
+        'closed_at',
+        'number_of_days_open',
+        'on_time_closing');
 
     /**
      * Database table name
@@ -192,11 +212,35 @@ class Feedback extends CoreModel {
             return "N/A";
     }
 
-
-    // TODO: Must add in this functionality
+    /**
+     * Tests to see if the
+     *
+     * @return bool
+     */
     public function getOnTimeClosingAttribute()
     {
-        return "IDONTKNOW";
+        // normal = 30 days max
+        // adverse event = 15
+        // with field samples += 15 days extra.
+
+        $numDaysOpen = $this->getNumberOfDaysOpenAttribute();
+        if (! is_int($numDaysOpen))
+            return false;
+
+        $maxDaysOpen = 0;
+
+        if ($this->fieldSampleRequested())
+            $maxDaysOpen += 15;
+
+        if ($this->adverse_event)
+            $maxDaysOpen += 15;
+        else
+            $maxDaysOpen += 30;
+
+        if ($numDaysOpen <= $maxDaysOpen)
+            return true;
+
+        return false;
     }
 
     /**
@@ -273,6 +317,15 @@ class Feedback extends CoreModel {
         $this->delete();
     }
 
+
+    public function fieldSampleRequested()
+    {
+        $requests = $this->customerRequests;
+        foreach ($requests as $request)
+            if ($request->request_field_sample)
+                return true;
+        return false;
+    }
 
     /*
      * Relationships
