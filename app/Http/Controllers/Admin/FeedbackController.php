@@ -64,19 +64,6 @@ class FeedbackController extends Controller {
         $feedback = Feedback::create($data);
         $feedback->save();
 
-//
-//        if ($request->retailer_id)
-//        {
-//            $retailer = Retailer::find($request->retailer_id);
-//            $feedback->retailer()->associate($retailer);
-//        }
-//
-//        if ($request->issue_id)
-//        {
-//            $issue = Issue::find($request->issue_id);
-//            $feedback->issue()->associate($issue);
-//        }
-
         // store the feedback to the session
         session(['feedback' => $feedback->id]);
 

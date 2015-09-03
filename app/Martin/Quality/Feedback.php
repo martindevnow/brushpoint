@@ -257,11 +257,6 @@ class Feedback extends CoreModel {
         foreach($investigations as $investigation)
             $investigation->trash();
 
-        // Emails
-        $emails = $this->emails;
-        foreach($emails as $email)
-            $email->trash();
-
         // Contacts
         $contacts = $this->contacts;
         foreach($contacts as $contact)
@@ -271,6 +266,9 @@ class Feedback extends CoreModel {
         $customerRequests = $this->customerRequests;
         foreach($customerRequests as $customerRequest)
             $customerRequest->trash();
+
+        // finally, kill this one
+        $this->delete();
     }
 
 
@@ -315,16 +313,6 @@ class Feedback extends CoreModel {
     public function address()
     {
         return $this->hasOne('Martin\Core\Address', 'id', 'address_id');
-    }
-
-    /**
-     * This Feedback can have several emails tied to it
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function emails()
-    {
-        return $this->hasMany('Martin\Quality\Email');
     }
 
     /**

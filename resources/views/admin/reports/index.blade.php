@@ -19,9 +19,15 @@
             <div class="panel-body">
 
                 <form method="post" action="/admins/reports/run">
-                    {!! Form::selectMonth('month', date('n')) !!}
-                    {!! Form::selectRange('year', 2015, 2016) !!}
-                    {!! Form::select('report', $viableReports) !!}
+                    From: {!! Form::selectMonth('from_month', date('n')) !!}
+                    {!! Form::selectRange('from_day', 01, 31) !!}
+                    {!! Form::selectRange('from_year', 2015, 2016) !!}
+                    <br />
+                    To: {!! Form::selectMonth('to_month', date('n')) !!}
+                    {!! Form::selectRange('to_day', 01, 31) !!}
+                    {!! Form::selectRange('to_year', 2015, 2016) !!}
+                    <br />
+                    Type: {!! Form::select('report', $viableReports) !!}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     {!! Form::submit('Run') !!}
                 </form>

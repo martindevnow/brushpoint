@@ -2,6 +2,7 @@
 namespace Martin\Reports;
 
 use Carbon\Carbon;
+use ReflectionClass;
 
 trait Reporter {
 
@@ -23,8 +24,8 @@ trait Reporter {
         $this->reporterRelations = $this->getRelationsFromArray($fields);
 
         $results = $this->with($this->reporterRelations)
-            ->where('created_at', '>', (new Carbon($from)))
-            ->where('created_at', '<', (new Carbon($to)));
+            ->where('created_at', '>', (Carbon::create($from['year'], $from['month'], $from['day'], 0, 0, 0, 'America/Toronto')))
+            ->where('created_at', '<', (Carbon::create($to['year'], $to['month'], $to['day'], 23, 59, 59, 'America/Toronto')));
 
         $lists = array();
         $lists[] = $fields;
@@ -33,6 +34,51 @@ trait Reporter {
             $lists[] = $this->generateRow($fields, $rowModel);
 
         return $lists;
+    }
+
+
+    public function generateFileName(array $from, array $to)
+    {
+        return strtolower($this->shortName()) . '_'
+        . $from['year'] .'-'. $this->zerofill($from['month'], 2) .'-'. $from['day']
+        .'-to-'
+        . $to['year'] .'-'. $this->zerofill($to['month'], 2) .'-'. $to['day']  .'.csv';
+    }
+
+    public function zerofill ($num, $zerofill = 5)
+    {
+        return str_pad($num, $zerofill, '0', STR_PAD_LEFT);
+    }
+
+
+
+    /**
+     * Generate the values for the report
+     *
+     * @param $request
+     * @throws \Exception
+     * @return array
+     */
+    public function getDatesFromRequest($request)
+    {
+        $to['year'] = $request->to_year;
+        $to['month'] = $request->to_month;
+        $to['day'] = $request->to_day;
+
+        $from['year'] = $request->from_year;
+        $from['month'] = $request->from_month;
+        $from['day'] = $request->from_day;
+
+        if ($to['year'] < $from['year'])
+            throw new \Exception;
+
+        if ($to['year'] == $from['year'] && $to['month'] < $from['month'])
+            throw new \Exception;
+
+        if ($to['year'] == $from['year'] && $to['month'] == $from['month'] && $to['day'] < $from['day'])
+            throw new \Exception;
+
+        return compact('from', 'to');
     }
 
 
@@ -194,4 +240,11 @@ trait Reporter {
         }
         return "N/A04";
     }
+
+    public function shortName()
+    {
+        $reflect = new ReflectionClass($this);
+        return $reflect->getShortName();
+    }
+
 }
