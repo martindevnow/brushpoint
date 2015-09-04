@@ -78,7 +78,7 @@
                                         <tr>
                                           <td>BP Code</td>
                                           <td>
-                                            {!! Form::text('phone', $feedback->phone) !!}
+                                            {!! Form::text('bp_code', $feedback->bp_code) !!}
                                           </td>
                                         </tr>
                                         <tr>
