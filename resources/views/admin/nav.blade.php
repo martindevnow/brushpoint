@@ -123,17 +123,18 @@
             </a>
             <ul class="dropdown-menu dropdown-alerts">
             <?php $attentions = $attentionRepo->getLatestUnseen();  ?>
-
                 @if (!$attentions->isEmpty())
                     @foreach ($attentions as $attention)
-                    <li>
-                        <a href="{{ $attention->getUrl() }}">
-                            <div>
-                                {!! $attention->getITag() !!}
-                                <span class="pull-right text-muted small">{{ $attention->created_at->diffForHumans() }}</span>
-                            </div>
-                        </a>
-                    </li>
+                        @if ($attention->attentionable != null)
+                        <li>
+                            <a href="{{ $attention->getUrl() }}">
+                                <div>
+                                    {!! $attention->getITag() !!}
+                                    <span class="pull-right text-muted small">{{ $attention->created_at->diffForHumans() }}</span>
+                                </div>
+                            </a>
+                        </li>
+                        @endif
                     @endforeach
                 @else
                 <li>

@@ -36,6 +36,9 @@ Feedback		fa-comment
 
     public function getType()
     {
+        if ($this->attentionable == null)
+            return false;
+
         if ($this->type)
             return $this->type;
 
