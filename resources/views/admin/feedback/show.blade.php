@@ -145,6 +145,10 @@
                                           <td>{{ $feedback->lot_code }}</td>
                                         </tr>
                                         <tr>
+                                          <td>BP Code</td>
+                                          <td>{{ $feedback->bp_code }}</td>
+                                        </tr>
+                                        <tr>
                                           <td>Issue</td>
                                           <td>
                                               @if (isset($feedback->issue_id))
