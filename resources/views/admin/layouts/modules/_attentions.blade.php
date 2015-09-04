@@ -11,22 +11,24 @@
             <?php $attentions = $attentionRepo->getLatestUnseen(15);
             ?>
             @foreach ($attentions as $attention)
-            <span class="pull-left">
-                <a href="/admins/attentions/remove/{{ $attention->id }}">
-                    <i class="fa fa-times-circle" style="font-size: 1.4em;
-                                                             padding: 10px 0px 0px 0px;
-                                                             color: #A40000;
-                                                         "> </i>
-                </a>
-            </span>
-            <a href="{{ $attention->getUrl() }}" class="list-group-item" style="margin-left: 25px">
-                {!! $attention->getITag() !!}
-                <span class="pull-right text-muted small">
-                    <em>{{ $attention->created_at->diffForHumans() }}
-
-                    </em>
+                @if ($attention->attentionable != null)
+                <span class="pull-left">
+                    <a href="/admins/attentions/remove/{{ $attention->id }}">
+                        <i class="fa fa-times-circle" style="font-size: 1.4em;
+                                                                 padding: 10px 0px 0px 0px;
+                                                                 color: #A40000;
+                                                             "> </i>
+                    </a>
                 </span>
-            </a>
+                <a href="{{ $attention->getUrl() }}" class="list-group-item" style="margin-left: 25px">
+                    {!! $attention->getITag() !!}
+                    <span class="pull-right text-muted small">
+                        <em>{{ $attention->created_at->diffForHumans() }}
+
+                        </em>
+                    </span>
+                </a>
+                @endif
             @endforeach
         </div>
         <!-- /.list-group -->
