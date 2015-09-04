@@ -28,9 +28,9 @@ class Version11TableChanges extends Migration {
             $table->text('recipient_list');
         });
 
-        Schema::table('feedbacks', function($table) {
-            $table->timestamp('closed_at')->nullable()->change();
-        });
+//        Schema::table('feedbacks', function($table) {
+//            $table->timestamp('closed_at')->nullable()->change();
+//        });
 
         // DB::statement('ALTER TABLE `feedbacks` MODIFY `closed_at` timestamp NULL;');
 
@@ -45,10 +45,6 @@ class Version11TableChanges extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('feedbacks', function(Blueprint $table) {
-            $table->dropColumn('received_at');
-        });
-
         Schema::table('inventories', function(Blueprint $table) {
             $table->dropColumn('counted');
         });
