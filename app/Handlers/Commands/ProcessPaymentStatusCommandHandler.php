@@ -7,15 +7,22 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 use Martin\Ecom\Checkout;
 use Martin\Ecom\PaymentLog;
-use PayPal\Api\Payment;
 
 class ProcessPaymentStatusCommandHandler {
 
+    /**
+     * @var \Martin\Ecom\Repositories\PaymentRepository
+     */
     protected $paymentRepo;
+
     /**
      * @var Checkout
      */
     private $checkout;
+
+    /**
+     * @var \PayPal\Rest\ApiContext
+     */
     private $api;
 
     /**
@@ -35,8 +42,8 @@ class ProcessPaymentStatusCommandHandler {
      * Handle the command.
      *
      * @param  ProcessPaymentStatusCommand $command
+     * @return \Martin\Ecom\Payment
      * @throws PaymentAlreadyProcessed
-     * @return void
      */
 	public function handle(ProcessPaymentStatusCommand $command)
 	{
@@ -47,13 +54,11 @@ class ProcessPaymentStatusCommandHandler {
 
         if ($paymentLog->isDuplicateEntry())
         {
-            // TODO: Flag, send email, etc...
             // die / throw exception
-            // throw new PaymentAlreadyProcessed('Duplicate Entry');
+            Log::error('Duplicate Payment attempt: ' . $dbPayment->id);
 
+            throw new PaymentAlreadyProcessed('Duplicate Entry');
         }
-
-        // $paymentLog->logPayment();
 
         $paymentLog->updateState();
 

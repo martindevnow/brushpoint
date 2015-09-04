@@ -47,6 +47,22 @@ class InventoryController extends Controller {
     }
 
     /**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function createForItem($itemId)
+	{
+
+        $itemListByIdName = Item::lists('sku', 'id');
+
+        $item = Item::find($itemId);
+
+        return view('admin.inventory.create')
+            ->with(compact('itemListByIdName', 'item'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
@@ -68,43 +84,23 @@ class InventoryController extends Controller {
             return redirect()->back()->withErrors($validator->errors()->all());
         }
 
-
-        // Save
-        //dd($request);
-        //dd($request);
         $item = Item::findOrFail($request->item_id);
-
 
         $inventory = Inventory::create([
             'lot_code' => $request->lot_code,
             'expiry_date' => $request->expiry_date,
             'quantity' => $request->quantity,
             'original_quantity' => $request->quantity,
-            'description' => $request->description,
             'status' => $request->status,
         ]);
 
         $item->inventories()->save($inventory);
 
-        if ($request->status != "on_hold")
-            event(new InventoryIncreased($inventory));
-
         Flash::message("New Inventory added for SKU: " . $item->sku);
 
         return redirect('admins/inventory');
-
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-
-	}
 
     /**
 	 * Display the specified resource.
@@ -114,10 +110,11 @@ class InventoryController extends Controller {
 	 */
 	public function showItem($id)
 	{
+        $item = Item::find($id);
         $inventories = Inventory::where('item_id', '=', $id)->paginate(25);
 
         return view('admin.inventory.showItem')
-            ->with(compact('inventories'));
+            ->with(compact('inventories', 'item'));
 	}
 
 
@@ -191,26 +188,22 @@ class InventoryController extends Controller {
 
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @param Request $request
+     * @return Response
+     */
+	public function update($id, Request $request)
 	{
-		//
-	}
+        $inventory = Inventory::find($id);
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+        $inventory->updateField($request->field, $request->value);
+
+        Flash::message('Inventory Updated');
+
+        return $inventory;;
 	}
 
 }

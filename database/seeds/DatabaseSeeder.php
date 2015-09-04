@@ -14,16 +14,31 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->call('UsersTableSeeder');
-        $this->call('ProductsTableSeeder');
-        $this->call('PurchaseTableSeeder');
-		$this->call('CartsTableSeeder');
-        $this->call('FeedbackTableSeeder');
-        $this->call('PayerTableSeeder');
-        $this->call('PaymentsTableSeeder');
-        $this->call('ContactsTableSeeder');
-        $this->call('InventoriesTableSeeder');
-        $this->call('IssuesTableSeeder');
-        $this->call('RetailersTableSeeder');
+
+        $testing = env('TESTING', false);
+
+
+        $env = env('APP_ENV');
+
+        if ($env == "local" && ! $testing )
+        {
+            $this->call('UsersTableSeeder');
+            $this->call('ProductsTableSeeder');
+            $this->call('PurchaseTableSeeder');
+            $this->call('CartsTableSeeder');
+            $this->call('FeedbackTableSeeder');
+            $this->call('PayerTableSeeder');
+            $this->call('PaymentsTableSeeder');
+            $this->call('ContactsTableSeeder');
+            $this->call('InventoriesTableSeeder');
+            $this->call('IssuesTableSeeder');
+            $this->call('RetailersTableSeeder');
+        }
+        else
+        {
+            $this->call('UsersTableSeeder');
+            $this->call('ProductsTableSeeder');
+            $this->call('PurchaseTableSeeder');
+        }
 	}
 }

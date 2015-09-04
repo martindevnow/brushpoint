@@ -2,9 +2,17 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class Payer extends CoreModel {
+
+    use SoftDeletes;
+    use RecordsActivity;
+
+    protected $recordEvents = [];
+    protected $drawAttentionEvents = ['created', 'updated'];
 
     protected $table = 'payers';
 
@@ -24,6 +32,11 @@ class Payer extends CoreModel {
     ];
 
     protected $hidden = [];
+
+    public function getName()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
 
     public function payments()
     {

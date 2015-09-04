@@ -22,5 +22,4 @@ class NotesController extends Controller {
 
         return view('admin.ajax.singles._note')->with(compact('note'));
     }
-
 }

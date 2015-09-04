@@ -1,8 +1,13 @@
 <?php namespace Martin\Products;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Martin\Core\Traits\RecordsActivity;
 
 class Inventory extends Model {
+
+    use SoftDeletes;
+    use RecordsActivity;
 
 	protected $fillable = [
         'transaction_id',
@@ -15,8 +20,24 @@ class Inventory extends Model {
 
         'quantity',
         'original_quantity',
+        'status'
     ];
 
+
+    public function isActive()
+    {
+        if ($this->status != "on_hold")
+            return true;
+    }
+
+
+
+    public function updateField($field, $value)
+    {
+        $this->$field = $value;
+        $this->save();
+        return $this;
+    }
 
 
     public function scopeActive($query)

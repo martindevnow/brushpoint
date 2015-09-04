@@ -49,7 +49,7 @@ class PagesController extends Controller {
      */
     public function contact()
     {
-        return view('pages.contact');
+        return redirect('/feedback');
     }
 
        /**

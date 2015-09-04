@@ -1,26 +1,83 @@
 <?php
 
 
+use Martin\Core\Address;
+use Martin\Core\Attention;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Martin\Core\Note;
+use Martin\Ecom\Payer;
+use Martin\Ecom\Payment;
+use Martin\Ecom\Transaction;
 use Martin\Products\Product;
+use Martin\Quality\Contact;
+use Martin\Quality\CustomerRequest;
+use Martin\Quality\Feedback;
 
-Route::get('invo', function()
+
+
+Route::get('testCarbon', function() {
+    $feedback = Feedback::find(4);
+    dd(get_class($feedback->created_at));
+    $relation = $feedback->notable();
+    dd($relation);
+
+});
+
+Route::get('classtest', function()
 {
-    $product = Product::find(17);
-    dd($product->getProductInventory());
+    $add['address'] = Address::latest()->first();
+    $add['payer'] = Payer::latest()->first();
+    $add['payment'] = Payment::latest()->first();
+    $add['contact'] = Contact::latest()->first();
+    $add['customerRequest'] = CustomerRequest::latest()->first();
+    $add['feedback'] = Feedback::latest()->first();
+
+
+    foreach ($add as $name => $model)
+    {
+        $attention = new Attention([
+            'global' => true,
+            'action' => "created_{$name}",
+            'attentionable_id' => $model->id,
+            'attentionable_type' => get_class($model)
+        ]);
+        $attention->save();
+    }
+});
+
+Route::get('findalldeadtransactions', function()
+{
+    $bad_ones = "";
+    $transactions = Transaction::all();
+    foreach ($transactions as $transaction)
+    {
+        $bad_ones .= "Transaction {$transaction->id}: ";
+
+        if (! $transaction->payments)
+        {
+            $bad_ones .= "Has a bad payents relationship.<br />";
+        }
+        else
+        {
+            foreach ($transaction->payments as $payment)
+            {
+                $bad_ones .= "Payment {$payment->id} is associated. Payment: {$payment->state}<br />";
+            }
+        }
+    }
+    return $bad_ones;
 });
 
 
-Route::get('emailLog', function(){
-
-    Mail::send('emails.internal.log', [], function($message) {
-        $file = storage_path() . '/logs/laravel-2015-06-25.log';
-        $message->attach($file);
-        $message->to('the.one.martin@gmail.com')
-            ->subject('Nightly Log - 2015-06-25');
-    });
-    return "Sent";
+Route::get('attentions', function() {
+    $attentions = Attention::unseen()->get();
+    dd($attentions);
 });
+
+
+
+
 
 /**
  * June 23 2015
@@ -130,9 +187,8 @@ Route::get('/', 'PagesController@index');
 Route::get('home', 'PagesController@index');
 Route::get('about', 'PagesController@about');
 Route::get('capabilities', 'PagesController@capabilities');
-Route::get('contact', 'PagesController@contact');
-Route::post('contact', 'PagesController@sendContact');
-Route::get('contact/thankyou', 'PagesController@thankyouContact');
+Route::get('contact', 'PagesController@contact'); // redirects to feedback
+
 Route::get('video', 'PagesController@video');
 
 // Backwards compatible with the QR code on packaged goods
@@ -178,7 +234,8 @@ Route::get('purchase/id-{id}/{name}', 'PurchaseController@show');
  */
 Route::get('cart', 'CartController@index');
 Route::get('cart/add/{id}', 'CartController@confirmAddToCart');
-Route::post('cart/add/confirm', 'CartController@addToCartConfirmed');
+// Route::post('cart/add/confirm', 'CartController@addToCartConfirmed'); depreciated
+Route::post('cart/confirm/add', 'CartController@addToCartConfirmed');
 Route::get('cart/remove/{id}', 'CartController@remove');
 Route::post('cart/update', 'CartController@update');
 Route::post('cart/shipping/country', 'CartController@shippingToCountry');
@@ -210,6 +267,43 @@ Route::get('checkout/cancel', 'CheckoutController@cancel');
  */
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 {
+
+
+    /**
+     * Attachments
+     */
+    Route::post(        'admins/attachments/store',       'AttachmentsController@attachmentStore');
+    Route::get(        'admins/attachments/download/{id}',   'AttachmentsController@attachmentDownload');
+
+
+
+    /**
+     * Addresses
+     */
+    Route::post(        'admins/addresses/store',       'AddressesController@ajaxStore');
+    Route::get(         'admins/addresses/remove/{id}',       'AddressesController@delete');
+
+
+
+    /**
+     * Attentions
+     */
+    Route::get(         'admins/attentions/clearAll', 'AttentionsController@clearAll');
+    Route::get(         'admins/attentions/remove/{id}', 'AttentionsController@destroy');
+    Route::resource(         'admins/attentions', 'AttentionsController',
+        ['only' => ['index', 'show']]);
+
+
+
+
+    /**
+     * Contacts
+     */
+    Route::resource('admins/contacts', 'ContactsController');
+
+
+
+
     /**
      * Dashboard
      */
@@ -217,34 +311,51 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 
 
 
-
     /**
-     * Products
+     * Emails
+     * - view the email templates that are sent to different people.
      */
-    // Route::get(      'admins/products/create',               'ProductsController@create');
-    // Route::post(     'admins/products/create',               'ProductsController@store');
-    Route::patch(       'admins/products/ajax/{id}',            'ProductsController@ajaxPatch');
-    Route::patch(       'admins/products/active/{id}',          'ProductsController@ajaxActive');
-    Route::patch(       'admins/products/portfolio/{id}',       'ProductsController@ajaxPortfolio');
-    Route::patch(       'admins/products/purchase/{id}',        'ProductsController@ajaxPurchase');
-    Route::get(         'admins/products/virtues/saveOrder',    'ProductsController@ajaxSaveListOrder');
-    Route::get(         'admins/products/rearrange',            'ProductsController@rearrange');
-    Route::get(         'admins/products/rearrange/saveOrder',  'ProductsController@ajaxSaveProductOrder');
-    Route::resource(    'admins/products',                      'ProductsController');
+    Route::get('admins/emails', 'EmailsController@index');
+    Route::get('admins/emails/{emailScope}/{emailType}', 'EmailsController@show');
+
 
 
     /**
      * Feedback
      */
-    Route::post(        'admins/feedback/contact/customer', 'FeedbackController@contactCustomer');
-    Route::post(        'admins/feedback/contact/send', 'FeedbackController@sendContactCustomer');
+    Route::post(        'admins/feedback/contact/customer',     'FeedbackController@contactCustomer');
+    Route::post(        'admins/feedback/contact/send',         'FeedbackController@sendContactCustomer');
     // Route::post(         'admins/feedback/email/requestRetailerInfo', 'FeedbackController@emailRequestRetailerInfo');
-    Route::get(         'admins/feedback/filter',      'FeedbackController@filtered');
+    Route::get(         'admins/feedback/filter',               'FeedbackController@filtered');
     Route::get(         'admins/feedback/{feedbackId}/retailer/remove', 'FeedbackController@removeRetailer');
     Route::get(         'admins/feedback/{feedbackId}/issue/remove',     'FeedbackController@removeIssue');
-    Route::patch(       'admins/feedback/ajax/{id}',   'FeedbackController@ajaxPatch');
-    Route::resource(    'admins/feedback',             'FeedbackController');
+    Route::patch(       'admins/feedback/ajax/{id}',            'FeedbackController@ajaxPatch');
+    Route::patch(       'admins/feedback/ajaxToggle/{id}',      'FeedbackController@ajaxToggle');
+    Route::resource(    'admins/feedback',                      'FeedbackController');
+    Route::patch(       'admins/feedback/{id}',                 'FeedbackController@update');
+    Route::get(         'admins/feedback/{id}/close',           'FeedbackController@close');
 
+
+
+
+
+    /**
+     * Inventory
+     */
+    Route::get(         'admins/inventory/item/{id}/create',     'InventoryController@createForItem');
+    Route::get(         'admins/inventory/item/{id}',     'InventoryController@showItem');
+    Route::get(         'admins/inventory/lot/{id}',     'InventoryController@showLotActivity');
+    Route::get(         'admins/inventory/hold/{id}',     'InventoryController@putOnHold');
+    Route::get(         'admins/inventory/activate/{id}',     'InventoryController@activate');
+    Route::resource(    'admins/inventory',             'InventoryController');
+
+
+    /**
+     * Issues
+     */
+    Route::post(        'admins/issues/store',      'IssuesController@ajaxStore');
+    Route::patch(       'admins/issues/ajax/{id}',  'IssuesController@ajaxPatch');
+    Route::resource(    'admins/issues',            'IssuesController');
 
 
     /**
@@ -253,6 +364,15 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::patch(       'admins/investigations/ajax/{id}',   'InvestigationsController@ajaxPatch');
     Route::post(        'admins/investigations/report/store',   'InvestigationsController@reportStore');
     Route::get(        'admins/investigations/download/{id}',   'InvestigationsController@reportDownload');
+
+
+
+
+    /**
+     * Notes
+     */
+    Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
+
 
 
 
@@ -280,41 +400,53 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 
 
     /**
-     * Users
+     * Payers
      */
-    Route::resource(    'admins/users',          'UsersController');
+    Route::resource('admins/payers', 'PayersController');
+
+
 
 
     /**
-     * Notes
+     * Products
      */
-    Route::post(        'admins/notes/store',       'NotesController@ajaxStore');
+    // Route::get(      'admins/products/create',               'ProductsController@create');
+    // Route::post(     'admins/products/create',               'ProductsController@store');
+    Route::patch(       'admins/products/ajax/{id}',            'ProductsController@ajaxPatch');
+    Route::patch(       'admins/products/active/{id}',          'ProductsController@ajaxActive');
+    Route::patch(       'admins/products/portfolio/{id}',       'ProductsController@ajaxPortfolio');
+    Route::patch(       'admins/products/purchase/{id}',        'ProductsController@ajaxPurchase');
+    Route::get(         'admins/products/virtues/saveOrder',    'ProductsController@ajaxSaveListOrder');
+    Route::get(         'admins/products/rearrange',            'ProductsController@rearrange');
+    Route::get(         'admins/products/rearrange/saveOrder',  'ProductsController@ajaxSaveProductOrder');
+    Route::resource(    'admins/products',                      'ProductsController');
+
+    /**
+     * Reports
+     */
+    Route::get(         'admins/reports', 'ReportsController@index');
+    Route::post(         'admins/reports/run', 'ReportsController@run');
+    Route::get(         'admins/reports/generate/payments', 'ReportsController@generatePayments');
+    Route::get(         'admins/reports/generate/soldItems', 'ReportsController@generateSoldItems');
+    Route::get(         'admins/reports/generate/feedback', 'ReportsController@generateFeedback');
+
+
 
 
     /**
-     * Addresses
+     * Retailers
      */
-    Route::post(        'admins/addresses/store',       'AddressesController@ajaxStore');
-    Route::get(         'admins/addresses/remove/{id}',       'AddressesController@delete');
+    Route::post(        'admins/retailers/store',      'RetailersController@ajaxStore');
+    Route::patch(       'admins/retailers/ajax/{id}',  'RetailersController@ajaxPatch');
+    Route::resource(    'admins/retailers',             'RetailersController');
 
 
     /**
-     * Inventory
+     * Search
      */
-    Route::get(         'admins/inventory/item/{id}',     'InventoryController@showItem');
-    Route::get(         'admins/inventory/lot/{id}',     'InventoryController@showLotActivity');
-    Route::get(         'admins/inventory/hold/{id}',     'InventoryController@putOnHold');
-    Route::get(         'admins/inventory/activate/{id}',     'InventoryController@activate');
-    Route::resource(    'admins/inventory',             'InventoryController');
 
-
-    /**
-     * Issues
-     */
-    Route::post(        'admins/issues/store',      'IssuesController@ajaxStore');
-    Route::patch(       'admins/issues/ajax/{id}',  'IssuesController@ajaxPatch');
-    Route::resource(    'admins/issues',            'IssuesController');
-
+    Route::get(         'admins/search', 'SearchController@index');
+    Route::post(         'admins/search', 'SearchController@show');
 
     /**
      * Virtues
@@ -324,32 +456,13 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     // Route::resource(    'admins/virtues',            'VirtuesController');
 
 
-    /**
-     * Retailers
-     */
-    Route::post(        'admins/retailers/store',      'RetailersController@ajaxStore');
-    Route::patch(       'admins/retailers/ajax/{id}',  'RetailersController@ajaxPatch');
-    Route::resource(    'admins/retailers',         'RetailersController');
 
 
     /**
-     * Payers
+     * Users
      */
-    Route::resource('admins/payers', 'PayersController');
+    Route::resource(    'admins/users',          'UsersController');
 
-
-    /**
-     * Contacts
-     */
-    Route::resource('admins/contacts', 'ContactsController');
-
-
-    /**
-     * Emails
-     * - view the email templates that are sent to different people.
-     */
-    Route::get('admins/emails', 'EmailsController@index');
-    Route::get('admins/emails/{emailScope}/{emailType}', 'EmailsController@show');
 
 });
 

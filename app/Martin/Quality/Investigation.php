@@ -1,8 +1,13 @@
 <?php namespace Martin\Quality;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class Investigation extends CoreModel {
+
+    use RecordsActivity;
+    use SoftDeletes;
 
     protected $fillable = [
         'feedback_id',
@@ -32,6 +37,19 @@ class Investigation extends CoreModel {
         $this->save();
     }
 
+
+    /**
+     * Trash this Investigation and take all Reports with it!
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany|void
+     */
+    public function trash()
+    {
+        $reports = $this->investigationReports;
+        foreach($reports as $report)
+            $report->trash();
+        return true;
+    }
 
     /**
      * This Investigation belongs to a single feedback

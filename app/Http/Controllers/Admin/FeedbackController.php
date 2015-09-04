@@ -6,8 +6,11 @@ use App\Events\RequestForRetailerInfoIssued;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\CreateNewFeedbackRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Martin\Notifications\Flash;
 use Martin\Quality\Contact;
 use Martin\Quality\CustomerRequest;
@@ -30,6 +33,17 @@ class FeedbackController extends Controller {
         return $this->layout->content = view('admin.feedback.index')->with(compact('feedbacks'));
     }
 
+
+    public function close($id)
+    {
+        $feedback = Feedback::find($id);
+
+        $feedback->toggleClose();
+
+        Flash::message('The feedback has been closed.');
+
+        return redirect()->back();
+    }
 
     /**
      * Show the form for creating a new Feedback entry.
@@ -55,25 +69,32 @@ class FeedbackController extends Controller {
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateNewFeedbackRequest $request)
     {
-        $data = $request->except('_token', 'issue_id', 'retailer_id');
+        Validator::extend('sanitiseDate', function($attribute, $value, $parameters)
+        {
+            return sanitiseDate($value);
+        });
+
+        $validator = Validator::make($request->all(), [
+            'received_at' => 'sanitiseDate'
+        ], ['sanitise_date' => 'Please enter using format: mm/dd/yyyy']);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors()->all());
+        }
+
+
+        $data = $request->except('_token', 'received_at' // , 'issue_id', 'retailer_id'
+            );
         $data['hash'] = str_random(32);
+
 
         $feedback = Feedback::create($data);
         $feedback->save();
-
-        if ($request->retailer_id)
-        {
-            $retailer = Retailer::find($request->retailer_id);
-            $feedback->retailer()->associate($retailer);
-        }
-
-        if ($request->issue_id)
-        {
-            $issue = Issue::find($request->issue_id);
-            $feedback->issue()->associate($issue);
-        }
+        $feedback->created_at = Carbon::createFromFormat('m/d/Y', $request->received_at);
+        $feedback->save();
 
         // store the feedback to the session
         session(['feedback' => $feedback->id]);
@@ -117,7 +138,14 @@ class FeedbackController extends Controller {
     public function edit($feedbackId)
     {
         $feedback = Feedback::find($feedbackId);
-        return $this->layout->content = view('admin.feedback.edit')->with(compact('feedback'));
+        $issues = Issue::lists('type', 'id');
+        $retailers = Retailer::lists('name', 'id');
+
+        array_unshift($issues, "Select");
+        array_unshift($retailers, "Select");
+
+        return $this->layout->content = view('admin.feedback.edit')
+            ->with(compact('feedback', 'issues', 'retailers'));
     }
 
 
@@ -128,17 +156,46 @@ class FeedbackController extends Controller {
      * @param Requests\CreateProductRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update($feedbackId, Requests\CreateProductRequest $request)
+    public function update($feedbackId, Request $request)
     {
         Feedback::findOrFail($feedbackId)->update($request->all());
-        Flash::message('The product has been listed successfully');
+
+        Flash::message('The feedback has been updated.');
+
         return redirect("admins/feedback/{$feedbackId}");
     }
 
 
-
-
+    /**
+     * Designed for string or integer, NOT checkboxes (use ajaxToggle for that)
+     *
+     * @param $feedbackId
+     * @param Request $request
+     * @return string
+     */
     public function ajaxPatch($feedbackId, Request $request)
+    {
+        $field = $request->get('field');
+        $value = $request->get($field);
+
+        $feedback = Feedback::find($feedbackId);
+
+        if ($field == "closed")
+            $feedback->toggleClose($request->has($field));
+        else
+            $feedback->$field = $value;
+        $feedback->save();
+        return "Passed";
+    }
+
+    /**
+     * Designed for Checkboxes (Boolean toggling)
+     *
+     * @param $feedbackId
+     * @param Request $request
+     * @return string
+     */
+    public function ajaxToggle($feedbackId, Request $request)
     {
         $field = $request->get('field');
         $value = $request->has($field);
@@ -152,7 +209,6 @@ class FeedbackController extends Controller {
         $feedback->save();
         return "Passed";
     }
-
 
 
     /**
@@ -181,7 +237,6 @@ class FeedbackController extends Controller {
         $feedback = Feedback::findOrFail($feedbackId);
         $feedback->retailer_id = null;
         $feedback->save();
-        // $retailer->feedbacks()->detach($feedbackId);
         return redirect('/admins/feedback/'. $feedbackId);
     }
 
@@ -265,5 +320,16 @@ class FeedbackController extends Controller {
         Auth::user()->contacts()->save($contact);
 
         return redirect('/admins/feedback/'. $request->feedback_id);
+    }
+
+
+
+    public function destroy($id)
+    {
+        $feedback = Feedback::find($id);
+        $feedback->trash();
+        Flash::message('That feedback was deleted.');
+
+        return redirect('admins/feedback/');
     }
 }

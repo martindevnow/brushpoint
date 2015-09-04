@@ -5,7 +5,7 @@
             body,td,div,p,a,input {font-family: arial, sans-serif;}
         </style>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Your BrushPoint.com order - {{ time() }}</title>
+        <title>BrushPoint.com Feedback - {{ time() }}</title>
         <style type="text/css">
             body, td {font-size:13px} a:link, a:active {color:#1155CC; text-decoration:none} a:hover {text-decoration:underline; cursor: pointer} a:visited{color:##6611CC} img{border:0px} pre { white-space: pre; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; white-space: pre-wrap; word-wrap: break-word; max-width: 800px; overflow: auto;}
         </style>
@@ -26,7 +26,7 @@
                                 <tr>
                                     <td rowspan="2" style="width:115px;padding:20px 20px 0 0;vertical-align:top;font-size:13px;line-height:18px;font-family:Arial,sans-serif">
                                         <a href="http://www.brushpoint.com" title="Visit www.brushpoint.com" style="text-decoration:none;color:rgb(0,102,153);font:12px/16px Arial,sans-serif" target="_blank">
-                                            <img src="http://www.brushpoint.martindevnow.com/images/logo/brushpoint.jpg" height="75" width="165" />
+                                            <img src="http://www.brushpoint.com/images/logo/brushpoint.jpg" height="75" width="165" />
                                             <!-- <img alt="BrushPoint.com" src="https://ci6.googleusercontent.com/proxy/WhmqLoMir5UYEN_mqZBtoDGctziWnxcd16JUuejFgylJH9MjVIUKe8NP3fxPs7ww8j41WBvy-JQKspLrhrPKLmmCwBuHQcWhwm7oPls8g7VZtkb0JoBGh-TAQx2I=s0-d-e1-ft#http://g-ec2.images-amazon.com/images/G/15/x-locale/cs/te/a_ca_logo.png" style="border:0;width:115px"> -->
                                         </a>
                                     </td>

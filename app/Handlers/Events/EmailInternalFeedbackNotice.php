@@ -36,7 +36,7 @@ class EmailInternalFeedbackNotice {
 	{
         $feedback = $event->feedback;
 
-        $this->emailRepository->emailInternalFeedbackNotice($feedback);
+        $this->emailRepository->emailInternalFeedbackNotice($feedback, get_class($event));
 	}
 
 }

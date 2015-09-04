@@ -13,11 +13,42 @@
         <testsuite name="Application Test Suite">
             <directory>./tests/</directory>
         </testsuite>
-        <testsuite name="inventory">
-            <file>./tests/functional/InventoryAdjustmentTest.php</file>
+        <testsuite name="default">
+            <directory>./tests/</directory>
         </testsuite>
-        <testsuite name="contact">
-            <file>./tests/functional/ContactCustomerTest.php</file>
+
+
+
+        <testsuite name="unit">
+            <directory>./tests/unit/</directory>
+        </testsuite>
+        <testsuite name="functional">
+            <directory>./tests/functional/</directory>
+        </testsuite>
+        <testsuite name="integrated">
+            <directory>./tests/integrated/</directory>
+        </testsuite>
+
+
+
+        <testsuite name="Core">
+            <directory>./tests/unit/Core/</directory>
+        </testsuite>
+        <testsuite name="Email">
+            <file>./tests/functional/EmailListTest.php</file>
+        </testsuite>
+        <testsuite name="Ecom">
+            <directory>./tests/unit/Ecom/</directory>
+        </testsuite>
+        <testsuite name="Products">
+            <directory>./tests/unit/Products/</directory>
+        </testsuite>
+        <testsuite name="Quality">
+            <directory>./tests/unit/Quality/</directory>
+        </testsuite>
+
+        <testsuite name="other">
+            <file>./tests/unit/Products/InventoryAdjustmentTest.php</file>
         </testsuite>
     </testsuites>
     <php>

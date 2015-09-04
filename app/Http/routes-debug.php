@@ -4,6 +4,32 @@ use Martin\Products\Item;
 use Martin\Quality\Contact;
 
 
+Route::get('invo', function()
+{
+    $product = Product::find(17);
+    dd($product->getProductInventory());
+});
+
+Route::get('datetime', function() {
+    $datet = Carbon::createFromDate(2015, 8, 0);//->createFromTime(0,0,0);
+    // $datet = Carbon::cr
+    echo (new Carbon('first day of July 2015'))->toDateTimeString();
+    die();
+});
+
+
+Route::get('emailLog', function(){
+
+    Mail::send('emails.internal.log', [], function($message) {
+        $file = storage_path() . '/logs/laravel-2015-06-25.log';
+        $message->attach($file);
+        $message->to('the.one.martin@gmail.com')
+            ->subject('Nightly Log - 2015-06-25');
+    });
+    return "Sent";
+});
+
+
 Route::get('fileUpload', function()
 {
     return view('testing.fileUpload');

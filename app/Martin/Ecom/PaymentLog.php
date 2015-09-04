@@ -10,18 +10,18 @@ use PayPal\Api\ShippingAddress;
 
 class PaymentLog {
 
-    protected $paymentRepo;
-    protected $payerRepo;
+    public $paymentRepo;
+    public $payerRepo;
 
-    protected $dbPayment;
-    protected $dbPayer;
-    protected $dbAddress;
-    protected $dbTransactions;
+    public $dbPayment;
+    public $dbPayer;
+    public $dbAddress;
+    public $dbTransactions;
 
-    protected $payPalPayment;
-    protected $payPalAddress;
+    public $payPalPayment;
+    public $payPalAddress;
 
-    protected $api;
+    public $api;
 
     function __construct($api)
     {
@@ -35,7 +35,7 @@ class PaymentLog {
     {
         $this->payPalPayment = \PayPal\Api\Payment::get($paymentId, $this->api);
 
-        Log::info(print_r($this->payPalPayment, true));
+        // Log::info(print_r($this->payPalPayment, true));
 
         return $this->fetchFromDbByPayPalPayment();
 
@@ -81,12 +81,12 @@ class PaymentLog {
         if (! $this->dbPayment->payer)
         {
             $this->payerRepo = new \Martin\Ecom\Repositories\PayerRepository();
-            Log::info('paypal payer: '. print_r($this->payPalPayment->getPayer(),1));
+            // Log::info('paypal payer: '. print_r($this->payPalPayment->getPayer(),1));
 
             $this->dbPayer = $this->payerRepo->findOrCreateFromPayPal($this->payPalPayment->getPayer());
 
             $this->dbPayer->payments()->save($this->dbPayment);
-            Log::info("payer: ". print_r($this->dbPayer,1));
+            // Log::info("payer: ". print_r($this->dbPayer,1));
 
             return $this->dbPayer;
         }

@@ -16,11 +16,16 @@ class EventServiceProvider extends ServiceProvider {
          */
 		'App\Events\ProductWasPurchased' => [
 			'App\Handlers\Events\EmailPurchaseConfirmation',
+            'App\Handlers\Events\EmailPurchaseNotificationToStaff',
             'App\Handlers\Events\GenerateInvoicePdf',
             'App\Handlers\Events\ClearCurrentCart',
             'App\Handlers\Events\AdjustPurchasedInventory',
 		],
 
+        'App\Events\TestProductWasPurchased' => [
+            'App\Handlers\Events\TestAdjustPurchasedInventory',
+
+        ],
 
         'App\Events\PackageWasShipped' => [
             'App\Handlers\Events\EmailShippingConfirmation',
@@ -43,21 +48,6 @@ class EventServiceProvider extends ServiceProvider {
         'App\Events\RequestForRetailerInfoIssued' => [
             'App\Handlers\Events\EmailRequestForLotCodeAndAddress',
         ],
-
-
-        /**
-         * Inventory Stuff
-         */
-        'App\Events\InventoryPlacedOnHold' => [
-            'App\Handlers\Events\RemoveInventoryFromOnHandOfItem',
-        ],
-
-        'App\Events\InventoryIncreased' => [
-            'App\Handlers\Events\AddInventoryToOnHandOfItem',
-        ],
-
-
-
 
 	];
 

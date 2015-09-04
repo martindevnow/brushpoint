@@ -1,22 +1,42 @@
 <?php namespace Martin\Quality;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
 
 class Email extends CoreModel {
+    use SoftDeletes;
 
     protected $table = 'emails';
 
 	protected $fillable = [
-        'body',
-        'subject',
-        'template',
-        'recipient_email',
-        'feedback_id',
+        'email_type',
+        'recipient_list',
     ];
 
-    public function feedback()
+
+    /**
+     * Trash this Email model
+     *
+     * @return bool|\Illuminate\Database\Eloquent\Relations\MorphMany
+     * @throws \Exception
+     */
+    public function trash()
     {
-        return $this->belongsTo('Martin\Quality\Feedback');
+        $this->delete();
+        return true;
     }
+
+
+    public function setRecipientListAttribute($value)
+    {
+        $this->attributes['recipient_list'] = serialize($value);
+    }
+
+    public function getRecipientListAttribute($value)
+    {
+        return unserialize($value);
+    }
+
 
 }

@@ -122,7 +122,6 @@ class PaymentsController extends Controller {
         $payments->appends($request->all());
 
         return $this->layout->content = view('admin.payments.index')->with(compact('payments'));
-
     }
 
 
@@ -130,7 +129,6 @@ class PaymentsController extends Controller {
     public function create()
     {
         // show the form to add a new payment
-
         return view('admin.payments.create');
     }
 
@@ -175,6 +173,4 @@ class PaymentsController extends Controller {
 
 
     }
-
-
-} 
+}

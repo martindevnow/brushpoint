@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
     use Authenticatable, CanResetPassword;
+    use SoftDeletes;
+
 
     /**
      * The database table used by the model.
@@ -59,6 +62,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function investigationReports()
     {
         return $this->hasMany('Martin\Quality\InvestigationReport');
+    }
+
+    public function attachments()
+    {
+        return $this->hasMany('Martin\Core\Attachment');
     }
 
 }

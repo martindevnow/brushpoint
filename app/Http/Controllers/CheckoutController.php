@@ -8,11 +8,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Log;
 use Martin\Ecom\Checkout;
 use Martin\Ecom\PaymentLog;
 use Martin\Notifications\Flash;
 use Martin\Products\CartRepository;
 use PayPal\Api\Payment;
+use PayPal\Api\PaymentExecution;
 
 
 class CheckoutController extends Controller {
@@ -58,26 +60,43 @@ class CheckoutController extends Controller {
 
         $paymentLog = new PaymentLog($checkout->getApi());
 
-        $payment = $paymentLog->fetchPaymentFromPayPal($request->get('paymentId'));
+        $DBPayment = $paymentLog->fetchPaymentFromPayPal($request->get('paymentId'));
+        $PPPayment = $paymentLog->payPalPayment;
 
-        $response = Event::fire(new ProductWasPurchased($payment));
+        // $DBPayment = $paymentLog->fetchFromDbByPayPalPayment();
+
+        $execution = new PaymentExecution();
+        $execution->setPayerId($request->PayerID);
+        $result = $PPPayment->execute($execution, $paymentLog->api);
+
+        Log::info("Payment Executed: " . print_r($result, true));
+
+        $response = Event::fire(new ProductWasPurchased($DBPayment));
 
         session(['payment' => $payment]);
 
-        return redirect('checkout/thankyou/'. $payment->id);
+        return redirect('checkout/thankyou/'. $DBPayment->id);
     }
 
 
 
     public function thankyou($invoiceId, Checkout $checkout)
     {
-        $payment = \Martin\Ecom\Payment::find($invoiceId);
+        $payment = \Martin\Ecom\Payment::findOrFail($invoiceId);
 
         $paymentLog = new PaymentLog($checkout->getApi());
 
         $payment = $paymentLog->fetchPaymentFromPayPal($payment->payment_id);
 
+        if ( ! $payment )
+            return redirect('/');
+
         return view('checkout.thankyou')->withPayment($payment);
+    }
+
+    public function error()
+    {
+        return view('errors.paypal');
     }
 }
 

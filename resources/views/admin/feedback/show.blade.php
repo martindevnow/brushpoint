@@ -4,150 +4,248 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-8">
-            <table class="table form-table">
-                <thead>
-                    <tr>
-                      <th style="width: 25%;">Field</th>
-                      <th>Content</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>ID</td>
-                      <td>{{ $feedback->id }}</td>
-                    </tr>
-                    <tr>
-                      <td>Date</td>
-                      <td>{{ $feedback->created_at }}</td>
-                    </tr>
-                    <tr>
-                      <td>Name</td>
-                      <td>{{ $feedback->name }} </td>
-                    </tr>
-                    <tr>
-                      <td>Email</td>
-                      <td>{{ $feedback->email }}</td>
-                    </tr>
-                    <tr>
-                      <td>Phone</td>
-                      <td>{{ $feedback->phone }}</td>
-                    </tr>
-                    <tr>
-                      <td>Retailer</td>
-                      <td>
+        <div class="col-lg-9">
+            <h1 class="page-header">Feedback: {{ $feedback->id }}  Received: {{ $feedback->created_at->diffForHumans() }}</h1>
+        </div>
+    </div>
 
-                        @if (isset($feedback->retailer_id))
-                            <a href="{{ url('admins/retailers/'. $feedback->retailer->id) }}"> {{ $feedback->retailer->name }}</a> <a href="/admins/feedback/{{ $feedback->id }}/retailer/remove">[Remove]</a>
-                        @else
-                            {{ $feedback->retailer_text }}
-                          {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=retailer_id' ]) !!}
-                              <div class="form-group">
-                              {!! Form::select('retailer_id', $retailers, null, ['data-click-submits-form']) !!}
-                              </div>
-                          {!! Form::close() !!}
-                          @if(!$feedback->issue)
-                          @endif
-                        @endif
 
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lot Code</td>
-                      <td>{{ $feedback->lot_code }}</td>
-                    </tr>
-                    <tr>
-                      <td>Issue <br />
-                            @if (isset($feedback->issue_id))
-                                <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a> <a href="/admins/feedback/{{ $feedback->issue->id }}/issue/remove/">[Remove]</a>
-                            @else
-                              {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=issue_id' ]) !!}
-                                  <div class="form-group">
-                                  {!! Form::select('issue_id', $issues, null, ['data-click-submits-form']) !!}
-                                  </div>
-                              {!! Form::close() !!}
+    {{--Start Row--}}
+    <div class="row">
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-cog fa-fw"></i>
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="list-group">
+                            <a href="/admins/feedback/{{ $feedback->id }}/edit">
+                                <button class="btn btn-101 btn-primary">
+                                    <i class="fa fa-pencil"></i>
+                                    &nbsp; Edit
+                                </button>
+                            </a>
+
+                            @include('admin.feedback.modals._contactCustomer')
+
+                            {{--Adding New Buttons--}}
+                            @if(!$feedback->issue)
+                                @include('admin.feedback.modals._issue')
                             @endif
-                       </td>
-                      <td>{{ $feedback->issue_text }}</td>
-                    </tr>
-                  </tbody>
-            </table>
-              @include('admin.feedback.modals._contactCustomer')
+
+                            @if(!$feedback->retailer)
+                                @include('admin.feedback.modals._retailer')
+                            @endif
+
+                            @include('admin.layouts.modals._note', ['model' => $feedback])
+                            @include('admin.layouts.modals._attachment', ['model' => $feedback])
+                            @include('admin.layouts.modals._address', ['model' => $feedback])
+
+
+
+                        {{--<a href="#close">--}}
+                        {{--<button class="btn btn-unchecked btn-close">--}}
+                            {{--<i class="fa fa-times"></i> Close--}}
+                        {{--</button>--}}
+                        {{--</a>--}}
+
+
+                        {{--<a href="#close">--}}
+                        {{--<button class="btn btn-checked btn-closed">--}}
+                            {{--<i class="fa fa-check"></i> Closed--}}
+                        {{--</button>--}}
+                        {{--</a>--}}
+
+
+
+
+                    </div>
+                    <!-- /.list-group -->
+                    {{--<a href="#" class="btn btn-default btn-block">View All Alerts</a>--}}
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-md-2 -->
+
+
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Feedback
+                    @if (! $feedback->closed)
+                    <a href="/admins/feedback/{{ $feedback->id }}/close" style="float: right;">
+                        <button class="btn btn-primary btn-panel-heading btn-danger">Close</button>
+                    </a>
+                    @else
+                    <a href="/admins/feedback/{{ $feedback->id }}/close" style="float: right;">
+                        <button class="btn btn-primary btn-panel-heading btn-success">Open</button>
+                    </a>
+
+                    @endif
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                          <th>Field</th>
+                                          <th>Content</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>ID</td>
+                                          <td>{{ $feedback->id }}</td>
+                                        </tr>
+                                        <tr>
+                                          <td>Date</td>
+                                          <td>{{ $feedback->created_at }}</td>
+                                        </tr>
+                                        <tr>
+                                          <td>Name</td>
+                                          <td>{{ $feedback->name }} </td>
+                                        </tr>
+                                        <tr>
+                                          <td>Email</td>
+                                          <td>{{ $feedback->email }}</td>
+                                        </tr>
+                                        <tr>
+                                          <td>Phone</td>
+                                          <td>{{ $feedback->phone }}</td>
+                                        </tr>
+                                        <tr>
+                                          <td>Retailer</td>
+                                          <td>
+
+                                            @if (isset($feedback->retailer_id))
+                                                <a href="{{ url('admins/retailers/'. $feedback->retailer->id) }}"> {{ $feedback->retailer->name }}</a>
+                                                <a href="/admins/feedback/{{ $feedback->id }}/retailer/remove">
+                                                    <button class="btn btn-primary">
+                                                    <i class="fa fa-trash"></i></button>
+                                                </a>
+                                            @else
+                                                {{ $feedback->retailer_text }}
+                                              {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=retailer_id' ]) !!}
+                                                  <div class="form-group">
+                                                  {!! Form::select('retailer_id', $retailers, null, ['data-click-submits-form']) !!}
+                                                  </div>
+                                              {!! Form::close() !!}
+                                              @if(!$feedback->issue)
+                                              @endif
+                                            @endif
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>Lot Code</td>
+                                          <td>{{ $feedback->lot_code }}</td>
+                                        </tr>
+                                        <tr>
+                                          <td>BP Code</td>
+                                          <td>{{ $feedback->bp_code }}</td>
+                                        </tr>
+                                        <tr>
+                                          <td>Issue</td>
+                                          <td>
+                                              @if (isset($feedback->issue_id))
+                                                  <a href="{{ url('admins/issues/'. $feedback->issue->id) }}"> {{ $feedback->issue->type }} </a>
+                                                  <a href="/admins/feedback/{{ $feedback->id }}/issue/remove/">
+                                                      <button class="btn btn-primary">
+                                                      <i class="fa fa-trash"></i></button>
+                                                  </a>
+                                              @else
+                                                {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=issue_id' ]) !!}
+                                                    <div class="form-group">
+                                                    {!! Form::select('issue_id', $issues, null, ['data-click-submits-form']) !!}
+                                                    </div>
+                                                {!! Form::close() !!}
+                                              @endif
+                                            {{ $feedback->issue_text }}
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
-        <div class="col-lg-4">
-            <table class="table form-table">
-                <thead>
-                    <tr>
-                      <th style="width: 25%">Field</th>
-                      <th>Content</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                      Adverse Event
-                      </td>
-                      <td>
-                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=adverse_event' ]) !!}
-                          <div class="form-group">
-                          {!! Form::checkbox('adverse_event', $feedback->adverse_event, $feedback->adverse_event, ['data-click-submits-form']) !!}
-                          </div>
-                      {!! Form::close() !!}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                      Health Canada Report
-                      </td>
-                      <td>
-                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=health_canada_report' ]) !!}
-                          <div class="form-group">
-                          {!! Form::checkbox('health_canada_report', $feedback->health_canada_report, $feedback->health_canada_report, ['data-click-submits-form']) !!}
-                          </div>
-                      {!! Form::close() !!}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                      CAPA Required
-                      </td>
-                      <td>
-                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=capa_required' ]) !!}
-                          <div class="form-group">
-                          {!! Form::checkbox('capa_required', $feedback->capa_required, $feedback->capa_required, ['data-click-submits-form']) !!}
-                          </div>
-                      {!! Form::close() !!}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                      Closed
-                      </td>
-                      <td>
-                      {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id .'?field=closed' ]) !!}
-                          <div class="form-group">
-                          {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
-                          </div>
-                      {!! Form::close() !!}
-                      </td>
-                    </tr>
-                  </tbody>
-            </table>
 
-            {{--Adding New Buttons--}}
-            @if(!$feedback->issue)
-                @include('admin.feedback.modals._issue')
-            @endif
-
-            @if(!$feedback->retailer)
-                @include('admin.feedback.modals._retailer')
-            @endif
-
-            @include('admin.layouts.modals._note', ['model' => $feedback])
-            @include('admin.layouts.modals._address', ['model' => $feedback])
-
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Other
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table form-table">
+                            <thead>
+                                <tr>
+                                  <th>Field</th>
+                                  <th>Content</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                  Adverse Event
+                                  </td>
+                                  <td>
+                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=adverse_event' ]) !!}
+                                      <div class="form-group">
+                                      {!! Form::checkbox('adverse_event', $feedback->adverse_event, $feedback->adverse_event, ['data-click-submits-form']) !!}
+                                      </div>
+                                  {!! Form::close() !!}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                  Health Canada Report
+                                  </td>
+                                  <td>
+                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=health_canada_report' ]) !!}
+                                      <div class="form-group">
+                                      {!! Form::checkbox('health_canada_report', $feedback->health_canada_report, $feedback->health_canada_report, ['data-click-submits-form']) !!}
+                                      </div>
+                                  {!! Form::close() !!}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                  CAPA Required
+                                  </td>
+                                  <td>
+                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=capa_required' ]) !!}
+                                      <div class="form-group">
+                                      {!! Form::checkbox('capa_required', $feedback->capa_required, $feedback->capa_required, ['data-click-submits-form']) !!}
+                                      </div>
+                                  {!! Form::close() !!}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>
+                                  Closed
+                                  </td>
+                                  <td>
+                                  {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajaxToggle/'. $feedback->id .'?field=closed' ]) !!}
+                                      <div class="form-group">
+                                      {!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form']) !!}
+                                      </div>
+                                  {!! Form::close() !!}
+                                  </td>
+                                </tr>
+                              </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -184,6 +282,12 @@
     <div class="row" id="address_list">
         @foreach($feedback->addresses as $address)
             @include('admin.ajax.singles._address', ['address' => $address])
+        @endforeach
+    </div>
+
+    <div class="row" id="attachment_list">
+        @foreach($feedback->attachments as $attachment)
+            @include('admin.ajax.singles._attachment', ['attachment' => $attachment])
         @endforeach
     </div>
 </div>

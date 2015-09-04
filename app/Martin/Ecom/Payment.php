@@ -4,12 +4,15 @@ use App\Events\PackageWasShipped;
 use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Martin\Core\CoreModel;
+use Martin\Core\Traits\RecordsActivity;
+use Martin\Reports\Reporter;
 
 class Payment extends CoreModel {
 
-	protected $table = "payments";
+    protected $table = "payments";
 
     protected $fillable = [
         'shipped',
@@ -21,9 +24,31 @@ class Payment extends CoreModel {
         'address_id',
         'unique_id',
         'hash',
-
     ];
 
+    use SoftDeletes;
+
+    use RecordsActivity;
+
+    protected $recordEvents = [
+    ];
+
+    protected $drawAttentionEvents = [
+        'created', 'updated'
+    ];
+
+    use Reporter;
+
+    public $reporterFields = array(
+        // payment fields
+        'id',            'payment_id',            'intent',            'shipped',            'created_at',
+        // payer fields
+        'payer.payer_id',       'payer_name',       'payer.email',
+        // address fields
+        'address.name',         'address.country',  'address.province',
+        // transaction fields
+        'transactions.firstRecord.amount_total', 'transactions.firstRecord.amount_subtotal', 'transactions.firstRecord.amount_shipping'
+    );
 
     public function setUniqueId()
     {
@@ -43,16 +68,20 @@ class Payment extends CoreModel {
         if ($status)
         {
             $this->shipped_at = $dt->format('y-m-d H:i:s');
-            // create an event
             Log::info('payment updated: shipped = true');
             // EVENT WAS MOVED TO THE CONTROLLER
-            event(new PackageWasShipped($this));
-            // add an event listener to this event so i can hook in and send a shipment confirmation
         }
         else
             $this->shipped_at = 0;
 
         $this->save();
+    }
+
+
+
+    public function getPayerNameAttribute()
+    {
+        return $this->payer->first_name . " " . $this->payer->last_name;
     }
 
 
@@ -71,9 +100,7 @@ class Payment extends CoreModel {
             $payment = $this;
 
         return base_path(). '/storage/invoices/BrushPoint_Invoice_'. $payment->getInvoiceNumber() .'.pdf';
-
     }
-
 
 
 
@@ -83,15 +110,9 @@ class Payment extends CoreModel {
     }
 
 
-
-
-
-
-
     /**
      * Relationships
      */
-
     public function payer()
     {
         return $this->belongsTo('Martin\Ecom\Payer');

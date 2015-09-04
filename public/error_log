@@ -2,3 +2,11 @@
 [14-Mar-2015 23:21:16 America/Denver] PHP Fatal error:  require(): Failed opening required '/home/martioo7/brushpoint/bootstrap/../vendor/autoload.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/martioo7/brushpoint/bootstrap/autoload.php on line 17
 [20-May-2015 20:37:07 UTC] PHP Parse error:  syntax error, unexpected 'throw' (T_THROW), expecting ',' or ';' in /home/martioo7/brushpoint/app/Http/routes.php on line 47
 [04-Jun-2015 01:13:13 UTC] PHP Fatal error:  Class 'App\Handlers\Events\Mail' not found in /home/martioo7/brushpoint/app/Handlers/Events/EmailShippingConfirmation.php on line 37
+[10-Jun-2015 00:59:32 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
+[10-Jun-2015 00:59:36 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
+[10-Jun-2015 01:00:19 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
+[10-Jun-2015 01:00:24 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
+[10-Jun-2015 01:01:56 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
+[10-Jun-2015 01:03:28 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
+[10-Jun-2015 01:03:50 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
+[22-Jun-2015 15:16:55 UTC] PHP Fatal error:  Class 'App\Http\Middleware\Flash' not found in /home/martioo7/brushpoint/app/Http/Middleware/ServerAccessOnly.php on line 26

@@ -1,4 +1,8 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#noteModal">New Note</button>
+<button type="button" class="btn btn-primary btn-101 {{ ( isset($class) ? $class : "" ) }}"
+data-toggle="modal" data-target="#noteModal">
+<i class="fa fa-file-text"></i>
+&nbsp; Note
+</button>
 
 <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

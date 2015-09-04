@@ -38,11 +38,22 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+    <!-- DataTables CSS -->
+    <link href="/admin/sb-admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="/admin/sb-admin/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/admin/sb-admin/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <style>
     .flash {
@@ -79,6 +90,104 @@
     .del_button {
         display: inline;
         float: right;
+    }
+
+    .btn-clear-all {
+        color: #fff;
+        background-color: #F04E4E;
+        border-color: #D81818;
+        margin-top: -3px;
+        padding: 2px 10px;
+    }
+
+    .btn-panel-heading {
+        margin-top: -3px;
+        padding: 2px 10px;
+    }
+
+    .btn-focus {
+        color: #fff;
+        background-color: #cd3297;
+        border-color: #a31d69;
+    }
+    
+    .page-header {
+        margin-top: 15px;
+
+    }
+
+    .btn-unchecked {
+        color: #fff;
+        background-color: #cd3297;
+        border-color: #a31d69;
+    }
+
+    .btn-checked {
+        color: #000;
+        background-color: #8bf292;
+        border-color: #3aa333;
+    }
+
+    .btn-close {
+        content: "Close";
+    }
+
+    .btn-closed {
+        content: "Closed";
+    }
+
+    .btn-unchecked:hover .fa-times:before {
+        content:"\f00c";
+    }
+
+    .btn-checked:hover .fa-check:before {
+        content:"\f00d";
+    }
+
+    .btn-checked:hover {
+        color: #fff;
+        background-color: #cd3297;
+        border-color: #a31d69;
+    }
+
+    .btn-unchecked:hover {
+        color: #000;
+        background-color: #8bf292;
+        border-color: #3aa333;
+    }
+
+    /*input.toggle[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+    }
+
+    input.toggle[type="checkbox"]:checked + label {
+            background-color: #DDE3ED;
+            color:  #333;
+    }
+
+    input.toggle[type="checkbox"]:hover, :focus, :active + label {
+        background-color: #eee;
+        background-color: #DDE3ED;
+        color:  #333;
+    }
+
+    input.toggle[type="checkbox"] + label {
+        display: block;
+        padding: .4em .8em;
+        color: #fff;
+        background-color: #444;
+    }
+
+    input.toggle[type="checkbox"] :hover, :focus, :active + label {
+        background-color: #DDE3ED;
+        color:  #333;
+    }*/
+
+    .btn-101 {
+        max-width: 101px;
+        width: 101px;
+        text-align: left;
     }
     </style>
 
@@ -129,7 +238,27 @@
       var recipient = button.data('whatever') // Extract info from data-* attributes
       // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
       // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    </script>
+    <script>
+    $(".btn-unchecked").hover(
+      function () {
+        $(this).addClass("btn-checked");
+      },
+      function () {
+        $(this).removeClass("btn-checked");
+      }
+    );
 
+    $(".btn-checked").hover(
+      function () {
+        //$(this).addClass("btn-unchecked");
+        // $(this).removeClass("btn-checked");
+      },
+      function () {
+        //$(this).removeClass("btn-unchecked");
+        // $(this).addClass("btn-checked");
+      }
+    );
     </script>
 </body>
 

@@ -2,9 +2,12 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\CoreModel;
 
 class Transaction extends CoreModel {
+
+    use SoftDeletes;
 
     protected $fillable = [
         'amount_subtotal',

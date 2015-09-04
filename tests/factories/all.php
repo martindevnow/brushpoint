@@ -1,4 +1,13 @@
 <?php
+$factory('Martin\Core\Activity', [
+    'user_id' => 'factory:Martin\Users\User',
+    'name' => $faker->name,
+
+    'subject_id' => '',
+    'subject_type' => '',
+    'ip_address' => $faker->ipv4,
+]);
+
 $factory('Martin\Core\Address', [
     'description' => $faker->sentence,
     'name' => $faker->word,
@@ -16,6 +25,32 @@ $factory('Martin\Core\Address', [
     'default_address' => '',
     'addressable_type' => '',
 ]);
+
+
+
+$factory('Martin\Core\Attachment', [
+    'user_id' => 'factory:Martin\Users\User',
+    'content' => $faker->sentence(),
+
+    'file_path' => $faker->url,
+    'file_name' => $faker->word,
+    'file_extension' => $faker->word,
+
+    'attachmentable_id' => '',
+    'attachmentable_type' => '',
+]);
+
+
+$factory('Martin\Core\Attention', [
+    'global' => true,
+    'receiver_id' => 'factory:Martin\Users\User',
+
+    'action' => 'create',
+
+    'attentionable_id' => '',
+    'attentionable_type' => '',
+]);
+
 
 $factory('Martin\Core\Image', [
     'user_id' => 'factory:Martin\Users\User',
@@ -44,7 +79,7 @@ $factory('Martin\Core\Note', [
 $factory('Martin\Ecom\Payer', [
     'payer_id' => $faker->name,
     'status' => 'completed',
-    'email' => $faker->email,
+    'email' => "the.one.martin@gmail.com",
     'first_name' => ($faker->word),
     'last_name' => ($faker->word),
 ]);
@@ -143,15 +178,16 @@ $factory('Martin\Products\Virtue', [
 
 $factory('Martin\Quality\Contact', [
     'name' => $faker->name,
-    'email' => $faker->email,
+    'email' => "the.one.martin@gmail.com",
     'message' => $faker->paragraph(),
     'ip' => $faker->ipv4,
     'hash' => bcrypt(time()),
 ]);
+
 // FEEDBACK
 $factory('Martin\Quality\Feedback', [
     'name' => $faker->name,
-    'email' => $faker->email,
+    'email' => "the.one.martin@gmail.com",
     'phone' => $faker->phoneNumber,
     'retailer_text' => $faker->word,
     'retailer_id' => 'factory:Martin\Quality\Retailer',
@@ -163,7 +199,7 @@ $factory('Martin\Quality\Feedback', [
     'bp_code' => '',
     'ip_address' => $faker->ipv4,
     'country' => $faker->country,
-    'address_id' => 'factory:Martin\Code\Address',
+    'address_id' => 'factory:Martin\Core\Address',
     'adverse_event' => $faker->boolean(),
     'health_canada_report' => $faker->boolean(),
     'capa_required' => $faker->boolean(),
@@ -171,17 +207,21 @@ $factory('Martin\Quality\Feedback', [
     'closed' => 0,
     'closed_at' => '',
 ]);
+
+
 // INVESTIGATION
 $factory('Martin\Quality\Investigation', [
     'feedback_id' => 'factory:Martin\Quality\Feedback',
     'field_sample_requested_at' => '',
     'field_sample_received_at' => '',
 ]);
+
 // ISSUE
 $factory('Martin\Quality\Issue', [
     'type' => $faker->word,
     'complaint' => $faker->boolean(),
 ]);
+
 // RETAILER
 $factory('Martin\Quality\Retailer', [
     'name' => $faker->name,
@@ -199,7 +239,7 @@ $factory('Martin\Quality\Retailer', [
 // USER
 $factory('Martin\Users\User', [
     'name' => $faker->name,
-    'email' => $faker->email,
+    'email' => "the.one.martin@gmail.com",
     'password' => bcrypt(12345),
 ]);
 
@@ -208,7 +248,10 @@ $factory('Martin\Users\User', [
 
 
 /*
+Martin\Core\Activity            ADDED
 Martin\Core\Address             ADDED
+Martin\Core\Attachment          ADDED
+Martin\Core\Attention           ADDED
 Martin\Core\CoreModel           NA
 Martin\Core\Image               ADDED
 Martin\Core\Note                ADDED
@@ -228,8 +271,11 @@ Martin\Products\Product         ADDED
 Martin\Products\Virtue          ADDED
 
 Martin\Quality\Contact          ADDED
+Martin\Quality\CustomerRequest  [[[NEED TO ADD]]]
+Martin\Quality\Email            [[[NEED TO ADD]]]
 Martin\Quality\Feedback         ADDED
 Martin\Quality\Investigation    ADDED
+Martin\Quality\InvestigationReport  [[[NEED TO ADD]]]
 Martin\Quality\Issue            ADDED
 Martin\Quality\Retailer         ADDED
 
