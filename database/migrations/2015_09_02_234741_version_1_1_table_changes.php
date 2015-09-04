@@ -32,6 +32,9 @@ class Version11TableChanges extends Migration {
             $table->timestamp('closed_at')->nullable()->change();
         });
 
+        // DB::statement('ALTER TABLE `feedbacks` MODIFY `closed_at` timestamp NULL;');
+
+
 
 	}
 
@@ -60,5 +63,8 @@ class Version11TableChanges extends Migration {
             $table->dropColumn('email_type');
             $table->dropColumn('recipient_list');
         });
-	}
+
+        // DB::statement('ALTER TABLE `feedbacks` MODIFY `closed_at` timestamp NOT NULL DEFAULT \'0000-00-00 00:00:00\';');
+
+    }
 }
