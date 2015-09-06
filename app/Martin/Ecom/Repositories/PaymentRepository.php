@@ -33,7 +33,7 @@ class PaymentRepository {
 
     public function generateInvoiceData($id)
     {
-        $payment = Payment::findOrFail($id);
+        $payment = Payment::find($id);
 
         $payer = $payment->payer;
 
