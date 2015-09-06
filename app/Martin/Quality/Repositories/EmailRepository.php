@@ -93,7 +93,7 @@ class EmailRepository {
     public function emailInternalPurchaseNotice(Payment $payment, $type)
     {
         // $emails = $this->getRecipientsByType($type);
-        $emails = "orderssssss@brushpoint.com";
+        $emails = "orders@brushpoint.com";
 
         $payer = $payment->payer;
         $address = $payment->address; // can have different recipient
