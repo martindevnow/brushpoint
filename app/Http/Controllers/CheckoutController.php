@@ -94,6 +94,13 @@ class CheckoutController extends Controller {
         return view('checkout.thankyou')->withPayment($payment);
     }
 
+    public function cancel()
+    {
+        // the order was cancelled from the paypal page.
+        Flash::message('The transaction could not be completed. Please try again later.');
+        return redirect('cart');
+    }
+
     public function error()
     {
         return view('errors.paypal');
