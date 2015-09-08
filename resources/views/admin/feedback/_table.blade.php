@@ -1,6 +1,7 @@
 <table class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
+          <th>ID</th>
           <th>Name</th>
           <th>Retailer</th>
           <th>Retailer Code</th>
@@ -16,6 +17,7 @@
       <tbody>
         @foreach($feedbacks as $feedback)
         <tr>
+          <td>{{ $feedback->id }}</td>
           <td>{{ $feedback->name }}</td>
           @if(isset($feedback->retailer_id))
             <td><a href="/admins/retailers/{{ $feedback->retailer->id }}">{{ $feedback->retailer->name }}</a></td>
