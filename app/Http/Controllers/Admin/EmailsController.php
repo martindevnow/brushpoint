@@ -18,60 +18,57 @@ class EmailsController extends Controller {
 	public function index()
 	{
 		// Show the links to all the different types of email templates
-        $emailLinks [] = [
-            'title' => 'Internal - Order Received / Invoice',
+        $internalEmailLinks [] = [
+            'title' => 'Order Received / Invoice',
             'scope' => 'internal',
-            'type' => 'invoice'
+            'type' => 'purchased'
         ];
-        $emailLinks [] = [
-            'title' => 'Internal - Contact Received',
-            'scope' => 'internal',
-            'type' => 'contact'
-        ];
-        $emailLinks [] = [
-            'title' => 'Internal - Feedback Received',
+        $internalEmailLinks [] = [
+            'title' => 'Feedback Received',
             'scope' => 'internal',
             'type' => 'feedback'
         ];
 
 
-
-        $emailLinks [] = [
-            'title' => 'External - Order Received / Invoice',
+        $externalEmailLinks [] = [
+            'title' => 'Order Received / Invoice',
             'scope' => 'customer',
             'type' => 'invoice'
         ];
-        $emailLinks [] = [
-            'title' => 'External - Order Shipped',
+        $externalEmailLinks [] = [
+            'title' => 'Order Shipped',
             'scope' => 'customer',
             'type' => 'asn'
         ];
-        $emailLinks [] = [
-            'title' => 'External - Contact Received',
-            'scope' => 'customer',
-            'type' => 'contact'
-        ];
-        $emailLinks [] = [
-            'title' => 'External - Feedback Received',
+
+        $externalEmailLinks [] = [
+            'title' => 'Feedback Received',
             'scope' => 'customer',
             'type' => 'feedback'
         ];
 
+        $externalEmailLinks [] = [
+            'title' => 'Replacement Shipped',
+            'scope' => 'customer',
+            'type' => 'replacementShipped'
+        ];
 
-        $emailLinks [] = [
-            'title' => 'External - Feedback - Info/Address Request [Battery]',
+
+        $externalEmailLinks [] = [
+            'title' => 'Feedback - Info/Address Request [Battery]',
             'scope' => 'customer',
             'type' => 'lotCodeRequestBattery'
         ];
-        $emailLinks [] = [
-            'title' => 'External - Feedback - Info/Address Request [Recharge]',
+
+        $externalEmailLinks [] = [
+            'title' => 'Feedback - Info/Address Request [Recharge]',
             'scope' => 'customer',
             'type' => 'lotCodeRequestRechargeable'
         ];
 
 
         $this->layout->context = view('admin.emails.index')
-            ->with(compact('emailLinks'));
+            ->with(compact('externalEmailLinks', 'internalEmailLinks'));
 
 	}
 
@@ -109,7 +106,6 @@ class EmailsController extends Controller {
         {
             $model = Contact::find($id);
             $class = 'contact';
-
         }
         elseif($emailType == 'feedback'
             || $emailType == 'lotCodeRequestRechargeable'
@@ -122,6 +118,14 @@ class EmailsController extends Controller {
         if ($model)
 		    return view('emails.'. $emailScope .'.'. $emailType .'')
                 ->with([$class => $model]);
+
+
+        $feedback = Feedback::find($id);
+
+        if ($emailType == 'replacementShipped')
+            return view('emails.customer.replacementShipped')
+                ->with(compact('feedback'));
+
 
         $payment = Payment::find($id);
         $payer = $payment->payer;
@@ -136,6 +140,10 @@ class EmailsController extends Controller {
 
         if ($emailType == 'invoice')
             return view('emails.' . $emailScope . '.invoice')
+                ->with($data);
+
+        if ($emailType == 'purchased')
+            return view('emails.' . $emailScope . '.purchased')
                 ->with($data);
 	}
 

@@ -123,4 +123,16 @@ class EmailRepository {
             $message->from('orders@brushpoint.com', 'BrushPoint Orders');
         });
     }
+
+
+    public function emailCustomerReplacementShipped(Feedback $feedback)
+    {
+        $recipient = $feedback->email;
+
+        Mail::send('emails.customer.replacementShipped', $feedback, function($message) use ($recipient) {
+            $message->to($recipient)
+                ->subject('BrushPoint: Your replacement has been shipped');
+            $message->from('info@brushpoint.com', 'BrushPoint Information');
+        });
+    }
 }

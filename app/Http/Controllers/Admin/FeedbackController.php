@@ -17,6 +17,7 @@ use Martin\Quality\CustomerRequest;
 use Martin\Quality\Feedback;
 use Martin\Quality\Issue;
 use Martin\Quality\Repositories\ContactRepository;
+use Martin\Quality\Repositories\EmailRepository;
 use Martin\Quality\Retailer;
 
 class FeedbackController extends Controller {
@@ -322,6 +323,19 @@ class FeedbackController extends Controller {
         return redirect('/admins/feedback/'. $request->feedback_id);
     }
 
+
+    public function sendShippedNotificationToCustomer($feedbackId)
+    {
+        $feedback = Feedback::find($feedbackId);
+
+        $emailRepo = new EmailRepository();
+
+        $emailRepo->emailCustomerReplacementShipped($feedback);
+
+        Flash::message('Customer emailed regarding the replacement having been shipped.');
+
+        return redirect()->back();
+    }
 
 
     public function destroy($id)

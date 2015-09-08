@@ -299,7 +299,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     /**
      * Contacts
      */
-    Route::resource('admins/contacts', 'ContactsController');
+    Route::resource(    'admins/contacts', 'ContactsController');
 
 
 
@@ -310,6 +310,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::get(         'admins', 'AdminController@index');
 
 
+    /**
+     * Debug
+     */
+
+    Route::get('admins/debug', 'DebugController@index');
+    Route::get('admins/debug/inventory/calculate', 'DebugController@calculateInventory');
 
     /**
      * Emails
@@ -334,6 +340,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     Route::resource(    'admins/feedback',                      'FeedbackController');
     Route::patch(       'admins/feedback/{id}',                 'FeedbackController@update');
     Route::get(         'admins/feedback/{id}/close',           'FeedbackController@close');
+    Route::get(         'admins/feedback/{id}/shipped',         'FeedbackController@sendShippedNotificationToCustomer');
 
 
 
