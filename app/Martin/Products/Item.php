@@ -132,7 +132,7 @@ class Item extends CoreModel {
 
         $inventories = $this->getOldestActiveInventories();
         if ($quantity > $inventories->sum('quantity'))
-            throw new \Exception;
+            throw new \Exception("Not Enough Inventory");
 
 
         $remainingToDeduct = $quantity;
