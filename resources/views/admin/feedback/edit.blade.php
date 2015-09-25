@@ -13,23 +13,16 @@
 {!! Form::open(['method' => 'patch', 'url' => '/admins/feedback/'. $feedback->id]) !!}
     {{--Start Row--}}
     <div class="row">
-
-
-
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Feedback
-
                     {!! Form::submit('Save', [
                         'class' => 'btn btn-primary btn-panel-heading',
                         'style' => 'float: right;',
                     ]) !!}
-
                 </div>
                 <div class="panel-body">
-
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
@@ -51,12 +44,6 @@
                                             {!! Form::text('created_at', $feedback->created_at, ['class' => 'form-control', 'id' => 'datepicker']) !!}
                                           </td>
                                         </tr>
-                                        {{--<tr>--}}
-                                          {{--<td>Closed Date</td>--}}
-                                          {{--<td>--}}
-                                            {{--{!! Form::text('closed_at', $feedback->closed_at, ['class' => 'form-control', 'id' => 'datepicker']) !!}--}}
-                                          {{--</td>--}}
-                                        {{--</tr>--}}
                                         <tr>
                                           <td>Name</td>
                                           <td>
@@ -107,16 +94,12 @@
                                         <tr>
                                           <td>Retailer</td>
                                           <td>
-
                                             {{ $feedback->retailer_text }}
-
                                               <div class="form-group">
                                               {!! Form::select('retailer_id', $retailers, $feedback->retailer_id) !!}
                                               </div>
-
                                           </td>
                                         </tr>
-
 
                                         <tr>
                                           <td>Lot Code</td>
@@ -128,7 +111,6 @@
                                         <tr>
                                           <td>Issue</td>
                                           <td>
-
                                             <div class="form-group">
                                             {!! Form::select('issue_id', $issues, $feedback->issue_id) !!}
                                             </div>

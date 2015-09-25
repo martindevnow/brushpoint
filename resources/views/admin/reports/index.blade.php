@@ -10,87 +10,45 @@
 
 <div class="row">
     <div class="col-lg-6">
-
         <div class="panel panel-default">
             <div class="panel-heading">
             Run Reports
             </div>
-
             <div class="panel-body">
-
                 <form method="post" action="/admins/reports/run">
-                    From: {!! Form::selectMonth('from_month', date('n')) !!}
-                    {!! Form::selectRange('from_day', 01, 31) !!}
-                    {!! Form::selectRange('from_year', 2015, 2016) !!}
-                    <br />
-                    To: {!! Form::selectMonth('to_month', date('n')) !!}
-                    {!! Form::selectRange('to_day', 01, 31) !!}
-                    {!! Form::selectRange('to_year', 2015, 2016) !!}
-                    <br />
-                    Type: {!! Form::select('report', $viableReports) !!}
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    {!! Form::submit('Run') !!}
+                    <table class="table table-striped table-bordered table-hover" >
+                        <tbody>
+                            <tr>
+                                <td>From</td>
+                                <td>
+                                    {!! Form::selectMonth('from_month', date('n')) !!}
+                                    {!! Form::selectRange('from_day', 01, 31) !!}
+                                    {!! Form::selectRange('from_year', 2015, 2016) !!}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>To</td>
+                                <td>
+                                    {!! Form::selectMonth('to_month', date('n')) !!}
+                                    {!! Form::selectRange('to_day', 01, 31) !!}
+                                    {!! Form::selectRange('to_year', 2015, 2016) !!}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Type</td>
+                                <td>
+                                    {!! Form::select('report', $viableReports) !!}
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">{!! Form::submit('Run') !!}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </form>
-
-
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-        {{--<div class="panel panel-default">--}}
-            {{--<div class="panel-heading">--}}
-                {{--<i class="fa fa-bell fa-fw"></i> Payment - Reports--}}
-            {{--</div>--}}
-            {{--<!-- /.panel-heading -->--}}
-
-
-
-            {{--<div class="panel-body">--}}
-                {{--<a href="/admins/reports/generate/payments" class="list-group-item">--}}
-                    {{--Payments - All--}}
-                    {{--<span class="pull-right text-muted small">--}}
-                        {{--<em>Run</em></span>--}}
-                {{--</a>--}}
-                {{--<a href="/admins/reports/generate/soldItems" class="list-group-item">--}}
-                    {{--Payments - SoldItems--}}
-                    {{--<span class="pull-right text-muted small">--}}
-                        {{--<em>Run</em></span>--}}
-                {{--</a>--}}
-            {{--</div>--}}
-            {{--<!-- /.panel-body -->--}}
-        {{--</div>--}}
-
-
-
-
-
-        {{--<div class="panel panel-default">--}}
-            {{--<div class="panel-heading">--}}
-                {{--<i class="fa fa-bell fa-fw"></i> Feedback - Reports--}}
-            {{--</div>--}}
-            {{--<!-- /.panel-heading -->--}}
-
-
-            {{--<div class="panel-body">--}}
-                {{--<a href="/admins/reports/generate/feedback" class="list-group-item">--}}
-                    {{--Feedback - All--}}
-                    {{--<span class="pull-right text-muted small">--}}
-                        {{--<em>Run</em></span>--}}
-                {{--</a>--}}
-            {{--</div>--}}
-            {{--<!-- /.panel-body -->--}}
-        {{--</div>--}}
     </div>
 </div>
 

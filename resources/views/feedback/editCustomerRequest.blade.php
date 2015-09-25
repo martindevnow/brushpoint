@@ -31,7 +31,6 @@ Please fill in the fields below and we will get back to you shortly.";
 
             @include('errors.list')
 
-
             <p class="body_paragraph">
                 Thank you for submitting your feedback.
             </p>
@@ -65,23 +64,19 @@ Please fill in the fields below and we will get back to you shortly.";
             @endif
 
             @if($customerRequest->request_address || $customerRequest->request_field_sample)
+            <h2>Your Delivery Address</h2>
                 @include('layouts.partials._address')
             @endif
 
             <div class="form-group">
                 {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
             </div>
-
             {!! Form::hidden('hash', $customerRequest->hash) !!}
-
         {!! Form::close() !!}
-
         </div>
+
         <div class="col-md-3 col-sm-3">
-
             @include('pages.partials.contactSideBar')
-
-
         </div>
     </div>
 </div>
