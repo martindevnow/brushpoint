@@ -35,7 +35,6 @@ class InvestigationsController extends Controller {
         if ($result)
             Flash::message('Your file was uploaded.');
         else
-            Flash::error("Your file could not be uploaded.");
 
         return redirect()->back();
     }

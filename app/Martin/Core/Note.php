@@ -31,5 +31,8 @@ class Note extends Model {
         return $this->belongsTo('Martin\Users\User');
     }
 
-
+    public function trash()
+    {
+        return $this->delete();
+    }
 } 

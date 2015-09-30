@@ -345,6 +345,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 
 
 
+    Route::get('admins/images/download/{id}', 'ImagesController@download');
+
 
     /**
      * Inventory

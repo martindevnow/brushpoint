@@ -277,9 +277,7 @@ class FeedbackController extends Controller {
         // Tie up relationships
         Auth::user()->customerRequests()->save($custRequest);
 
-
         $data['customer_request_id'] = $custRequest->id;
-
 
         // get the body of the email based on the request
         $data['email_body'] = $contactRepository->getBody($request, $feedback, $custRequest);
@@ -293,11 +291,11 @@ class FeedbackController extends Controller {
     public function sendContactCustomer(Request $request)
     {
         // get request
-        $data['to_email'] = $request->to_email;
+        $data                                                   ['to_email']   = $request->to_email;
         $data['from_email'] = $request->from_email;
-        $data['subject'] = $request->subject;
-        $data['body'] = $request->email_body;
-        $data['feedback_id'] = $request->feedback_id;
+        $data['subject']    = $request->subject;
+        $data['body']       = $request->email_body;
+        $data['feedback_id']    = $request->feedback_id;
         $data['email_template'] = 'emails.customer.genericContact';
 
         // build contact model
@@ -341,7 +339,9 @@ class FeedbackController extends Controller {
     public function destroy($id)
     {
         $feedback = Feedback::find($id);
+
         $feedback->trash();
+
         Flash::message('That feedback was deleted.');
 
         return redirect('admins/feedback/');

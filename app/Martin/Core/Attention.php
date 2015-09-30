@@ -81,6 +81,10 @@ Feedback		fa-comment
             case "Feedback":
                 $url = "/admins/feedback/{$this->attentionable->id}";
                 break;
+            case "Image":
+                $image = $this->attentionable;
+                $url = $image->getUrlToImageable();
+                break;
             default:
                 $url = "fa-comment ";
                 break;
@@ -149,8 +153,7 @@ Feedback		fa-comment
 
     public function trash()
     {
-        $this->delete();
-        return true;
+        return $this->delete();
     }
 
     /*
@@ -176,5 +179,6 @@ Feedback		fa-comment
     {
         return $this->belongsTo('Martin\Users\User', 'seen_by');
     }
+
 
 }

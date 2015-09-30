@@ -293,10 +293,15 @@ class Feedback extends CoreModel {
      */
     public function trash()
     {
-        // Attentions
-        $attentions = $this->attentions;
-        foreach($attentions as $attention)
-            $attention->trash();
+
+        // Notes & Addresses
+        parent::trash();
+
+        // This is now done in CoreModel (parent class)
+//        // Attentions
+//        $attentions = $this->attentions;
+//        foreach($attentions as $attention)
+//            $attention->trash();
 
         // Investigations
         $investigations = $this->investigations;

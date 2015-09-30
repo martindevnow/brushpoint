@@ -52,6 +52,34 @@ class CoreModel extends Model{
 
     public function trash()
     {
-        return $this->morphMany('Martin\Core\Trash', 'trashable');
+        // Addresses
+        $addresses = $this->addresses;
+        foreach($addresses as $address)
+            $address->trash();
+
+        // Attentions
+        $attentions = $this->attentions;
+        foreach($attentions as $attention)
+            $attention->trash();
+
+        // Attachments
+        $attachments = $this->attachments;
+        foreach($attachments as $attachment)
+            $attachment->trash();
+
+//        // Comments
+//        $comments = $this->comments;
+//        foreach($comments as $comment)
+//            $comment->trash();
+
+        // Images
+        $images = $this->images;
+        foreach($images as $image)
+            $image->trash();
+
+        // Notes
+        $notes = $this->notes;
+        foreach($notes as $note)
+            $note->trash();
     }
 }

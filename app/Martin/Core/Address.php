@@ -112,4 +112,9 @@ EOT;
         return $output;
     }
 
+    public function trash()
+    {
+        return $this->delete();
+    }
+
 } 

@@ -30,24 +30,16 @@ class UploadInvestigationReportCommandHandler {
      */
     public function handle(UploadInvestigationReportCommand $command)
     {
-
         $this->request = $command->request;
-
-//        dd('event handled');
-
         $this->validate($this->request,[
             'investigation_report' => 'required|mimes:pdf'
         ]);
 
         $investigation = Investigation::findOrFail($this->request->investigation_id);
 
-//        dd("executed");
-
         // TODO: get and save any image which might be attached.
         if ($this->request->hasFile('investigation_report'))
         {
-//            dd('working');
-
             $shortPath = config('brushpoint.investigation_report_storage_path');
             $fullPath = base_path() . $shortPath ;
 
@@ -74,7 +66,8 @@ class UploadInvestigationReportCommandHandler {
 
             return true;
         }
-        return false;
+        Flash::error("Your file could not be uploaded.");
 
+        return false;
     }
 }

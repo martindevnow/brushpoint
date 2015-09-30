@@ -53,7 +53,7 @@
                 onsubmit="return confirm('Do you really wish to delete that??');">
                 <input name="_method" type="hidden" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                    <button class="btn btn-danger" title="Delete"><i class="fa fa-trash-o"></i></button>
             </form>
           </td>
         </tr>

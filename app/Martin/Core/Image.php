@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Martin\Core\Traits\RecordsActivity;
+use ReflectionClass;
 
 class Image extends Model {
 
@@ -23,6 +24,11 @@ class Image extends Model {
 
     protected $hidden = [];
 
+    public function adminDownloadLink()
+    {
+        return "/admins/images/download/". $this->id;
+    }
+
     public function imageable()
     {
         return $this->morphTo();
@@ -31,5 +37,32 @@ class Image extends Model {
     public function user()
     {
         return $this->belongsTo('Martin\Users\User');
+    }
+
+    public function trash() {
+        return $this->delete();
+    }
+
+    protected function getImageableType()
+    {
+        if ($this->type)
+            return $this->type;
+
+        return $this->type = strtolower((new ReflectionClass($this->addressable))->getShortName());
+    }
+
+    public function getUrlToImageable()
+    {
+        $model = $this->imageable;
+        $type = $this->getImageableType();
+
+        switch ($type) {
+            case "payment":
+                $type .= "s";
+                break;
+            default:
+                break;
+        }
+        return "/admins/{$type}/{$model->id}";
     }
 } 

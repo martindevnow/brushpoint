@@ -33,5 +33,10 @@ class Attachment extends Model {
         return response()->download(base_path(). $this->file_path, $this->file_name);
     }
 
+    public function trash()
+    {
+        return $this->delete();
+    }
+
 
 }

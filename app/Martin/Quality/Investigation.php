@@ -45,6 +45,7 @@ class Investigation extends CoreModel {
      */
     public function trash()
     {
+        // Delete All Reports
         $reports = $this->investigationReports;
         foreach($reports as $report)
             $report->trash();

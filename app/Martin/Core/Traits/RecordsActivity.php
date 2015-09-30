@@ -66,12 +66,16 @@ trait RecordsActivity
 
     protected function drawAttention($event)
     {
-        Attention::create([
-            'attentionable_id' => $this->id,
-            'attentionable_type' => get_class($this),
-            'action' => $this->getActivityName($this, $event),
-            'global' => true,
-        ]);
+        if ( ! \Auth::id() )
+        {
+            Attention::create([
+                'attentionable_id' => $this->id,
+                'attentionable_type' => get_class($this),
+                'action' => $this->getActivityName($this, $event),
+                'global' => true,
+            ]);
+        }
+
     }
 
     protected function addAttention($event)
