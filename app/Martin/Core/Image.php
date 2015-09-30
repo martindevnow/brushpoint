@@ -48,7 +48,7 @@ class Image extends Model {
         if ($this->type)
             return $this->type;
 
-        return $this->type = strtolower((new ReflectionClass($this->addressable))->getShortName());
+        return $this->type = strtolower((new ReflectionClass($this->imageable))->getShortName());
     }
 
     public function getUrlToImageable()
