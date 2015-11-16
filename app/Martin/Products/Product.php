@@ -135,4 +135,9 @@ class Product extends CoreModel {
     {
         return sanitizeForUrl($this->name);
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class)->withTimestamps();
+    }
 } 

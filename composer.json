@@ -31,7 +31,9 @@
 			"App\\": "app/",
             "Martin\\": "app/Martin"
 		},
-        "files": ["app/Http/helpers.php"]
+        "files": [
+            "app/Http/helpers.php"
+        ]
 	},
 	"autoload-dev": {
 		"classmap": [

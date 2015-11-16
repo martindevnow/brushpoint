@@ -25,6 +25,9 @@ class ProductsController extends Controller {
      */
     public function index()
     {
+
+        return redirect('category');
+
         // get all portfolio products
         $products = $this->productRepository->getPortfolioPaginated(25);
 

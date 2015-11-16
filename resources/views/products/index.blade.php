@@ -8,8 +8,19 @@ are available as private label. Please contact us if you have any further inquir
 
     <?php
     $page['link'] = "/products";
-    $page['title'] = "Products";
-    $page['short_title'] = "Products";
+
+    if (isset($category))
+        $page['title'] = "Products - ".  $category->name;
+    else
+        $page['title'] = "Products";
+
+
+    if (isset($category))
+        $page['short_title'] = $category->name;
+    else
+        $page['short_title'] = "Products";
+
+
     $page['short_description'] = "Our Lineup!";
 
     if (isset($product))
@@ -36,8 +47,10 @@ are available as private label. Please contact us if you have any further inquir
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6" style="padding-left: 5px; padding-right: 5px;">
             <div class="small-container">
                 <div class="thumbnail">
-                    <div class="product-details">
+                    <div class="product-details" style="height: 18px">
+                    @if ($product->active)
                         <p><a href="{{ $product->urlToProductPage() }}" class="btn btn-primary product-detail-btn" role="button" style="float: right;">Details</a>
+                    @endif
                     </div>
                     <div class="product-thumbnail">
                         <a href="{{ $product->urlToProductPage() }}">
