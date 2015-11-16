@@ -50,9 +50,15 @@ class CategoriesController extends Controller {
 	{
 		$category = Category::bySlug($slug);
 
+
+        if (\Auth::user())
+            $products = $category->products;
+        else
+            $products = $category->activeProducts();
+
         // return a view
         return view('products.index')->with([
-            'products' => $category->products,
+            'products' => $products,
             'category' => $category
         ]);
 	}
