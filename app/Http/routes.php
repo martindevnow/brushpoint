@@ -23,38 +23,38 @@ Route::get('build_categories', function(){
         return redirect('/');
 
     Category::create([
-        'name' => 'Power',
-        'description' => 'Power Toothbrushes',
+        'name' => 'Power Toothbrushes',
+//        'description' => 'Power Toothbrushes',
         'slug' => 'power',
     ]);
     Category::create([
-        'name' => 'Childrens',
-        'description' => 'Childrens Toothbrushes',
+        'name' => 'Children’s Toothbrushes',
+//        'description' => 'Childrens Toothbrushes',
         'slug' => 'childrens',
     ]);
     Category::create([
-        'name' => 'Manual',
-        'description' => 'Manual Toothbrushes',
+        'name' => 'Manual Toothbrushes',
+//        'description' => 'Manual Toothbrushes',
         'slug' => 'manual',
     ]);
     Category::create([
         'name' => 'Whitening',
-        'description' => 'Whitening Toothbrushes',
+//        'description' => 'Whitening Toothbrushes',
         'slug' => 'whitening',
     ]);
     Category::create([
         'name' => 'Denture',
-        'description' => 'Denture Accessories',
+//        'description' => 'Denture Accessories',
         'slug' => 'denture',
     ]);
     Category::create([
         'name' => 'Toothpaste',
-        'description' => 'Toothpastes',
+//        'description' => 'Toothpastes',
         'slug' => 'toothpaste',
     ]);
     Category::create([
-        'name' => 'Interdental / Accessories',
-        'description' => 'Interdental and Other Accessories',
+        'name' => 'Interdental & Accessories',
+//        'description' => 'Interdental and Other Accessories',
         'slug' => 'interdental',
     ]);
 
@@ -79,6 +79,7 @@ Route::get('assign_categories', function(){
     Product::find(9)->categories()->attach(1);      // Power Whitening
     Product::find(10)->categories()->attach(1);     // Pro Clean
     Product::find(11)->categories()->attach(1);     // Pulsating
+    $products[] = ['name' => 'Deep Clean Rechargeable', 'cat' => 1];
     Product::find(12)->categories()->attach(1);     // Osc Recharge
     Product::find(13)->categories()->attach(1);     // Pulsating Recharge
     Product::find(4)->categories()->attach(1);  // Kids Power
@@ -87,9 +88,11 @@ Route::get('assign_categories', function(){
     Product::find(4)->categories()->attach(2);  // Kids Power
     Product::find(5)->categories()->attach(2);  // Kids Manual
     // CANDY STRIPE
-    $products[] = ['name' => 'Candy Stripe', 'cat' => 2];
+    $products[] = ['name' => 'Designer Stripe Manual Toothbrush',
+                   'sku' => 'CandyStripe', 'cat' => 2];
     // SUCTION CUP
-    $products[] = ['name' => 'Suction Cup', 'cat' => 2];
+    $products[] = ['name' => 'Suction Cup Manual Toothbrushes',
+                   'sku' => 'SuctionCupManual', 'cat' => 2];
 
 
 
@@ -97,32 +100,35 @@ Route::get('assign_categories', function(){
     // DEEP CLEAN
     $products[] = ['name' => 'Deep Clean Manual', 'cat' => 3];
     // WHITENING
-    $products[] = ['name' => 'Optimal Whitening Manual', 'cat' => 3];
+    $products[] = ['name' => 'Optimal Whitening™ Manual',
+                   'sku' => 'OptimalWhiteningManual', 'cat' => 3];
     // OVERALL HEALTH
     $products[] = ['name' => 'Overall Health Manual', 'cat' => 3];
     // SENSITIVE
-    $products[] = ['name' => 'Sensitive Reprieve Manual', 'cat' => 3];
+    $products[] = ['name' => 'Sensitive Reprieve™ Manual',
+                   'sku' => 'SensitiveReprieveManual', 'cat' => 3];
 
 
     // 4. Whitening
     Product::find(16)->categories()->attach(4);  // Whitening Pen
     // OPTIMAL WHITENING
-    $products[] = ['name' => 'Optimal Whitening', 'cat' => 4];
+    $products[] = ['name' => 'Optimal Whitening™ Power System',
+                   'sku' => 'OptimalWhiteningPowerSystem', 'cat' => 4];
     // WHITENING TOOTHPASTE
     $products[] = ['name' => 'Whitening Toothpaste', 'cat' => 4];
 
 
     // 5. Denture
     // COMPLETE
-    $products[] = ['name' => 'Complete', 'cat' => 5];
+    $products[] = ['name' =>  'Complete Denture Adhesive',  'cat' => 5];
     // SUPER HOLD
-    $products[] = ['name' => 'Super Hold', 'cat' => 5];
+    $products[] = ['name' =>  'Super Hold Denture Adhesive','cat' => 5];
     // SUPER HOLD FREE
-    $products[] = ['name' => 'Super Hold Free', 'cat' => 5];
+    $products[] = ['name' =>  'Super Hold Free Denture Adhesive', 'cat' => 5];
     // DENTURE BRUSH
-    $products[] = ['name' => 'Denture Brush', 'cat' => 5];
+    $products[] = ['name' =>  'Denture Brush', 'cat' => 5];
     // DENTURE BATH
-    $products[] = ['name' => 'Denture Bath', 'cat' => 5];
+    $products[] = ['name' =>  'Denture Bath', 'cat' => 5];
 
 
     // 6. Toothpaste
@@ -144,18 +150,18 @@ Route::get('assign_categories', function(){
     // FLOSSER PICKS
     $products[] = ['name' => 'Flosser Picks', 'cat' => 7];
     // COMFORT FLOSS
-    $products[] = ['name' => 'Comfort Floss', 'cat' => 7];
+    $products[] = ['name' => 'Comfort Dental Floss', 'cat' => 7];
 
 
     foreach($products as $product)
     {
         $dbProduct = Product::create([
             'name'      => $product['name'],
-            'description' => $product['name'],
-            'sku'       => str_replace(' ', '', $product['name']),
+            // 'description' => $product['name'],
+            'sku'       => (isset($product['sku'])?$product['sku']:str_replace(' ', '', $product['name'])),
             'on_hand'   => 0,
             'price'     => 0,
-            'active'    => 0,
+            'active'    => 1,
             'portfolio' => 1,
         ]);
         if (!is_array($product['cat']))

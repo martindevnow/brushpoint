@@ -18,11 +18,15 @@ class Product extends CoreModel {
         'name',
         'description',
         'price',
+        'on_hand',
         'sku',
         'unit_weight_g',
         'unit_depth_cm',
         'pack_size',
         'pack_description',
+        'active',
+        'portfolio',
+        'purchase',
     ];
 
 

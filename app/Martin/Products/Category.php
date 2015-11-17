@@ -21,7 +21,9 @@ class Category extends Model {
 
     public function activeProducts()
     {
-        return $this->products()->where('active', '=', 1)->get();
+        return $this->products()
+            //->where('active', '=', 1)
+            ->get();
     }
 
     public function products()
