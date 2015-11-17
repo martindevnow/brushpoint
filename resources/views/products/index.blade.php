@@ -53,7 +53,7 @@ are available as private label. Please contact us if you have any further inquir
                     @endif
                     </div>
                     <div class="product-thumbnail">
-                        <a href="{{ $product->urlToProductPage() }}">
+                        <a href="{{ ($product->active?$product->urlToProductPage():"#") }}">
                         <img src="/images/brushpoint/products/{{ $product->sku }}-full.jpg"
                             alt="BrushPoint presents {{ $product->name }}"
                             class="img-responsive"

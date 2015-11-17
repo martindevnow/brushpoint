@@ -161,7 +161,7 @@ Route::get('assign_categories', function(){
             'sku'       => (isset($product['sku'])?$product['sku']:str_replace(' ', '', $product['name'])),
             'on_hand'   => 0,
             'price'     => 0,
-            'active'    => 1,
+            'active'    => 0,
             'portfolio' => 1,
         ]);
         if (!is_array($product['cat']))

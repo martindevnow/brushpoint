@@ -15,14 +15,15 @@ class Category extends Model {
 
     public static function bySlug($slug)
     {
-        return (new static)->where('slug', '=', $slug)->first();
+        return (new static)->where('slug', '=', $slug)->firstOrFail();
     }
 
 
     public function activeProducts()
     {
         return $this->products()
-            //->where('active', '=', 1)
+            // ->where('active', '=', 1)
+            ->orderBy('display_order', 'asc')
             ->get();
     }
 
