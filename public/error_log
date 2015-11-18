@@ -10,3 +10,12 @@
 [10-Jun-2015 01:03:28 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
 [10-Jun-2015 01:03:50 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
 [22-Jun-2015 15:16:55 UTC] PHP Fatal error:  Class 'App\Http\Middleware\Flash' not found in /home/martioo7/brushpoint/app/Http/Middleware/ServerAccessOnly.php on line 26
+[01-Oct-2015 14:38:33 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home/martioo7/brushpoint/app/Martin/Products/CartRepository.php on line 403
+[01-Oct-2015 14:38:43 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home/martioo7/brushpoint/app/Martin/Products/CartRepository.php on line 403
+[03-Oct-2015 03:02:23 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
+[03-Oct-2015 03:02:26 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
+[06-Oct-2015 14:24:58 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
+[06-Oct-2015 14:25:06 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
+[06-Oct-2015 14:25:11 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
+[06-Oct-2015 14:38:59 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
+[06-Oct-2015 14:39:11 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
