@@ -175,7 +175,7 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li class="sidebar-search">
-                    {!! Form::open(['method' => 'post', 'url' => '/admins/search']) !!}
+                    {!! Form::open(['method' => 'get', 'url' => '/admins/search']) !!}
                     <div class="input-group custom-search-form">
                         <input name="search" type="text" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">

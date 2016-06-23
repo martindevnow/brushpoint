@@ -620,7 +620,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
      * Search
      */
 
-    Route::get(         'admins/search', 'SearchController@index');
+    Route::get(         'admins/search', 'SearchController@show');
     Route::post(         'admins/search', 'SearchController@show');
 
     /**

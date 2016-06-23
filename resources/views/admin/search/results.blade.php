@@ -33,7 +33,7 @@
 
 
     </div>
-    {!!  $feedbacks->render() !!}
+    {!!  $feedbacks->appends(Request::only('search')) !!}
 </div>
 <div class="flash">
     Updated...

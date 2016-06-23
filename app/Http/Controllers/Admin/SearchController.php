@@ -20,7 +20,7 @@ class SearchController extends Controller {
 
 	public function show(Request $request)
     {
-        $feedbacks = Feedback::search($request->search, 1)->paginate(20);
+        $feedbacks = Feedback::search($request->get('search'), 1)->paginate(20);
 
 
         //->get();
