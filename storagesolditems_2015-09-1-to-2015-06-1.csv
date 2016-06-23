@@ -1,1 +1,0 @@
-id,transaction.id,transaction.payments.firstRecord.payment_id,transaction.payments.firstRecord.state,transaction.payments.firstRecord.intent,transaction.payments.firstRecord.created_at,transaction.payments.firstRecord.shipped,transaction.payments.firstRecord.shipped_at,item.sku,lot_code,name,price,quantity

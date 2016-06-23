@@ -29,7 +29,7 @@ class EmailCustomerFeedbackNotice {
         $feedback = $event->feedback;
 
         Mail::send('emails.customer.feedback', compact('feedback'), function($message) use ($event) {
-            $sender = 'info@brushpoint.com';
+            $sender = 'noreply@brushpoint.com';
 
 
             $message->to($event->feedback->email)

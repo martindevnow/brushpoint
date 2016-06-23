@@ -25,7 +25,8 @@ class EmailRepository {
 
         Mail::send($contact->email_template, compact('feedback', 'contact'), function($message) use ($feedback, $contact) {
 
-            $from_email = $contact->from_email;
+//            $from_email = $contact->from_email;
+	    $from_email = "noreply@brushpoint.com";
             $to_email = $contact->to_email;
 
             $message->to($to_email)
@@ -44,7 +45,7 @@ class EmailRepository {
             $emailTemplate = "lotCodeRequestRechargeable";
 
         Mail::send('emails.customer.'. $emailTemplate, compact('feedback'), function ($message) use ($feedback) {
-            $sender = 'info@brushpoint.com';
+            $sender = 'noreply@brushpoint.com';
 
             $message->to($feedback->email)
                 ->subject('BrushPoint: Followup on Feedback ID: '. $feedback->id);
@@ -70,7 +71,9 @@ class EmailRepository {
 
             $message->to($recipient)
                 ->subject("Feedback Received: ID: " . $feedback->id);
-            $message->from($feedback->email, "BrushPoint: Feedback");
+            $message->from('noreply@brushpoint.com',
+			//$feedback->email, 
+			"BrushPoint: Feedback");
         });
     }
 
@@ -79,7 +82,7 @@ class EmailRepository {
     public function emailCustomerFeedbackNotice(Feedback $feedback)
     {
         Mail::send('emails.customer.feedback', compact('feedback'), function($message) use ($feedback) {
-            $sender = 'info@brushpoint.com';
+            $sender = 'noreply@brushpoint.com';
 
 
             $message->to($feedback->email)
@@ -93,7 +96,7 @@ class EmailRepository {
     public function emailInternalPurchaseNotice(Payment $payment, $type)
     {
         // $emails = $this->getRecipientsByType($type);
-        $emails = "orders@brushpoint.com";
+        $emails = "noreply@brushpoint.com";
 
         $payer = $payment->payer;
         $address = $payment->address; // can have different recipient
@@ -121,7 +124,7 @@ class EmailRepository {
         Mail::send('emails.customer.invoice', $data, function($message) use ($payment) {
             $message->to($payment->payer->email)
                 ->subject("BrushPoint: Purchase Receipt");
-            $message->from('orders@brushpoint.com', 'BrushPoint Orders');
+            $message->from('noreply@brushpoint.com', 'BrushPoint Orders');
         });
     }
 
@@ -133,7 +136,7 @@ class EmailRepository {
         Mail::send('emails.customer.replacementShipped', $feedback, function($message) use ($recipient) {
             $message->to($recipient)
                 ->subject('BrushPoint: Your replacement has been shipped');
-            $message->from('info@brushpoint.com', 'BrushPoint Information');
+            $message->from('noreply@brushpoint.com', 'BrushPoint Information');
         });
     }
 }

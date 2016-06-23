@@ -233,7 +233,7 @@ EOT;
 
     public function getFromEmail()
     {
-        return "info@brushpoint.com";
+        return "noreply@brushpoint.com";
     }
 
 
