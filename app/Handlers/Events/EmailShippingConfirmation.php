@@ -2,6 +2,7 @@
 
 use App\Events\PackageWasShipped;
 
+use Carbon\Carbon;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldBeQueued;
 use Illuminate\Support\Facades\Log;
@@ -35,8 +36,9 @@ class EmailShippingConfirmation {
         Log::info($payer);
         $address = $payment->address; // can have different recipient
         $transactions = $payment->transactions->all(); // array of transactions
+		$shipDate = Carbon::now();
 
-        $data = compact('payment', 'payer', 'address', 'transactions');
+        $data = compact('payment', 'payer', 'address', 'transactions', 'shipDate');
         /// Log::info(print_r($event->payment->payer->addresses,1));
 
         Mail::send('emails.customer.asn', $data, function($message) use ($event) {

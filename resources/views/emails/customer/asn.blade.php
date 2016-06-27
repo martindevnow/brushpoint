@@ -122,8 +122,8 @@ $payment->created_at->timezone = 'America/Toronto';
                                             </span>
                                             <br>
                                             <b>
-                                                {{ $payment->created_at->addWeekdays(5)->format('l\\, F jS Y') }} -
-                                                <br> {{ $payment->created_at->addWeekdays(10)->format('l\\, F jS Y') }}
+                                                {{ $shipDate->addWeekdays(5)->format('l\\, F jS Y') }} -
+                                                <br> {{ $shipDate->addWeekdays(10)->format('l\\, F jS Y') }}
                                             </b>
                                         </p>
                                         <p style="margin:2px 0 9px 0;font:14px Arial,sans-serif">
