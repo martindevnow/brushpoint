@@ -495,34 +495,34 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
     /**
      * Feedback
      */
-    Route::post(        'admins/feedback/contact/customer',     'FeedbackController@contactCustomer');
-    Route::post(        'admins/feedback/contact/send',         'FeedbackController@sendContactCustomer');
-    // Route::post(         'admins/feedback/email/requestRetailerInfo', 'FeedbackController@emailRequestRetailerInfo');
-    Route::get(         'admins/feedback/filter',               'FeedbackController@filtered');
+    Route::post(        'admins/feedback/contact/customer',             'FeedbackController@contactCustomer');
+    Route::post(        'admins/feedback/contact/send',                 'FeedbackController@sendContactCustomer');
+    // Route::post(     'admins/feedback/email/requestRetailerInfo',    'FeedbackController@emailRequestRetailerInfo');
+    Route::get(         'admins/feedback/filter',                       'FeedbackController@filtered');
     Route::get(         'admins/feedback/{feedbackId}/retailer/remove', 'FeedbackController@removeRetailer');
-    Route::get(         'admins/feedback/{feedbackId}/issue/remove',     'FeedbackController@removeIssue');
-    Route::patch(       'admins/feedback/ajax/{id}',            'FeedbackController@ajaxPatch');
-    Route::patch(       'admins/feedback/ajaxToggle/{id}',      'FeedbackController@ajaxToggle');
-    Route::resource(    'admins/feedback',                      'FeedbackController');
-    Route::patch(       'admins/feedback/{id}',                 'FeedbackController@update');
-    Route::get(         'admins/feedback/{id}/close',           'FeedbackController@close');
-    Route::get(         'admins/feedback/{id}/shipped',         'FeedbackController@sendShippedNotificationToCustomer');
+    Route::get(         'admins/feedback/{feedbackId}/issue/remove',    'FeedbackController@removeIssue');
+    Route::patch(       'admins/feedback/ajax/{id}',                    'FeedbackController@ajaxPatch');
+    Route::patch(       'admins/feedback/ajaxToggle/{id}',              'FeedbackController@ajaxToggle');
+    Route::resource(    'admins/feedback',                              'FeedbackController');
+    Route::patch(       'admins/feedback/{id}',                         'FeedbackController@update');
+    Route::get(         'admins/feedback/{id}/close',                   'FeedbackController@close');
+    Route::get(         'admins/feedback/{id}/shipped',                 'FeedbackController@sendShippedNotificationToCustomer');
 
 
 
 
-    Route::get('admins/images/download/{id}', 'ImagesController@download');
+    Route::get('admins/images/download/{id}',                   'ImagesController@download');
 
 
     /**
      * Inventory
      */
-    Route::get(         'admins/inventory/item/{id}/create',     'InventoryController@createForItem');
-    Route::get(         'admins/inventory/item/{id}',     'InventoryController@showItem');
-    Route::get(         'admins/inventory/lot/{id}',     'InventoryController@showLotActivity');
-    Route::get(         'admins/inventory/hold/{id}',     'InventoryController@putOnHold');
-    Route::get(         'admins/inventory/activate/{id}',     'InventoryController@activate');
-    Route::resource(    'admins/inventory',             'InventoryController');
+    Route::get(         'admins/inventory/item/{id}/create',        'InventoryController@createForItem');
+    Route::get(         'admins/inventory/item/{id}',               'InventoryController@showItem');
+    Route::get(         'admins/inventory/lot/{id}',                'InventoryController@showLotActivity');
+    Route::get(         'admins/inventory/hold/{id}',               'InventoryController@putOnHold');
+    Route::get(         'admins/inventory/activate/{id}',           'InventoryController@activate');
+    Route::resource(    'admins/inventory',                         'InventoryController');
 
 
     /**

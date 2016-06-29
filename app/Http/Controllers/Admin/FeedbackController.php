@@ -34,7 +34,12 @@ class FeedbackController extends Controller {
         return $this->layout->content = view('admin.feedback.index')->with(compact('feedbacks'));
     }
 
-
+    /**
+     * Close an open feedback
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function close($id)
     {
         $feedback = Feedback::find($id);
@@ -63,11 +68,10 @@ class FeedbackController extends Controller {
             ->with(compact('retailers', 'issues'));
     }
 
-
     /**
      * Store a new Feedback submitted by QA department
      *
-     * @param Request $request
+     * @param CreateNewFeedbackRequest|Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateNewFeedbackRequest $request)
@@ -107,7 +111,6 @@ class FeedbackController extends Controller {
         // $this->layout->content = view('admin.feedback.index');
     }
 
-
     /**
      * Display one individual Feedback entry
      *
@@ -120,15 +123,12 @@ class FeedbackController extends Controller {
         $issues = Issue::lists('type', 'id');
         $retailers = Retailer::lists('name', 'id');
 
-//        dd($feedback->addresses->first()->toString());
-
         array_unshift($issues, "Select");
         array_unshift($retailers, "Select");
 
         return $this->layout->content = view('admin.feedback.show')
             ->with(compact('feedback', 'issues', 'retailers'));
     }
-
 
     /**
      * Show the form to edit the details of a Feedback entry
@@ -154,7 +154,7 @@ class FeedbackController extends Controller {
      * Save the changes to the feedback and redirect back to the feedback itself
      *
      * @param $feedbackId
-     * @param Requests\CreateProductRequest $request
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update($feedbackId, Request $request)
@@ -165,7 +165,6 @@ class FeedbackController extends Controller {
 
         return redirect("admins/feedback/{$feedbackId}");
     }
-
 
     /**
      * Designed for string or integer, NOT checkboxes (use ajaxToggle for that)
@@ -211,7 +210,6 @@ class FeedbackController extends Controller {
         return "Passed";
     }
 
-
     /**
      * Return a view with feedbacks filtered by the search query
      *
@@ -232,7 +230,12 @@ class FeedbackController extends Controller {
         return $this->layout->content = view('admin.feedback.index')->with(compact('feedbacks'));
     }
 
-
+    /**
+     * Remove the retailer from supplied Feedback
+     *
+     * @param $feedbackId
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function removeRetailer($feedbackId)
     {
         $feedback = Feedback::findOrFail($feedbackId);
@@ -241,7 +244,12 @@ class FeedbackController extends Controller {
         return redirect('/admins/feedback/'. $feedbackId);
     }
 
-
+    /**
+     * Remove the Issue from supplied Feedback
+     *
+     * @param $feedbackId
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function removeIssue($feedbackId)
     {
         $feedback = Feedback::findOrFail($feedbackId);
@@ -250,7 +258,13 @@ class FeedbackController extends Controller {
         return redirect('/admins/feedback/'. $feedbackId);
     }
 
-
+    /**
+     * Contact the Customer
+     *
+     * @param Request $request
+     * @param ContactRepository $contactRepository
+     * @return $this
+     */
     public function contactCustomer(Request $request, ContactRepository $contactRepository)
     {
         $feedback = Feedback::find($request->feedback_id);
@@ -287,7 +301,12 @@ class FeedbackController extends Controller {
         return $this->layout->content = view('admin.feedback.prepareContact')->with($data);
     }
 
-
+    /**
+     * Send the Contact Email to the Customer
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function sendContactCustomer(Request $request)
     {
         // get request
@@ -321,7 +340,12 @@ class FeedbackController extends Controller {
         return redirect('/admins/feedback/'. $request->feedback_id);
     }
 
-
+    /**
+     * Send the Shipment Notification to the Customer
+     *
+     * @param $feedbackId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function sendShippedNotificationToCustomer($feedbackId)
     {
         $feedback = Feedback::find($feedbackId);
@@ -335,7 +359,12 @@ class FeedbackController extends Controller {
         return redirect()->back();
     }
 
-
+    /**
+     * Delete a Feedback
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function destroy($id)
     {
         $feedback = Feedback::find($id);

@@ -7,7 +7,8 @@
           <th>Retailer Code</th>
           <th>Lot Code</th>
           <th>Issue</th>
-          <th>Intent</th>
+            {{--// Removed June 28th 2016 -- Requested by Vivian Wong //--}}
+          {{--<th>Intent</th>--}}
           <th>Received</th>
           <th>Closed</th>
           <th></th>
@@ -26,18 +27,19 @@
           @endif
           <td>{{ $feedback->retailer_reference }}</td>
           <td>{{ $feedback->lot_code }}</td>
-          <td>{{ str_limit($feedback->issue_text, 150) }}</td>
-          <td>{{ $feedback->intent }}</td>
+          <td>{{ str_limit($feedback->issue_text, 50) }}</td>
+            {{--// Removed June 28th 2016 - Requested by Vivian Wong //--}}
+{{--          <td>{{ $feedback->intent }}</td>--}}
           <td>{{ $feedback->created_at->diffForHumans() }}</td>
           <td>
               @if($feedback->closed_at != "0000-00-00 00:00:00" && $feedback->closed_at != "-0001-11-30 00:00:00")
-                {{ $feedback->closed_at }}
+                {{ substr($feedback->closed_at,0,10) }}
               @else
                   <div>
                     {!! Form::open(['data-remote', 'method' => 'patch', 'url' => 'admins/feedback/ajax/'. $feedback->id . '?field=closed']) !!}
                     {{--{!! Form::checkbox('closed', $feedback->closed, $feedback->closed, ['data-click-submits-form', 'class' => 'toggle']) !!}--}}
                     <input name="closed" data-click-submits-form class="toggle" id="closed-{{ $feedback->id }}" type="checkbox" value="0">
-                    <label for="closed-{{ $feedback->id }}">Closed</label>
+                    <label for="closed-{{ $feedback->id }}">Close</label>
                     {!! Form::close() !!}
                   </div>
               @endif
