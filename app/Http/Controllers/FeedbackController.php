@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Martin\Core\Image;
 use Martin\Notifications\Flash;
 use Martin\Quality\Feedback;
+use Martin\Quality\Repositories\EmailRepository;
 
 class FeedbackController extends Controller {
 
@@ -170,10 +171,15 @@ class FeedbackController extends Controller {
 
             $customerRequest->images()->save($image);
         }
+        
+        
 
         $customerRequest->received_at = get_current_time();
         $customerRequest->save();
 
+        $remailRepo = new EmailRepository();
+        $remailRepo->emailInternalFeedbackUpdatedNotice($feedback);
+                
         Flash::message('Thank you for your submission!');
 
         return redirect('feedback/thankyou');

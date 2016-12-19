@@ -79,6 +79,20 @@ class EmailRepository {
     }
 
 
+    public function emailInternalFeedbackUpdatedNotice(Feedback $feedback)
+    {
+
+//        Mail::send('emails.internal.feedback', compact('feedback'), function($message) use ($feedback) {
+        Mail::send('emails.internal.feedback_updated', compact('feedback'), function($message) use ($feedback) {
+	        $recipient = "info@brushpoint.com";
+            $message->to($recipient)
+                ->subject("Feedback Updated: ID: " . $feedback->id);
+            $message->from('noreply@brushpoint.com',
+			    "BrushPoint: Feedback");
+        });
+    }
+
+
 
     public function emailCustomerFeedbackNotice(Feedback $feedback)
     {
