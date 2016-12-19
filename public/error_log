@@ -1,34 +1,6 @@
-[14-Mar-2015 23:21:16 America/Denver] PHP Warning:  require(/home/martioo7/brushpoint/bootstrap/../vendor/autoload.php): failed to open stream: No such file or directory in /home/martioo7/brushpoint/bootstrap/autoload.php on line 17
-[14-Mar-2015 23:21:16 America/Denver] PHP Fatal error:  require(): Failed opening required '/home/martioo7/brushpoint/bootstrap/../vendor/autoload.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/martioo7/brushpoint/bootstrap/autoload.php on line 17
-[20-May-2015 20:37:07 UTC] PHP Parse error:  syntax error, unexpected 'throw' (T_THROW), expecting ',' or ';' in /home/martioo7/brushpoint/app/Http/routes.php on line 47
-[04-Jun-2015 01:13:13 UTC] PHP Fatal error:  Class 'App\Handlers\Events\Mail' not found in /home/martioo7/brushpoint/app/Handlers/Events/EmailShippingConfirmation.php on line 37
-[10-Jun-2015 00:59:32 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
-[10-Jun-2015 00:59:36 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
-[10-Jun-2015 01:00:19 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
-[10-Jun-2015 01:00:24 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
-[10-Jun-2015 01:01:56 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
-[10-Jun-2015 01:03:28 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
-[10-Jun-2015 01:03:50 UTC] PHP Fatal error:  Class 'Martin\Quality\Repositories\DateTime' not found in /home/martioo7/brushpoint/app/Martin/Quality/Repositories/EmailRepository.php on line 27
-[22-Jun-2015 15:16:55 UTC] PHP Fatal error:  Class 'App\Http\Middleware\Flash' not found in /home/martioo7/brushpoint/app/Http/Middleware/ServerAccessOnly.php on line 26
-[01-Oct-2015 14:38:33 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home/martioo7/brushpoint/app/Martin/Products/CartRepository.php on line 403
-[01-Oct-2015 14:38:43 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home/martioo7/brushpoint/app/Martin/Products/CartRepository.php on line 403
-[03-Oct-2015 03:02:23 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[03-Oct-2015 03:02:26 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[06-Oct-2015 14:24:58 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[06-Oct-2015 14:25:06 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[06-Oct-2015 14:25:11 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[06-Oct-2015 14:38:59 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[06-Oct-2015 14:39:11 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[21-Dec-2015 18:39:54 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home/martioo7/brushpoint/app/Martin/Products/CartRepository.php on line 403
-[21-Dec-2015 18:40:06 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home/martioo7/brushpoint/app/Martin/Products/CartRepository.php on line 403
-[21-Dec-2015 18:40:15 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home/martioo7/brushpoint/app/Martin/Products/CartRepository.php on line 403
-[21-Dec-2015 18:40:38 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home/martioo7/brushpoint/app/Martin/Products/CartRepository.php on line 403
-[15-Mar-2016 17:32:36 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[15-Mar-2016 17:32:37 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[15-Mar-2016 17:32:54 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[15-Mar-2016 17:32:54 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
-[31-Mar-2016 18:41:11 America/Denver] PHP Warning:  POST Content-Length of 32035181 bytes exceeds the limit of 10485760 bytes in Unknown on line 0
-[31-Mar-2016 18:49:53 America/Denver] PHP Warning:  POST Content-Length of 32035181 bytes exceeds the limit of 10485760 bytes in Unknown on line 0
-[31-Mar-2016 19:12:13 America/Denver] PHP Warning:  POST Content-Length of 32035157 bytes exceeds the limit of 10485760 bytes in Unknown on line 0
-[12-Jun-2016 03:20:02 UTC] PHP Fatal error:  Call to a member function delete() on a non-object in /home/martioo7/brushpoint/app/Martin/Products/CartRepository.php on line 403
-[15-Jun-2016 18:48:17 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/martioo7/brushpoint/storage/framework/views/5ba92c7269bc25dd214ceea97041c5ab on line 37
+[27-Oct-2016 16:33:58 UTC] PHP Fatal error:  Class 'App\Http\Controllers\Admin\Auth' not found in /home/brushpoint/projects/brushpoint/app/Http/Controllers/Admin/AttachmentsController.php on line 95
+[23-Nov-2016 19:16:51 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 32 bytes) in /home/brushpoint/projects/brushpoint/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 296
+[23-Nov-2016 19:16:57 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 32 bytes) in /home/brushpoint/projects/brushpoint/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 296
+[23-Nov-2016 19:18:58 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 84 bytes) in /home/brushpoint/projects/brushpoint/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 296
+[09-Dec-2016 03:20:03 UTC] PHP Fatal error:  Call to a member function delete() on null in /home/brushpoint/projects/brushpoint/app/Martin/Products/CartRepository.php on line 403
+[09-Dec-2016 03:20:08 UTC] PHP Fatal error:  Call to a member function delete() on null in /home/brushpoint/projects/brushpoint/app/Martin/Products/CartRepository.php on line 403

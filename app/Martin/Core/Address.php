@@ -82,16 +82,12 @@ class Address extends Model {
     public function toString()
     {
 
-        $output = $this->street_1 ."<br />";
+        $output = $this->street_1 .", ";
         if ($this->street_2)
-            $output .= $this->street_2 ."<br />";
+            $output .= $this->street_2 .", ";
 
         $output .= <<<EOT
-$this->city <br />
-$this->province <br />
-$this->postal_code <br />
-$this->country <br />
-
+$this->city , $this->province , $this->postal_code , $this->country 
 EOT;
 
         return $output;

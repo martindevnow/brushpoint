@@ -67,7 +67,8 @@ class EmailRepository {
         $emails = Email::where('email_type', '=', $type)->first();
 
         Mail::send('emails.internal.feedback', compact('feedback'), function($message) use ($feedback, $emails) {
-            $recipient = ($emails ? $emails->recipient_list : "info@brushpoint.com");
+            //$recipient = ($emails ? $emails->recipient_list : "info@brushpoint.com");
+	    $recipient = "info@brushpoint.com";
 
             $message->to($recipient)
                 ->subject("Feedback Received: ID: " . $feedback->id);

@@ -1,4 +1,7 @@
 <?php
+ini_set('upload_tmp_dir', '/tmp');
+ini_set('upload_max_filesize', '10000000'); // 10MB
+ini_set('memory_limit', '-1');
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

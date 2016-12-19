@@ -7,7 +7,7 @@
             </button></a>
         </div>
         <div class="panel-body">
-            <p>{!! $address->toString() !!}</p>
+            <p>{{ $address->toString() }}</p>
         </div>
         <div class="panel-footer">
             Submitted by {{ $address->user ? $address->user->name : "Customer" }}
