@@ -23,6 +23,9 @@ class PurchaseController extends Controller {
      */
     public function index()
     {
+        // This functionality has been disabled.
+        return view('purchase.disabled');
+
         $products = $this->productsRepository->getPurchasePaginated(12);
         return view('purchase.index')->with(['products' => $products]);
     }

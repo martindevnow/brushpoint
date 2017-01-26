@@ -34,16 +34,31 @@ These are available in a variety of colours or characters for our children's too
         <div class="row">
             <div class="col-md-3 col-sm-4">
                 <div class="center-title">
+                    <br /><br /><img src="/images/ranir.png" width="250" height="111" class="img-responsive">
+                </div>
+                <div class="center-title">
                     <br /><br /><img src="/images/logo/brushpoint.jpg" width="250" height="111" class="img-responsive">
-                 </div>
+                </div>
             </div>
             <div class="col-md-9 col-sm-8">
                 <p style="font-size: 1.5em"><br /><br />
-                    <b>BrushPoint Innovations Inc.</b> is a privately held company that focuses on patented consumer Oral Care technology and products for global retailers in the area of
-                    Private Label and Branded products.
-                    <br/><br />
-                    We pride ourselves on quality products that deliver innovation and uniqueness for our retail Customers' private brand offering to their valued consumer base.
+                    Brushpoint Innovations Inc. is now
+                    part of the Ranir family of oral care
+                    products! <br /><br />
+                    As a leading global
+                    manufacturer of oral and personal
+                    healthcare products, we’re
+                    committed to delivering exceptional
+                    quality and value each and every day.
+                    Through teamwork, product
+                    development and consultative
+                    solutions, we help our customers win
+                    with their consumers.
                 </p>
+                <p style="font-size: 1.5em; padding-top: 25px">Please visit Ranir’s full line of
+                    products, services, and solutions at
+                    <a href="http://www.ranir.com">www.ranir.com</a>.</p>
+
             </div>
         </div>
     </div>
