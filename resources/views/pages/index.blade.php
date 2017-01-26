@@ -36,9 +36,9 @@ These are available in a variety of colours or characters for our children's too
                 <div class="center-title">
                     <br /><br /><img src="/images/ranir.png" width="250" height="111" class="img-responsive">
                 </div>
-                <div class="center-title">
-                    <br /><br /><img src="/images/logo/brushpoint.jpg" width="250" height="111" class="img-responsive">
-                </div>
+                {{--<div class="center-title">--}}
+                    {{--<br /><br /><img src="/images/logo/brushpoint.jpg" width="250" height="111" class="img-responsive">--}}
+                {{--</div>--}}
             </div>
             <div class="col-md-9 col-sm-8">
                 <p style="font-size: 1.5em"><br /><br />

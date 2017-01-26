@@ -45,7 +45,7 @@
 
 
 
-                @if(isset($showCart) && $showCart==true)
+                @if( false && isset($showCart) && $showCart==true)
                 <!-- Shopping cart -->
                 <div class="dropdown pull-right" style="float: right; margin-top: 10px ">
                   <button class="btn btn-primary dropdown-toggle bp-cart" type="button" id="dropdownMenu1"
