@@ -44,16 +44,7 @@ These are available in a variety of colours or characters for our children's too
                 <p style="font-size: 1.5em"><br /><br />
                     Brushpoint Innovations Inc. is now
                     part of the Ranir family of oral care
-                    products! <br /><br />
-                    As a leading global
-                    manufacturer of oral and personal
-                    healthcare products, we’re
-                    committed to delivering exceptional
-                    quality and value each and every day.
-                    Through teamwork, product
-                    development and consultative
-                    solutions, we help our customers win
-                    with their consumers.
+                    products!
                 </p>
                 <p style="font-size: 1.5em; padding-top: 25px">Please visit Ranir’s full line of
                     products, services, and solutions at

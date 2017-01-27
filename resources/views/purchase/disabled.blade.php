@@ -30,7 +30,8 @@ If you wish to purchase our toothbrushes, you can find links to them on the reta
 
                         <div class="callout-content">
                             <h2>Thank you for visiting.</h2>
-                            <p>These replacement parts and accessories are no longer available for purchase.</p>
+                            <p>Replacement parts and accessories are no longer available for purchase.</p>
+                            <p>We apologize for any inconvenience.</p>
                         </div>
 
                         {{--<a href="http://www.google.com" class="btn  btn-primary btn-small btn-full-width visible-xs ">Purchase Theme</a>--}}
